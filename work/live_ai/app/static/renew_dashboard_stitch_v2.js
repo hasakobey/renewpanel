@@ -57,6 +57,21 @@
     _origKpis(id,a);
   };
 
+  /* dashboard_pro_v3.js'teki eski decorateKpis(), #dashKpis'in DOGRUDAN
+     COCUKLARINA (eskiden tek tek .kpi kartlariydi, simdi 2 .kpi-group
+     sarmalayicisi) metin-eslesmeli ikon+renk sinifi ekliyor. Artik yanlis
+     elemente (grubun tamamina) bir emoji ikon (.rp-kpi-icon) ve rp-kpi-*
+     rengi ekliyor - "SKS Finansman'in ustunde ayri ikon" hatasi buradan
+     geliyordu. O dosyayi degistiremeyiz (kendi IIFE'si icinde kapali),
+     bu yuzden calistiktan SONRA temizliyoruz. */
+  function cleanupLegacyKpiDecoration(){
+    const box=document.getElementById('dashKpis');if(!box)return;
+    [...box.children].forEach(group=>{
+      group.classList.remove('rp-kpi-blue','rp-kpi-green','rp-kpi-purple','rp-kpi-orange','rp-kpi-yellow','rp-kpi-red');
+      group.querySelectorAll('.rp-kpi-icon').forEach(n=>n.remove());
+    });
+  }
+
   /* ---------- 2) #dashAlerts: mevcut metni koruyarak ikon + footer ekle ---------- */
   function restyleAlerts(){
     const box=document.getElementById('dashAlerts');if(!box)return;
@@ -144,7 +159,7 @@
   /* ---------- 6) En Kârlı / Zarar Eden Satışlar: mini liste karti (ayni veri, tablo yerine kart) ---------- */
   function saleMiniRow(x,tone){
     return `<div class="pa-mini-row ${tone}">
-      <span class="pa-mini-plate">${esc(x.plate)}</span>
+      <span class="pa-plate">${esc(x.plate)}</span>
       <div class="pa-mini-info"><b>${esc(x.vehicle_info||'')}</b><small>${esc(x.consultant||'')} • SKS: ${x.sks} Gün</small></div>
       <div class="pa-mini-amount"><b>${tone==='good'?'+':''}${money(x.profit)}</b></div>
     </div>`;
@@ -163,8 +178,10 @@
   function restyleCriticalStock(){
     const box=document.getElementById('criticalStock');if(!box)return;
     box.querySelectorAll('table tbody tr').forEach(tr=>{
-      const cell=tr.children[2];if(!cell)return;
-      const n=parseInt(cell.textContent,10);if(Number.isFinite(n))cell.innerHTML=badgeForSks(n);
+      const sksCell=tr.children[2];
+      if(sksCell){const n=parseInt(sksCell.textContent,10);if(Number.isFinite(n))sksCell.innerHTML=badgeForSks(n)}
+      const plateB=tr.children[0]?.querySelector('b');
+      if(plateB)plateB.outerHTML=`<span class="pa-plate">${esc(plateB.textContent)}</span>`;
     });
   }
 
@@ -177,7 +194,7 @@
     box.innerHTML=`<div class="pa-acq-grid">${recent.map(x=>`
       <div class="pa-acq-card">
         <label>${esc(x.purchase_type||'ALIM')}</label>
-        <strong>${esc(x.plate)}</strong>
+        <span class="pa-plate">${esc(x.plate)}</span>
         <small>${esc(x.model_year||'')} ${esc(x.brand||'')} ${esc(x.model||'')}</small>
         <div class="pa-acq-foot"><span>Alış:</span><b>${money(x.purchase_price)}</b></div>
       </div>`).join('')}</div>`;
@@ -213,6 +230,13 @@
   const _prevRenderDashboard=renderDashboard;
   renderDashboard=function(d){
     _prevRenderDashboard(d);
+    cleanupLegacyKpiDecoration();
+    /* dashboard_pro_v3.js kendi DOMContentLoaded'inda renderDashboard'i
+       BIZDEN SONRA sarmalayabiliyor (script sirasi/DOMContentLoaded
+       zamanlamasi yuzunden), yani decorateKpis() bazen bizim temizlikten
+       SONRA calisip DOM'u yeniden kirletebiliyor. setTimeout(0) ile bir
+       sonraki turda tekrar temizleyerek bunu garantiye aliyoruz. */
+    setTimeout(cleanupLegacyKpiDecoration,0);
     renderMonthCompareGrouped(d);
     renderRiskGrouped(d);
     renderProfitSplitGrouped(d);

@@ -111,16 +111,16 @@
 #dashKpis>*{position:static!important;overflow:visible!important;background:transparent!important;border:none!important;border-radius:0!important;box-shadow:none!important;padding:0!important;min-height:0!important}
 #dashKpis>*::before{content:none!important}
 #dashKpis>*:hover{transform:none!important;box-shadow:none!important}
-#dashKpis{display:flex!important;flex-direction:column;gap:20px}
-#dashKpis .kpi-group-head{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:10px}
+#dashKpis{display:flex!important;flex-direction:column;gap:14px}
+#dashKpis .kpi-group-head{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:8px}
 #dashKpis .kpi-group-head h4{
   font-family:"RDS Space Grotesk","Segoe UI",Arial,sans-serif;font-weight:600;font-size:14px;margin:0;color:var(--pa-text);
 }
 #dashKpis .kpi-group-head span{
   font-family:"RDS Inter","Segoe UI",Arial,sans-serif;font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--pa-text-faint);
 }
-#dashKpis .kpi-grid{display:grid;grid-template-columns:repeat(6,minmax(140px,1fr));gap:12px}
-#dashKpis .kpi-top{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:10px}
+#dashKpis .kpi-grid{display:grid;grid-template-columns:repeat(6,minmax(140px,1fr));gap:10px}
+#dashKpis .kpi-top{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:8px}
 #dashKpis .kpi-icon{
   width:32px;height:32px;border-radius:var(--pa-r);background:var(--pa-surface-blue);color:var(--pa-primary);
   display:flex;align-items:center;justify-content:center;flex:0 0 32px;
@@ -140,19 +140,18 @@
   border-left:1px solid var(--pa-border)!important;
   border-radius:var(--pa-r-lg)!important;
   box-shadow:none!important;
-  padding:20px!important;
-  transition:transform .22s var(--pa-ease),box-shadow .22s var(--pa-ease),border-color .18s var(--pa-ease)!important;
+  padding:14px!important;
+  transition:box-shadow .18s var(--pa-ease),border-color .18s var(--pa-ease)!important;
 }
 #dashboard .card:hover,
 #dashboard .kpi:hover{
-  transform:translateY(-1px)!important;
   box-shadow:var(--pa-shadow-1)!important;
   border-color:#CBD5E1!important;
 }
 #dashboard .cardhead{
   border-bottom:1px solid var(--pa-border-soft);
-  padding-bottom:12px;
-  margin-bottom:12px;
+  padding-bottom:8px;
+  margin-bottom:8px;
 }
 #dashboard .attention-card{
   background:var(--pa-surface-soft)!important;
@@ -275,16 +274,16 @@
    Veri/metin AYNI (renderRenewAlerts uretiyor); sadece ic yapi + ikon eklendi. */
 #dashboard .dash-alerts{
   grid-template-columns:repeat(3,minmax(0,1fr))!important;
-  gap:12px!important;
+  gap:10px!important;
 }
 #dashboard .dash-alert{
   display:flex!important;flex-direction:column!important;align-items:stretch!important;
-  gap:10px!important;text-align:left!important;
+  gap:8px!important;text-align:left!important;
   border:1px solid var(--pa-border)!important;border-radius:var(--pa-r-lg)!important;
-  background:var(--pa-surface-soft)!important;padding:16px!important;
-  transition:transform .2s var(--pa-ease),box-shadow .2s var(--pa-ease),border-color .2s var(--pa-ease)!important;
+  background:var(--pa-surface-soft)!important;padding:14px!important;
+  transition:box-shadow .18s var(--pa-ease),border-color .18s var(--pa-ease)!important;
 }
-#dashboard .dash-alert:hover{transform:translateY(-2px)!important;box-shadow:var(--pa-shadow-1)!important}
+#dashboard .dash-alert:hover{box-shadow:var(--pa-shadow-1)!important}
 #dashboard .dash-alert-row{display:flex;align-items:center;gap:8px}
 #dashboard .dash-alert-icon{
   width:28px;height:28px;border-radius:var(--pa-r);display:flex;align-items:center;justify-content:center;flex:0 0 28px;
@@ -320,43 +319,27 @@
 @media(max-width:1100px){#dashboard .dash-alerts{grid-template-columns:1fr 1fr!important}}
 @media(max-width:700px){#dashboard .dash-alerts{grid-template-columns:1fr!important}}
 
-/* ---------- Sayfa-giris animasyonu ---------- */
-@keyframes rdsFadeInUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
-#dashboard>.hero,
-#dashboard>.attention-card,
-#dashboard>#dashKpis,
-#dashboard>.dash-command-grid,
-#dashboard>.section-label,
-#dashboard>#monthCompare,
-#dashboard>.grid2,
-#dashboard>.card{
-  animation:rdsFadeInUp .45s var(--pa-ease) both;
-}
-#dashboard>.hero{animation-delay:.02s}
-#dashboard>.attention-card{animation-delay:.06s}
-#dashboard>#dashKpis{animation-delay:.10s}
-#dashboard>.dash-command-grid{animation-delay:.16s}
-#dashboard>.section-label{animation-delay:.20s}
-#dashboard>#monthCompare{animation-delay:.22s}
-#dashboard>.grid2:nth-of-type(1){animation-delay:.26s}
-#dashboard>.grid2:nth-of-type(2){animation-delay:.30s}
-#dashboard>.grid2:nth-of-type(3){animation-delay:.34s}
-#dashboard>.card{animation-delay:.30s}
+/* ---------- Sayfa-giris animasyonu ----------
+   Onceki surum: 10 farkli blogu kademeli (0.02s-0.34s) sahneleyen ayri ayri
+   fade-in-up animasyonlari vardi - "animasyonlar cok karmasik" geri bildirimi
+   sonrasi TEK, kisa, sadelestirilmis bir gecis birakildi (kademe yok). */
+@keyframes rdsFadeIn{from{opacity:0}to{opacity:1}}
+#dashboard{animation:rdsFadeIn .2s ease-out both}
 
 /* ---------- Donem Karsilastirma karti (JS: renderMonthCompareGrouped) ----------
    dashboard_pro_v3.css #monthCompare>*{...!important} + ::after dekoratif
    kesigi + nth-child renk kurallari eskiden 3 farkli renkli karta aitti;
    yeni tek-tip .pa-compare tasarimimizda sifirlanip yeniden yukleniyor. */
-#monthCompare{display:grid!important;grid-template-columns:repeat(3,1fr)!important;gap:12px!important}
+#monthCompare{display:grid!important;grid-template-columns:repeat(3,1fr)!important;gap:10px!important}
 @media(max-width:900px){#monthCompare{grid-template-columns:1fr!important}}
 #monthCompare>*::after{content:none!important}
 #monthCompare>*{color:inherit!important}
 #monthCompare .pa-compare{
   background:var(--pa-surface)!important;border:1px solid var(--pa-border)!important;border-radius:var(--pa-r-lg)!important;
-  box-shadow:none!important;padding:16px!important;
-  position:relative;transition:transform .2s var(--pa-ease),box-shadow .2s var(--pa-ease);
+  box-shadow:none!important;padding:14px!important;
+  position:relative;transition:box-shadow .18s var(--pa-ease);
 }
-.pa-compare:hover{transform:translateY(-1px);box-shadow:var(--pa-shadow-1)}
+.pa-compare:hover{box-shadow:var(--pa-shadow-1)}
 .pa-compare-top span{
   font-family:"RDS Inter",sans-serif;font-weight:600;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--pa-text-muted);
 }
@@ -399,8 +382,8 @@
 #risk.risk .pa-risk-61_90{background:var(--pa-warning)!important}
 #risk.risk .pa-risk-90_plus{background:var(--pa-danger)!important}
 #risk.risk .pa-risk-scale{display:flex!important;justify-content:space-between;margin-top:6px!important;min-height:0!important;padding:0!important;border:none!important;font-family:"RDS Inter",sans-serif;font-size:10px!important;font-weight:600!important;letter-spacing:.04em;text-transform:uppercase;color:var(--pa-text-faint)!important}
-#risk.risk .pa-risk-grid{display:grid!important;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:14px!important;min-height:0!important;padding:0!important;border:none!important}
-#risk.risk .pa-risk-box{background:var(--pa-surface-soft)!important;border:1px solid var(--pa-border)!important;border-radius:var(--pa-r)!important;padding:10px!important;text-align:left!important}
+#risk.risk .pa-risk-grid{display:grid!important;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:10px!important;min-height:0!important;padding:0!important;border:none!important}
+#risk.risk .pa-risk-box{background:var(--pa-surface-soft)!important;border:1px solid var(--pa-border)!important;border-radius:var(--pa-r)!important;padding:8px!important;text-align:left!important}
 #risk.risk .pa-risk-box label{display:block;font-family:"RDS Inter",sans-serif;font-size:10px!important;font-weight:600!important;letter-spacing:.04em;text-transform:uppercase;color:var(--pa-text-muted)!important;margin-bottom:6px}
 #risk.risk .pa-risk-box strong{display:block;font-family:"RDS Space Grotesk","RDS Inter",sans-serif;font-weight:700!important;font-size:16px!important;color:var(--pa-text)!important}
 #risk.risk .pa-risk-box small{display:block;margin-top:2px;font-family:"RDS Inter",sans-serif;font-size:11px!important;font-weight:400!important;color:var(--pa-text-faint)!important}
@@ -418,8 +401,8 @@
    kart oldugumuz icin (first=last=ayni eleman) ikisi de uygulanip yanlis
    kirmizi/yesil boyardi; ID-kapsamli yeniden yukleme ile sonduruluyor. */
 #profitSplit>*:first-child,#profitSplit>*:last-child{background:transparent!important;color:inherit!important;border-radius:0!important}
-#profitSplit .pa-split-grid{display:grid!important;grid-template-columns:1fr 1fr;gap:12px}
-.pa-split-card{border-radius:var(--pa-r-lg);padding:14px;border:1px solid var(--pa-border)}
+#profitSplit .pa-split-grid{display:grid!important;grid-template-columns:1fr 1fr;gap:10px}
+.pa-split-card{border-radius:var(--pa-r-lg);padding:12px;border:1px solid var(--pa-border)}
 .pa-split-card.good{background:var(--pa-success-bg);border-color:#CBEBD6}
 .pa-split-card.bad{background:var(--pa-danger-bg);border-color:#F3C6CE}
 .pa-split-top{display:flex;align-items:center;justify-content:space-between;gap:6px}
@@ -439,13 +422,17 @@
 @media(max-width:700px){.pa-split-grid{grid-template-columns:1fr}}
 
 /* ---------- En Karlı/Zararlı satislar mini liste (JS: renderTopLossSalesGrouped) ---------- */
-.pa-mini-row{display:flex;align-items:center;gap:10px;padding:10px;border-radius:var(--pa-r);background:var(--pa-surface-soft);margin-bottom:8px;transition:transform .16s var(--pa-ease)}
-.pa-mini-row:hover{transform:translateY(-1px)}
+.pa-mini-row{display:flex;align-items:center;gap:8px;padding:8px;border-radius:var(--pa-r);background:var(--pa-surface-soft);margin-bottom:6px;transition:background-color .16s var(--pa-ease)}
 .pa-mini-row:last-child{margin-bottom:0}
-.pa-mini-plate{
-  font-family:"RDS Inter",sans-serif;font-weight:700;font-size:11px;letter-spacing:.03em;
+/* .pa-plate: begenilen plaka rozeti, dashboard'daki HER plaka gorunumunde
+   (mini satis listeleri, kritik SKS tablosu, Bu Ay Alinan Araclar) kullanilir. */
+.pa-plate{
+  display:inline-block;font-family:"RDS Inter",sans-serif;font-weight:700;font-size:11px;letter-spacing:.03em;
   background:var(--pa-surface);border:1px solid var(--pa-border);border-radius:var(--pa-r);padding:4px 7px;white-space:nowrap;
+  color:var(--pa-text);
 }
+#dashboard td .pa-plate{margin-bottom:2px}
+.pa-acq-card .pa-plate{display:block;width:fit-content;margin-top:6px;font-size:13px}
 .pa-mini-info{flex:1;min-width:0}
 .pa-mini-info b{display:block;font-family:"RDS Inter",sans-serif;font-weight:600;font-size:12px;color:var(--pa-text);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .pa-mini-info small{display:block;margin-top:2px;font-family:"RDS Inter",sans-serif;font-size:11px;color:var(--pa-text-faint)}
@@ -455,12 +442,11 @@
 .pa-mini-row.bad .pa-mini-amount b{color:var(--pa-danger)}
 
 /* ---------- Bu Ay Alinan Araclar mini kart (JS: renderDashAcquisitionsGrouped) ---------- */
-.pa-acq-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
-.pa-acq-card{background:var(--pa-surface-soft);border:1px solid var(--pa-border);border-radius:var(--pa-r);padding:10px;transition:transform .16s var(--pa-ease)}
-.pa-acq-card:hover{transform:translateY(-2px)}
+.pa-acq-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.pa-acq-card{background:var(--pa-surface-soft);border:1px solid var(--pa-border);border-radius:var(--pa-r);padding:8px;transition:border-color .16s var(--pa-ease)}
+.pa-acq-card:hover{border-color:#CBD5E1}
 .pa-acq-card label{display:block;font-family:"RDS Inter",sans-serif;font-weight:600;font-size:10px;letter-spacing:.05em;text-transform:uppercase;color:var(--pa-text-muted)}
-.pa-acq-card strong{display:block;margin-top:6px;font-family:"RDS Space Grotesk","RDS Inter",sans-serif;font-weight:700;font-size:14px;color:var(--pa-text)}
-.pa-acq-card small{display:block;margin-top:2px;font-family:"RDS Inter",sans-serif;font-size:11px;color:var(--pa-text-faint)}
+.pa-acq-card small{display:block;margin-top:4px;font-family:"RDS Inter",sans-serif;font-size:11px;color:var(--pa-text-faint)}
 .pa-acq-foot{display:flex;justify-content:space-between;margin-top:10px;padding-top:8px;border-top:1px solid var(--pa-border-soft);font-family:"RDS Inter",sans-serif;font-size:12px}
 .pa-acq-foot span{color:var(--pa-text-faint)}
 .pa-acq-foot b{color:var(--pa-text);font-weight:600}
@@ -489,7 +475,7 @@
 #dashboard .target-cell.bad b{color:var(--pa-danger)!important}
 
 /* ---------- Stok Marka Dagilimi (JS: renderBrandDistGrouped, veri AYNI) ---------- */
-.pa-brand-list{display:flex;flex-direction:column;gap:14px}
+.pa-brand-list{display:flex;flex-direction:column;gap:10px}
 .pa-brand-row:last-child{margin-bottom:0}
 .pa-brand-top{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:6px;font-family:"RDS Inter",sans-serif;font-size:13px}
 .pa-brand-top span{font-weight:600;color:var(--pa-text)}
@@ -499,8 +485,8 @@
 .pa-brand-fill{height:100%;border-radius:var(--pa-r-full)}
 
 /* ---------- Ekspertiz ozeti nokta listesi (JS: renderExpertiseSummaryGrouped) ---------- */
-.pa-dot-list{display:flex;flex-direction:column;gap:8px}
-.pa-dot-row{display:flex;align-items:center;gap:8px;padding:10px;border-radius:var(--pa-r);background:var(--pa-surface-soft);transition:background-color .16s var(--pa-ease)}
+.pa-dot-list{display:flex;flex-direction:column;gap:6px}
+.pa-dot-row{display:flex;align-items:center;gap:8px;padding:8px;border-radius:var(--pa-r);background:var(--pa-surface-soft);transition:background-color .16s var(--pa-ease)}
 .pa-dot-row:hover{background:var(--pa-surface-blue)}
 .pa-dot{width:9px;height:9px;border-radius:50%;flex:0 0 9px}
 .pa-dot.blue{background:var(--pa-primary)}
