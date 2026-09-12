@@ -97,13 +97,37 @@
 
 /* ---------- Glass-wave dekoratif efektini dashboard'da sondur ---------- */
 #dashboard .kpis>.kpi:before,
-#dashboard .kpis>.kpi:after{
+#dashboard .kpis>.kpi:after,
+#dashboard .kpi:before,
+#dashboard .kpi:after{
   content:none!important;
 }
 
+/* ---------- #dashKpis grup basligi + grid (ikon + gruplama, JS: renew_dashboard_stitch_v2.js) ---------- */
+#dashKpis{display:flex!important;flex-direction:column;gap:20px}
+#dashKpis .kpi-group-head{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:10px}
+#dashKpis .kpi-group-head h4{
+  font-family:"RDS Space Grotesk","Segoe UI",Arial,sans-serif;font-weight:600;font-size:14px;margin:0;color:var(--pa-text);
+}
+#dashKpis .kpi-group-head span{
+  font-family:"RDS Inter","Segoe UI",Arial,sans-serif;font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--pa-text-faint);
+}
+#dashKpis .kpi-grid{display:grid;grid-template-columns:repeat(6,minmax(140px,1fr));gap:12px}
+#dashKpis .kpi-top{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:10px}
+#dashKpis .kpi-icon{
+  width:32px;height:32px;border-radius:var(--pa-r);background:var(--pa-surface-blue);color:var(--pa-primary);
+  display:flex;align-items:center;justify-content:center;flex:0 0 32px;
+}
+#dashKpis .kpi-icon svg{width:18px;height:18px}
+#dashKpis .kpi.good .kpi-icon{background:var(--pa-success-bg);color:var(--pa-success)}
+#dashKpis .kpi.warn .kpi-icon{background:var(--pa-warning-bg);color:var(--pa-warning)}
+#dashKpis .kpi.bad .kpi-icon{background:var(--pa-danger-bg);color:var(--pa-danger)}
+@media(max-width:1300px){#dashKpis .kpi-grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:700px){#dashKpis .kpi-grid{grid-template-columns:repeat(2,1fr)}}
+
 /* ---------- Kartlar (Level 1/2 elevation) ---------- */
 #dashboard .card,
-#dashboard .kpis>.kpi{
+#dashboard .kpi{
   background:var(--pa-surface)!important;
   border:1px solid var(--pa-border)!important;
   border-left:1px solid var(--pa-border)!important;
@@ -113,7 +137,7 @@
   transition:transform .22s var(--pa-ease),box-shadow .22s var(--pa-ease),border-color .18s var(--pa-ease)!important;
 }
 #dashboard .card:hover,
-#dashboard .kpis>.kpi:hover{
+#dashboard .kpi:hover{
   transform:translateY(-1px)!important;
   box-shadow:var(--pa-shadow-1)!important;
   border-color:#CBD5E1!important;
@@ -130,8 +154,8 @@
 }
 
 /* ---------- KPI format ---------- */
-#dashboard .kpis>.kpi{border-left:1px solid var(--pa-border)!important}
-#dashboard .kpis>.kpi label{
+#dashboard .kpi{border-left:1px solid var(--pa-border)!important}
+#dashboard .kpi label{
   font-family:"RDS Inter","Segoe UI",Arial,sans-serif!important;
   font-weight:600!important;
   font-size:11px!important;
@@ -139,7 +163,7 @@
   text-transform:uppercase!important;
   color:var(--pa-text-muted)!important;
 }
-#dashboard .kpis>.kpi strong{
+#dashboard .kpi strong{
   font-family:"RDS Space Grotesk","RDS Inter","Segoe UI",Arial,sans-serif!important;
   font-weight:600!important;
   font-size:24px!important;
@@ -147,16 +171,16 @@
   letter-spacing:-.01em!important;
   color:var(--pa-text)!important;
 }
-#dashboard .kpis>.kpi small{
+#dashboard .kpi small{
   font-family:"RDS Inter","Segoe UI",Arial,sans-serif!important;
   font-weight:400!important;
   font-size:12px!important;
   color:var(--pa-text-faint)!important;
 }
 /* Durum renkleri: sadece DESIGN.md'deki success/warning/danger ciftleri */
-#dashboard .kpis>.kpi.good strong{color:var(--pa-success)!important}
-#dashboard .kpis>.kpi.warn strong{color:var(--pa-warning)!important}
-#dashboard .kpis>.kpi.bad strong{color:var(--pa-danger)!important}
+#dashboard .kpi.good strong{color:var(--pa-success)!important}
+#dashboard .kpi.warn strong{color:var(--pa-warning)!important}
+#dashboard .kpi.bad strong{color:var(--pa-danger)!important}
 
 /* ---------- Butonlar (sadece #dashboard icinde) ---------- */
 #dashboard .btn{
@@ -239,6 +263,55 @@
 
 /* ---------- Finans/SKS mor vurgusu (accent-purple, mevcut deger zaten esit) ---------- */
 #dashboard .finance{color:var(--pa-purple)!important}
+
+/* ---------- Dikkat Gerektirenler kartlari (JS: renew_dashboard_stitch_v2.js -> restyleAlerts) ----------
+   Veri/metin AYNI (renderRenewAlerts uretiyor); sadece ic yapi + ikon eklendi. */
+#dashboard .dash-alerts{
+  grid-template-columns:repeat(3,minmax(0,1fr))!important;
+  gap:12px!important;
+}
+#dashboard .dash-alert{
+  display:flex!important;flex-direction:column!important;align-items:stretch!important;
+  gap:10px!important;text-align:left!important;
+  border:1px solid var(--pa-border)!important;border-radius:var(--pa-r-lg)!important;
+  background:var(--pa-surface-soft)!important;padding:16px!important;
+  transition:transform .2s var(--pa-ease),box-shadow .2s var(--pa-ease),border-color .2s var(--pa-ease)!important;
+}
+#dashboard .dash-alert:hover{transform:translateY(-2px)!important;box-shadow:var(--pa-shadow-1)!important}
+#dashboard .dash-alert-row{display:flex;align-items:center;gap:8px}
+#dashboard .dash-alert-icon{
+  width:28px;height:28px;border-radius:var(--pa-r);display:flex;align-items:center;justify-content:center;flex:0 0 28px;
+  background:var(--pa-surface-blue);color:var(--pa-primary);
+}
+#dashboard .dash-alert-icon svg{width:16px;height:16px}
+#dashboard .dash-alert-title{
+  flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+  font-family:"RDS Inter","Segoe UI",sans-serif;font-weight:600;font-size:13px;color:var(--pa-text);
+}
+#dashboard .dash-alert-badge{
+  font-family:"RDS Inter",sans-serif;font-weight:700;font-size:11px;padding:4px 8px;border-radius:var(--pa-r-full);white-space:nowrap;
+  background:var(--pa-surface);color:var(--pa-text-muted);
+}
+#dashboard .dash-alert-desc{
+  margin:0;font-family:"RDS Inter","Segoe UI",sans-serif;font-size:12px;line-height:1.4;color:var(--pa-text-faint);
+}
+#dashboard .dash-alert-foot{
+  display:flex;align-items:center;justify-content:space-between;
+  font-family:"RDS Inter",sans-serif;font-weight:600;font-size:11px;color:var(--pa-text-muted);
+  padding-top:8px;border-top:1px solid var(--pa-border-soft);
+}
+#dashboard .dash-alert-arrow{width:14px;height:14px;transition:transform .18s var(--pa-ease)}
+#dashboard .dash-alert:hover .dash-alert-arrow{transform:translateX(3px)}
+#dashboard .dash-alert.critical .dash-alert-icon{background:var(--pa-danger-bg);color:var(--pa-danger)}
+#dashboard .dash-alert.critical .dash-alert-badge{background:var(--pa-danger-bg);color:var(--pa-danger)}
+#dashboard .dash-alert.critical{border-color:#F3C6CE!important}
+#dashboard .dash-alert.warning .dash-alert-icon{background:var(--pa-warning-bg);color:var(--pa-warning)}
+#dashboard .dash-alert.warning .dash-alert-badge{background:var(--pa-warning-bg);color:var(--pa-warning)}
+#dashboard .dash-alert.warning{border-color:#EFDBAE!important}
+#dashboard .dash-alert.success .dash-alert-icon{background:var(--pa-success-bg);color:var(--pa-success)}
+#dashboard .dash-alert.success .dash-alert-badge{background:var(--pa-success-bg);color:var(--pa-success)}
+@media(max-width:1100px){#dashboard .dash-alerts{grid-template-columns:1fr 1fr!important}}
+@media(max-width:700px){#dashboard .dash-alerts{grid-template-columns:1fr!important}}
 
 /* ---------- Sayfa-giris animasyonu ---------- */
 @keyframes rdsFadeInUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
