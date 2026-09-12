@@ -339,6 +339,36 @@ doğrulaması gerektiğinde önce `tabs_context` ile panelin gizli olup olmadı�
 kontrol et; gizliyse ekran görüntüsüne güvenme, JS tarafından ölçülebilir
 durumları (`classList`, `computedStyle` zaman damgalı) kontrol et.
 
+### 12.09.2026 — Dashboard "Precision Automotive" redesign (canlıda)
+
+Kullanıcı stitch referans tasarım (DESIGN.md + örnek HTML) verdi, "birebir
+aynı görünsün, içerik/veri değişmesin" istedi. `renew_dashboard_stitch_v2.css/js`
+— SADECE `#dashboard`, sol menüye dokunulmadı.
+
+**Yöntem:** Var olan render fonksiyonları (`kpis()`, `renderDashboard()`,
+`renderRenewAlerts()`, `renderDashAcquisitions()`) ZİNCİRLENDİ — orijinal
+veri/hesap kodu hiç değişmedi, sadece DOM son haliyle yeniden biçimlendirildi.
+KPI'lar 2 gruba ayrıldı + SVG ikon, "Dikkat Gerektirenler"/Dönem Karşılaştırma/
+Risk dağılımı/Kâr-Zarar/mini satış listeleri/Alınan Araçlar/Ekspertiz özeti
+hepsi bu şekilde yeniden kuruldu. Renkler sadece DESIGN.md'dekiler (yeni renk
+uydurulmadı). Fontlar (Inter+Space Grotesk) CSP (`style-src 'self'`) yüzünden
+Google Fonts'tan çekilemedi — yerelde barındırıldı (`static/fonts/`).
+
+**ÖNEMLİ DERS — eski `#id>*` / `#id>*:nth-child()` kalıntıları:**
+`dashboard_pro_v3.css` ve `renew_dashboard_polish_v1.css` içinde `#dashKpis>*`,
+`#risk>*:nth-child(1..4)`, `#monthCompare>*`, `#profitSplit>*:first-child/
+:last-child` gibi ID+evrensel-seçici kuralları, ESKİ düz yapıya (örn. `#risk`
+içinde doğrudan 4 kutu) göre yazılmıştı. Yeni DOM'da aynı pozisyondaki
+elemanlar (örn. yeni `.pa-risk-bar` `#risk`'in 1. çocuğu) bu kuralları
+FARKINDA OLMADAN miras alıyor (min-height, background, border-color, hatta
+tamamen farklı bir rengi zorluyor). Çözüm: konteyneri değiştiren her JS
+DOM-yeniden-yapılandırmasından sonra, o konteynerin ID'siyle `grep` yapıp
+`#id>*` / `#id>*:nth-child` / `#id .split` gibi kalıntı kuralları bul, ID
+içeren eşit/daha yüksek özgüllükte sıfırlama yaz. Sadece `!important` eklemek
+yetmez — **aynı özgüllükte iki `!important` çakışırsa özgüllük kazanır**,
+kaynak sırası değil (bu oturumda 2. kez öğrenilen spesifik ders: `height` ile
+`min-height` de ayrı kısıtlardır, height'ı ezmek min-height'ı sıfırlamaz).
+
 **Not — bulgu, kapsam dışı bırakıldı:** `user_admin_v2.js` da `#loginForm`'a
 kendi `loginSubmit`'ini atıyor (`DOMContentLoaded`+`setTimeout` ile, app.js'in
 senkron atamalarından sonra) — fiilen çalışan handler bu olabilir. ID
@@ -388,6 +418,11 @@ Kullanıcı artık projenin sadece git üzerinden yürütülmesini istiyor:
   son sağlam yedeğe dön) hiç atlanmadan uygulanır. Bu, `/biziz` kuralı gibi
   değişmez kurallarla çelişmez; sadece "her adımda kullanıcıya sor" alışkanlığı
   kalkıyor.
+
+**12.09.2026 — SSH/VDS tam yetki:** Kullanıcı "sunucuda dosya ekleme/silme
+dahil tam yetki, onay beklemeden" dedi. Yedek alma + SHA256 + `nginx -t` +
+servis/HTTPS + konsol kontrolü adımları yine atlanmaz, sadece "her adımda
+sor" kalkıyor.
 
 **Bilinen kısıtlama:** `git push` ve `.claude/settings.json` (permissions)
 düzenlemesi Claude Code'un "auto mode classifier"ı tarafından varsayılan

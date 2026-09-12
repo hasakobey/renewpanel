@@ -77,4 +77,139 @@
     const _origAlerts=renderRenewAlerts;
     renderRenewAlerts=function(d){_origAlerts(d);restyleAlerts()};
   }
+
+  /* ---------- 3) #monthCompare: buyuk sayi + yuzde rozeti karti ---------- */
+  function compareCard(label,value,prevLabel,prevValue,changeFrac,deltaLabel){
+    const up=changeFrac>=0;
+    return `<div class="pa-compare">
+      <div class="pa-compare-top"><span>${esc(label)}</span></div>
+      <strong>${value}</strong>
+      <small>${esc(prevLabel)}: <b>${prevValue}</b></small>
+      <div class="pa-compare-badge ${up?'up':'down'}">${icon(up?'trend':'down')}<span>${up?'+':''}${(changeFrac*100).toFixed(1).replace('.',',')}%</span></div>
+      <span class="pa-compare-delta">${esc(deltaLabel)}</span>
+    </div>`;
+  }
+  function renderMonthCompareGrouped(d){
+    const box=document.getElementById('monthCompare');if(!box||!d)return;
+    const revDelta=money(d.sales_revenue-d.previous_revenue);
+    const profDelta=money(d.sales_performance_profit-d.previous_performance_profit);
+    const countDelta=(d.sales_count-d.previous_sales_count);
+    box.innerHTML=
+      compareCard('SATIŞ ADEDİ',d.sales_count+' Adet','Geçen ay',d.previous_sales_count+' Adet',d.sales_count_change,(countDelta>=0?'+':'')+countDelta+' Araç')+
+      compareCard('AYLIK TOPLAM CİRO',money(d.sales_revenue),'Geçen ay',money(d.previous_revenue),d.revenue_change,(d.sales_revenue>=d.previous_revenue?'+':'')+revDelta)+
+      compareCard('PERFORMANS KÂRI',money(d.sales_performance_profit),'Geçen ay',money(d.previous_performance_profit),d.profit_change,(d.sales_performance_profit>=d.previous_performance_profit?'+':'')+profDelta);
+  }
+
+  /* ---------- 4) Risk dagilimi: tek orantili cubuk + 4 kutu ---------- */
+  function renderRiskGrouped(d){
+    const box=document.getElementById('risk');if(!box||!d)return;
+    const r=d.stock_risk||{};
+    const tiers=[['0_30','0-30 Gün','normal'],['31_60','31-60 Gün','watch'],['61_90','61-90 Gün','action'],['90_plus','90+ Gün','critical']];
+    const total=tiers.reduce((a,[k])=>a+Number(r[k]||0),0)||1;
+    box.innerHTML=`
+      <div class="pa-risk-bar">${tiers.map(([k])=>`<div class="pa-risk-bar-seg pa-risk-${k}" style="width:${Number(r[k]||0)/total*100}%"></div>`).join('')}</div>
+      <div class="pa-risk-scale"><span>0 Gün</span><span>Kritik Eşik: 90 Gün+</span></div>
+      <div class="pa-risk-grid">${tiers.map(([k,label,tone])=>`<div class="pa-risk-box pa-risk-${k}"><span class="pa-risk-dot"></span><label>${label}</label><strong>${r[k]||0} Araç</strong><small>%${(Number(r[k]||0)/total*100).toFixed(1)}</small></div>`).join('')}</div>`;
+    const sum=document.getElementById('riskSummary');
+    if(sum)sum.innerHTML=`<p class="hint">Ortalama stok SKS: <b>${d.stock_avg_sks.toFixed(1)} gün</b> • Kritik: <b>${d.stock_critical_count}</b></p>`;
+  }
+
+  /* ---------- 5) Satis Kar/Zarar dagilimi: SALES uzerinden gercek toplamlar ---------- */
+  function renderProfitSplitGrouped(d){
+    const box=document.getElementById('profitSplit');if(!box||!d)return;
+    const rows=(typeof SALES!=='undefined'?SALES:[])||[];
+    const profitRows=rows.filter(x=>(x.calc?.performance_profit||0)>=0);
+    const lossRows=rows.filter(x=>(x.calc?.performance_profit||0)<0);
+    const profitSum=profitRows.reduce((a,x)=>a+(x.calc?.performance_profit||0),0);
+    const lossSum=lossRows.reduce((a,x)=>a+(x.calc?.performance_profit||0),0);
+    const total=rows.length||1;
+    const profitPct=profitRows.length/total*100, lossPct=lossRows.length/total*100;
+    box.innerHTML=`
+      <div class="pa-split-grid">
+        <div class="pa-split-card good">
+          <div class="pa-split-top"><span>Kârlı &amp; Başabaş Satış</span><em>%${profitPct.toFixed(1)} Başarı</em></div>
+          <strong>${profitRows.length} Adet</strong>
+          <small>Üretilen kâr hacmi:</small><b class="pa-split-amount">${money(profitSum)}</b>
+          <div class="pa-split-bar"><div style="width:${profitPct}%"></div></div>
+        </div>
+        <div class="pa-split-card bad">
+          <div class="pa-split-top"><span>Zararlı Satış</span><em>%${lossPct.toFixed(1)} Risk</em></div>
+          <strong>${lossRows.length} Adet</strong>
+          <small>Gerçekleşen zarar hacmi:</small><b class="pa-split-amount">${money(lossSum)}</b>
+          <div class="pa-split-bar"><div style="width:${lossPct}%"></div></div>
+        </div>
+      </div>`;
+  }
+
+  /* ---------- 6) En Kârlı / Zarar Eden Satışlar: mini liste karti (ayni veri, tablo yerine kart) ---------- */
+  function saleMiniRow(x,tone){
+    return `<div class="pa-mini-row ${tone}">
+      <span class="pa-mini-plate">${esc(x.plate)}</span>
+      <div class="pa-mini-info"><b>${esc(x.vehicle_info||'')}</b><small>${esc(x.consultant||'')} • SKS: ${x.sks} Gün</small></div>
+      <div class="pa-mini-amount"><b>${tone==='good'?'+':''}${money(x.profit)}</b></div>
+    </div>`;
+  }
+  function renderTopLossSalesGrouped(d){
+    const topBox=document.getElementById('topSales'),lossBox=document.getElementById('lossSales');
+    if(topBox&&d.top_sales)topBox.innerHTML=(d.top_sales||[]).map(x=>saleMiniRow(x,'good')).join('')||'<div class="empty">Kayıt yok</div>';
+    if(lossBox&&d.loss_sales)lossBox.innerHTML=(d.loss_sales||[]).map(x=>saleMiniRow(x,'bad')).join('')||'<div class="empty">Kayıt yok</div>';
+  }
+
+  /* ---------- 7) Kritik SKS Stoklari: SKS hucresine renkli rozet ekle (tablo yapisi AYNI) ---------- */
+  function badgeForSks(days){
+    const c=days<=30?'sks-ok':days<=60?'sks-watch':days<=90?'sks-action':'sks-critical';
+    return `<span class="sksbadge ${c}">${days} Gün</span>`;
+  }
+  function restyleCriticalStock(){
+    const box=document.getElementById('criticalStock');if(!box)return;
+    box.querySelectorAll('table tbody tr').forEach(tr=>{
+      const cell=tr.children[2];if(!cell)return;
+      const n=parseInt(cell.textContent,10);if(Number.isFinite(n))cell.innerHTML=badgeForSks(n);
+    });
+  }
+
+  /* ---------- 8) Bu Ay Alinan Araclar: en son 3 gercek kayit, mini kart (kategori uydurulmadi) ---------- */
+  function renderDashAcquisitionsGrouped(){
+    const box=document.getElementById('dashAcquisitions');if(!box)return;
+    const rows=(typeof ACQUISITIONS!=='undefined'?ACQUISITIONS:[])||[];
+    const recent=[...rows].sort((a,b)=>String(b.purchase_date||'').localeCompare(String(a.purchase_date||''))).slice(0,3);
+    if(!recent.length){box.innerHTML='<div class="empty">Bu ay alım yok</div>';return}
+    box.innerHTML=`<div class="pa-acq-grid">${recent.map(x=>`
+      <div class="pa-acq-card">
+        <label>${esc(x.purchase_type||'ALIM')}</label>
+        <strong>${esc(x.plate)}</strong>
+        <small>${esc(x.model_year||'')} ${esc(x.brand||'')} ${esc(x.model||'')}</small>
+        <div class="pa-acq-foot"><span>Alış:</span><b>${money(x.purchase_price)}</b></div>
+      </div>`).join('')}</div>`;
+  }
+
+  /* ---------- 9) Ekspertiz Ozeti: gercek 3 metrik, renkli nokta satiri (kategori uydurulmadi) ---------- */
+  function renderExpertiseSummaryGrouped(d){
+    const box=document.getElementById('expertiseSummary');if(!box||!d)return;
+    box.innerHTML=`<div class="pa-dot-list">
+      <div class="pa-dot-row"><span class="pa-dot blue"></span><b>Yapılan Ekspertiz</b><strong>${d.expertise_done} Adet</strong></div>
+      <div class="pa-dot-row"><span class="pa-dot green"></span><b>Alıma Dönüşen</b><strong>${d.expertise_converted} Adet</strong></div>
+      <div class="pa-dot-row"><span class="pa-dot purple"></span><b>Dönüşüm Oranı</b><strong>${pct(d.expertise_rate)}</strong></div>
+    </div>`;
+  }
+
+  const _prevRenderDashboard=renderDashboard;
+  renderDashboard=function(d){
+    _prevRenderDashboard(d);
+    renderMonthCompareGrouped(d);
+    renderRiskGrouped(d);
+    renderProfitSplitGrouped(d);
+    renderTopLossSalesGrouped(d);
+    restyleCriticalStock();
+    renderExpertiseSummaryGrouped(d);
+  };
+
+  /* #dashAcquisitions ayrica refreshAll() icinde renderDashAcquisitions()
+     olarak renderDashboard'DAN SONRA da cagriliyor (renderAcquisitions()
+     zincirinden) - o yuzden renderDashboard'a degil, dogrudan bu
+     fonksiyona zincirlenir, yoksa kartimiz orijinal tablo ile ezilir. */
+  if(typeof renderDashAcquisitions==='function'){
+    const _prevDashAcq=renderDashAcquisitions;
+    renderDashAcquisitions=function(){_prevDashAcq();renderDashAcquisitionsGrouped()};
+  }
 })();

@@ -103,7 +103,14 @@
   content:none!important;
 }
 
-/* ---------- #dashKpis grup basligi + grid (ikon + gruplama, JS: renew_dashboard_stitch_v2.js) ---------- */
+/* ---------- #dashKpis grup basligi + grid (ikon + gruplama, JS: renew_dashboard_stitch_v2.js) ----------
+   dashboard_pro_v3.css #dashKpis>*{...!important} eskiden dogrudan .kpi
+   kartlarini hedefliyordu; simdi #dashKpis'in dogrudan cocuklari .kpi-group
+   sarmalayicilari oldugu icin o kart gorunumu (beyaz kutu+kenarlik+4px sol
+   cizgi) yanlislikla gruplara biniyor - once sifirlaniyor. */
+#dashKpis>*{position:static!important;overflow:visible!important;background:transparent!important;border:none!important;border-radius:0!important;box-shadow:none!important;padding:0!important;min-height:0!important}
+#dashKpis>*::before{content:none!important}
+#dashKpis>*:hover{transform:none!important;box-shadow:none!important}
 #dashKpis{display:flex!important;flex-direction:column;gap:20px}
 #dashKpis .kpi-group-head{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:10px}
 #dashKpis .kpi-group-head h4{
@@ -335,6 +342,140 @@
 #dashboard>.grid2:nth-of-type(2){animation-delay:.30s}
 #dashboard>.grid2:nth-of-type(3){animation-delay:.34s}
 #dashboard>.card{animation-delay:.30s}
+
+/* ---------- Donem Karsilastirma karti (JS: renderMonthCompareGrouped) ----------
+   dashboard_pro_v3.css #monthCompare>*{...!important} + ::after dekoratif
+   kesigi + nth-child renk kurallari eskiden 3 farkli renkli karta aitti;
+   yeni tek-tip .pa-compare tasarimimizda sifirlanip yeniden yukleniyor. */
+#monthCompare{display:grid!important;grid-template-columns:repeat(3,1fr)!important;gap:12px!important}
+@media(max-width:900px){#monthCompare{grid-template-columns:1fr!important}}
+#monthCompare>*::after{content:none!important}
+#monthCompare>*{color:inherit!important}
+#monthCompare .pa-compare{
+  background:var(--pa-surface)!important;border:1px solid var(--pa-border)!important;border-radius:var(--pa-r-lg)!important;
+  box-shadow:none!important;padding:16px!important;
+  position:relative;transition:transform .2s var(--pa-ease),box-shadow .2s var(--pa-ease);
+}
+.pa-compare:hover{transform:translateY(-1px);box-shadow:var(--pa-shadow-1)}
+.pa-compare-top span{
+  font-family:"RDS Inter",sans-serif;font-weight:600;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--pa-text-muted);
+}
+.pa-compare strong{
+  display:block;margin-top:6px;font-family:"RDS Space Grotesk","RDS Inter",sans-serif;font-weight:700;font-size:26px;color:var(--pa-text);
+}
+.pa-compare small{display:block;margin-top:4px;font-family:"RDS Inter",sans-serif;font-size:12px;color:var(--pa-text-faint)}
+.pa-compare small b{color:var(--pa-text);font-weight:600}
+.pa-compare-badge{
+  position:absolute;top:16px;right:16px;display:inline-flex;align-items:center;gap:4px;
+  padding:4px 8px;border-radius:var(--pa-r-full);font-family:"RDS Inter",sans-serif;font-weight:700;font-size:12px;
+}
+.pa-compare-badge svg{width:12px;height:12px}
+.pa-compare-badge.up{background:var(--pa-success-bg);color:var(--pa-success)}
+.pa-compare-badge.down{background:var(--pa-danger-bg);color:var(--pa-danger)}
+.pa-compare-delta{display:block;margin-top:34px;font-family:"RDS Inter",sans-serif;font-size:11px;color:var(--pa-text-faint)}
+
+/* ---------- Risk dagilimi (JS: renderRiskGrouped) ----------
+   #risk eski .risk sinifini tasiyor (style.css: .risk div{padding;text-align;
+   border-radius;font-size;font-weight}) - yeni yapimizin dogrudan cocuklarini
+   once sifirlamamiz gerekiyor, yoksa eski kutu-model kurallari cakisiyor. */
+/* #risk kendisi eskiden 4 sutunlu grid kutu konteyneriydi (style.css .risk +
+   renew_dashboard_polish_v1.css #risk{gap...}); simdi 3 blogu (bar/scale/grid)
+   dikey istifliyoruz, container'in kendi display'ini de degistirmemiz gerekiyor. */
+#risk.risk{display:flex!important;flex-direction:column!important;gap:0!important}
+/* dashboard_pro_v3.css #risk>*:nth-child(1..4) + renew_dashboard_polish_v1.css
+   #risk>div ESKİ 4-kutu (r1..r4) tasarimina renk/kutu kurallari zorluyordu;
+   yeni bar/scale/grid yapimiz artik #risk'in ayni konumdaki cocuklari oldugu
+   icin bu kurallar sizmasin diye tam sifirlama + tekrar yukleme yapiyoruz. */
+#risk.risk div{padding:0!important;text-align:left!important;border-radius:0!important;font-size:inherit!important;font-weight:normal!important;background:transparent!important;color:inherit!important;border:none!important;box-shadow:none!important;justify-content:flex-start!important}
+/* Not: yukaridaki reset ID+class icerdigi icin yuksek ozgullukte (0,2,0-ish).
+   Asagidaki kurallar da #risk on-ekiyle ayni/daha yuksek ozgullukte yazildi,
+   yoksa !important vs !important carpismasinda ozguluk kazanir, kaybederiz
+   (CLAUDE.md'deki CSS ozgulluk dersi - login ekrani isindeki ayni hata). */
+#risk.risk .pa-risk-bar{display:flex!important;width:100%;height:10px!important;min-height:0!important;border-radius:var(--pa-r-full)!important;overflow:hidden;background:var(--pa-border-soft)!important;border:none!important}
+#risk.risk .pa-risk-box{min-height:0!important}
+#risk.risk .pa-risk-bar-seg{height:100%!important}
+#risk.risk .pa-risk-0_30{background:var(--pa-primary)!important}
+#risk.risk .pa-risk-31_60{background:#6CD3F7!important}
+#risk.risk .pa-risk-61_90{background:var(--pa-warning)!important}
+#risk.risk .pa-risk-90_plus{background:var(--pa-danger)!important}
+#risk.risk .pa-risk-scale{display:flex!important;justify-content:space-between;margin-top:6px!important;min-height:0!important;padding:0!important;border:none!important;font-family:"RDS Inter",sans-serif;font-size:10px!important;font-weight:600!important;letter-spacing:.04em;text-transform:uppercase;color:var(--pa-text-faint)!important}
+#risk.risk .pa-risk-grid{display:grid!important;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:14px!important;min-height:0!important;padding:0!important;border:none!important}
+#risk.risk .pa-risk-box{background:var(--pa-surface-soft)!important;border:1px solid var(--pa-border)!important;border-radius:var(--pa-r)!important;padding:10px!important;text-align:left!important}
+#risk.risk .pa-risk-box label{display:block;font-family:"RDS Inter",sans-serif;font-size:10px!important;font-weight:600!important;letter-spacing:.04em;text-transform:uppercase;color:var(--pa-text-muted)!important;margin-bottom:6px}
+#risk.risk .pa-risk-box strong{display:block;font-family:"RDS Space Grotesk","RDS Inter",sans-serif;font-weight:700!important;font-size:16px!important;color:var(--pa-text)!important}
+#risk.risk .pa-risk-box small{display:block;margin-top:2px;font-family:"RDS Inter",sans-serif;font-size:11px!important;font-weight:400!important;color:var(--pa-text-faint)!important}
+#risk.risk .pa-risk-box .pa-risk-dot{display:inline-block;width:7px;height:7px;border-radius:50%!important;margin-bottom:4px}
+#risk.risk .pa-risk-box.pa-risk-0_30 .pa-risk-dot{background:var(--pa-primary)!important}
+#risk.risk .pa-risk-box.pa-risk-31_60 .pa-risk-dot{background:#6CD3F7!important}
+#risk.risk .pa-risk-box.pa-risk-61_90 .pa-risk-dot{background:var(--pa-warning)!important}
+#risk.risk .pa-risk-box.pa-risk-90_plus{background:var(--pa-danger-bg)!important;border-color:#F3C6CE!important}
+#risk.risk .pa-risk-box.pa-risk-90_plus .pa-risk-dot{background:var(--pa-danger)!important}
+#risk.risk .pa-risk-box.pa-risk-90_plus strong{color:var(--pa-danger)!important}
+@media(max-width:700px){.pa-risk-grid{grid-template-columns:repeat(2,1fr)}}
+
+/* ---------- Satis Kar/Zarar dagilimi (JS: renderProfitSplitGrouped) ---------- */
+/* dashboard_pro_v3.css #profitSplit>*:first-child/:last-child eskiden tek
+   kart oldugumuz icin (first=last=ayni eleman) ikisi de uygulanip yanlis
+   kirmizi/yesil boyardi; ID-kapsamli yeniden yukleme ile sonduruluyor. */
+#profitSplit>*:first-child,#profitSplit>*:last-child{background:transparent!important;color:inherit!important;border-radius:0!important}
+#profitSplit .pa-split-grid{display:grid!important;grid-template-columns:1fr 1fr;gap:12px}
+.pa-split-card{border-radius:var(--pa-r-lg);padding:14px;border:1px solid var(--pa-border)}
+.pa-split-card.good{background:var(--pa-success-bg);border-color:#CBEBD6}
+.pa-split-card.bad{background:var(--pa-danger-bg);border-color:#F3C6CE}
+.pa-split-top{display:flex;align-items:center;justify-content:space-between;gap:6px}
+.pa-split-top span{font-family:"RDS Inter",sans-serif;font-weight:600;font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:var(--pa-text-muted)}
+.pa-split-top em{font-style:normal;font-family:"RDS Inter",sans-serif;font-weight:700;font-size:11px;padding:3px 7px;border-radius:var(--pa-r-full);background:var(--pa-surface)}
+.pa-split-card strong{display:block;margin-top:8px;font-family:"RDS Space Grotesk","RDS Inter",sans-serif;font-weight:700;font-size:22px;color:var(--pa-text)}
+.pa-split-card.good strong{color:var(--pa-success)}
+.pa-split-card.bad strong{color:var(--pa-danger)}
+.pa-split-card small{display:block;margin-top:6px;font-family:"RDS Inter",sans-serif;font-size:11px;color:var(--pa-text-faint)}
+.pa-split-amount{display:block;font-family:"RDS Space Grotesk","RDS Inter",sans-serif;font-weight:700;font-size:13px}
+.pa-split-card.good .pa-split-amount{color:var(--pa-success)}
+.pa-split-card.bad .pa-split-amount{color:var(--pa-danger)}
+.pa-split-bar{margin-top:10px;height:5px;border-radius:var(--pa-r-full);background:var(--pa-surface);overflow:hidden}
+.pa-split-bar div{height:100%}
+.pa-split-card.good .pa-split-bar div{background:var(--pa-success)}
+.pa-split-card.bad .pa-split-bar div{background:var(--pa-danger)}
+@media(max-width:700px){.pa-split-grid{grid-template-columns:1fr}}
+
+/* ---------- En Karlı/Zararlı satislar mini liste (JS: renderTopLossSalesGrouped) ---------- */
+.pa-mini-row{display:flex;align-items:center;gap:10px;padding:10px;border-radius:var(--pa-r);background:var(--pa-surface-soft);margin-bottom:8px;transition:transform .16s var(--pa-ease)}
+.pa-mini-row:hover{transform:translateY(-1px)}
+.pa-mini-row:last-child{margin-bottom:0}
+.pa-mini-plate{
+  font-family:"RDS Inter",sans-serif;font-weight:700;font-size:11px;letter-spacing:.03em;
+  background:var(--pa-surface);border:1px solid var(--pa-border);border-radius:var(--pa-r);padding:4px 7px;white-space:nowrap;
+}
+.pa-mini-info{flex:1;min-width:0}
+.pa-mini-info b{display:block;font-family:"RDS Inter",sans-serif;font-weight:600;font-size:12px;color:var(--pa-text);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pa-mini-info small{display:block;margin-top:2px;font-family:"RDS Inter",sans-serif;font-size:11px;color:var(--pa-text-faint)}
+.pa-mini-amount b{font-family:"RDS Space Grotesk","RDS Inter",sans-serif;font-weight:700;font-size:13px;white-space:nowrap}
+.pa-mini-row.good .pa-mini-amount b{color:var(--pa-success)}
+.pa-mini-row.bad{background:var(--pa-danger-bg)}
+.pa-mini-row.bad .pa-mini-amount b{color:var(--pa-danger)}
+
+/* ---------- Bu Ay Alinan Araclar mini kart (JS: renderDashAcquisitionsGrouped) ---------- */
+.pa-acq-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.pa-acq-card{background:var(--pa-surface-soft);border:1px solid var(--pa-border);border-radius:var(--pa-r);padding:10px;transition:transform .16s var(--pa-ease)}
+.pa-acq-card:hover{transform:translateY(-2px)}
+.pa-acq-card label{display:block;font-family:"RDS Inter",sans-serif;font-weight:600;font-size:10px;letter-spacing:.05em;text-transform:uppercase;color:var(--pa-text-muted)}
+.pa-acq-card strong{display:block;margin-top:6px;font-family:"RDS Space Grotesk","RDS Inter",sans-serif;font-weight:700;font-size:14px;color:var(--pa-text)}
+.pa-acq-card small{display:block;margin-top:2px;font-family:"RDS Inter",sans-serif;font-size:11px;color:var(--pa-text-faint)}
+.pa-acq-foot{display:flex;justify-content:space-between;margin-top:10px;padding-top:8px;border-top:1px solid var(--pa-border-soft);font-family:"RDS Inter",sans-serif;font-size:12px}
+.pa-acq-foot span{color:var(--pa-text-faint)}
+.pa-acq-foot b{color:var(--pa-text);font-weight:600}
+@media(max-width:700px){.pa-acq-grid{grid-template-columns:1fr}}
+
+/* ---------- Ekspertiz ozeti nokta listesi (JS: renderExpertiseSummaryGrouped) ---------- */
+.pa-dot-list{display:flex;flex-direction:column;gap:8px}
+.pa-dot-row{display:flex;align-items:center;gap:8px;padding:10px;border-radius:var(--pa-r);background:var(--pa-surface-soft);transition:background-color .16s var(--pa-ease)}
+.pa-dot-row:hover{background:var(--pa-surface-blue)}
+.pa-dot{width:9px;height:9px;border-radius:50%;flex:0 0 9px}
+.pa-dot.blue{background:var(--pa-primary)}
+.pa-dot.green{background:var(--pa-success)}
+.pa-dot.purple{background:var(--pa-purple)}
+.pa-dot-row b{flex:1;font-family:"RDS Inter",sans-serif;font-weight:600;font-size:12px;color:var(--pa-text)}
+.pa-dot-row strong{font-family:"RDS Space Grotesk","RDS Inter",sans-serif;font-weight:700;font-size:13px;color:var(--pa-text)}
 
 @media(prefers-reduced-motion:reduce){
   #dashboard *{animation:none!important;transition:none!important}
