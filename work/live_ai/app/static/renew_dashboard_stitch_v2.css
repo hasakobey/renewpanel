@@ -1,0 +1,268 @@
+/* RENEW_DASHBOARD_STITCH_V2
+   Kaynak: stitch_renew_pro_ui_redesign/precision_automotive_fleet_intelligence/DESIGN.md
+   Kapsam: SADECE #dashboard (Genel Dashboard sayfasi). <aside> (sol menu) ve
+   diger sayfalar (#stocks,#sales,...) HEDEFLENMEZ — her selector #dashboard
+   ile baslar. v1'in yerini alir (glass-wave gorsel efekti dashboard'da
+   kaldirilir, tek temiz kaynak dosya - CLAUDE.md kural 5).
+   Renkler SADECE DESIGN.md'de tanimli olanlardir, yeni renk uydurulmadi
+   (kural.md / CLAUDE.md "yeni renk uydurma" kurali).
+   Veri/hesap mantigina (app.js render fonksiyonlari, calc.py) dokunulmadi.
+*/
+
+/* ---------- Fontlar (yerelde barindiriliyor, CSP: style-src 'self') ---------- */
+@font-face{
+  font-family:"RDS Inter";font-style:normal;font-weight:600;font-display:swap;
+  src:url("/static/fonts/Inter-600-latin.woff2") format("woff2");
+  unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+20AC,U+2122;
+}
+@font-face{
+  font-family:"RDS Inter";font-style:normal;font-weight:600;font-display:swap;
+  src:url("/static/fonts/Inter-600-latin-ext.woff2") format("woff2");
+  unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+1E00-1EFF;
+}
+@font-face{
+  font-family:"RDS Inter";font-style:normal;font-weight:700;font-display:swap;
+  src:url("/static/fonts/Inter-700-latin.woff2") format("woff2");
+  unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+20AC,U+2122;
+}
+@font-face{
+  font-family:"RDS Inter";font-style:normal;font-weight:700;font-display:swap;
+  src:url("/static/fonts/Inter-700-latin-ext.woff2") format("woff2");
+  unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+1E00-1EFF;
+}
+@font-face{
+  font-family:"RDS Space Grotesk";font-style:normal;font-weight:700;font-display:swap;
+  src:url("/static/fonts/SpaceGrotesk-700-latin.woff2") format("woff2");
+  unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+20AC,U+2122;
+}
+@font-face{
+  font-family:"RDS Space Grotesk";font-style:normal;font-weight:700;font-display:swap;
+  src:url("/static/fonts/SpaceGrotesk-700-latin-ext.woff2") format("woff2");
+  unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+1E00-1EFF;
+}
+
+/* ---------- Tasarim tokenlari (DESIGN.md) ---------- */
+#dashboard{
+  --pa-page-bg:#F4F7FB;
+  --pa-surface:#FFFFFF;
+  --pa-surface-soft:#F8FAFD;
+  --pa-surface-blue:#EDF4FF;
+  --pa-border:#E2E8F0;
+  --pa-border-soft:#EDF1F6;
+  --pa-primary:#0052D9;
+  --pa-primary-hover:#0044B5;
+  --pa-primary-active:#003794;
+  --pa-primary-soft:#EAF1FF;
+  --pa-text:#142B45;
+  --pa-text-muted:#64748B;
+  --pa-text-faint:#718096;
+  --pa-success:#15803D; --pa-success-bg:#EAF8EF;
+  --pa-warning:#A86408; --pa-warning-bg:#FFF5DF;
+  --pa-danger:#C6283D;  --pa-danger-bg:#FFF0F2;
+  --pa-cyan:#0891B2;    --pa-cyan-bg:#EDF4FF;
+  --pa-purple:#7C3AED;
+  --pa-r-sm:2px; --pa-r:4px; --pa-r-lg:8px; --pa-r-xl:12px; --pa-r-full:9999px;
+  --pa-ease:cubic-bezier(.16,1,.3,1);
+  --pa-shadow-1:0 4px 12px -2px rgba(20,43,69,.06),0 2px 4px -1px rgba(20,43,69,.03);
+  --pa-shadow-2:0 10px 24px -4px rgba(20,43,69,.10),0 4px 8px -2px rgba(20,43,69,.04);
+  background:var(--pa-page-bg);
+  font-variant-numeric:tabular-nums;
+}
+
+/* ---------- Baslıklar ---------- */
+#dashboard h2,
+#dashboard h3,
+#dashboard .hero h2{
+  font-family:"RDS Space Grotesk","Segoe UI",Arial,sans-serif!important;
+  font-weight:600!important;
+  font-size:16px!important;
+  line-height:24px!important;
+  letter-spacing:0!important;
+  color:var(--pa-text)!important;
+}
+#dashboard .hero h2{font-size:22px!important;letter-spacing:-.01em!important}
+#dashboard .hint{
+  font-family:"RDS Inter","Segoe UI",Arial,sans-serif!important;
+  color:var(--pa-text-faint)!important;
+  font-weight:400!important;
+}
+#dashboard .section-label{
+  font-family:"RDS Space Grotesk","Segoe UI",Arial,sans-serif!important;
+  text-transform:uppercase!important;
+  letter-spacing:.08em!important;
+  font-weight:600!important;
+  font-size:11px!important;
+  color:var(--pa-text-muted)!important;
+}
+
+/* ---------- Glass-wave dekoratif efektini dashboard'da sondur ---------- */
+#dashboard .kpis>.kpi:before,
+#dashboard .kpis>.kpi:after{
+  content:none!important;
+}
+
+/* ---------- Kartlar (Level 1/2 elevation) ---------- */
+#dashboard .card,
+#dashboard .kpis>.kpi{
+  background:var(--pa-surface)!important;
+  border:1px solid var(--pa-border)!important;
+  border-left:1px solid var(--pa-border)!important;
+  border-radius:var(--pa-r-lg)!important;
+  box-shadow:none!important;
+  padding:20px!important;
+  transition:transform .22s var(--pa-ease),box-shadow .22s var(--pa-ease),border-color .18s var(--pa-ease)!important;
+}
+#dashboard .card:hover,
+#dashboard .kpis>.kpi:hover{
+  transform:translateY(-1px)!important;
+  box-shadow:var(--pa-shadow-1)!important;
+  border-color:#CBD5E1!important;
+}
+#dashboard .cardhead{
+  border-bottom:1px solid var(--pa-border-soft);
+  padding-bottom:12px;
+  margin-bottom:12px;
+}
+#dashboard .attention-card{
+  background:var(--pa-surface-soft)!important;
+  border:1px solid var(--pa-border)!important;
+  border-radius:var(--pa-r-lg)!important;
+}
+
+/* ---------- KPI format ---------- */
+#dashboard .kpis>.kpi{border-left:1px solid var(--pa-border)!important}
+#dashboard .kpis>.kpi label{
+  font-family:"RDS Inter","Segoe UI",Arial,sans-serif!important;
+  font-weight:600!important;
+  font-size:11px!important;
+  letter-spacing:.08em!important;
+  text-transform:uppercase!important;
+  color:var(--pa-text-muted)!important;
+}
+#dashboard .kpis>.kpi strong{
+  font-family:"RDS Space Grotesk","RDS Inter","Segoe UI",Arial,sans-serif!important;
+  font-weight:600!important;
+  font-size:24px!important;
+  line-height:30px!important;
+  letter-spacing:-.01em!important;
+  color:var(--pa-text)!important;
+}
+#dashboard .kpis>.kpi small{
+  font-family:"RDS Inter","Segoe UI",Arial,sans-serif!important;
+  font-weight:400!important;
+  font-size:12px!important;
+  color:var(--pa-text-faint)!important;
+}
+/* Durum renkleri: sadece DESIGN.md'deki success/warning/danger ciftleri */
+#dashboard .kpis>.kpi.good strong{color:var(--pa-success)!important}
+#dashboard .kpis>.kpi.warn strong{color:var(--pa-warning)!important}
+#dashboard .kpis>.kpi.bad strong{color:var(--pa-danger)!important}
+
+/* ---------- Butonlar (sadece #dashboard icinde) ---------- */
+#dashboard .btn{
+  font-family:"RDS Inter","Segoe UI",Arial,sans-serif!important;
+  font-weight:600!important;
+  font-size:13px!important;
+  border-radius:var(--pa-r)!important;
+  transition:background-color .18s var(--pa-ease),border-color .18s var(--pa-ease)!important;
+}
+#dashboard .btn.primary{background:var(--pa-primary)!important;color:#fff!important}
+#dashboard .btn.primary:hover{background:var(--pa-primary-hover)!important}
+#dashboard .btn.primary:active{background:var(--pa-primary-active)!important}
+#dashboard .btn.success{background:var(--pa-success)!important;color:#fff!important}
+#dashboard .btn.danger{background:var(--pa-danger)!important;color:#fff!important}
+#dashboard .btn.ghost,#dashboard .btn.small{
+  background:var(--pa-surface)!important;
+  color:var(--pa-text)!important;
+  border:1px solid var(--pa-border)!important;
+}
+#dashboard .btn.ghost:hover,#dashboard .btn.small:hover{
+  background:var(--pa-surface-soft)!important;border-color:#CBD5E1!important;
+}
+
+/* ---------- Durum rozetleri / SKS etiketleri ----------
+   4 mevcut kademe (ok/watch/action/critical) DESIGN.md'nin 3 durum
+   cifti icine haritalanir: ok->success, watch+action->warning, critical->danger.
+   Yeni renk uydurulmadi. */
+#dashboard .sksbadge{
+  font-family:"RDS Inter","Segoe UI",Arial,sans-serif!important;
+  border-radius:var(--pa-r-full)!important;
+  font-weight:600!important;
+}
+#dashboard .sks-ok{background:var(--pa-success-bg)!important;color:var(--pa-success)!important}
+#dashboard .sks-watch,#dashboard .sks-action{background:var(--pa-warning-bg)!important;color:var(--pa-warning)!important;border:none!important}
+#dashboard .sks-critical{background:var(--pa-danger-bg)!important;color:var(--pa-danger)!important;border:none!important}
+#dashboard .attention-count{
+  background:var(--pa-surface-blue)!important;color:var(--pa-primary)!important;
+  border-radius:var(--pa-r-full)!important;font-family:"RDS Inter",sans-serif!important;font-weight:600!important;
+}
+
+/* ---------- Risk / kar-zarar kutulari (.risk, .split) ---------- */
+#dashboard .risk .r1{background:var(--pa-success-bg)!important;color:var(--pa-success)!important}
+#dashboard .risk .r2,#dashboard .risk .r3{background:var(--pa-warning-bg)!important;color:var(--pa-warning)!important}
+#dashboard .risk .r4{background:var(--pa-danger-bg)!important;color:var(--pa-danger)!important}
+#dashboard .split .g{background:var(--pa-success-bg)!important;color:var(--pa-success)!important}
+#dashboard .split .r{background:var(--pa-danger-bg)!important;color:var(--pa-danger)!important}
+#dashboard .split b,#dashboard .risk div{font-family:"RDS Space Grotesk","RDS Inter",sans-serif!important}
+
+/* ---------- Donem karsilastirma kartlari (.compare) ---------- */
+#dashboard .compare{
+  background:var(--pa-surface)!important;border:1px solid var(--pa-border)!important;
+  border-radius:var(--pa-r-lg)!important;
+}
+#dashboard .compare span{
+  font-family:"RDS Inter","Segoe UI",sans-serif!important;color:var(--pa-text-muted)!important;
+  text-transform:uppercase!important;letter-spacing:.08em!important;font-weight:600!important;
+}
+#dashboard .compare b{
+  font-family:"RDS Space Grotesk","RDS Inter",sans-serif!important;font-weight:600!important;
+  color:var(--pa-text)!important;
+}
+#dashboard .up{color:var(--pa-success)!important}
+#dashboard .down{color:var(--pa-danger)!important}
+
+/* ---------- Tablolar (Fleet/Financial ledger stili) ---------- */
+#dashboard table{font-family:"RDS Inter","Segoe UI",Arial,sans-serif!important}
+#dashboard th{
+  background:var(--pa-surface-soft)!important;
+  color:var(--pa-text-muted)!important;
+  border-bottom:1px solid var(--pa-border)!important;
+  text-transform:uppercase!important;letter-spacing:.08em!important;font-weight:600!important;
+}
+#dashboard td{border-bottom:1px solid var(--pa-border-soft)!important;color:var(--pa-text)!important}
+#dashboard tbody tr:nth-child(even){background:var(--pa-surface)!important}
+#dashboard tbody tr{transition:background-color .16s var(--pa-ease)!important}
+#dashboard tbody tr:hover{background:var(--pa-surface-blue)!important}
+#dashboard .profit{color:var(--pa-success)!important}
+#dashboard .loss{color:var(--pa-danger)!important}
+#dashboard .lossrow{background:var(--pa-danger-bg)!important}
+
+/* ---------- Finans/SKS mor vurgusu (accent-purple, mevcut deger zaten esit) ---------- */
+#dashboard .finance{color:var(--pa-purple)!important}
+
+/* ---------- Sayfa-giris animasyonu ---------- */
+@keyframes rdsFadeInUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+#dashboard>.hero,
+#dashboard>.attention-card,
+#dashboard>#dashKpis,
+#dashboard>.dash-command-grid,
+#dashboard>.section-label,
+#dashboard>#monthCompare,
+#dashboard>.grid2,
+#dashboard>.card{
+  animation:rdsFadeInUp .45s var(--pa-ease) both;
+}
+#dashboard>.hero{animation-delay:.02s}
+#dashboard>.attention-card{animation-delay:.06s}
+#dashboard>#dashKpis{animation-delay:.10s}
+#dashboard>.dash-command-grid{animation-delay:.16s}
+#dashboard>.section-label{animation-delay:.20s}
+#dashboard>#monthCompare{animation-delay:.22s}
+#dashboard>.grid2:nth-of-type(1){animation-delay:.26s}
+#dashboard>.grid2:nth-of-type(2){animation-delay:.30s}
+#dashboard>.grid2:nth-of-type(3){animation-delay:.34s}
+#dashboard>.card{animation-delay:.30s}
+
+@media(prefers-reduced-motion:reduce){
+  #dashboard *{animation:none!important;transition:none!important}
+}
