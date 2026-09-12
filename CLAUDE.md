@@ -15,6 +15,11 @@ Bu klasör, canlı sistemlerin yerel çalışma kopyası ve dağıtım (deploy) 
 
 ## Değişmez kurallar
 
+**[kural.md](kural.md) bu dosyanın üzerinde önceliklidir** — sadece kullanıcının
+söylediği kurallar orada durur, Claude kendi inisiyatifiyle ekleme yapmaz.
+Çelişki olursa kural.md geçerlidir.
+
+
 1. **`/biziz` alanına hiçbir koşulda dokunulmaz.** Ayrı bir sistemdir, kendi
    Supabase bağlantısı vardır. Hook bunu zorla engeller, override yoktur.
 
