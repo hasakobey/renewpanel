@@ -57,7 +57,12 @@
       "Bash(python -c:*)",
       "Bash(python -m py_compile:*)",
       "Bash(node --check:*)",
-      "Bash(certutil -hashfile:*)"
+      "Bash(certutil -hashfile:*)",
+      "Bash(git *)",
+      "Bash(git push:*)",
+      "Bash(git remote *)",
+      "Bash(git branch *)",
+      "Bash(& \"C:\\Program Files\\Git\\bin\\git.exe\" *)"
     ],
     "deny": [
       "Read(//**/.env)",

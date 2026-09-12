@@ -373,12 +373,26 @@ taşındı (`.env.example` referans). `claude_conn.py`'deki eski AST-okuma yolu
 kaldırıldı, artık sadece env var. Yeni kod yazarken sır asla commit edilmez —
 `guard-secrets.ps1` hook'u zaten bunu engelliyor.
 
-Bundan sonra: kod değişikliği yapılıp doğrulandıktan sonra (canlıya alınsın
-ya da alınmasın) uygun bir noktada commit atılır; kullanıcı "push et" veya
-"git'e işle" dediğinde commit + push yapılır. `git push` sırasında GitHub
-kimlik doğrulaması kullanıcı tarafından tamamlanır (tarayıcı/credential
-manager) — bu adım otomatikleştirilemez, terminal panelinden veya kullanıcının
-kendi terminalinden çalıştırılır.
+**12.09.2026 karar — local-only çalışma yok, canlıya alım da Claude'a ait:**
+Kullanıcı artık projenin sadece git üzerinden yürütülmesini istiyor:
+- Her kod değişikliği doğrulandıktan sonra commit + push edilir (biriktirilmez).
+- **Canlıya alım (VDS'e deploy) işini de Claude kendisi yapar** — kullanıcı
+  onayı beklemeden, ama "Canlı değişiklik akışı" bölümündeki 8 adım (oku →
+  tarihli yedek al → tek temiz kaynak dosyada düzenle → SHA256 karşılaştır →
+  `nginx -t` → servis/HTTPS/301 kontrolü → konsol hata kontrolü → başarısızsa
+  son sağlam yedeğe dön) hiç atlanmadan uygulanır. Bu, `/biziz` kuralı gibi
+  değişmez kurallarla çelişmez; sadece "her adımda kullanıcıya sor" alışkanlığı
+  kalkıyor.
+
+**Bilinen kısıtlama:** `git push` ve `.claude/settings.json` (permissions)
+düzenlemesi Claude Code'un "auto mode classifier"ı tarafından varsayılan
+olarak engelleniyordu; kullanıcı `permissions.allow`'a git kurallarını elle
+ekledi (VS Code'da). SSH ile VDS'e bağlanıp canlıya yazma (`*_ops.py`,
+`deploy_*.py`, `claude_conn.py` üzerinden) da aynı sınıflandırıcı tarafından
+engellenebilir — böyle bir blok çıkarsa Claude, komutu terminal panelinden
+kullanıcıya yazdırıp çalıştırmasını ister (git push'ta yapıldığı gibi),
+kullanıcının o an tekrar onay vermesi gerekir. Bu, tasarım gereği aşılamayan
+bir sınır; workaround aranmaz.
 
 ## İletişim
 
