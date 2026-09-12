@@ -1,0 +1,92 @@
+/* RENEW PRO — Precision Automotive gorsel katmani: Arac Fotograflari (25 slot studyo).
+   Sadece CSS. renew_photo_studio_v1.js/DOM yapisina, slot/kamera/upload/swap
+   mantigina hic dokunulmadi - var olan class adlari uzerinden restyle. */
+#photos{
+  --pa-page-bg:#F4F7FB; --pa-surface:#FFFFFF; --pa-surface-soft:#F8FAFD; --pa-surface-blue:#EDF4FF;
+  --pa-border:#E2E8F0; --pa-border-soft:#EDF1F6;
+  --pa-primary:#0052D9; --pa-primary-hover:#0044B5; --pa-primary-soft:#EAF1FF;
+  --pa-text:#142B45; --pa-text-muted:#64748B; --pa-text-faint:#718096;
+  --pa-success:#15803D; --pa-success-bg:#EAF8EF;
+  --pa-warning:#A86408; --pa-warning-bg:#FFF5DF;
+  --pa-danger:#C6283D;  --pa-danger-bg:#FFF0F2;
+  --pa-r-sm:2px; --pa-r:4px; --pa-r-lg:8px; --pa-r-xl:12px; --pa-r-full:9999px;
+  --pa-shadow-1:0 4px 12px -2px rgba(20,43,69,.06),0 2px 4px -1px rgba(20,43,69,.03);
+}
+
+/* ---- Ust baslik seridi ---- */
+.photo-studio>header{background:#0B1D30;border-radius:var(--pa-r-xl)}
+.photo-studio header span{color:#8FB4DA;font-family:"RDS Inter",sans-serif;font-weight:700}
+.photo-studio header h2{font-family:"RDS Space Grotesk","Space Grotesk",sans-serif;font-weight:600}
+.photo-studio header p{color:#B9C9DB}
+.studio-progress{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.16)}
+.studio-progress b{font-family:"RDS Space Grotesk","Space Grotesk",sans-serif}
+
+/* ---- Kartlar ---- */
+.studio-picker,.studio-workspace{background:var(--pa-surface);border:1px solid var(--pa-border);border-radius:var(--pa-r-lg);box-shadow:none}
+.studio-search input{border:1px solid var(--pa-border);border-radius:var(--pa-r);background:var(--pa-surface);color:var(--pa-text)}
+.studio-search input:focus{outline:0;border-color:var(--pa-primary);box-shadow:0 0 0 1px var(--pa-primary)}
+.studio-search button,.studio-vehicle-head button{background:var(--pa-primary-soft);color:var(--pa-primary);border-radius:var(--pa-r)}
+
+/* ---- Filtre cipleri ---- */
+.studio-chips button{background:var(--pa-surface-soft);border:1px solid var(--pa-border);color:var(--pa-text-muted);border-radius:var(--pa-r-full);font-weight:700}
+.studio-chips button.active{background:var(--pa-primary);border-color:var(--pa-primary);color:#fff}
+
+/* ---- Arac listesi ---- */
+.studio-vehicle{background:var(--pa-surface-soft);border:1px solid var(--pa-border);border-radius:var(--pa-r-lg);color:var(--pa-text)}
+.studio-vehicle>span{background:var(--pa-primary-soft);color:var(--pa-primary);border-radius:var(--pa-r)}
+.studio-vehicle small{color:var(--pa-text-faint)}
+.studio-vehicle.active{border-color:var(--pa-primary);background:var(--pa-primary-soft);box-shadow:inset 0 0 0 1px var(--pa-primary)}
+.studio-vehicle.warn>span{background:var(--pa-warning-bg);color:var(--pa-warning)}
+.studio-vehicle.warn>strong{color:var(--pa-warning)}
+.studio-vehicle.good>span{background:var(--pa-success-bg);color:var(--pa-success)}
+.studio-vehicle.good>strong{color:var(--pa-success)}
+.studio-vehicle.bad>span{background:var(--pa-danger-bg);color:var(--pa-danger)}
+.studio-vehicle.bad>strong{color:var(--pa-danger)}
+.studio-empty,.studio-loading,.studio-no-result{color:var(--pa-text-muted)}
+
+/* ---- Secili arac basligi + araclar ---- */
+.studio-vehicle-head{border-bottom:1px solid var(--pa-border-soft)}
+.studio-vehicle-head span{color:var(--pa-text-muted)}
+.studio-vehicle-head h3{font-family:"RDS Space Grotesk","Space Grotesk",sans-serif;color:var(--pa-text)}
+.studio-vehicle-head h3 small{color:var(--pa-text-faint)}
+.next-slot-badge{background:var(--pa-warning-bg);color:var(--pa-warning)}
+.slot-help{background:var(--pa-surface-soft);border:1px solid var(--pa-border-soft);color:var(--pa-text-muted);border-radius:var(--pa-r-lg)}
+
+.desktop-studio-tools button{border:1px solid var(--pa-border);background:var(--pa-surface);color:var(--pa-text);border-radius:var(--pa-r);font-weight:700}
+.desktop-studio-tools button:hover{background:var(--pa-surface-soft);border-color:#CBD5E1}
+.desktop-studio-tools button.primary{background:var(--pa-primary);border-color:var(--pa-primary);color:#fff}
+.desktop-studio-tools button.primary:hover{background:var(--pa-primary-hover)}
+.desktop-studio-tools button.danger{color:var(--pa-danger);border-color:#F3CDD4;background:var(--pa-danger-bg)}
+.studio-vehicle-head button.mobile-change{background:var(--pa-primary-soft);color:var(--pa-primary)}
+
+/* ---- Numara kilavuzu ---- */
+.number-guide button{background:var(--pa-surface-soft);border:1px solid var(--pa-border);color:var(--pa-text-muted);border-radius:var(--pa-r-sm);font-family:"RDS Inter",sans-serif}
+.number-guide button.filled{background:var(--pa-success-bg);border-color:#CFE9DA;color:var(--pa-success)}
+.number-guide button.next{background:var(--pa-primary);border-color:var(--pa-primary);color:#fff;box-shadow:0 0 0 2px var(--pa-primary-soft)}
+
+/* ---- 25 slot izgara ---- */
+.slot-grid{gap:10px}
+.photo-slot{border:1px solid var(--pa-border);border-radius:var(--pa-r-lg);background:var(--pa-surface-soft);transition:box-shadow .18s ease,border-color .18s ease}
+.photo-slot:hover{box-shadow:var(--pa-shadow-1);border-color:#CBD5E1}
+.photo-slot.empty{border:1.5px dashed #CBD5E1;color:var(--pa-text-faint)}
+.photo-slot>span{background:var(--pa-text);border-radius:var(--pa-r);font-family:"RDS Inter",sans-serif}
+.photo-slot>b{color:#AEBFCE}
+.photo-slot>i{background:var(--pa-success)}
+.photo-slot>em{color:var(--pa-danger)}
+.photo-slot.selected{outline-color:var(--pa-primary)}
+.photo-slot.swap-selected{outline-color:var(--pa-warning)}
+.drop-overlay{border-color:var(--pa-primary);background:rgba(234,241,255,.92);color:var(--pa-primary)}
+.selection-marquee{border-color:var(--pa-primary);background:rgba(0,82,217,.12)}
+
+/* ---- Alt aksiyon cubugu ---- */
+.studio-bottom label{background:var(--pa-primary-soft);color:var(--pa-primary)}
+.studio-bottom button{background:var(--pa-primary);color:#fff;border-radius:var(--pa-r)}
+.studio-bottom button:hover{background:var(--pa-primary-hover)}
+.studio-bottom label{border-radius:var(--pa-r)}
+
+/* ---- Kamera modu (renkler pa- tonlarina hizalandi, davranis degismedi) ---- */
+.camera-top button.on{background:var(--pa-warning);color:#111}
+.camera-film .active{outline-color:var(--pa-primary)}
+.camera-shutter:active{box-shadow:inset 0 0 0 4px var(--pa-primary)}
+
+@media(prefers-reduced-motion:reduce){#photos *{transition:none!important}}
