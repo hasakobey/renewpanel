@@ -355,6 +355,31 @@ YAZILAN metin kısalır. Ayrıntı bu dosyada durur, sohbette tekrar edilmez.
   ChatGPT sohbetinde açıkta paylaşıldı → **üçü de değiştirilmeli**
 - Firebase hizmet hesabı JSON'unun İndirilenler klasöründeki kopyası silinmeli
 
+## Git / GitHub (12.09.2026'dan itibaren)
+
+Proje `https://github.com/hasakobey/renewpanel` (özel repo) üzerinden takip
+ediliyor. Sadece kaynak kod push edildi: `work/`, `.claude/`, `CLAUDE.md`,
+`.mcp.json`. **Push edilmez / `.gitignore`'da:** `backups/`, `output/`,
+`outputs/`, `tmp/` (gerçek müşteri/finans verisi ve DB yedekleri içeriyor),
+`.env*`, service-account JSON'lar.
+
+Git yerel Windows'a kurulu ama PATH'e eklenmedi — komutlarda tam yol kullan:
+`& "C:\Program Files\Git\bin\git.exe" ...` (veya PowerShell oturumunda
+`$env:PATH += ";C:\Program Files\Git\bin"`).
+
+**Sırlar:** `deploy_video_studio.py` / `inspect_video_server.py`'deki düz
+metin SSH root parolası kaldırıldı, `RENEW_SSH_PASSWORD` ortam değişkenine
+taşındı (`.env.example` referans). `claude_conn.py`'deki eski AST-okuma yolu
+kaldırıldı, artık sadece env var. Yeni kod yazarken sır asla commit edilmez —
+`guard-secrets.ps1` hook'u zaten bunu engelliyor.
+
+Bundan sonra: kod değişikliği yapılıp doğrulandıktan sonra (canlıya alınsın
+ya da alınmasın) uygun bir noktada commit atılır; kullanıcı "push et" veya
+"git'e işle" dediğinde commit + push yapılır. `git push` sırasında GitHub
+kimlik doğrulaması kullanıcı tarafından tamamlanır (tarayıcı/credential
+manager) — bu adım otomatikleştirilemez, terminal panelinden veya kullanıcının
+kendi terminalinden çalıştırılır.
+
 ## İletişim
 
 Kullanıcı Türkçe yazar, kısa ve doğrudan cevap bekler. Yapılan işi madde madde
