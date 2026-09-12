@@ -72,6 +72,71 @@ Her canlı işlem bu sırayı izler — adım atlanmaz:
 Küçük görsel düzeltmelerde her seferinde yeni yedek alınmaz (kullanıcı isteği);
 büyük paketlerde tek toplu yedek alınır.
 
+## Stitch referans tasarım akışı
+
+Kullanıcı Google Stitch'te tasarladığı bir ekranı `.zip` olarak paylaşıyor
+("stitch üzerinden ... iletiyorum" gibi bir mesajla). Zip her zaman şu
+yapıdadır:
+
+```
+stitch_renew_pro_ui_redesign/
+  <ekran_adi_1>/code.html   + screen.png   (Tailwind CDN'li tek dosya mockup + görsel)
+  <ekran_adi_2>/code.html   + screen.png   (varsa mobil versiyon, ayrı klasör)
+  precision_automotive_fleet_intelligence/DESIGN.md   (renk/tipografi/spacing token spesifikasyonu — proje genelinde SABİT, her zip'te aynı)
+```
+
+Bu geldiğinde şu sıra izlenir, adım atlanmaz:
+
+1. **Zip'i aç**, `screen.png`'leri (web + varsa mobil) görüntüle, `code.html`'i
+   oku (Tailwind class'ları ve JS mantığı gerçek uygulamaya taşınmaz, sadece
+   görsel referanstır — `<script src="cdn.tailwindcss.com">`, sahte veri,
+   `stitch-placeholder` görselleri hiçbiri canlıya gitmez).
+2. **DESIGN.md** aynı token setiyse (surface/primary/success/warning/danger
+   renkleri, Inter+Space Grotesk tipografi, 4/8/12px radius kademesi) tekrar
+   okumaya gerek yok — proje zaten `--pa-*` custom property olarak
+   `renew_dashboard_stitch_v2.css`'te tanımlı, aynı isim/değerlerle yeni
+   dosyada da kullan (bkz. o dosyanın tepesindeki `:root` bloğu).
+3. **Hedef gerçek modülü bul** — mockup'taki ekran adı (`code.html` başlığı,
+   sidebar'daki "aktif" link) üzerinden `index.html`/`app.js`/ilgili
+   `renew_*.js` dosyalarında GERÇEKTEN çalışan kodu keşfet (gerekirse Explore
+   ajanı ile). index.html'de birden fazla "eski/ölü" markup katmanı olabilir
+   (bkz. `#photos` örneği — statik markup `boot()` ile eziliyordu); mockup'a
+   en çok benzeyen HTML değil, tarayıcıda GERÇEKTEN render olan kod hedeftir.
+4. **Karar ver: zincirleme mi, CSS-only mu?**
+   - Hedef render fonksiyonu `window`'a açık/global ise (dashboard, stok/satış
+     formları gibi) → fonksiyonu `const _prev=fn; fn=function(...){_prev(...);
+     /* restyle */}` ile zincirle, DOM'u ihtiyaca göre yeniden kur.
+   - Hedef fonksiyon kapalı bir IIFE içindeyse ve dışa hiçbir şey açmıyorsa
+     (`renew_photo_studio_v1.js` gibi) → zincirleme YAPMA, sadece var olan
+     class adlarını hedefleyen yeni bir CSS dosyasıyla restyle et. Daha az
+     riskli ve genelde yeterlidir.
+5. **Değişmeyecekler:** sol menü/sidebar, sayfa yönlendirme, gerçek veri
+   alanları (id/name), hesap mantığı (varsa `calc.py` formülü — JS'de bir
+   canlı önizleme gösterilecekse formül calc.py'den BİREBİR kopyalanır,
+   uydurulmaz), API çağrıları. Kullanıcı her turda bunu ayrıca hatırlatıyor
+   ("menübar ve ekstra şeyler değişmeyecek") ama bu zaten proje kuralı.
+6. **Kontrol listesi (üç ayrı modülde tekrar çıkan hatalar):**
+   - Yeni oluşturduğun HTML etiketi (`aside`, `header`, `nav` vb.) için
+     `style.css`'te proje genelinde bare-tag seçici var mı grep'le (`<aside>`
+     sol menü seçicisiyle çakışmıştı — bkz. 12.09.2026 formlar bölümü).
+   - Yeni JS'in okuduğu global değişkenler (`SETTINGS`, `SALES`, `STOCKS` vb.)
+     `window.X` ile DEĞİL, çıplak identifier (`typeof X!=='undefined'&&X...`)
+     ile eriş — `app.js`'teki üst seviye `let` bildirimleri window'a eklenmez.
+   - Konteyneri yeniden yapılandıran her değişiklikten sonra o ID için
+     `#id>*` / `#id>*:nth-child` gibi eski seçicileri grep'le, ID-scope'lu
+     eşit/yüksek özgüllükte sıfırla.
+   - `?v=` sürüm dizesini HER deploy'da artır (statik dosya önbelleği).
+7. **Deploy:** "Canlı değişiklik akışı" (yukarıdaki 8 adım) aynen uygulanır,
+   sonra `git add/commit/push`. Yeni dosyalar her zaman mevcut `renew_*_v1`
+   dosyalarının SONUNA eklenir (index.html'deki `<link>`/`<script>` listesinin
+   en altına) — cascade'de son söz onlarda kalsın.
+
+Şimdiye kadar bu akışla yapılanlar: `renew_dashboard_stitch_v2.css/js`
+(Genel Dashboard), `renew_forms_stitch_v1.css/js` (Stok/Satış/Aylık Alım
+formları + Canlı Finansal Analiz paneli), `renew_photo_studio_stitch_v1.css`
+(Araç Fotoğrafları/25 slot stüdyo, CSS-only). Sıradaki bir Stitch zip'i
+gelirse aynı isim kalıbını takip et: `renew_<modül>_stitch_v1.css/js`.
+
 ## Klasör yapısı
 
 ```
