@@ -466,6 +466,38 @@
 .pa-acq-foot b{color:var(--pa-text);font-weight:600}
 @media(max-width:700px){.pa-acq-grid{grid-template-columns:1fr}}
 
+/* ---------- Satis Danismani Performans Matrisi (CSS-only restyle, sutunlar/veri AYNI) ---------- */
+#dashboard .consultant-avatar{
+  border-radius:50%!important;width:30px!important;height:30px!important;
+  background:var(--pa-surface-blue)!important;color:var(--pa-primary)!important;font-weight:700!important;
+}
+#dashboard .consultant-avatar.warn{background:var(--pa-warning-bg)!important;color:var(--pa-warning)!important}
+#dashboard .consultant-avatar.bad{background:var(--pa-danger-bg)!important;color:var(--pa-danger)!important}
+#dashboard .consultant-person b{font-family:"RDS Inter",sans-serif;font-weight:600;color:var(--pa-text)}
+#dashConsultants td:nth-child(2) b{
+  display:inline-block;background:var(--pa-surface-blue);color:var(--pa-primary);
+  font-family:"RDS Inter",sans-serif;font-weight:700;font-size:12px;padding:3px 9px;border-radius:var(--pa-r-full);
+}
+#dashConsultants td.profit b{color:var(--pa-primary)!important}
+#dashConsultants td.loss b{color:var(--pa-danger)!important}
+#dashboard .target-cell i{background:var(--pa-border-soft)!important}
+#dashboard .target-cell em{background:var(--pa-danger)!important}
+#dashboard .target-cell.warn em{background:var(--pa-warning)!important}
+#dashboard .target-cell.good em{background:var(--pa-success)!important}
+#dashboard .target-cell.good b{color:var(--pa-success)!important}
+#dashboard .target-cell.warn b{color:var(--pa-warning)!important}
+#dashboard .target-cell.bad b{color:var(--pa-danger)!important}
+
+/* ---------- Stok Marka Dagilimi (JS: renderBrandDistGrouped, veri AYNI) ---------- */
+.pa-brand-list{display:flex;flex-direction:column;gap:14px}
+.pa-brand-row:last-child{margin-bottom:0}
+.pa-brand-top{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:6px;font-family:"RDS Inter",sans-serif;font-size:13px}
+.pa-brand-top span{font-weight:600;color:var(--pa-text)}
+.pa-brand-top b{font-weight:400;color:var(--pa-text-muted)}
+.pa-brand-top b em{font-style:normal;font-weight:700;color:var(--pa-text)}
+.pa-brand-track{width:100%;height:8px;border-radius:var(--pa-r-full);background:var(--pa-border-soft);overflow:hidden}
+.pa-brand-fill{height:100%;border-radius:var(--pa-r-full)}
+
 /* ---------- Ekspertiz ozeti nokta listesi (JS: renderExpertiseSummaryGrouped) ---------- */
 .pa-dot-list{display:flex;flex-direction:column;gap:8px}
 .pa-dot-row{display:flex;align-items:center;gap:8px;padding:10px;border-radius:var(--pa-r);background:var(--pa-surface-soft);transition:background-color .16s var(--pa-ease)}

@@ -183,6 +183,23 @@
       </div>`).join('')}</div>`;
   }
 
+  /* ---------- 9b) Stok Marka Dagilimi: satir+cubuk yerine 2 katmanli (isim/yuzde ustte, tam-genislik cubuk altta) ----------
+     Veri AYNI (d.brand_distribution: name+count), sadece duzen degisti.
+     Renkler sadece daha once tanimli --pa-* tokenlarindan (yeni renk yok). */
+  const BRAND_COLORS=['var(--pa-primary)','var(--pa-cyan)','var(--pa-purple)','var(--pa-warning)','var(--pa-text-muted)'];
+  function renderBrandDistGrouped(d){
+    const box=document.getElementById('brandDist');if(!box||!d||!d.brand_distribution)return;
+    const rows=d.brand_distribution||[];
+    const total=rows.reduce((a,x)=>a+Number(x.count||0),0)||1;
+    box.innerHTML=`<div class="pa-brand-list">${rows.map((x,i)=>{
+      const pctVal=Number(x.count||0)/total*100;
+      return `<div class="pa-brand-row">
+        <div class="pa-brand-top"><span>${esc(x.name)}</span><b>${x.count} Araç • <em>%${pctVal.toFixed(1)}</em></b></div>
+        <div class="pa-brand-track"><div class="pa-brand-fill" style="width:${pctVal}%;background:${BRAND_COLORS[i%BRAND_COLORS.length]}"></div></div>
+      </div>`;
+    }).join('')||'<div class="empty">Veri yok</div>'}</div>`;
+  }
+
   /* ---------- 9) Ekspertiz Ozeti: gercek 3 metrik, renkli nokta satiri (kategori uydurulmadi) ---------- */
   function renderExpertiseSummaryGrouped(d){
     const box=document.getElementById('expertiseSummary');if(!box||!d)return;
@@ -201,6 +218,7 @@
     renderProfitSplitGrouped(d);
     renderTopLossSalesGrouped(d);
     restyleCriticalStock();
+    renderBrandDistGrouped(d);
     renderExpertiseSummaryGrouped(d);
   };
 
