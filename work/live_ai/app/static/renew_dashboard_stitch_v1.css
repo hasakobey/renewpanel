@@ -1,0 +1,117 @@
+/* RENEW_DASHBOARD_STITCH_V1
+   Kaynak: stitch tasarım referansı (genel_dashboard_renew_pro_canl_animasyonlu_masa_st)
+   Kapsam: SADECE #dashboard içeriği (KPI formatı, geçiş animasyonları, tipografi).
+   <aside> (sol menü) ve diğer sayfalar (#stocks, #sales, ...) bu dosyada hedeflenmez.
+   Var olan veri/hesap mantığına (app.js render fonksiyonları) dokunulmaz;
+   sadece görünüm katmanı eklenir. Önceki katmanların üzerine tek temiz kaynak
+   dosya olarak biner (CLAUDE.md kural 5).
+*/
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700;800&display=swap');
+
+#dashboard{
+  --rds-ease: cubic-bezier(.16,1,.3,1);
+  --rds-metal: linear-gradient(180deg,#1c3f6b 0%,#0b2036 52%,#3169a8 100%);
+  font-family:"Inter",-apple-system,"Segoe UI",Arial,sans-serif;
+}
+
+/* ---------- Başlıklar ---------- */
+#dashboard h2,
+#dashboard h3,
+#dashboard .hero h2{
+  font-family:"Space Grotesk","Inter",sans-serif!important;
+  font-weight:700!important;
+  letter-spacing:-.01em!important;
+}
+
+/* ---------- KPI kartları: format + geçiş ---------- */
+#dashKpis>.kpi,
+.kpis>.kpi,
+.rt-kpis>.rt-kpi{
+  transition:transform .32s var(--rds-ease),box-shadow .32s var(--rds-ease),border-color .25s var(--rds-ease)!important;
+}
+
+#dashKpis>.kpi label,
+.kpis>.kpi label{
+  font-family:"Inter",sans-serif!important;
+  font-weight:700!important;
+  letter-spacing:.07em!important;
+}
+
+/* Sayı formatı: Space Grotesk, kalın, hafif metalik degrade dolgu.
+   Anlam taşıyan renkler (good/warn/bad) solid kalır — degrade sadece nötr KPI'da. */
+#dashKpis>.kpi strong,
+.kpis>.kpi strong{
+  font-family:"Space Grotesk","Inter",sans-serif!important;
+  font-weight:800!important;
+  letter-spacing:-.02em!important;
+  font-size:20px!important;
+}
+#dashKpis>.kpi:not(.good):not(.bad):not(.warn) strong,
+.kpis>.kpi:not(.good):not(.bad):not(.warn) strong{
+  background:var(--rds-metal);
+  background-clip:text;
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  color:#142d48; /* fallback: -webkit-text-fill-color desteklenmeyen tarayıcı */
+}
+#dashKpis>.kpi.good strong,.kpis>.kpi.good strong{color:var(--green,#16a34a)!important}
+#dashKpis>.kpi.warn strong,.kpis>.kpi.warn strong{color:var(--amber,#d97706)!important}
+#dashKpis>.kpi.bad strong,.kpis>.kpi.bad strong{color:var(--red,#dc2626)!important}
+
+#dashKpis>.kpi small,
+.kpis>.kpi small{
+  font-family:"Inter",sans-serif!important;
+  font-weight:600!important;
+}
+
+/* Kart hover: hafif kalkma + yumuşak gölge (mevcut glass-wave efektiyle uyumlu, sadece easing/gölge inceltildi) */
+#dashKpis>.kpi:hover,.kpis>.kpi:hover,.rt-kpis>.rt-kpi:hover{
+  box-shadow:0 20px 40px rgba(20,45,72,.14),0 0 0 3px rgba(45,139,208,.08)!important;
+}
+
+/* ---------- Dikkat Gerektirenler / kartlar: geçiş inceltme ---------- */
+#dashboard .card,
+#dashboard .attention-card,
+#dashboard .dash-alert{
+  transition:transform .28s var(--rds-ease),box-shadow .28s var(--rds-ease),border-color .2s ease!important;
+}
+#dashboard .card:hover{
+  box-shadow:0 14px 30px rgba(15,35,60,.09)!important;
+}
+
+/* ---------- Bölüm giriş animasyonu (sayfa ilk açıldığında kademeli belirme) ---------- */
+@keyframes rdsFadeInUp{
+  from{opacity:0;transform:translateY(10px)}
+  to{opacity:1;transform:translateY(0)}
+}
+#dashboard>.hero,
+#dashboard>.attention-card,
+#dashboard>#dashKpis,
+#dashboard>.dash-command-grid,
+#dashboard>.section-label,
+#dashboard>#monthCompare,
+#dashboard>.grid2{
+  animation:rdsFadeInUp .5s var(--rds-ease) both;
+}
+#dashboard>.hero{animation-delay:.02s}
+#dashboard>.attention-card{animation-delay:.06s}
+#dashboard>#dashKpis{animation-delay:.10s}
+#dashboard>.dash-command-grid{animation-delay:.16s}
+#dashboard>.section-label{animation-delay:.20s}
+#dashboard>#monthCompare{animation-delay:.22s}
+#dashboard>.grid2:nth-of-type(1){animation-delay:.26s}
+#dashboard>.grid2:nth-of-type(2){animation-delay:.30s}
+#dashboard>.grid2:nth-of-type(3){animation-delay:.34s}
+#dashboard>.card{animation:rdsFadeInUp .5s var(--rds-ease) both;animation-delay:.30s}
+
+/* ---------- Tablo satırları: hover geçişi ---------- */
+#dashboard table tbody tr{
+  transition:background-color .18s var(--rds-ease)!important;
+}
+#dashboard table tbody tr:hover{
+  background-color:#f0f6ff!important;
+}
+
+@media(prefers-reduced-motion:reduce){
+  #dashboard *{animation:none!important;transition:none!important}
+}
