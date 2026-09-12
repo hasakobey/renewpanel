@@ -1,0 +1,127 @@
+/* RENEW PRO — Precision Automotive form system: Stok / Satış / Aylık Alım.
+   Sadece görsel katman. Alan id/name, submit ve hesap mantığı degismez. */
+.renew-form-modal,.acq-form-modal{
+  --pa-page-bg:#F4F7FB; --pa-surface:#FFFFFF; --pa-surface-soft:#F8FAFD; --pa-surface-blue:#EDF4FF;
+  --pa-border:#E2E8F0; --pa-border-soft:#EDF1F6;
+  --pa-primary:#0052D9; --pa-primary-hover:#0044B5; --pa-primary-active:#003794; --pa-primary-soft:#EAF1FF;
+  --pa-text:#142B45; --pa-text-muted:#64748B; --pa-text-faint:#718096;
+  --pa-success:#15803D; --pa-success-bg:#EAF8EF;
+  --pa-warning:#A86408; --pa-warning-bg:#FFF5DF;
+  --pa-danger:#C6283D;  --pa-danger-bg:#FFF0F2;
+  --pa-cyan:#0891B2;
+  --pa-r-sm:2px; --pa-r:4px; --pa-r-lg:8px; --pa-r-xl:12px; --pa-r-full:9999px;
+  --pa-ease:cubic-bezier(.16,1,.3,1);
+  --pa-shadow-1:0 4px 12px -2px rgba(20,43,69,.06),0 2px 4px -1px rgba(20,43,69,.03);
+}
+
+/* ---- Modal shell ---- */
+.renew-form-modal .modalbox,.acq-form-modal .modalbox{background:var(--pa-page-bg)!important}
+.renew-form-modal .modalhead,.acq-form-modal .modalhead{background:var(--pa-surface)!important;border-bottom:1px solid var(--pa-border)!important}
+.renew-form-modal .modalhead h2,.acq-form-modal .modalhead h2{font-family:"RDS Space Grotesk","Space Grotesk",sans-serif;color:var(--pa-text)!important;letter-spacing:-.01em}
+.renew-form-body,.acq-form-body{background:var(--pa-page-bg)!important}
+
+/* ---- Section cards (stok/satış) ---- */
+.renew-form-section{border:1px solid var(--pa-border)!important;border-left:1px solid var(--pa-border)!important;border-radius:var(--pa-r-lg)!important;background:var(--pa-surface)!important;box-shadow:none!important;padding:16px!important;transition:box-shadow .18s var(--pa-ease),border-color .18s var(--pa-ease)!important}
+.renew-form-section:hover{box-shadow:var(--pa-shadow-1)!important;border-color:#CBD5E1!important}
+.renew-form-section-head{padding-bottom:10px!important;margin-bottom:12px!important;border-bottom:1px solid var(--pa-border-soft)!important}
+.renew-form-section-head>span{width:22px!important;height:22px!important;border-radius:var(--pa-r)!important;background:var(--pa-text)!important;box-shadow:none!important;display:grid;place-items:center;color:#fff;font-family:"RDS Space Grotesk","Space Grotesk",sans-serif;font-size:11px;font-weight:700}
+.renew-form-section-head>span:after{content:'';}
+.renew-form-section.violet .renew-form-section-head>span,.renew-form-section.green .renew-form-section-head>span{background:var(--pa-text)!important;box-shadow:none!important}
+.renew-form-section-head b{color:var(--pa-text)!important;font-size:13px!important;font-weight:700!important}
+.renew-form-section-head small{color:var(--pa-text-muted)!important}
+
+/* section-head numbering: 1/2/3 via counter, no icon needed */
+.renew-form-layout{counter-reset:pa-sec}
+.renew-form-section .renew-form-section-head>span:before{counter-increment:pa-sec;content:counter(pa-sec)}
+
+.renew-form-grid .field label{color:var(--pa-text-muted)!important;font-weight:600!important;text-transform:none}
+.renew-form-grid input,.renew-form-grid select{
+  height:38px!important;border-radius:var(--pa-r)!important;border:1px solid var(--pa-border)!important;
+  background:var(--pa-surface)!important;font-family:Inter,sans-serif;font-size:13px!important;color:var(--pa-text)!important;
+  transition:border-color .15s,box-shadow .15s!important;
+}
+.renew-form-grid input:hover,.renew-form-grid select:hover{border-color:#CBD5E1!important;background:var(--pa-surface)!important}
+.renew-form-grid input:focus,.renew-form-grid select:focus{border-color:var(--pa-primary)!important;box-shadow:0 0 0 1px var(--pa-primary)!important;background:var(--pa-surface)!important}
+.renew-form-grid .field[data-key="plate"] input{text-transform:uppercase;font-weight:700;letter-spacing:.03em}
+.renew-form-grid .field sup{color:var(--pa-danger)!important}
+
+.renew-form-intro{padding:2px 2px 14px!important}
+.renew-form-icon{background:var(--pa-primary-soft)!important;color:var(--pa-primary)!important;box-shadow:none!important;border:1px solid var(--pa-border)!important;border-radius:var(--pa-r-lg)!important}
+.renew-form-intro b{color:var(--pa-text)!important;font-family:"RDS Space Grotesk","Space Grotesk",sans-serif}
+.renew-form-intro small{color:var(--pa-text-muted)!important}
+.renew-form-intro em{background:var(--pa-primary-soft)!important;color:var(--pa-primary)!important}
+
+.purchase-rule-note{display:block;margin-top:5px;font-size:11px;font-weight:600;color:var(--pa-warning);background:var(--pa-warning-bg);border-radius:var(--pa-r);padding:3px 7px}
+.purchase-rule-note.is-free{color:var(--pa-success);background:var(--pa-success-bg)}
+
+.renew-form-actions,.acq-form-actions{background:var(--pa-surface)fd!important;border-top:1px solid var(--pa-border)!important;backdrop-filter:none!important}
+.renew-form-actions .btn.success,.acq-form-actions .btn.success{background:var(--pa-primary)!important;box-shadow:none!important;border-radius:var(--pa-r)!important}
+.renew-form-actions .btn.success:hover,.acq-form-actions .btn.success:hover{background:var(--pa-primary-hover)!important;transform:none!important;box-shadow:none!important}
+.renew-cancel,.acq-form-actions .btn.ghost{border-radius:var(--pa-r)!important;border-color:var(--pa-border)!important;color:var(--pa-text)!important}
+
+/* ================= Canlı Finansal Analiz paneli (stok/satış) ================= */
+.pa-form-shell{display:grid;grid-template-columns:1fr;gap:16px}
+@media(min-width:1024px){.pa-form-shell{grid-template-columns:1.5fr 1fr;align-items:start}}
+.pa-form-main{min-width:0;display:grid;gap:14px}
+.pa-finance-panel{
+  background:var(--pa-surface);border:1px solid var(--pa-border);border-radius:var(--pa-r-xl);
+  overflow:hidden;box-shadow:none;
+}
+@media(min-width:1024px){.pa-finance-panel{position:sticky;top:0}}
+@media(max-width:1023.98px){.pa-finance-panel{order:-1}}
+.pa-fp-head{background:#0B1D30;color:#DCE6F2;padding:14px 16px}
+.pa-fp-head-top{display:flex;align-items:center;gap:6px}
+.pa-fp-dot{width:6px;height:6px;border-radius:50%;background:var(--pa-success);animation:paFpPing 1.6s ease-out infinite}
+@keyframes paFpPing{0%{opacity:1;transform:scale(1)}70%,100%{opacity:0;transform:scale(2.6)}}
+.pa-fp-head h4{margin:0;font:700 11px/1 "RDS Space Grotesk","Space Grotesk",sans-serif;letter-spacing:.08em;text-transform:uppercase;color:#EAF1FF}
+.pa-fp-head p{margin:4px 0 0;font-size:11px;color:#9FB2C9}
+.pa-fp-body{padding:14px;display:grid;gap:10px}
+.pa-fp-highlights{display:grid;gap:10px}
+@media(max-width:1023.98px){.pa-fp-highlights{grid-template-columns:1fr 1fr}}
+.pa-fp-card{background:var(--pa-surface-soft);border:1px solid var(--pa-border-soft);border-radius:var(--pa-r-lg);padding:12px}
+.pa-fp-label{display:block;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--pa-text-muted)}
+.pa-fp-value{font:700 22px/1.15 "RDS Space Grotesk","Space Grotesk",sans-serif;color:var(--pa-text);margin-top:4px;font-variant-numeric:tabular-nums}
+.pa-fp-sub{display:block;margin-top:3px;font-size:10px;color:var(--pa-text-faint)}
+.pa-fp-card.profit{background:var(--pa-success-bg);border-color:#CFE9DA}
+.pa-fp-card.profit .pa-fp-value{color:var(--pa-success)}
+.pa-fp-card.loss{background:var(--pa-danger-bg);border-color:#F3CDD4}
+.pa-fp-card.loss .pa-fp-value{color:var(--pa-danger)}
+.pa-fp-card.neutral .pa-fp-value{color:var(--pa-text)}
+.pa-fp-margin{display:inline-block;margin-top:4px;font-size:11px;font-weight:700;padding:2px 7px;border-radius:var(--pa-r-full);font-variant-numeric:tabular-nums}
+.pa-fp-card.profit .pa-fp-margin{background:#D8F1E1;color:var(--pa-success)}
+.pa-fp-card.loss .pa-fp-margin{background:#FADCE1;color:var(--pa-danger)}
+.pa-fp-detail{border:1px solid var(--pa-border-soft);border-radius:var(--pa-r-lg);padding:12px;display:grid;gap:7px}
+.pa-fp-row{display:flex;align-items:center;justify-content:space-between;font-size:12px;color:var(--pa-text-muted)}
+.pa-fp-row b{color:var(--pa-text);font-weight:700;font-variant-numeric:tabular-nums}
+.pa-fp-row.pa-fp-danger b{color:var(--pa-danger)}
+.pa-fp-row.total{padding-top:7px;border-top:1px solid var(--pa-border-soft)}
+.pa-fp-sks-pill{font-size:11px;font-weight:700;padding:2px 8px;border-radius:var(--pa-r-full);background:var(--pa-surface-blue);color:var(--pa-cyan);font-variant-numeric:tabular-nums}
+.pa-fp-sks-pill.crit{background:var(--pa-danger-bg);color:var(--pa-danger)}
+.pa-fp-state{display:flex;align-items:center;justify-content:space-between;padding:8px 12px;background:var(--pa-surface-soft);border-top:1px solid var(--pa-border-soft);font-size:11px;color:var(--pa-text-muted)}
+.pa-fp-state b{color:var(--pa-text)}
+
+@media(prefers-reduced-motion:reduce){.pa-fp-dot{animation:none}}
+
+/* ================= Aylık Alım — aynı görsel dil ================= */
+.acq-form-modal .modalbox{box-shadow:none!important}
+.acq-form-intro{background:transparent}
+.acq-intro-icon{background:var(--pa-primary-soft)!important;box-shadow:none!important;color:var(--pa-primary)!important;border:1px solid var(--pa-border)!important;border-radius:var(--pa-r-lg)!important}
+.acq-form-intro b{color:var(--pa-text)!important;font-family:"RDS Space Grotesk","Space Grotesk",sans-serif}
+.acq-form-intro small{color:var(--pa-text-muted)!important}
+.acq-form-intro em{background:var(--pa-primary-soft)!important;color:var(--pa-primary)!important}
+.acq-section{border:1px solid var(--pa-border)!important;border-left:1px solid var(--pa-border)!important;border-radius:var(--pa-r-lg)!important;background:var(--pa-surface)!important;box-shadow:none!important}
+.acq-section-head i{background:var(--pa-text)!important;color:#fff!important;border-radius:var(--pa-r)!important;font-style:normal}
+.acq-section.violet .acq-section-head i,.acq-section.green .acq-section-head i{background:var(--pa-text)!important;color:#fff!important}
+.acq-section-head b{color:var(--pa-text)!important}
+.acq-section-head small{color:var(--pa-text-muted)!important}
+.acq-form-premium input,.acq-form-premium select{height:38px!important;border-radius:var(--pa-r)!important;border:1px solid var(--pa-border)!important;background:var(--pa-surface)!important;font-size:13px!important;color:var(--pa-text)!important}
+.acq-form-premium input:focus,.acq-form-premium select:focus{border-color:var(--pa-primary)!important;box-shadow:0 0 0 1px var(--pa-primary)!important}
+.acq-form-premium label[class*="required"] span:after,.acq-form-premium label.required span{color:var(--pa-text-muted)}
+.acq-form-premium label[name="plate"] input,.acq-form-premium input[name="plate"]{text-transform:uppercase;font-weight:700;letter-spacing:.03em}
+.acq-help{background:var(--pa-surface-blue)!important;color:var(--pa-primary)!important;border-radius:var(--pa-r-lg)!important}
+.acq-total{background:var(--pa-success-bg)!important;border:1px solid #CFE9DA!important;border-radius:var(--pa-r-lg)!important}
+.acq-total span{color:var(--pa-success)!important}
+.acq-total b{color:var(--pa-success)!important;font-family:"RDS Space Grotesk","Space Grotesk",sans-serif}
+.acq-record-note{background:var(--pa-surface-blue)!important;border:1px solid var(--pa-border)!important;border-radius:var(--pa-r-lg)!important}
+.acq-record-note>span{background:var(--pa-primary)!important;border-radius:var(--pa-r)!important}
+.acq-record-note b{color:var(--pa-text)!important}
