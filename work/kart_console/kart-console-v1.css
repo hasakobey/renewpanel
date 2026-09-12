@@ -1,0 +1,35 @@
+#finansKartPanel.kc-console{--kc-line:#d7e4f2;--kc-blue:#1766aa;--kc-ink:#102b49;padding:22px!important;background:#fff!important;border:1px solid var(--kc-line)!important;border-radius:22px!important;overflow:hidden}
+#finansKartPanel.kc-console .brand h2{font-size:25px!important;color:var(--kc-ink)!important}
+#finansKartPanel.kc-console .rc-workspace{display:grid!important;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr)!important;gap:0!important;border:1px solid var(--kc-line);border-top:4px solid var(--kc-blue);border-radius:18px;background:#fff;overflow:hidden;box-shadow:0 16px 40px -28px #123b65}
+#finansKartPanel.kc-console .rc-input-pane{padding:24px;border-right:1px solid var(--kc-line);background:#f8fbff}
+#finansKartPanel.kc-console .rc-summary-pane{padding:20px;position:static!important;min-width:0}
+#finansKartPanel.kc-console .rc-input-pane .form-group{background:transparent!important;border:0!important;box-shadow:none!important;padding:0!important;margin-bottom:22px!important}
+#finansKartPanel.kc-console #tutar{padding:17px!important;font-size:28px!important;min-height:72px!important;background:white!important;border:1px solid var(--kc-line)!important;border-radius:14px!important;color:var(--kc-ink)!important}
+#finansKartPanel.kc-console input:focus,#finansKartPanel.kc-console select:focus{outline:3px solid #d7eaff!important;border-color:var(--kc-blue)!important}
+#finansKartPanel.kc-console .quick-taksit{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:7px!important}
+#finansKartPanel.kc-console .taksit-btn{min-height:62px!important;padding:9px 4px!important;border-radius:12px!important;border:1px solid var(--kc-line)!important;font-size:12px!important;white-space:normal!important;background:#fff!important;color:var(--kc-ink)!important;transition:transform .2s,box-shadow .2s}
+#finansKartPanel.kc-console .taksit-btn.active{background:#123b65!important;color:white!important;box-shadow:0 6px 15px #123b6525}
+#finansKartPanel.kc-console #sonuc{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:9px!important;padding:0!important;background:transparent!important;border:0!important;box-shadow:none!important;margin:0!important;overflow:visible!important}
+#finansKartPanel.kc-console #sonuc:before{content:none!important}
+#finansKartPanel.kc-console #sonuc .result-item{min-height:72px!important;border:1px solid var(--kc-line)!important;border-radius:12px!important;background:#f7faff!important;padding:12px!important;box-shadow:none!important;grid-column:auto!important;min-width:0!important;overflow:visible!important}
+#finansKartPanel.kc-console #sonuc .result-item:before,#finansKartPanel.kc-console #sonuc .result-item:after{content:none!important}
+#finansKartPanel.kc-console #sonuc .result-item span{font-size:10px!important;color:#536d89!important;line-height:1.5!important}
+#finansKartPanel.kc-console #sonuc .result-item strong{font-size:17px!important;color:var(--kc-ink)!important;white-space:normal!important;overflow-wrap:anywhere!important;font-variant-numeric:tabular-nums;line-height:1.35!important}
+#finansKartPanel.kc-console #sonuc .result-item:nth-child(7){grid-column:1/-1!important;order:-1;background:linear-gradient(120deg,#edf7ff,#e0f0ff)!important;border-color:#9dccf1!important;padding:17px!important}
+#finansKartPanel.kc-console #sonuc .result-item:nth-child(7) strong{font-size:32px!important;color:#105a94!important}
+#finansKartPanel.kc-console #sonuc .result-item:last-child{grid-column:1/-1!important;background:linear-gradient(110deg,#edf9f3,#dbf4e9)!important;border-color:#a8dcc5!important;padding:15px!important}
+#finansKartPanel.kc-console #sonuc .result-item:last-child strong{font-size:23px!important;color:#075a3e!important}
+#finansKartPanel.kc-console #sonuc .result-item:last-child span{color:#276b56!important}
+#finansKartPanel.kc-console .rc-mini-actions{display:grid!important;grid-template-columns:1fr 1fr!important;gap:8px;margin-top:14px}
+#finansKartPanel.kc-console button:hover{transform:translateY(-2px);box-shadow:0 8px 18px -8px #123b6555}
+#finansKartPanel.kc-console .rc-mini-actions button{padding:12px 7px!important;min-height:46px;font-size:12px!important;white-space:normal;border:1px solid var(--kc-line);background:white;border-radius:12px;color:var(--kc-ink)}
+#finansKartPanel.kc-console>.rc-section{padding:18px!important;border:1px solid var(--kc-line)!important;border-radius:16px!important;margin-top:16px!important;background:white!important}
+#finansKartPanel.kc-console .rc-section-head b{font-size:15px;color:var(--kc-ink)}
+#finansKartPanel.kc-console .rc-table{width:100%!important;min-width:0!important}
+#finansKartPanel.kc-console .rc-table td{padding:13px 8px!important;font-variant-numeric:tabular-nums;white-space:normal!important}
+#finansKartPanel.kc-console .kc-track{display:block;height:5px;background:#e4edf7;border-radius:6px;margin-top:7px;overflow:hidden}
+#finansKartPanel.kc-console .kc-fill{display:block;height:100%;background:linear-gradient(90deg,#1766aa,#69b8e5);border-radius:6px;transition:width .45s ease-out}
+#finansKartPanel.kc-console .kc-selected{background:#edf6ff}
+@media(max-width:1250px){#finansKartPanel.kc-console .rc-workspace{grid-template-columns:minmax(0,1fr)!important}#finansKartPanel.kc-console .rc-input-pane{border-right:0;border-bottom:1px solid var(--kc-line)}}
+@media(max-width:600px){#finansKartPanel.kc-console{padding:12px!important}#finansKartPanel.kc-console .rc-input-pane,#finansKartPanel.kc-console .rc-summary-pane{padding:14px}#finansKartPanel.kc-console .brand h2{font-size:20px!important}#finansKartPanel.kc-console .rc-table th,#finansKartPanel.kc-console .rc-table td{font-size:10px!important;padding:9px 4px!important}#finansKartPanel.kc-console .rc-section-head{flex-wrap:wrap;gap:4px}#finansKartPanel.kc-console #sonuc .result-item strong{font-size:15px!important}#finansKartPanel.kc-console #sonuc .result-item:nth-child(7) strong{font-size:28px!important}}
+@media(prefers-reduced-motion:reduce){#finansKartPanel.kc-console *{transition:none!important;animation:none!important}}

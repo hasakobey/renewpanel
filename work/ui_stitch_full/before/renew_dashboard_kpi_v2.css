@@ -1,0 +1,23 @@
+/* RENEW PRO 8.3 — clearer dashboard KPIs; data and calculations are unchanged. */
+#dashKpis{gap:14px!important}
+#dashKpis>.kpi{min-height:124px!important;padding:20px 60px 18px 20px!important;border-radius:18px!important;isolation:isolate;animation:renewKpiEnter .48s cubic-bezier(.2,.8,.2,1) both}
+#dashKpis>.kpi:nth-child(2){animation-delay:.04s}#dashKpis>.kpi:nth-child(3){animation-delay:.08s}#dashKpis>.kpi:nth-child(4){animation-delay:.12s}#dashKpis>.kpi:nth-child(5){animation-delay:.16s}#dashKpis>.kpi:nth-child(6){animation-delay:.20s}#dashKpis>.kpi:nth-child(7){animation-delay:.24s}#dashKpis>.kpi:nth-child(8){animation-delay:.28s}#dashKpis>.kpi:nth-child(9){animation-delay:.32s}#dashKpis>.kpi:nth-child(10){animation-delay:.36s}#dashKpis>.kpi:nth-child(11){animation-delay:.40s}#dashKpis>.kpi:nth-child(12){animation-delay:.44s}
+#dashKpis>.kpi:after{content:"";position:absolute;z-index:-1;width:86px;height:86px;border-radius:50%;right:-34px;bottom:-42px;background:radial-gradient(circle,#338ee31a,transparent 70%);transition:transform .28s ease}
+#dashKpis>.kpi:hover{transform:translateY(-5px)!important;box-shadow:0 18px 38px #183b641a!important}
+#dashKpis>.kpi:hover:after{transform:scale(1.35)}
+#dashKpis>.kpi label{display:block!important;color:#536b84!important;font-size:11px!important;font-weight:900!important;line-height:1.25!important;letter-spacing:.045em!important;text-transform:uppercase!important;margin-bottom:9px!important}
+#dashKpis>.kpi strong{display:block!important;color:#142d48!important;font-size:18px!important;font-weight:950!important;line-height:1.18!important;letter-spacing:-.025em!important;text-transform:none!important;white-space:nowrap}
+#dashKpis>.kpi small{display:block!important;color:#72879d!important;font-size:11px!important;font-weight:650!important;line-height:1.3!important;margin-top:9px!important}
+#dashKpis .rp-kpi-icon{width:42px!important;height:42px!important;border-radius:13px!important;right:14px!important;top:16px!important;font-size:20px!important;box-shadow:inset 0 0 0 1px #ffffffb8;transition:transform .25s ease,box-shadow .25s ease}
+#dashKpis>.kpi:hover .rp-kpi-icon{transform:translateY(-2px) rotate(-4deg) scale(1.06);box-shadow:0 8px 18px #193e6820}
+#dashKpis .rp-kpi-blue{background:linear-gradient(145deg,#fff 58%,#eff6ff)!important}#dashKpis .rp-kpi-green{background:linear-gradient(145deg,#fff 58%,#edfbf4)!important}#dashKpis .rp-kpi-purple{background:linear-gradient(145deg,#fff 58%,#f4f0ff)!important}#dashKpis .rp-kpi-orange{background:linear-gradient(145deg,#fff 58%,#fff4ea)!important}#dashKpis .rp-kpi-yellow{background:linear-gradient(145deg,#fff 58%,#fff9e8)!important}#dashKpis .rp-kpi-red{background:linear-gradient(145deg,#fff 58%,#fff0f1)!important}
+#monthCompare>.compare{min-height:122px!important;padding:22px!important;border-radius:18px!important;transition:transform .24s ease,box-shadow .24s ease;animation:renewCompareEnter .5s ease both}
+#monthCompare>.compare:nth-child(2){animation-delay:.08s}#monthCompare>.compare:nth-child(3){animation-delay:.16s}
+#monthCompare>.compare:hover{transform:translateY(-4px);box-shadow:0 16px 34px #183b6417}
+#monthCompare>.compare>span{font-size:11px!important;font-weight:900!important;letter-spacing:.045em!important;color:#536a82!important}
+#monthCompare>.compare>b{font-size:23px!important;font-weight:950!important;letter-spacing:-.03em!important;margin:8px 0 5px!important}
+#monthCompare>.compare{font-size:12px!important;font-weight:700!important;color:#60758d!important}
+.dashboard-risk-profit{align-items:stretch}.dashboard-risk-profit>.card{min-height:228px;transition:transform .22s ease,box-shadow .22s ease}.dashboard-risk-profit>.card:hover{transform:translateY(-3px);box-shadow:0 16px 34px #183b6414}.dashboard-risk-profit h3{font-weight:900!important}.dashboard-risk-profit .hint{font-weight:600!important}
+@keyframes renewKpiEnter{from{opacity:0;transform:translateY(12px) scale(.98)}to{opacity:1;transform:none}}@keyframes renewCompareEnter{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+@media(max-width:760px){#dashKpis>.kpi{min-height:112px!important;padding:17px 54px 15px 17px!important}#dashKpis>.kpi strong{font-size:16px!important}#monthCompare>.compare>b{font-size:20px!important}}
+@media(prefers-reduced-motion:reduce){#dashKpis>.kpi,#monthCompare>.compare{animation:none!important;transition:none!important}}

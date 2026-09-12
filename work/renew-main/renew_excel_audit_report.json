@@ -1,0 +1,174 @@
+{
+  "checks": [
+    {
+      "name": "Ana formül hücreleri",
+      "pass": true,
+      "expected": 4500,
+      "missing": []
+    },
+    {
+      "name": "Stok formül hücreleri",
+      "pass": true,
+      "expected": 1800,
+      "missing": []
+    },
+    {
+      "name": "Formül hata belirteçleri",
+      "pass": true,
+      "bad": []
+    },
+    {
+      "name": "Dışa aktar kayıt sayıları",
+      "pass": true,
+      "preview": {
+        "sales_count": 11,
+        "stock_count": 8,
+        "consultant_count": 2,
+        "expertise_people": 10,
+        "settings_count": 5,
+        "rules_count": 4,
+        "sale_months": [
+          "2026-08"
+        ],
+        "stock_purchase_months": [
+          "2026-05",
+          "2026-06",
+          "2026-08"
+        ],
+        "expertise_month": "2026-08",
+        "sales_revenue": 15315000.0,
+        "stock_purchase_total": 10947000.0,
+        "stock_sale_total": 11430000.0
+      }
+    },
+    {
+      "name": "Satış matematiği: NAKİT",
+      "pass": true,
+      "actual": {
+        "sks_days": 45,
+        "total_expense": 23402.0,
+        "total_cost": 1023402.0,
+        "net_profit": 226598.0,
+        "net_margin": 0.1812784,
+        "performance_profit": 244598.0
+      },
+      "expected": {
+        "sks_days": 45,
+        "total_expense": 23402.0,
+        "total_cost": 1023402.0,
+        "net_profit": 226598.0,
+        "net_margin": 0.1812784,
+        "performance_profit": 244598.0
+      }
+    },
+    {
+      "name": "Satış matematiği: TAKAS",
+      "pass": true,
+      "actual": {
+        "sks_days": 45,
+        "total_expense": 23402.0,
+        "total_cost": 1023402.0,
+        "net_profit": 226598.0,
+        "net_margin": 0.1812784,
+        "performance_profit": 244598.0
+      },
+      "expected": {
+        "sks_days": 45,
+        "total_expense": 23402.0,
+        "total_cost": 1023402.0,
+        "net_profit": 226598.0,
+        "net_margin": 0.1812784,
+        "performance_profit": 244598.0
+      }
+    },
+    {
+      "name": "Satış matematiği: İHALE",
+      "pass": true,
+      "actual": {
+        "sks_days": 45,
+        "total_expense": 23402.0,
+        "total_cost": 1023402.0,
+        "net_profit": 226598.0,
+        "net_margin": 0.1812784,
+        "performance_profit": 244598.0
+      },
+      "expected": {
+        "sks_days": 45,
+        "total_expense": 23402.0,
+        "total_cost": 1023402.0,
+        "net_profit": 226598.0,
+        "net_margin": 0.1812784,
+        "performance_profit": 244598.0
+      }
+    },
+    {
+      "name": "Satış matematiği: ŞİRKET ARACI",
+      "pass": true,
+      "actual": {
+        "sks_days": 45,
+        "total_expense": 18300.0,
+        "total_cost": 1018300.0,
+        "net_profit": 231700.0,
+        "net_margin": 0.18536,
+        "performance_profit": 249700.0
+      },
+      "expected": {
+        "sks_days": 45,
+        "total_expense": 18300.0,
+        "total_cost": 1018300.0,
+        "net_profit": 231700.0,
+        "net_margin": 0.18536,
+        "performance_profit": 249700.0
+      }
+    }
+  ],
+  "warnings": [
+    {
+      "name": "Stok/Excel sabit gider farkı: ŞİRKET ARACI",
+      "backend_total": 1005800.0,
+      "excel_total": 1010902.0,
+      "difference": -5102.0,
+      "rule": {
+        "apply_sks": 0,
+        "apply_fixed": 0
+      }
+    }
+  ],
+  "errors": [],
+  "template": "/opt/renewpro/app_live/templates/RENEW_MASTER_SABLON.xlsx",
+  "db_counts": {
+    "sales": 11,
+    "stock": 8,
+    "consultants": 2
+  },
+  "formula_counts_before": {
+    "main": 4488,
+    "extra": 1801
+  },
+  "exported_preview": {
+    "sales_count": 11,
+    "stock_count": 8,
+    "consultant_count": 2,
+    "expertise_people": 10,
+    "settings_count": 5,
+    "rules_count": 4,
+    "sale_months": [
+      "2026-08"
+    ],
+    "stock_purchase_months": [
+      "2026-05",
+      "2026-06",
+      "2026-08"
+    ],
+    "expertise_month": "2026-08",
+    "sales_revenue": 15315000.0,
+    "stock_purchase_total": 10947000.0,
+    "stock_sale_total": 11430000.0
+  },
+  "formula_counts_after": {
+    "main": 4500,
+    "extra": 1805
+  },
+  "status": "PASS",
+  "warning_count": 1
+}

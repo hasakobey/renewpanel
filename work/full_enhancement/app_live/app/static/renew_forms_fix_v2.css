@@ -1,0 +1,6 @@
+/* Keep stock/sale action buttons fully inside the modal viewport. */
+.renew-form-modal .modalbox{display:flex;flex-direction:column;max-height:92vh}
+.renew-form-modal .modalhead{flex:0 0 auto}
+.renew-form-modal .renew-form-body{flex:1 1 auto;min-height:0;max-height:none;padding-bottom:0;overscroll-behavior:contain}
+.renew-form-modal .renew-form-actions{bottom:0;margin:18px -24px 0;padding:14px 24px calc(14px + env(safe-area-inset-bottom));box-shadow:0 -8px 24px #17355212}
+@media(max-width:560px){.renew-form-modal .renew-form-body{padding-bottom:0}.renew-form-modal .renew-form-actions{margin:16px -14px 0;padding:12px 14px calc(12px + env(safe-area-inset-bottom))}}

@@ -1,0 +1,79 @@
+/* Scoped dashboard design tokens; other screens and all calculations are untouched. */
+#dashboard.ds{--ds-blue:#0052d9;--ds-ink:#142b45;--ds-muted:#64748b;color:var(--ds-ink);font-family:Inter,'Segoe UI',sans-serif;max-width:1800px;margin-inline:auto;min-width:0}
+#dashboard.ds .hero{display:flex!important;align-items:center;justify-content:space-between;gap:16px;padding:0 0 16px!important;margin:0!important;background:none!important;border:0!important;box-shadow:none!important;min-height:0!important}
+#dashboard.ds .hero h2{font-size:25px;display:flex;align-items:center;gap:12px;margin:0;color:var(--ds-ink)}
+#dashboard.ds .hero p{font-size:12px;margin:6px 0 0;color:var(--ds-muted)}
+.ds-period{font:600 11px Inter,sans-serif;background:#eaf1ff;color:#0052d9;padding:6px 9px;border-radius:6px;white-space:nowrap}
+#dashboard.ds .card{background:#fff!important;border:1px solid #e4eaf2!important;border-radius:12px!important;padding:18px!important;box-shadow:0 3px 14px #142b4505!important;margin:0!important;min-width:0;min-height:0!important}
+#dashboard.ds h3{font-size:14px!important;font-weight:650!important;display:flex;align-items:center;gap:8px;margin:0 0 12px!important;line-height:1.5}
+#dashboard.ds h3:before,#dashboard.ds h3:after{display:none!important}
+#dashboard.ds .hint{font-size:11px!important;color:#64748b!important;line-height:1.6}
+#dashboard.ds .ds-icon{display:inline-flex;align-items:center;justify-content:center;color:#0052d9;flex:0 0 26px;width:26px;height:26px;background:#edf3ff;border-radius:7px}
+#dashboard.ds .ds-icon svg{width:17px;height:17px}
+#dashboard.ds .attention-card{margin-bottom:18px!important;background:transparent!important;border:0!important;padding:0!important;box-shadow:none!important}
+#dashboard.ds .attention-card .cardhead{margin-bottom:8px;align-items:center}
+#dashboard.ds .attention-card h3{margin:0!important}#dashboard.ds .attention-card .hint{margin:3px 0 0}
+#dashboard.ds #dashAlerts{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;max-height:260px;overflow:auto}
+#dashboard.ds .dash-alert{display:flex!important;gap:10px!important;align-items:center;padding:13px!important;border:1px solid transparent!important;border-radius:10px!important;min-width:0;box-shadow:none!important;text-align:left;transition:transform .18s,box-shadow .18s}
+#dashboard.ds .dash-alert>div{min-width:0;flex:1}#dashboard.ds .dash-alert b{font-size:12px!important;overflow-wrap:anywhere}#dashboard.ds .dash-alert small{font-size:11px!important;line-height:1.5;display:block}
+#dashboard.ds .dash-alert strong{font-size:11px!important;white-space:nowrap;padding:5px 7px!important;border-radius:5px}
+#dashboard.ds .dash-alert.critical{background:#fff0f2!important;color:#ac1830!important}#dashboard.ds .dash-alert.warning{background:#fff5df!important;color:#895208!important}#dashboard.ds .dash-alert.success{background:#eaf8ef!important;color:#15803d!important}
+#dashboard.ds .dash-alert-icon{display:none!important}
+#dashboard.ds #dashKpis{display:grid!important;grid-template-columns:repeat(6,minmax(0,1fr))!important;gap:12px!important;margin:0 0 20px!important}
+#dashboard.ds #dashKpis:before,#dashboard.ds #dashKpis:after{display:block;grid-column:1/-1;position:static!important;background:none!important;color:#142b45;font-size:13px;font-weight:650;line-height:24px;height:auto!important;width:auto!important}
+#dashboard.ds #dashKpis:before{content:attr(data-stock-label);order:-2}#dashboard.ds #dashKpis:after{content:attr(data-sales-label);order:1;margin-top:5px}
+#dashboard.ds #dashKpis>.kpi{order:0;display:flex!important;flex-direction:column;justify-content:flex-start;position:relative!important;min-width:0;min-height:135px!important;height:auto!important;padding:15px!important;border:1px solid #e4eaf2!important;border-radius:11px!important;background:#fff!important;box-shadow:0 3px 12px #142b4503!important;overflow:hidden;animation:ds-enter .3s ease-out both!important;animation-delay:var(--ds-delay)!important;transition:transform .18s,box-shadow .18s!important}
+#dashboard.ds #dashKpis>.kpi:nth-child(n+7){order:2}
+#dashboard.ds #dashKpis>.kpi:before,#dashboard.ds #dashKpis>.kpi:after{display:none!important}
+#dashboard.ds #dashKpis>.kpi label{font-size:10px!important;letter-spacing:.025em;font-weight:650!important;padding-right:30px!important;min-height:30px;margin:0 0 10px!important;color:#52657e!important;line-height:1.4}
+#dashboard.ds #dashKpis>.kpi>strong{font-family:'Space Grotesk',Inter,sans-serif;font-size:clamp(17px,1.65vw,27px)!important;line-height:1.3;letter-spacing:-.6px;font-weight:650!important;white-space:normal!important;overflow-wrap:anywhere;color:#142b45!important;margin:0!important;font-variant-numeric:tabular-nums}
+#dashboard.ds #dashKpis>.kpi.bad>strong{color:#c6283d!important}
+#dashboard.ds #dashKpis>.kpi>small{font-size:10px!important;line-height:1.5;margin-top:5px!important;color:#64748b!important;padding-right:0!important}
+#dashboard.ds #dashKpis .ds-icon{position:absolute;right:12px;top:12px}
+#dashboard.ds #dashKpis .rp-kpi-icon,#dashboard.ds #dashKpis .gw-kpi-icon{display:none!important}
+#dashboard.ds #dashKpis .gw-stat{position:relative!important;inset:auto!important;margin:7px 0 0 auto;height:23px!important;max-width:85px;opacity:.65}#dashboard.ds #dashKpis .gw-stat small{display:none}
+#dashboard.ds .ds-main-grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:16px;align-items:start}
+#dashboard.ds .ds-panel{grid-column:span 6}
+#dashboard.ds [data-ds-panel=salesTrendChart],#dashboard.ds [data-ds-panel=criticalStock],#dashboard.ds [data-ds-panel=dashAcquisitions],#dashboard.ds [data-ds-panel=quick]{grid-column:1/-1}
+#dashboard.ds [data-ds-panel=dashConsultants]{grid-column:span 8}#dashboard.ds [data-ds-panel=brandDist]{grid-column:span 4}
+#dashboard.ds .pulse-live{display:none!important}
+#dashboard.ds .pulse-comparisons{gap:12px}.ds .pulse-compare{border-radius:10px!important;background:#f5f8fe!important;border-color:#e5edf9!important;padding:13px!important}.ds .pulse-compare:after{display:none!important}
+#dashboard.ds .metric-values b{font-size:20px!important}#dashboard.ds .metric-icon{display:none!important}
+#dashboard.ds .pulse-efficiency>div,#dashboard.ds .pulse-goals>div{padding:12px!important;border-radius:9px!important}#dashboard.ds .pulse-history{margin-top:12px!important}
+#dashboard.ds .section-label,#dashboard.ds #monthCompare{display:none!important}/* Existing pulse contains the same period comparison. */
+#dashboard.ds #risk{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:8px!important}
+#dashboard.ds #risk>div{border-radius:8px!important;padding:12px 6px!important;min-height:70px!important;font-size:11px!important}#dashboard.ds #risk b{font-size:22px!important}
+#dashboard.ds .split{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:10px!important}
+#dashboard.ds .split>div{min-height:90px!important;border-radius:9px!important;padding:12px!important;background:#eff6ff!important;color:#164176!important}
+#dashboard.ds .split>.r{background:#fff0f2!important;color:#b42339!important}#dashboard.ds .split>.g{background:#eaf8ef!important;color:#166534!important}
+#dashboard.ds .split b{font-size:25px!important}#dashboard.ds .renew-bottom-icon{display:none!important}
+#dashboard.ds .tablewrap,#dashboard.ds .consultant-table-scroll{max-width:100%;overflow:auto!important;border:0!important;border-radius:8px!important}
+#dashboard.ds table{width:100%!important;min-width:0!important}#dashboard.ds th{background:#eff4ff!important;color:#455770!important;font-size:10px!important;padding:10px!important;height:auto!important;border:0!important}
+#dashboard.ds td{font-size:12px!important;padding:11px 10px!important;line-height:1.5;height:auto!important;border-bottom:1px solid #edf1f6!important;position:static!important;white-space:normal!important}
+#dashboard.ds td.profit{color:#15803d!important}#dashboard.ds td.loss{color:#c6283d!important}#dashboard.ds th{position:static!important}
+#dashboard.ds .consultant-avatar{width:30px;height:30px;flex:0 0 30px;font-size:11px}#dashboard.ds .target-cell{min-width:110px}
+#dashboard.ds #brandDist .bars{display:grid!important;grid-template-columns:1fr!important;gap:15px!important}#dashboard.ds #brandDist .bar{grid-template-columns:70px minmax(0,1fr) 24px!important;font-size:12px!important}
+#dashboard.ds .fill{background:#0052d9!important;animation:ds-bar .55s ease-out;transform-origin:left}#dashboard.ds .track{height:6px!important}
+#dashboard.ds .activity{padding:12px!important;border-radius:8px!important;min-height:0!important;margin-bottom:7px!important;background:#f8fafd!important}#dashboard.ds .activity b{font-size:11px!important}#dashboard.ds .activity small{font-size:11px!important;overflow-wrap:anywhere}
+#dashboard.ds .quick-actions{display:grid!important;grid-template-columns:repeat(6,minmax(0,1fr));gap:10px}#dashboard.ds .quick-actions button{padding:12px!important;min-height:70px!important;display:flex;align-items:center;gap:9px;background:#f5f8ff!important;border:1px solid #e5ecf8!important;border-radius:9px!important}
+#dashboard.ds .quick-actions button>b{display:none}#dashboard.ds .quick-actions strong{font-size:12px!important}#dashboard.ds .quick-actions small{font-size:10px!important}
+#dashboard.ds button:focus-visible{outline:3px solid #7aaaff;outline-offset:3px}#dashboard.ds .btn{border-radius:8px!important;min-height:36px;font-size:12px!important}
+@media(hover:hover){#dashboard.ds #dashKpis>.kpi:hover,#dashboard.ds .dash-alert:hover{transform:translateY(-2px)!important;box-shadow:0 9px 24px #142b4510!important}#dashboard.ds button:hover .ds-icon{transform:rotate(-4deg);transition:transform .2s}}
+@keyframes ds-enter{from{opacity:.75;transform:translateY(5px)}to{opacity:1;transform:none}}@keyframes ds-bar{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@media(max-width:1250px){#dashboard.ds #dashKpis{grid-template-columns:repeat(3,minmax(0,1fr))!important}#dashboard.ds #dashKpis>.kpi>strong{font-size:24px!important}#dashboard.ds #dashAlerts{grid-template-columns:repeat(2,minmax(0,1fr))}#dashboard.ds .quick-actions{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:760px){#dashboard.ds .hero{align-items:flex-start;flex-direction:column;gap:10px}#dashboard.ds .hero h2{font-size:21px;flex-wrap:wrap}#dashboard.ds .hero>.ds-period{font-size:10px}#dashboard.ds .hero>div:last-child{display:flex;gap:8px;flex-wrap:wrap}#dashboard.ds .btn{min-height:44px}
+#dashboard.ds #dashKpis{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:8px!important}#dashboard.ds #dashKpis>.kpi{padding:12px!important;min-height:115px!important}#dashboard.ds #dashKpis>.kpi>strong{font-size:21px!important}#dashboard.ds #dashKpis>.kpi label{font-size:10px!important;padding-right:23px!important}#dashboard.ds #dashKpis .ds-icon{width:23px;height:23px;right:9px;top:10px}
+#dashboard.ds #dashAlerts{grid-template-columns:1fr;max-height:290px}#dashboard.ds .ds-main-grid{grid-template-columns:minmax(0,1fr);gap:12px}#dashboard.ds .ds-panel{grid-column:1/-1!important}#dashboard.ds .card{padding:14px!important}#dashboard.ds .pulse-comparisons{grid-template-columns:1fr!important}#dashboard.ds .metric-values b{font-size:23px!important}#dashboard.ds .pulse-efficiency{grid-template-columns:1fr!important}#dashboard.ds .quick-actions{grid-template-columns:repeat(2,minmax(0,1fr))}
+#dashboard.ds #dashConsultants thead{display:none}#dashboard.ds #dashConsultants tbody,#dashboard.ds #dashConsultants tr{display:block}#dashboard.ds #dashConsultants tr{padding:9px;background:#f7f9ff;border-radius:9px;margin-bottom:8px}#dashboard.ds #dashConsultants td{display:flex;justify-content:space-between;align-items:center;gap:10px;border:0!important;padding:5px!important}#dashboard.ds #dashConsultants td:not(:first-child):before{content:attr(data-ds-label);font-size:11px;color:#64748b}#dashboard.ds #criticalStock table{min-width:780px!important}#dashboard.ds #topSales table,#dashboard.ds #lossSales table{min-width:490px!important}
+#dashboard.ds .pulse-history>div{flex-wrap:wrap}#dashboard.ds .cardhead{flex-wrap:wrap;gap:8px}#dashboard.ds #risk{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
+#dashboard.ds #dashKpis .gw-stat small{display:none!important}
+#dashboard.ds #rpProfitBar{display:none!important}
+#dashboard.ds .ds-profit-bar{height:7px;display:flex;overflow:hidden;border-radius:8px;background:#edf1f6;margin-top:12px}
+#dashboard.ds .ds-profit-bar i:first-child{background:#21a675}#dashboard.ds .ds-profit-bar i:last-child{background:#e35c6e}
+#dashboard.ds #profitSplit>.hint{background:#f4f7fb!important;color:#64748b!important}
+#dashboard.ds .activity{padding-left:44px!important}
+#dashboard.ds .empty{display:table-cell!important;min-height:0!important;padding:16px!important}
+#dashboard.ds .hero .btn.success{background:#fff!important;color:#0052d9!important;border:1px solid #dbe6fa!important}
+#dashboard.ds .quick-actions button{width:auto!important}#dashboard.ds .quick-actions button:after{display:none!important}
+@media(max-width:760px){#dashboard.ds .hero>div:last-child{display:grid!important;grid-template-columns:1fr 1fr!important;width:100%!important}#dashboard.ds .hero .btn{width:100%!important;margin:0!important}#dashboard.ds .quick-actions{display:grid!important;grid-template-columns:1fr 1fr!important}#dashboard.ds .quick-actions button{width:100%!important;min-width:0!important}#dashboard.ds .quick-actions button span{min-width:0}}
+@media(prefers-reduced-motion:reduce){#dashboard.ds *,#dashboard.ds #dashKpis>.kpi,#dashboard.ds *:before,#dashboard.ds *:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}

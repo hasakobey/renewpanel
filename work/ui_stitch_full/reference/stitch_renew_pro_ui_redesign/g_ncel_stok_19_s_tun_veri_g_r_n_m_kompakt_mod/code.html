@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+
+<html lang="tr"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={"darkMode":"class","theme":{"extend":{"colors":{"primary-fixed-dim":"#b4c5ff","primary-container":"#0052d9","on-secondary":"#ffffff","on-secondary-fixed-variant":"#004e61","inverse-surface":"#1b314c","outline":"#737686","surface-bright":"#f8f9ff","on-tertiary-fixed":"#25005a","on-tertiary-container":"#e1d0ff","on-surface-variant":"#434654","on-primary-container":"#cbd6ff","on-secondary-fixed":"#001f28","error-container":"#ffdad6","on-surface":"#031c36","surface-container-lowest":"#ffffff","on-tertiary-fixed-variant":"#5a00c6","on-primary-fixed-variant":"#003ea8","on-background":"#031c36","tertiary-fixed":"#eaddff","primary":"#003da6","on-error":"#ffffff","secondary-container":"#76dcff","surface-container-highest":"#d3e4ff","error":"#ba1a1a","tertiary":"#5900c4","primary-fixed":"#dbe1ff","on-primary":"#ffffff","surface-container-low":"#eff4ff","on-tertiary":"#ffffff","surface-dim":"#c5dcfd","secondary":"#006780","secondary-fixed-dim":"#6cd3f7","surface":"#f8f9ff","outline-variant":"#c3c6d7","on-error-container":"#93000a","surface-tint":"#0353da","inverse-on-surface":"#eaf1ff","background":"#f8f9ff","secondary-fixed":"#b7eaff","inverse-primary":"#b4c5ff","on-secondary-container":"#006077","surface-container":"#e6eeff","tertiary-fixed-dim":"#d2bbff","surface-variant":"#d3e4ff","tertiary-container":"#732de3","on-primary-fixed":"#00174b"},"borderRadius":{"DEFAULT":"0.125rem","lg":"0.25rem","xl":"0.5rem","full":"0.75rem"},"spacing":{"space-xs":"0.25rem","space-base":"1rem","space-2xl":"2rem","space-md":"0.75rem","space-lg":"1.25rem","space-4xl":"3rem","gutter-desktop":"1.5rem","space-3xl":"2.5rem","sidebar-width-expanded":"17.5rem","header-height":"4rem","gutter-mobile":"1rem","space-2xs":"0.125rem","space-sm":"0.5rem","space-xl":"1.5rem","sidebar-width-collapsed":"4.5rem"},"fontFamily":{"table-data":["Inter"],"metric-kpi-xl":["Space Grotesk"],"body-md":["Inter"],"label-ui":["Inter"],"headline-lg":["Space Grotesk"],"metric-kpi-md":["Space Grotesk"],"body-sm":["Inter"],"display-lg":["Space Grotesk"],"headline-lg-mobile":["Space Grotesk"],"table-numeric":["Inter"],"body-lg":["Inter"],"headline-md":["Space Grotesk"],"headline-sm":["Space Grotesk"],"label-caps":["Space Grotesk"]},"fontSize":{"table-data":["13px",{"lineHeight":"18px","letterSpacing":"0em","fontWeight":"400"}],"metric-kpi-xl":["32px",{"lineHeight":"38px","letterSpacing":"-0.02em","fontWeight":"700"}],"body-md":["14px",{"lineHeight":"20px","letterSpacing":"0em","fontWeight":"400"}],"label-ui":["12px",{"lineHeight":"16px","letterSpacing":"0.01em","fontWeight":"500"}],"headline-lg":["28px",{"lineHeight":"36px","letterSpacing":"-0.02em","fontWeight":"600"}],"metric-kpi-md":["24px",{"lineHeight":"30px","letterSpacing":"-0.01em","fontWeight":"600"}],"body-sm":["12px",{"lineHeight":"16px","letterSpacing":"0.01em","fontWeight":"400"}],"display-lg":["36px",{"lineHeight":"44px","letterSpacing":"-0.03em","fontWeight":"700"}],"headline-lg-mobile":["22px",{"lineHeight":"28px","letterSpacing":"-0.01em","fontWeight":"600"}],"table-numeric":["13px",{"lineHeight":"18px","letterSpacing":"0.02em","fontWeight":"500"}],"body-lg":["16px",{"lineHeight":"24px","letterSpacing":"-0.01em","fontWeight":"400"}],"headline-md":["20px",{"lineHeight":"28px","letterSpacing":"-0.01em","fontWeight":"600"}],"headline-sm":["16px",{"lineHeight":"24px","letterSpacing":"0em","fontWeight":"600"}],"label-caps":["11px",{"lineHeight":"14px","letterSpacing":"0.08em","fontWeight":"600"}]}}}};</script></head><body class="bg-surface font-body-md text-on-surface"><aside class="fixed left-0 top-0 h-full w-sidebar-width-expanded bg-inverse-surface z-50 flex flex-col justify-between"><div class="flex flex-col"><div class="h-header-height px-space-lg flex items-center gap-space-md border-b border-white/10"><div class="w-10 h-10 rounded-xl bg-primary-container flex items-center justify-center text-on-primary font-headline-md text-headline-md shadow-md">R</div><div class="flex flex-col"><span class="font-headline-sm text-headline-sm text-white tracking-wider leading-none">RENEW PRO</span><span class="font-label-caps text-label-caps text-on-surface-variant uppercase text-outline-variant mt-space-2xs">Çayan Tarsus • v8.4 Enterprise</span></div></div><div class="overflow-y-auto px-space-md py-space-lg flex flex-col gap-space-lg"><div class="flex flex-col gap-space-xs"><span class="font-label-caps text-label-caps text-outline-variant px-space-sm uppercase tracking-wider mb-space-2xs">YÖNETİM</span><nav class="flex flex-col gap-space-2xs" data-active-classes="bg-primary-container text-white font-medium rounded-lg"><a class="flex items-center gap-space-md px-space-sm py-space-sm rounded-lg text-outline-variant hover:bg-white/10 hover:text-white transition-all" data-path="genel-dashboard" href="#"><span class="material-symbols-outlined text-[20px]">dashboard</span><span class="font-body-md text-body-md">Genel Dashboard</span></a><a class="flex items-center gap-space-md px-space-sm py-space-sm rounded-lg text-outline-variant hover:bg-white/10 hover:text-white transition-all" data-path="guncel-stok" href="#"><span class="material-symbols-outlined text-[20px]">directions_car</span><span class="font-body-md text-body-md">Güncel Stok</span></a><a class="flex items-center gap-space-md px-space-sm py-space-sm rounded-lg text-outline-variant hover:bg-white/10 hover:text-white transition-all" data-path="satilan-araclar" href="#"><span class="material-symbols-outlined text-[20px]">sell</span><span class="font-body-md text-body-md">Satılan Araçlar</span></a></nav></div><div class="flex flex-col gap-space-xs"><span class="font-label-caps text-label-caps text-outline-variant px-space-sm uppercase tracking-wider mb-space-2xs">PERFORMANS</span><nav class="flex flex-col gap-space-2xs" data-active-classes="bg-primary-container text-white font-medium rounded-lg"><a class="flex items-center gap-space-md px-space-sm py-space-sm rounded-lg text-outline-variant hover:bg-white/10 hover:text-white transition-all" data-path="aylik-alimlar" href="#"><span class="material-symbols-outlined text-[20px]">calendar_month</span><span class="font-body-md text-body-md">Aylık Alımlar</span></a><a class="flex items-center gap-space-md px-space-sm py-space-sm rounded-lg text-outline-variant hover:bg-white/10 hover:text-white transition-all" data-path="arac-fotograflari" href="#"><span class="material-symbols-outlined text-[20px]">photo_camera</span><span class="font-body-md text-body-md">Araç Fotoğrafları</span></a><a class="flex items-center gap-space-md px-space-sm py-space-sm rounded-lg text-outline-variant hover:bg-white/10 hover:text-white transition-all" data-path="video-studyosu" href="#"><span class="material-symbols-outlined text-[20px]">videocam</span><span class="font-body-md text-body-md">Video Stüdyosu</span></a><a class="flex items-center gap-space-md px-space-sm py-space-sm rounded-lg text-outline-variant hover:bg-white/10 hover:text-white transition-all" data-path="ekspertiz-takip" href="#"><span class="material-symbols-outlined text-[20px]">fact_check</span><span class="font-body-md text-body-md">Ekspertiz Takip</span></a><a class="flex items-center gap-space-md px-space-sm py-space-sm rounded-lg text-outline-variant hover:bg-white/10 hover:text-white transition-all" data-path="danisman-performansi" href="#"><span class="material-symbols-outlined text-[20px]">badge</span><span class="font-body-md text-body-md">Danışman Performansı</span></a></nav></div><div class="flex flex-col gap-space-xs"><span class="font-label-caps text-label-caps text-outline-variant px-space-sm uppercase tracking-wider mb-space-2xs">SİSTEM</span><nav class="flex flex-col gap-space-2xs" data-active-classes="bg-primary-container text-white font-medium rounded-lg"><a class="flex items-center gap-space-md px-space-sm py-space-sm rounded-lg text-outline-variant hover:bg-white/10 hover:text-white transition-all" data-path="parametre-merkezi" href="#"><span class="material-symbols-outlined text-[20px]">settings_applications</span><span class="font-body-md text-body-md">Parametre Merkezi</span></a><a class="flex items-center gap-space-md px-space-sm py-space-sm rounded-lg text-outline-variant hover:bg-white/10 hover:text-white transition-all" data-path="rapor-merkezi" href="#"><span class="material-symbols-outlined text-[20px]">assessment</span><span class="font-body-md text-body-md">Rapor Merkezi</span></a><a class="flex items-center gap-space-md px-space-sm py-space-sm rounded-lg text-outline-variant hover:bg-white/10 hover:text-white transition-all" data-path="islem-gecmisi" href="#"><span class="material-symbols-outlined text-[20px]">history</span><span class="font-body-md text-body-md">İşlem Geçmişi</span></a></nav></div></div></div><div class="p-space-md border-t border-white/10 flex items-center justify-between text-outline-variant"><div class="flex items-center gap-space-xs"><span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span><span class="font-label-ui text-label-ui">Sunucu Aktif</span></div><span class="font-label-ui text-label-ui">TR-01</span></div></aside><div class="pl-sidebar-width-expanded"><header class="fixed top-0 left-sidebar-width-expanded right-0 h-header-height bg-surface-container-lowest/90 backdrop-blur-md shadow-[0_1px_8px_rgba(0,0,0,0.04)] z-40 px-gutter-desktop flex items-center justify-between"><div class="flex items-center gap-space-lg"><div class="flex items-center gap-space-sm px-space-md py-space-xs bg-surface-container-low rounded-lg text-on-surface-variant"><span class="material-symbols-outlined text-[18px] text-secondary">calendar_today</span><span class="font-label-ui text-label-ui text-on-surface font-semibold">Ekim 2024</span><span class="material-symbols-outlined text-[16px]">expand_more</span></div><button class="flex items-center gap-space-md px-space-md py-space-xs bg-surface-container rounded-lg text-on-surface-variant hover:text-on-surface transition-all"><span class="material-symbols-outlined text-[18px]">search</span><span class="font-body-sm text-body-sm">Şasi, Plaka, Model Ara...</span><kbd class="font-label-caps text-label-caps px-space-xs py-space-2xs bg-surface-container-lowest rounded text-outline">⌘K</kbd></button></div><div class="flex items-center gap-space-xl"><div class="flex items-center gap-space-xs px-space-sm py-space-2xs bg-surface-container rounded-full text-on-surface-variant"><span class="material-symbols-outlined text-[16px] text-emerald-600">cloud_done</span><span class="font-label-ui text-label-ui">Yedekleme: Güncel (14:30)</span></div><div class="h-6 w-[1px] bg-outline-variant/30"></div><div class="flex items-center gap-space-md"><div class="flex flex-col text-right"><span class="font-headline-sm text-headline-sm text-on-surface leading-tight">Seval Avseven</span><span class="font-label-caps text-label-caps text-primary uppercase">Yönetici</span></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="relative pt-header-height w-full px-gutter-desktop py-space-xl bg-surface"><div class="flex flex-col w-full gap-space-xl">
+<!-- Top Navigation & Actions Bar -->
+<div class="flex flex-col xl:flex-row items-start xl:items-center justify-between gap-space-lg">
+<div class="flex flex-col gap-space-2xs">
+<div class="flex items-center gap-space-sm flex-wrap">
+<h1 class="font-headline-lg text-headline-lg text-on-surface tracking-tight">Güncel Stok</h1>
+<span class="inline-flex items-center gap-space-xs px-space-sm py-space-2xs bg-secondary-container/30 text-on-secondary-fixed-variant rounded-full font-label-ui text-label-ui">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse"></span>
+          42 Aktif Araç Portföyü • Canlı Excel Veri Senkronizasyonu
+        </span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">Çayan Tarsus Plazası 2. El araç filosu dinamik finansal amortisman ve SKS risk matrisi.</p>
+</div>
+<!-- Actions Header -->
+<div class="flex items-center gap-space-sm flex-wrap">
+<button class="flex items-center gap-space-xs px-space-md py-space-sm bg-surface-container hover:bg-surface-container-high text-on-surface rounded-lg font-label-ui text-label-ui transition-colors" onclick="triggerExport('excel')">
+<span class="material-symbols-outlined text-[18px] text-secondary">table_view</span>
+        Excel İndir
+      </button>
+<button class="flex items-center gap-space-xs px-space-md py-space-sm bg-surface-container hover:bg-surface-container-high text-on-surface rounded-lg font-label-ui text-label-ui transition-colors" onclick="triggerExport('pdf')">
+<span class="material-symbols-outlined text-[18px] text-error">picture_as_pdf</span>
+        PDF Raporu
+      </button>
+<button class="flex items-center gap-space-xs px-space-md py-space-sm bg-surface-container hover:bg-surface-container-high text-on-surface rounded-lg font-label-ui text-label-ui transition-colors" onclick="window.print()">
+<span class="material-symbols-outlined text-[18px] text-on-surface-variant">print</span>
+        Tüm Stoğu Yazdır
+      </button>
+<button class="flex items-center gap-space-xs px-space-lg py-space-sm bg-primary-container hover:bg-primary text-on-primary rounded-lg font-label-ui text-label-ui shadow-sm transition-all hover:shadow-md">
+<span class="material-symbols-outlined text-[20px]">add_circle</span>
+        + Yeni Stok Ekle
+      </button>
+</div>
+</div>
+<!-- 6 High-Fidelity KPI Cards Grid -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-6 gap-space-base">
+<!-- Card 1 -->
+<div class="p-space-lg bg-surface-container-lowest rounded-xl shadow-sm flex flex-col justify-between relative overflow-hidden">
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps uppercase text-outline tracking-wider">GÜNCEL STOK</span>
+<div class="w-8 h-8 rounded-lg bg-surface-container-low flex items-center justify-center text-primary-container">
+<span class="material-symbols-outlined text-[20px]">directions_car</span>
+</div>
+</div>
+<div class="my-space-sm">
+<div class="flex items-baseline gap-space-xs">
+<span class="font-metric-kpi-xl text-metric-kpi-xl text-on-surface">42</span>
+<span class="font-headline-sm text-headline-sm text-outline">Adet</span>
+</div>
+</div>
+<div class="flex items-center justify-between text-body-sm pt-space-xs bg-surface-container-low/50 -mx-space-lg -mb-space-lg px-space-lg py-space-xs">
+<span class="text-on-surface-variant">Ort. SKS: <strong class="text-on-surface">34.2 Gün</strong></span>
+<span class="text-error font-semibold flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-error"></span> 3 Kritik Stok
+        </span>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="p-space-lg bg-surface-container-lowest rounded-xl shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps uppercase text-outline tracking-wider">BAĞLI SERMAYE</span>
+<div class="w-8 h-8 rounded-lg bg-surface-container-low flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-[20px]">account_balance_wallet</span>
+</div>
+</div>
+<div class="my-space-sm">
+<div class="flex items-baseline gap-space-xs">
+<span class="font-metric-kpi-md text-metric-kpi-md text-on-surface tracking-tight">₺48.650.000</span>
+</div>
+</div>
+<div class="flex items-center justify-between text-body-sm pt-space-xs bg-surface-container-low/50 -mx-space-lg -mb-space-lg px-space-lg py-space-xs">
+<span class="text-on-surface-variant">Ortalama Alış:</span>
+<span class="font-semibold text-on-surface">₺1.158.333</span>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="p-space-lg bg-surface-container-lowest rounded-xl shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps uppercase text-outline tracking-wider">LİSTE SATIŞ DEĞERİ</span>
+<div class="w-8 h-8 rounded-lg bg-surface-container-low flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[20px]">price_check</span>
+</div>
+</div>
+<div class="my-space-sm">
+<div class="flex items-baseline gap-space-xs">
+<span class="font-metric-kpi-md text-metric-kpi-md text-on-surface tracking-tight">₺56.800.000</span>
+</div>
+</div>
+<div class="flex items-center justify-between text-body-sm pt-space-xs bg-surface-container-low/50 -mx-space-lg -mb-space-lg px-space-lg py-space-xs">
+<span class="text-on-surface-variant">Brüt Fark:</span>
+<span class="font-semibold text-secondary-fixed-variant">+₺8.150.000 (%16.7)</span>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="p-space-lg bg-surface-container-lowest rounded-xl shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps uppercase text-outline tracking-wider">SABİT MASRAFLAR</span>
+<div class="w-8 h-8 rounded-lg bg-surface-container-low flex items-center justify-center text-outline">
+<span class="material-symbols-outlined text-[20px]">receipt_long</span>
+</div>
+</div>
+<div class="my-space-sm">
+<div class="flex items-baseline gap-space-xs">
+<span class="font-metric-kpi-md text-metric-kpi-md text-on-surface tracking-tight">₺823.200</span>
+</div>
+</div>
+<div class="flex items-center justify-between text-body-sm pt-space-xs bg-surface-container-low/50 -mx-space-lg -mb-space-lg px-space-lg py-space-xs">
+<span class="text-on-surface-variant">Noter, Eksp., 150 Nokta</span>
+<span class="font-semibold text-on-surface">Ort. ₺19.600</span>
+</div>
+</div>
+<!-- Card 5 -->
+<div class="p-space-lg bg-surface-container-lowest rounded-xl shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps uppercase text-tertiary tracking-wider">SKS FİNANSMAN YÜKÜ</span>
+<div class="w-8 h-8 rounded-lg bg-tertiary-fixed/40 flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined text-[20px]">hourglass_bottom</span>
+</div>
+</div>
+<div class="my-space-sm">
+<div class="flex items-baseline gap-space-xs">
+<span class="font-metric-kpi-md text-metric-kpi-md text-tertiary tracking-tight">₺1.120.000</span>
+</div>
+</div>
+<div class="flex items-center justify-between text-body-sm pt-space-xs bg-surface-container-low/50 -mx-space-lg -mb-space-lg px-space-lg py-space-xs">
+<span class="text-on-surface-variant">Aylık Maliyet Katsayısı:</span>
+<span class="font-semibold text-tertiary">%3.00 / Ay</span>
+</div>
+</div>
+<!-- Card 6 -->
+<div class="p-space-lg bg-surface-container-lowest rounded-xl shadow-sm flex flex-col justify-between relative overflow-hidden bg-gradient-to-br from-surface-container-lowest to-surface-container-low">
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps uppercase text-secondary tracking-wider font-semibold">TAHMİNİ NET KÂR</span>
+<div class="w-8 h-8 rounded-lg bg-secondary-fixed/50 flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-[20px]">trending_up</span>
+</div>
+</div>
+<div class="my-space-sm">
+<div class="flex items-baseline gap-space-xs">
+<span class="font-metric-kpi-md text-metric-kpi-md text-on-surface tracking-tight font-bold">₺5.560.000</span>
+</div>
+</div>
+<div class="flex items-center justify-between text-body-sm pt-space-xs bg-surface-container-low/50 -mx-space-lg -mb-space-lg px-space-lg py-space-xs">
+<span class="text-on-surface-variant">Tahmini Net Marj:</span>
+<span class="font-bold text-secondary font-metric-kpi-md text-body-sm">%9.8 Net</span>
+</div>
+</div>
+</div>
+<!-- Control & Filter Toolbar -->
+<div class="flex flex-col gap-space-md p-space-lg bg-surface-container-lowest rounded-xl shadow-sm">
+<div class="flex flex-col xl:flex-row items-stretch xl:items-center justify-between gap-space-md">
+<!-- Search Box -->
+<div class="relative flex-1">
+<span class="material-symbols-outlined absolute left-space-md top-1/2 -translate-y-1/2 text-outline text-[20px]">search</span>
+<input class="w-full pl-10 pr-space-lg py-space-sm bg-surface-container-low rounded-lg font-body-md text-body-md text-on-surface placeholder:text-outline focus:bg-surface-container-lowest focus:outline-none transition-all shadow-inner" id="searchInput" placeholder="Plaka, marka, model, versiyon, renk veya şasi ara..." type="text"/>
+</div>
+<!-- Quick Dropdown Filters -->
+<div class="flex flex-wrap items-center gap-space-sm">
+<div class="relative">
+<select class="appearance-none pl-space-md pr-space-2xl py-space-sm bg-surface-container-low rounded-lg font-label-ui text-label-ui text-on-surface cursor-pointer focus:outline-none">
+<option>Tüm Markalar (Renault, Dacia, Fiat, VW, Ford)</option>
+<option>Renault (22)</option>
+<option>Dacia (9)</option>
+<option>Fiat (6)</option>
+<option>Volkswagen (3)</option>
+<option>Ford (2)</option>
+</select>
+<span class="material-symbols-outlined absolute right-space-sm top-1/2 -translate-y-1/2 pointer-events-none text-outline text-[18px]">expand_more</span>
+</div>
+<div class="relative">
+<select class="appearance-none pl-space-md pr-space-2xl py-space-sm bg-surface-container-low rounded-lg font-label-ui text-label-ui text-on-surface cursor-pointer focus:outline-none">
+<option>Tüm SKS Aralıkları (0-90+ Gün)</option>
+<option>0 - 30 Gün (Hızlı Stok)</option>
+<option>31 - 60 Gün (Normal)</option>
+<option>61 - 90 Gün (Dikkat)</option>
+<option selected="">90+ Gün (Kritik Stok)</option>
+</select>
+<span class="material-symbols-outlined absolute right-space-sm top-1/2 -translate-y-1/2 pointer-events-none text-outline text-[18px]">expand_more</span>
+</div>
+<div class="relative">
+<select class="appearance-none pl-space-md pr-space-2xl py-space-sm bg-surface-container-low rounded-lg font-label-ui text-label-ui text-on-surface cursor-pointer focus:outline-none">
+<option>Tüm Alım Türleri</option>
+<option>Takas (Sıfır Araç)</option>
+<option>Nakit Alım</option>
+<option>Şirket Aracı</option>
+<option>Konsinye</option>
+</select>
+<span class="material-symbols-outlined absolute right-space-sm top-1/2 -translate-y-1/2 pointer-events-none text-outline text-[18px]">expand_more</span>
+</div>
+<div class="relative">
+<select class="appearance-none pl-space-md pr-space-2xl py-space-sm bg-surface-container-low rounded-lg font-label-ui text-label-ui text-on-surface cursor-pointer focus:outline-none">
+<option>Sıralama: SKS (Yüksekten Düşüğe)</option>
+<option>Sıralama: Alış Fiyatı (Azalan)</option>
+<option>Sıralama: Alış Fiyatı (Artan)</option>
+<option>Sıralama: Net Kâr (Azalan)</option>
+<option>Sıralama: Model Yılı (Yeni-Eski)</option>
+</select>
+<span class="material-symbols-outlined absolute right-space-sm top-1/2 -translate-y-1/2 pointer-events-none text-outline text-[18px]">sort</span>
+</div>
+</div>
+<!-- View Toggle Mode: Kompakt vs Rahat -->
+<div class="flex items-center bg-surface-container-low p-1 rounded-lg">
+<button class="flex items-center gap-1 px-space-sm py-1 rounded bg-surface-container-lowest text-primary-container font-label-ui text-label-ui shadow-sm transition-all font-semibold" id="btnCompact" onclick="setViewMode('compact')">
+<span class="material-symbols-outlined text-[16px]">density_small</span>
+          Kompakt
+        </button>
+<button class="flex items-center gap-1 px-space-sm py-1 rounded text-on-surface-variant hover:text-on-surface font-label-ui text-label-ui transition-all" id="btnComfort" onclick="setViewMode('comfort')">
+<span class="material-symbols-outlined text-[16px]">density_medium</span>
+          Rahat
+        </button>
+</div>
+</div>
+<!-- Active Filter Chips & Record Count Row -->
+<div class="flex items-center justify-between flex-wrap gap-space-sm pt-space-xs">
+<div class="flex items-center gap-space-xs flex-wrap">
+<span class="font-label-caps text-label-caps text-outline uppercase mr-1">Aktif Filtreler:</span>
+<span class="inline-flex items-center gap-1 px-space-sm py-0.5 bg-error-container/40 text-on-error-container rounded-full font-label-ui text-label-ui">
+          SKS: 90+ Gün ve Takas
+          <button class="hover:text-error ml-1 leading-none font-bold">×</button>
+</span>
+<span class="inline-flex items-center gap-1 px-space-sm py-0.5 bg-surface-container text-on-surface-variant rounded-full font-label-ui text-label-ui">
+          Marka: Renault
+          <button class="hover:text-on-surface ml-1 leading-none font-bold">×</button>
+</span>
+<button class="font-label-ui text-label-ui text-primary hover:underline ml-space-xs flex items-center gap-0.5">
+<span class="material-symbols-outlined text-[14px]">filter_alt_off</span>
+          Filtreleri Temizle
+        </button>
+</div>
+<div class="font-label-ui text-label-ui text-on-surface-variant">
+        Görüntülenen: <strong class="text-on-surface">42</strong> / 42 araç listeleniyor
+      </div>
+</div>
+</div>
+<!-- 19-Column Data Grid Container -->
+<div class="bg-surface-container-lowest rounded-xl shadow-sm overflow-hidden flex flex-col relative">
+<!-- Top Table Ribbon with Sticky Horizontal Scroll Warning & Column Legend -->
+<div class="px-space-lg py-space-sm bg-surface-container-low flex items-center justify-between font-label-ui text-label-ui text-on-surface-variant flex-wrap gap-space-xs">
+<div class="flex items-center gap-space-md">
+<span class="flex items-center gap-1">
+<span class="w-2 h-2 rounded-full bg-emerald-500"></span> 0-30 Gün (Hızlı)
+        </span>
+<span class="flex items-center gap-1">
+<span class="w-2 h-2 rounded-full bg-amber-500"></span> 31-60 Gün (Normal)
+        </span>
+<span class="flex items-center gap-1">
+<span class="w-2 h-2 rounded-full bg-orange-500"></span> 61-90 Gün (Risk)
+        </span>
+<span class="flex items-center gap-1">
+<span class="w-2 h-2 rounded-full bg-red-600"></span> 90+ Gün (Kritik Eşik)
+        </span>
+</div>
+<div class="flex items-center gap-space-sm text-outline">
+<span class="material-symbols-outlined text-[16px]">swipe</span>
+<span>19 Sütun • Çakışmasız Yatay Kaydırma</span>
+</div>
+</div>
+<!-- Scrollable Table Matrix -->
+<div class="overflow-x-auto w-full max-w-full relative scrollbar-thin">
+<table class="w-full text-left whitespace-nowrap table-auto" id="stokTable">
+<!-- Table Header (Dark Monolith Navy) -->
+<thead>
+<tr class="bg-inverse-surface text-surface-container-lowest font-label-caps text-label-caps uppercase tracking-wider sticky top-0 z-20">
+<th class="py-3 px-3 text-center w-10">#</th>
+<th class="py-3 px-4 font-semibold sticky left-0 z-30 bg-inverse-surface shadow-[2px_0_5px_rgba(0,0,0,0.2)]">PLAKA</th>
+<th class="py-3 px-3 cursor-pointer hover:bg-white/10">YIL</th>
+<th class="py-3 px-3 cursor-pointer hover:bg-white/10">KM</th>
+<th class="py-3 px-4 cursor-pointer hover:bg-white/10">MARKA &amp; MODEL</th>
+<th class="py-3 px-4">VERSİYON / PAKET</th>
+<th class="py-3 px-3">RENK</th>
+<th class="py-3 px-3 cursor-pointer hover:bg-white/10">ALIŞ TARİHİ</th>
+<th class="py-3 px-4 cursor-pointer hover:bg-white/10 text-center">SKS GÜN &amp; DURUM</th>
+<th class="py-3 px-3">YAKIT</th>
+<th class="py-3 px-3">VİTES</th>
+<th class="py-3 px-3">ALIM TÜRÜ</th>
+<th class="py-3 px-4 text-right cursor-pointer hover:bg-white/10">ALIŞ FİYATI</th>
+<th class="py-3 px-4 text-right cursor-pointer hover:bg-white/10">LİSTE SATIŞ</th>
+<th class="py-3 px-4 text-right">HEDEF KAZANÇ</th>
+<th class="py-3 px-3 text-right">SABİT GİDER</th>
+<th class="py-3 px-4 text-right">SKS FİNANSMAN</th>
+<th class="py-3 px-4 text-right font-semibold">TOPLAM MALİYET</th>
+<th class="py-3 px-4 text-right font-bold">TAHMİNİ NET KÂR</th>
+<th class="py-3 px-3 text-center sticky right-0 z-30 bg-inverse-surface shadow-[-2px_0_5px_rgba(0,0,0,0.2)]">İŞLEM</th>
+</tr>
+</thead>
+<!-- Table Body (Rendered via Compact 38px/Comfort 48px toggle) -->
+<tbody class="divide-y divide-surface-container font-table-data text-table-data text-on-surface">
+<!-- ROW 1: Kritik 94 Gün SKS, Negatif Kâr -->
+<tr class="hover:bg-primary-fixed/20 transition-colors bg-surface-container-lowest group">
+<td class="px-3 py-2 text-center text-outline">1</td>
+<td class="px-4 py-2 sticky left-0 z-10 bg-surface-container-lowest group-hover:bg-primary-fixed/20 shadow-[2px_0_5px_rgba(0,0,0,0.03)] font-semibold">
+<div class="inline-flex items-center overflow-hidden rounded bg-surface-container-high shadow-xs">
+<span class="bg-primary px-1.5 py-0.5 text-[9px] font-bold text-white tracking-widest leading-none">TR</span>
+<span class="px-2 py-0.5 font-headline-sm text-[12px] font-bold tracking-tight text-on-surface">33 ARB 585</span>
+</div>
+</td>
+<td class="px-3 py-2 text-on-surface font-table-numeric">2022</td>
+<td class="px-3 py-2 font-table-numeric tabular-nums">68.400 KM</td>
+<td class="px-4 py-2 font-medium text-on-surface">Megane Sedan</td>
+<td class="px-4 py-2 text-on-surface-variant truncate max-w-[200px]" title="Touch 1.3 TCe 140 bg EDC">Touch 1.3 TCe 140 bg EDC</td>
+<td class="px-3 py-2 text-on-surface-variant">Saf Beyaz</td>
+<td class="px-3 py-2 font-table-numeric text-on-surface-variant">18.11.2024</td>
+<td class="px-4 py-2 text-center">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-error-container text-on-error-container font-semibold font-label-ui text-label-ui animate-pulse">
+<span class="material-symbols-outlined text-[13px]">warning</span>
+                94 Gün • Kritik
+              </span>
+</td>
+<td class="px-3 py-2 text-on-surface-variant">Benzin</td>
+<td class="px-3 py-2 text-on-surface-variant">Otomatik EDC</td>
+<td class="px-3 py-2">
+<span class="inline-block px-2 py-0.5 rounded text-[11px] font-medium bg-primary-fixed text-on-primary-fixed">Takas (Sıfır Araç)</span>
+</td>
+<td class="px-4 py-2 text-right font-table-numeric tabular-nums">₺1.120.000</td>
+<td class="px-4 py-2 text-right font-table-numeric tabular-nums font-semibold">₺1.240.000</td>
+<td class="px-4 py-2 text-right font-table-numeric tabular-nums text-secondary">₺120.000</td>
+<td class="px-3 py-2 text-right font-table-numeric tabular-nums text-outline">₺19.600</td>
+<td class="px-4 py-2 text-right font-table-numeric tabular-nums text-tertiary font-medium">₺105.280</td>
+<td class="px-4 py-2 text-right font-table-numeric tabular-nums font-bold">₺1.244.880</td>
+<td class="px-4 py-2 text-right font-table-numeric tabular-nums">
+<span class="inline-block px-2 py-0.5 rounded bg-error-container text-on-error-container font-bold">-₺4.880</span>
+</td>
+<td class="px-3 py-2 text-center sticky right-0 z-10 bg-surface-container-lowest group-hover:bg-primary-fixed/20 shadow-[-2px_0_5px_rgba(0,0,0,0.03)]">
+<div class="relative inline-block text-left">
+<button class="p-1 rounded hover:bg-surface-container text-outline hover:text-on-surface" onclick="toggleActionMenu(event, 'menu-1')">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+<div class="action-dropdown hidden absolute right-0 mt-1 w-36 bg-surface-container-lowest rounded-lg shadow-lg z-50 py-1 text-left" id="menu-1">
+<a class="block px-3 py-1.5 font-label-ui text-label-ui hover:bg-surface-container text-on-surface" href="#">Düzenle</a>
+<a class="block px-3 py-1.5 font-label-ui text-label-ui hover:bg-surface-container text-emerald-700" href="#">Satıldı Yap</a>
+<a class="block px-3 py-1.5 font-label-ui text-label-ui hover:bg-surface-container text-on-surface" href="#">360° Detay</a>
+<a class="block px-3 py-1.5 font-label-ui text-label-ui hover:bg-error-container text-error" href="#">Stoktan Sil</a>
+</div>
+</div>
+</td>
+</tr>
+<!-- ROW 2: Dacia Sandero (91 Gün SKS, Kritik Eşik) -->
+<tr class="hover:bg-primary-fixed/20 transition-colors bg-surface-container-lowest group">
+<td class="px-3 py-2 text-center text-outline">2</td>
+<td class="px-4 py-2 sticky left-0 z-10 bg-surface-container-lowest group-hover:bg-primary-fixed/20 shadow-[2px_0_5px_rgba(0,0,0,0.03)] font-semibold">
+<div class="inline-flex items-center overflow-hidden rounded bg-surface-container-high shadow-xs">
+<span class="bg-primary px-1.5 py-0.5 text-[9px] font-bold text-white tracking-widest leading-none">TR</span>
+<span class="px-2 py-0.5 font-headline-sm text-[12px] font-bold tracking-tight text-on-surface">33 TN 419</span>
+</div>
+</td>
+<td class="px-3 py-2 text-on-surface font-table-numeric">2021</td>
+<td class="px-3 py-2 font-table-numeric tabular-nums">49.800 KM</td>
+<td class="px-4 py-2 font-medium text-on-surface">Sandero Stepway</td>
+<td class="px-4 py-2 text-on-surface-variant truncate max-w-[200px]" title="Prestige 1.0 TCe 90 bg X-Tronic">Prestige 1.0 TCe 90 bg X-Tronic</td>
+<td class="px-3 py-2 text-on-surface-variant">Atacama Turuncu</td>
+<td class="px-3 py-2 font-table-numeric text-on-surface-variant">21.11.2024</td>
+<td class="px-4 py-2 text-center">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-error-container text-on-error-container font-semibold font-label-ui text-label-ui">
+<span class="material-symbols-outlined text-[13px]">warning</span>
+                91 Gün • Kritik
+              </span>
+</td>
+<td class="px-3 py-2 text-on-surface-variant">Benzin</td>
+<td class="px-3 py-2 text-on-surface-variant">Otomatik (CVT)</td>
+<td class="px-3 py-2">
+<span class="inline-block px-2 py-0.5 rounded text-[11px] font-medium bg-tertiary-fixed text-on-tertiary-fixed">Şirket Aracı</span>
+</td>
+<td class="px-4 py-2 text-right font-table-numeric tabular-nums">₺890.000</td>
+<td class="px-4 py-2 text-right font-table-numeric tabular-nums font-semibold">₺995.000</td>
+<td class="px-4 py-2 text-right font-table-numeric tabular-nums text-secondary">₺105.000</td>
+<td class="px-3 py-2 text-right font-table-numeric tabular-nums text-outline">₺19.600</td>
+<td class="px-4 py-2 text-right font-table-numeric tabular-nums text-tertiary font-medium">₺80.990</td>
+<td class="px-4 py-2 text-right font-table-numeric tabular-nums font-bold">₺990.590</td>
+<td class="px-4 py-2 text-right font-table-numeric tabular-nums">
+<span class="inline-block px-2 py-0.5 rounded bg-surface-container text-secondary font-bold">+₺4.410</span>
+</td>
+<td class="px-3 py-2 text-center sticky right-0 z-10 bg-surface-container-lowest group-hover:bg-primary-fixed/20 shadow-[-2px_0_5px_rgba(0,0,0,0.03)]">
+<div class="relative inline-block text-left">
+<button class="p-1 rounded hover:bg-surface-container text-outline hover:text-on-surface" onclick="toggleActionMenu(event, 'menu-2')">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+<div class="action-dropdown hidden absolute right-0 mt-1 w-36 bg-surface-container-lowest rounded-lg shadow-lg z-50 py-1 text-left" id="menu-2">
+<a class="block px-3 py-1.5 font-label-ui text-label-ui hover:bg-surface-container text-on-surface" href="#">Düzenle</a>
+<a class="block px-3 py-1.5 font-label-ui text-label-ui hover:bg-surface-container text-emerald-700" href="#">Satıldı Yap</a>
+<a class="block px-3 py-1.5 font-label-ui text-label-ui hover:bg-surface-container text-on-surface" href="#">360° Detay</a>
+<a class="block px-3 py-1.5 font-label-ui text-label-ui hover:bg-error-container text-error" href="#">Stoktan Sil</a>
+</div>
+</div>
+</td>
+</tr>
+<!-- ROW 3: 78 Gün Fiat Egea Cross -->
+<tr class="hover:bg-primary-fixed/20 transition-colors bg-surface-container-lowest group">
+<td class="px-3 py-2 text-center text-outline">3</td>
+<td class="px-4 py-2 sticky left-0 z-10 bg-surface-container-lowest group-hover:bg-primary-fixed/20 shadow-[2px_0_5px_rgba(0,0,0,0.03)] font-semibold">
+<div class="inline-flex items-center overflow-hidden rounded bg-surface-container-high shadow-xs">
+<span class="bg-primary px-1.5 py-0.5 text-[9px] font-bold text-white tracking-widest leading-none">TR</span>
+<span class="px-2 py-0.5 font-headline-sm text-[12px] font-bold tracking-tight text-on-surface">33 BB 650</span>
+</div>
+</td>
+<td class="px-3 py-2 text-on-surface font-table-numeric">2023</td>
+<td class="px-3 py-2 font-table-numeric tabular-nums">31.200 KM</td>
+<td class="px-4 py-2 font-medium text-on-surface">Egea Cross</td>
+<td class="px-4 py-2 text-on-surface-variant truncate max-w-[200px]" title="Lounge 1.6 M.Jet 130 bg DCT">Lounge 1.6 M.Jet 130 bg DCT</td>
+<td class="px-3 py-2 text-on-surface-variant">Paprika Turuncu</td>
+<td class="px-3 py-2 font-table-numeric text-on-surface-variant">04.12.2024</td>
+<td class="px-4 py-2 text-center">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-orange-100 text-orange-800 font-semibold font-label-ui text-label-ui">
+<span class="w-1.5 h-1.5 rounded-full bg-orange-600"></span>
+                78 Gün • Risk
+              </span>
+</td>
+<td class="px-3 py-2 text-on-surface-variant">Dizel</td>
+<td class="px-3 py-2 text-on-surface-variant">Otomatik DCT</td>
+<td class="px-3 py-2">
+<span class="inline-block px-2 py-0.5 rounded text-[11px] font-medium bg-secondary-fixed text-on-secondary-fixed-variant">Nakit Alım</span>
+</td>
+<td class="px-4 py-2 text-right font-table-numeric tabular-nums">₺1.050.000</td>
+<td class="px-4 py-2 text-right font-table-numeric tabular-nums font-semibold">₺1.190.000</td>
+<td class="px-4 py-2 text-right font-table-numeric tabular-nums text-secondary">₺140.000</td>
+<td class="px-3 py-2 text-right font-table-numeric tabular-nums text-outline">₺19.600</td>
+<td class="px-4 py-2 text-right font-table-numeric tabular-nums text-tertiary font-medium">₺81.900</td>
+<td class="px-4 py-2 text-right font-table-numeric tabular-nums font-bold">₺1.151.500</td>
+<td class="px-4 py-2 text-right font-table-numeric tabular-nums">
+<span class="inline-block px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 font-bold">+₺38.500</span>
+</td>
+<td class="px-3 py-2 text-center sticky right-0 z-10 bg-surface-container-lowest group-hover:bg-primary-fixed/20 shadow-[-2px_0_5px_rgba(0,0,0,0.03)]">
+<div class="relative inline-block text-left">
+<button class="p-1 rounded hover:bg-surface-container text-outline hover:text-on-surface" onclick="toggleActionMenu(event, 'menu-3')">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+<div class="action-dropdown hidden absolute right-0 mt-1 w-36 bg-surface-container-lowest rounded-lg shadow-lg z-50 py-1 text-left" id="menu-3">
+<a class="block px-3 py-1.5 font-label-ui text-label-ui hover:bg-surface-container text-on-surface" href="#">Düzenle</a>
+<a class="block px-3 py-1.5 font-label-ui text-label-ui hover:bg-surface-container text-emerald-700" href="#">Satıldı Yap</a>
+<a class="block px-3 py-1.5 font-label-ui text-label-ui hover:bg-surface-container text-on-surface" href="#">360° Detay</a>
+<a class="block px-3 py-1.5 font-label-ui text-label-ui hover:bg-error-container text-error" href="#">Stoktan Sil</a>
+</div>
+</div>
+</td>
+</tr>
+<!-- ROW 4: VW Passat - Yüksek Kârlı -->
+<tr class="hover:bg-primary-fixed/20 transition-colors bg-surface-container-lowest group">
+<td class="px-3 py-2 text-center text-outline">4</td>
+<td class="px-4 py-2 sticky left-0 z-10 bg-surface-container-lowest group-hover:bg-primary-fixed/20 shadow-[2px_0_5px_rgba(0,0,0,0.03)] font-semibold">
+<div class="inline-flex items-center overflow-hidden rounded bg-surface-container-high shadow-xs">
+<span class="bg-primary px-1.5 py-0.5 text-[9px] font-bold text-white tracking-widest leading-none">TR</span>
+<span class="px-2 py-0.5 font-headline-sm text-[12px] font-bold tracking-tight text-on-surface">33 VW 112</span>
+</div>
+</td>
+<td class="px-3 py-2 text-on-surface font-table-numeric">2020</td>
+<td class="px-3 py-2 font-table-numeric tabular-nums">94.300 KM</td>
+<td class="px-4 py-2 font-medium text-on-surface">Passat Elegance</td>
+<td class="px-4 py-2 text-on-surface-variant truncate max-w-[200px]" title="1.5 TSI ACT 150 bg DSG">1.5 TSI ACT 150 bg DSG</td>
+<td class="px-3 py-2 text-on-surface-variant">Derin Siyah</td>
+<td class="px-3 py-2 font-table-numeric text-on-surface-variant">08.01.2025</td>
+<td class="px-4 py-2 text-center">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-amber-100 text-amber-900 font-semibold font-label-ui text-label-ui">
+<span class="w-1.5 h-1.5 rounded-full bg-amber-600"></span>
+                43 Gün • Normal
+              </span>
+</td>
+<td class="px-3 py-2 text-on-surface-variant">Benzin</td>
+<td class="px-3 py-2 text-on-surface-variant">Otomatik DSG</td>
+<td class="px-3 py-2">
+<span class="inline-block px-2 py-0.5 rounded text-[11px] font-medium bg-primary-fixed text-on-primary-fixed">Takas (Sıfır Araç)</span>
+</td>
+<td class="px-4 py-2 text-right font-table-numeric tabular-nums">₺1.780.000</td>
+<td class="px-4 py-2 text-right font-table-numeric tabular-nums font-semibold">₺2.040.000</td>
+<td class="px-4 py-2 text-right font-table-numeric tabular-nums text-secondary">₺260.000</td>
+<td class="px-3 py-2 text-right font-table-numeric tabular-nums text-outline">₺19.600</td>
+<td class="px-4 py-2 text-right font-table-numeric tabular-nums text-tertiary font-medium">₺76.540</td>
+<td class="px-4 py-2 text-right font-table-numeric tabular-nums font-bold">₺1.876.140</td>
+<td class="px-4 py-2 text-right font-table-numeric tabular-nums">
+<span class="inline-block px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 font-bold">+₺163.860</span>
+</td>
+<td class="px-3 py-2 text-center sticky right-0 z-10 bg-surface-container-lowest group-hover:bg-primary-fixed/20 shadow-[-2px_0_5px_rgba(0,0,0,0.03)]">
+<div class="relative inline-block text-left">
+<button class="p-1 rounded hover:bg-surface-container text-outline hover:text-on-surface" onclick="toggleActionMenu(event, 'menu-4')">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+<div class="action-dropdown hidden absolute right-0 mt-1 w-36 bg-surface-container-lowest rounded-lg shadow-lg z-50 py-1 text-left" id="menu-4">
+<a class="block px-3 py-1.5 font-label-ui text-label-ui hover:bg-surface-container text-on-surface" href="#">Düzenle</a>
+<a class="block px-3 py-1.5 font-label-ui text-label-ui hover:bg-surface-container text-emerald-700" href="#">Satıldı Yap</a>
+<a class="block px-3 py-1.5 font-label-ui text-label-ui hover:bg-surface-container text-on-surface" href="#">360° Detay</a>
+<a class="block px-3 py-1.5 font-label-ui text-label-ui hover:bg-error-container text-error" href="#">Stoktan Sil</a>
+</div>
+</div>
+</td>
+</tr>
+<!-- ROW 5: 33 CAY 950 - Renault Megane, Yeni Giriş (4 Gün) -->
+<tr class="hover:bg-primary-fixed/20 transition-colors bg-surface-container-lowest group">
+<td class="px-3 py-2 text-center text-outline">5</td>
+<td class="px-4 py-2 sticky left-0 z-10 bg-surface-container-lowest group-hover:bg-primary-fixed/20 shadow-[2px_0_5px_rgba(0,0,0,0.03)] font-semibold">
+<div class="inline-flex items-center overflow-hidden rounded bg-surface-container-high shadow-xs">
+<span class="bg-primary px-1.5 py-0.5 text-[9px] font-bold text-white tracking-widest leading-none">TR</span>
+<span class="px-2 py-0.5 font-headline-sm text-[12px] font-bold tracking-tight text-on-surface">33 CAY 950</span>
+</div>
+</td>
+<td class="px-3 py-2 text-on-surface font-table-numeric">2024</td>
+<td class="px-3 py-2 font-table-numeric tabular-nums">12.400 KM</td>
+<td class="px-4 py-2 font-medium text-on-surface">Megane Sedan</td>
+<td class="px-4 py-2 text-on-surface-variant truncate max-w-[200px]" title="Icon 1.3 TCe 140 bg EDC">Icon 1.3 TCe 140 bg EDC</td>
+<td class="px-3 py-2 text-on-surface-variant">Titanyum Gri</td>
+<td class="px-3 py-2 font-table-numeric text-on-surface-variant">16.02.2025</td>
+<td class="px-4 py-2 text-center">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 font-semibold font-label-ui text-label-ui">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-600"></span>
+                4 Gün • Yeni
+              </span>
+</td>
+<td class="px-3 py-2 text-on-surface-variant">Benzin</td>
+<td class="px-3 py-2 text-on-surface-variant">Otomatik EDC</td>
+<td class="px-3 py-2">
+<span class="inline-block px-2 py-0.5 rounded text-[11px] font-medium bg-primary-fixed text-on-primary-fixed">Takas (Sıfır Araç)</span>
+</td>
+<td class="px-4 py-2 text-right font-table-numeric tabular-nums">₺1.340.000</td>
+<td class="px-4 py-2 text-right font-table-numeric tabular-nums font-semibold">₺1.490.000</td>
+<td class="px-4 py-2 text-right font-table-numeric tabular-nums text-secondary">₺150.000</td>
+<td class="px-3 py-2 text-right font-table-numeric tabular-nums text-outline">₺19.600</td>
+<td class="px-4 py-2 text-right font-table-numeric tabular-nums text-tertiary font-medium">₺5.360</td>
+<td class="px-4 py-2 text-right font-table-numeric tabular-nums font-bold">₺1.364.960</td>
+<td class="px-4 py-2 text-right font-table-numeric tabular-nums">
+<span class="inline-block px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 font-bold">+₺125.040</span>
+</td>
+<td class="px-3 py-2 text-center sticky right-0 z-10 bg-surface-container-lowest group-hover:bg-primary-fixed/20 shadow-[-2px_0_5px_rgba(0,0,0,0.03)]">
+<div class="relative inline-block text-left">
+<button class="p-1 rounded hover:bg-surface-container text-outline hover:text-on-surface" onclick="toggleActionMenu(event, 'menu-5')">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+<div class="action-dropdown hidden absolute right-0 mt-1 w-36 bg-surface-container-lowest rounded-lg shadow-lg z-50 py-1 text-left" id="menu-5">
+<a class="block px-3 py-1.5 font-label-ui text-label-ui hover:bg-surface-container text-on-surface" href="#">Düzenle</a>
+<a class="block px-3 py-1.5 font-label-ui text-label-ui hover:bg-surface-container text-emerald-700" href="#">Satıldı Yap</a>
+<a class="block px-3 py-1.5 font-label-ui text-label-ui hover:bg-surface-container text-on-surface" href="#">360° Detay</a>
+<a class="block px-3 py-1.5 font-label-ui text-label-ui hover:bg-error-container text-error" href="#">Stoktan Sil</a>
+</div>
+</div>
+</td>
+</tr>
+<!-- ROW 6: Dacia Duster -->
+<tr class="hover:bg-primary-fixed/20 transition-colors bg-surface-container-lowest group">
+<td class="px-3 py-2 text-center text-outline">6</td>
+<td class="px-4 py-2 sticky left-0 z-10 bg-surface-container-lowest group-hover:bg-primary-fixed/20 shadow-[2px_0_5px_rgba(0,0,0,0.03)] font-semibold">
+<div class="inline-flex items-center overflow-hidden rounded bg-surface-container-high shadow-xs">
+<span class="bg-primary px-1.5 py-0.5 text-[9px] font-bold text-white tracking-widest leading-none">TR</span>
+<span class="px-2 py-0.5 font-headline-sm text-[12px] font-bold tracking-tight text-on-surface">33 TY 302</span>
+</div>
+</td>
+<td class="px-3 py-2 text-on-surface font-table-numeric">2022</td>
+<td class="px-3 py-2 font-table-numeric tabular-nums">54.100 KM</td>
+<td class="px-4 py-2 font-medium text-on-surface">Duster Journey</td>
+<td class="px-4 py-2 text-on-surface-variant truncate max-w-[200px]" title="1.3 TCe 150 bg EDC 4x2">1.3 TCe 150 bg EDC 4x2</td>
+<td class="px-3 py-2 text-on-surface-variant">Haki Yeşili</td>
+<td class="px-3 py-2 font-table-numeric text-on-surface-variant">29.12.2024</td>
+<td class="px-4 py-2 text-center">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-amber-100 text-amber-900 font-semibold font-label-ui text-label-ui">
+<span class="w-1.5 h-1.5 rounded-full bg-amber-600"></span>
+                53 Gün • Normal
+              </span>
+</td>
+<td class="px-3 py-2 text-on-surface-variant">Benzin</td>
+<td class="px-3 py-2 text-on-surface-variant">Otomatik EDC</td>
+<td class="px-3 py-2">
+<span class="inline-block px-2 py-0.5 rounded text-[11px] font-medium bg-secondary-fixed text-on-secondary-fixed-variant">Nakit Alım</span>
+</td>
+<td class="px-4 py-2 text-right font-table-numeric tabular-nums">₺1.180.000</td>
+<td class="px-4 py-2 text-right font-table-numeric tabular-nums font-semibold">₺1.310.000</td>
+<td class="px-4 py-2 text-right font-table-numeric tabular-nums text-secondary">₺130.000</td>
+<td class="px-3 py-2 text-right font-table-numeric tabular-nums text-outline">₺19.600</td>
+<td class="px-4 py-2 text-right font-table-numeric tabular-nums text-tertiary font-medium">₺62.540</td>
+<td class="px-4 py-2 text-right font-table-numeric tabular-nums font-bold">₺1.262.140</td>
+<td class="px-4 py-2 text-right font-table-numeric tabular-nums">
+<span class="inline-block px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 font-bold">+₺47.860</span>
+</td>
+<td class="px-3 py-2 text-center sticky right-0 z-10 bg-surface-container-lowest group-hover:bg-primary-fixed/20 shadow-[-2px_0_5px_rgba(0,0,0,0.03)]">
+<div class="relative inline-block text-left">
+<button class="p-1 rounded hover:bg-surface-container text-outline hover:text-on-surface" onclick="toggleActionMenu(event, 'menu-6')">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+<div class="action-dropdown hidden absolute right-0 mt-1 w-36 bg-surface-container-lowest rounded-lg shadow-lg z-50 py-1 text-left" id="menu-6">
+<a class="block px-3 py-1.5 font-label-ui text-label-ui hover:bg-surface-container text-on-surface" href="#">Düzenle</a>
+<a class="block px-3 py-1.5 font-label-ui text-label-ui hover:bg-surface-container text-emerald-700" href="#">Satıldı Yap</a>
+<a class="block px-3 py-1.5 font-label-ui text-label-ui hover:bg-surface-container text-on-surface" href="#">360° Detay</a>
+<a class="block px-3 py-1.5 font-label-ui text-label-ui hover:bg-error-container text-error" href="#">Stoktan Sil</a>
+</div>
+</div>
+</td>
+</tr>
+<!-- ROW 7: Ford Focus -->
+<tr class="hover:bg-primary-fixed/20 transition-colors bg-surface-container-lowest group">
+<td class="px-3 py-2 text-center text-outline">7</td>
+<td class="px-4 py-2 sticky left-0 z-10 bg-surface-container-lowest group-hover:bg-primary-fixed/20 shadow-[2px_0_5px_rgba(0,0,0,0.03)] font-semibold">
+<div class="inline-flex items-center overflow-hidden rounded bg-surface-container-high shadow-xs">
+<span class="bg-primary px-1.5 py-0.5 text-[9px] font-bold text-white tracking-widest leading-none">TR</span>
+<span class="px-2 py-0.5 font-headline-sm text-[12px] font-bold tracking-tight text-on-surface">33 FTT 612</span>
+</div>
+</td>
+<td class="px-3 py-2 text-on-surface font-table-numeric">2021</td>
+<td class="px-3 py-2 font-table-numeric tabular-nums">76.800 KM</td>
+<td class="px-4 py-2 font-medium text-on-surface">Focus Titanium</td>
+<td class="px-4 py-2 text-on-surface-variant truncate max-w-[200px]" title="1.5 Ti-VCT 123 bg Otomatik">1.5 Ti-VCT 123 bg Otomatik</td>
+<td class="px-3 py-2 text-on-surface-variant">Aytozu Gri</td>
+<td class="px-3 py-2 font-table-numeric text-on-surface-variant">14.01.2025</td>
+<td class="px-4 py-2 text-center">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-amber-100 text-amber-900 font-semibold font-label-ui text-label-ui">
+<span class="w-1.5 h-1.5 rounded-full bg-amber-600"></span>
+                37 Gün • Normal
+              </span>
+</td>
+<td class="px-3 py-2 text-on-surface-variant">Benzin</td>
+<td class="px-3 py-2 text-on-surface-variant">Otomatik 6 İleri</td>
+<td class="px-3 py-2">
+<span class="inline-block px-2 py-0.5 rounded text-[11px] font-medium bg-primary-fixed text-on-primary-fixed">Takas (Sıfır Araç)</span>
+</td>
+<td class="px-4 py-2 text-right font-table-numeric tabular-nums">₺1.080.000</td>
+<td class="px-4 py-2 text-right font-table-numeric tabular-nums font-semibold">₺1.210.000</td>
+<td class="px-4 py-2 text-right font-table-numeric tabular-nums text-secondary">₺130.000</td>
+<td class="px-3 py-2 text-right font-table-numeric tabular-nums text-outline">₺19.600</td>
+<td class="px-4 py-2 text-right font-table-numeric tabular-nums text-tertiary font-medium">₺39.960</td>
+<td class="px-4 py-2 text-right font-table-numeric tabular-nums font-bold">₺1.139.560</td>
+<td class="px-4 py-2 text-right font-table-numeric tabular-nums">
+<span class="inline-block px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 font-bold">+₺70.440</span>
+</td>
+<td class="px-3 py-2 text-center sticky right-0 z-10 bg-surface-container-lowest group-hover:bg-primary-fixed/20 shadow-[-2px_0_5px_rgba(0,0,0,0.03)]">
+<div class="relative inline-block text-left">
+<button class="p-1 rounded hover:bg-surface-container text-outline hover:text-on-surface" onclick="toggleActionMenu(event, 'menu-7')">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+<div class="action-dropdown hidden absolute right-0 mt-1 w-36 bg-surface-container-lowest rounded-lg shadow-lg z-50 py-1 text-left" id="menu-7">
+<a class="block px-3 py-1.5 font-label-ui text-label-ui hover:bg-surface-container text-on-surface" href="#">Düzenle</a>
+<a class="block px-3 py-1.5 font-label-ui text-label-ui hover:bg-surface-container text-emerald-700" href="#">Satıldı Yap</a>
+<a class="block px-3 py-1.5 font-label-ui text-label-ui hover:bg-surface-container text-on-surface" href="#">360° Detay</a>
+<a class="block px-3 py-1.5 font-label-ui text-label-ui hover:bg-error-container text-error" href="#">Stoktan Sil</a>
+</div>
+</div>
+</td>
+</tr>
+<!-- ROW 8: Fiat Fiorino -->
+<tr class="hover:bg-primary-fixed/20 transition-colors bg-surface-container-lowest group">
+<td class="px-3 py-2 text-center text-outline">8</td>
+<td class="px-4 py-2 sticky left-0 z-10 bg-surface-container-lowest group-hover:bg-primary-fixed/20 shadow-[2px_0_5px_rgba(0,0,0,0.03)] font-semibold">
+<div class="inline-flex items-center overflow-hidden rounded bg-surface-container-high shadow-xs">
+<span class="bg-primary px-1.5 py-0.5 text-[9px] font-bold text-white tracking-widest leading-none">TR</span>
+<span class="px-2 py-0.5 font-headline-sm text-[12px] font-bold tracking-tight text-on-surface">01 BJK 903</span>
+</div>
+</td>
+<td class="px-3 py-2 text-on-surface font-table-numeric">2023</td>
+<td class="px-3 py-2 font-table-numeric tabular-nums">38.900 KM</td>
+<td class="px-4 py-2 font-medium text-on-surface">Fiorino Combi</td>
+<td class="px-4 py-2 text-on-surface-variant truncate max-w-[200px]" title="Premio 1.3 M.Jet 95 bg">Premio 1.3 M.Jet 95 bg</td>
+<td class="px-3 py-2 text-on-surface-variant">Kurşun Gri</td>
+<td class="px-3 py-2 font-table-numeric text-on-surface-variant">25.01.2025</td>
+<td class="px-4 py-2 text-center">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 font-semibold font-label-ui text-label-ui">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-600"></span>
+                26 Gün • Hızlı
+              </span>
+</td>
+<td class="px-3 py-2 text-on-surface-variant">Dizel</td>
+<td class="px-3 py-2 text-on-surface-variant">Manuel 5 İleri</td>
+<td class="px-3 py-2">
+<span class="inline-block px-2 py-0.5 rounded text-[11px] font-medium bg-tertiary-fixed text-on-tertiary-fixed">Konsinye</span>
+</td>
+<td class="px-4 py-2 text-right font-table-numeric tabular-nums">₺640.000</td>
+<td class="px-4 py-2 text-right font-table-numeric tabular-nums font-semibold">₺725.000</td>
+<td class="px-4 py-2 text-right font-table-numeric tabular-nums text-secondary">₺85.000</td>
+<td class="px-3 py-2 text-right font-table-numeric tabular-nums text-outline">₺19.600</td>
+<td class="px-4 py-2 text-right font-table-numeric tabular-nums text-tertiary font-medium">₺16.640</td>
+<td class="px-4 py-2 text-right font-table-numeric tabular-nums font-bold">₺676.240</td>
+<td class="px-4 py-2 text-right font-table-numeric tabular-nums">
+<span class="inline-block px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 font-bold">+₺48.760</span>
+</td>
+<td class="px-3 py-2 text-center sticky right-0 z-10 bg-surface-container-lowest group-hover:bg-primary-fixed/20 shadow-[-2px_0_5px_rgba(0,0,0,0.03)]">
+<div class="relative inline-block text-left">
+<button class="p-1 rounded hover:bg-surface-container text-outline hover:text-on-surface" onclick="toggleActionMenu(event, 'menu-8')">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+<div class="action-dropdown hidden absolute right-0 mt-1 w-36 bg-surface-container-lowest rounded-lg shadow-lg z-50 py-1 text-left" id="menu-8">
+<a class="block px-3 py-1.5 font-label-ui text-label-ui hover:bg-surface-container text-on-surface" href="#">Düzenle</a>
+<a class="block px-3 py-1.5 font-label-ui text-label-ui hover:bg-surface-container text-emerald-700" href="#">Satıldı Yap</a>
+<a class="block px-3 py-1.5 font-label-ui text-label-ui hover:bg-surface-container text-on-surface" href="#">360° Detay</a>
+<a class="block px-3 py-1.5 font-label-ui text-label-ui hover:bg-error-container text-error" href="#">Stoktan Sil</a>
+</div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Table Sticky Summary Footer -->
+<div class="p-space-md bg-surface-container-low flex flex-col md:flex-row items-center justify-between gap-space-md">
+<div class="flex items-center gap-space-sm font-label-ui text-label-ui text-on-surface-variant">
+<span>Sayfa Başına Gösterim:</span>
+<select class="bg-surface-container-lowest px-2 py-1 rounded text-on-surface focus:outline-none">
+<option>25 Araç</option>
+<option selected="">50 Araç</option>
+<option>100 Araç</option>
+<option>Tümünü Listele (42)</option>
+</select>
+<span class="text-outline">| Toplam 42 aracın 1-8 arası gösteriliyor</span>
+</div>
+<!-- Pagination Controls -->
+<div class="flex items-center gap-1">
+<button class="w-8 h-8 rounded flex items-center justify-center bg-surface-container-lowest text-outline hover:text-on-surface disabled:opacity-40" disabled="">
+<span class="material-symbols-outlined text-[18px]">chevron_left</span>
+</button>
+<button class="w-8 h-8 rounded flex items-center justify-center bg-primary-container text-on-primary font-semibold text-label-ui">1</button>
+<button class="w-8 h-8 rounded flex items-center justify-center bg-surface-container-lowest text-on-surface hover:bg-surface-container font-label-ui">2</button>
+<button class="w-8 h-8 rounded flex items-center justify-center bg-surface-container-lowest text-outline hover:text-on-surface">
+<span class="material-symbols-outlined text-[18px]">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Real-Time Notification Toast for Excel Synch Simulation -->
+<div class="fixed bottom-space-xl right-space-xl bg-inverse-surface text-inverse-on-surface px-space-lg py-space-md rounded-xl shadow-xl flex items-center gap-space-md transform transition-all duration-300 translate-y-24 opacity-0 z-50" id="toastNotification">
+<span class="material-symbols-outlined text-secondary-container">sync</span>
+<div class="flex flex-col">
+<span class="font-headline-sm text-[13px] font-semibold">Excel Veri Havuzu İletişimi</span>
+<span class="font-body-sm text-[12px] text-surface-variant" id="toastMessage">Dosya başarıyla aktarılıyor...</span>
+</div>
+</div>
+</div>
+<script>
+  // Dynamic View Mode Switcher (Kompakt: 38px, Rahat: 48px row heights)
+  function setViewMode(mode) {
+    const table = document.getElementById('stokTable');
+    const btnCompact = document.getElementById('btnCompact');
+    const btnComfort = document.getElementById('btnComfort');
+    const cells = table.querySelectorAll('tbody td');
+
+    if (mode === 'compact') {
+      cells.forEach(td => {
+        td.classList.remove('py-3.5');
+        td.classList.add('py-2');
+      });
+      btnCompact.classList.add('bg-surface-container-lowest', 'text-primary-container', 'font-semibold', 'shadow-sm');
+      btnCompact.classList.remove('text-on-surface-variant');
+      btnComfort.classList.remove('bg-surface-container-lowest', 'text-primary-container', 'font-semibold', 'shadow-sm');
+      btnComfort.classList.add('text-on-surface-variant');
+    } else {
+      cells.forEach(td => {
+        td.classList.remove('py-2');
+        td.classList.add('py-3.5');
+      });
+      btnComfort.classList.add('bg-surface-container-lowest', 'text-primary-container', 'font-semibold', 'shadow-sm');
+      btnComfort.classList.remove('text-on-surface-variant');
+      btnCompact.classList.remove('bg-surface-container-lowest', 'text-primary-container', 'font-semibold', 'shadow-sm');
+      btnCompact.classList.add('text-on-surface-variant');
+    }
+  }
+
+  // Interactive Action Dropdowns with Collision Control
+  function toggleActionMenu(event, menuId) {
+    event.stopPropagation();
+    const allMenus = document.querySelectorAll('.action-dropdown');
+    allMenus.forEach(m => {
+      if (m.id !== menuId) m.classList.add('hidden');
+    });
+
+    const targetMenu = document.getElementById(menuId);
+    if (targetMenu) {
+      targetMenu.classList.toggle('hidden');
+    }
+  }
+
+  // Close dropdowns on document click
+  document.addEventListener('click', function() {
+    const allMenus = document.querySelectorAll('.action-dropdown');
+    allMenus.forEach(m => m.classList.add('hidden'));
+  });
+
+  // Client-Side Search Filter Micro-Interaction
+  document.getElementById('searchInput').addEventListener('input', function(e) {
+    const term = e.target.value.toLowerCase();
+    const rows = document.querySelectorAll('#stokTable tbody tr');
+    
+    rows.forEach(row => {
+      const text = row.textContent.toLowerCase();
+      if (text.includes(term)) {
+        row.style.display = '';
+      } else {
+        row.style.display = 'none';
+      }
+    });
+  });
+
+  // Notification Toast simulation for Excel/PDF triggers
+  function triggerExport(type) {
+    const toast = document.getElementById('toastNotification');
+    const msg = document.getElementById('toastMessage');
+    
+    if (type === 'excel') {
+      msg.textContent = 'Canlı stok verisi (.xlsx) formatında derlenip indiriliyor.';
+    } else {
+      msg.textContent = 'Yönetim özet PDF raporu 19 sütun ekseninde hazırlanıyor.';
+    }
+
+    toast.classList.remove('translate-y-24', 'opacity-0');
+    toast.classList.add('translate-y-0', 'opacity-100');
+
+    setTimeout(() => {
+      toast.classList.add('translate-y-24', 'opacity-0');
+      toast.classList.remove('translate-y-0', 'opacity-100');
+    }, 3400);
+  }
+</script></main></div></body></html>

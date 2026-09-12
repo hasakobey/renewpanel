@@ -1,0 +1,800 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>RENEW PRO • Ödeme Merkezi</title>
+
+<style>
+*{box-sizing:border-box}
+
+:root{
+  --navy:#173e69;
+  --navy2:#102f51;
+  --bg:#eef4fa;
+  --card:#fff;
+  --line:#d6e0eb;
+  --text:#172536;
+  --muted:#697b91;
+  --green:#16845b;
+  --red:#c64545;
+  --shadow:0 8px 25px rgba(25,50,80,.08);
+}
+
+html,body{
+  margin:0;
+  min-height:100%;
+  background:var(--bg);
+  color:var(--text);
+  font-family:Arial,Helvetica,sans-serif;
+}
+
+.topbar{
+  height:62px;
+  background:linear-gradient(135deg,var(--navy2),var(--navy));
+  color:white;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 18px;
+  position:sticky;
+  top:0;
+  z-index:100;
+  box-shadow:0 3px 14px rgba(0,0,0,.15);
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:11px;
+}
+
+.logo{
+  width:37px;
+  height:37px;
+  border-radius:9px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:#fff;
+  color:var(--navy);
+  font-weight:900;
+  font-size:18px;
+}
+
+.brand b{
+  font-size:15px;
+}
+
+.brand small{
+  display:block;
+  font-size:10px;
+  opacity:.7;
+  margin-top:2px;
+}
+
+.top-actions{
+  display:flex;
+  gap:8px;
+}
+
+.top-actions button{
+  border:1px solid rgba(255,255,255,.25);
+  background:rgba(255,255,255,.1);
+  color:#fff;
+  border-radius:8px;
+  padding:9px 12px;
+  font-weight:800;
+  cursor:pointer;
+}
+
+.workspace{
+  display:grid;
+  grid-template-columns:minmax(650px,1fr) 430px;
+  gap:14px;
+  padding:14px;
+  align-items:start;
+}
+
+.payment-card{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:14px;
+  box-shadow:var(--shadow);
+  overflow:hidden;
+  min-height:calc(100vh - 90px);
+}
+
+#paymentFrame{
+  display:block;
+  width:100%;
+  min-height:calc(100vh - 92px);
+  border:0;
+  background:white;
+}
+
+.mail-card{
+  position:sticky;
+  top:76px;
+  max-height:calc(100vh - 90px);
+  overflow:auto;
+  background:white;
+  border:1px solid var(--line);
+  border-radius:14px;
+  box-shadow:var(--shadow);
+}
+
+.mail-head{
+  padding:14px 15px;
+  background:linear-gradient(135deg,var(--navy2),var(--navy));
+  color:white;
+  position:sticky;
+  top:0;
+  z-index:10;
+}
+
+.mail-head b{
+  font-size:14px;
+}
+
+.mail-head small{
+  display:block;
+  opacity:.72;
+  margin-top:4px;
+  font-size:10px;
+}
+
+.mail-body{
+  padding:13px;
+}
+
+.toolbar{
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:8px;
+  margin-bottom:12px;
+}
+
+select,input,textarea{
+  width:100%;
+  border:1px solid #cbd7e3;
+  border-radius:8px;
+  padding:9px 10px;
+  background:#fff;
+  font:inherit;
+  color:var(--text);
+}
+
+textarea{
+  min-height:170px;
+  resize:vertical;
+}
+
+label{
+  display:block;
+  font-size:10px;
+  font-weight:900;
+  color:#496177;
+  margin:10px 0 5px;
+  text-transform:uppercase;
+  letter-spacing:.25px;
+}
+
+.two{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+}
+
+.btn{
+  border:0;
+  border-radius:8px;
+  padding:9px 11px;
+  cursor:pointer;
+  font-weight:900;
+  font-size:11px;
+}
+
+.primary{background:var(--navy);color:#fff}
+.success{background:var(--green);color:#fff}
+.light{background:#edf3f8;color:#294761}
+.danger{background:#fff0f0;color:var(--red)}
+
+.actions{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+  margin-top:11px;
+}
+
+.preview{
+  white-space:pre-wrap;
+  background:#f8fafc;
+  border:1px solid #dce5ed;
+  border-radius:9px;
+  padding:12px;
+  min-height:180px;
+  font-size:12px;
+  line-height:1.55;
+}
+
+.section-title{
+  margin-top:14px;
+  border-top:1px solid #e5ebf1;
+  padding-top:13px;
+  font-size:11px;
+  font-weight:900;
+  color:var(--navy);
+}
+
+.template-manager{
+  display:none;
+  background:#f7fafc;
+  border:1px solid #dce5ed;
+  padding:10px;
+  border-radius:9px;
+  margin-bottom:12px;
+}
+
+.template-manager.show{display:block}
+
+.status{
+  margin-top:8px;
+  font-size:10px;
+  color:var(--muted);
+}
+
+.fullmail .payment-card{display:none}
+.fullmail .workspace{
+  display:block;
+  max-width:950px;
+  margin:auto;
+}
+.fullmail .mail-card{
+  position:relative;
+  top:auto;
+  max-height:none;
+}
+
+@media(max-width:1150px){
+  .workspace{grid-template-columns:1fr}
+  .mail-card{
+    position:relative;
+    top:auto;
+    max-height:none;
+  }
+}
+
+@media(max-width:650px){
+  .workspace{padding:7px}
+  .two,.actions{grid-template-columns:1fr}
+  .topbar{padding:0 10px}
+  .brand small{display:none}
+}
+</style>
+</head>
+
+<body>
+
+<div class="topbar">
+  <div class="brand">
+    <div class="logo">R</div>
+    <div>
+      <b>RENEW PRO • Ödeme Merkezi</b>
+      <small>Banka • Kart • Mail • Sigorta • Devir İşlemleri</small>
+    </div>
+  </div>
+
+  <div class="top-actions">
+    <button onclick="toggleMailOnly()">✉ Mail Merkezi</button>
+    <button onclick="location.reload()">↻ Yenile</button>
+    <button onclick="location.href='/'">← Ana Panel</button>
+  </div>
+</div>
+
+<div class="workspace">
+
+  <div class="payment-card">
+    <iframe
+      id="paymentFrame"
+      src="/static/payment_center.html?v=7.27.0"
+      title="RENEW PRO Ödeme Merkezi">
+    </iframe>
+  </div>
+
+  <aside class="mail-card">
+
+    <div class="mail-head">
+      <b>✉ MAIL & ÖDEME İŞLEMLERİ</b>
+      <small>Kurumsal mail hazırlama ve şablon merkezi</small>
+    </div>
+
+    <div class="mail-body">
+
+      <div class="toolbar">
+        <select id="templateSelect"></select>
+        <button class="btn light" onclick="toggleManager()">⚙ Şablonlar</button>
+      </div>
+
+      <div class="template-manager" id="templateManager">
+
+        <label>Şablon Adı</label>
+        <input id="tplName">
+
+        <label>Mail Konusu</label>
+        <input id="tplSubject">
+
+        <label>Mail Metni</label>
+        <textarea id="tplBody"></textarea>
+
+        <div class="actions">
+          <button class="btn success" onclick="saveTemplate()">Kaydet</button>
+          <button class="btn danger" onclick="deleteTemplate()">Sil</button>
+        </div>
+
+        <div class="status">
+          Kullanılabilir değişkenler:
+          {ALICI}, {PLAKA}, {TUTAR}, {TARIH}, {ACIKLAMA}, {GONDEREN}
+        </div>
+
+      </div>
+
+      <div class="two">
+        <div>
+          <label>Alıcı Adı</label>
+          <input id="recipientName" placeholder="Sezen Hanım">
+        </div>
+
+        <div>
+          <label>Alıcı E-Posta</label>
+          <input id="recipientEmail" placeholder="mail@firma.com">
+        </div>
+      </div>
+
+      <div class="two">
+        <div>
+          <label>Plaka</label>
+          <input id="plate" placeholder="34 ABC 123">
+        </div>
+
+        <div>
+          <label>Tutar</label>
+          <input id="amount" placeholder="0,00 TL">
+        </div>
+      </div>
+
+      <label>Tarih</label>
+      <input id="date">
+
+      <label>Açıklama / Ek Not</label>
+      <textarea id="note" style="min-height:75px"
+        placeholder="Varsa ilave açıklama..."></textarea>
+
+      <label>Mail Konusu</label>
+      <input id="subject">
+
+      <div class="section-title">CANLI MAIL ÖNİZLEME</div>
+
+      <div class="preview" id="preview"></div>
+
+      <div class="actions">
+        <button class="btn primary" onclick="copyMail()">📋 Maili Kopyala</button>
+        <button class="btn success" onclick="openMail()">✉ Mail Uygulamasında Aç</button>
+      </div>
+
+      <div class="actions">
+        <button class="btn light" onclick="copySubject()">Konu Kopyala</button>
+        <button class="btn light" onclick="clearForm()">Formu Temizle</button>
+      </div>
+
+      <div class="status" id="status"></div>
+
+    </div>
+  </aside>
+
+</div>
+
+<script>
+const STORE_KEY = "renewProMailTemplatesV1";
+
+const defaultTemplates = [
+ {
+  id:"orfin",
+  name:"Orfin Ödeme Talebi",
+  subject:"{PLAKA} - Orfin Ödeme Talebi",
+  body:`Merhaba {ALICI},
+
+{PLAKA} plakalı araca ilişkin ödeme işleminin gerçekleştirilmesini rica ederim.
+
+Tutar: {TUTAR}
+İşlem Tarihi: {TARIH}
+
+{ACIKLAMA}
+
+Bilgilerinize sunar, iyi çalışmalar dilerim.
+
+Saygılarımla,
+{GONDEREN}`
+ },
+ {
+  id:"sigorta",
+  name:"Sigorta Kesim Talebi",
+  subject:"{PLAKA} - Sigorta Talebi",
+  body:`Merhaba {ALICI},
+
+{PLAKA} plakalı araç için sigorta işleminin gerçekleştirilmesini rica ederim.
+
+{ACIKLAMA}
+
+Bilgilerinize sunar, iyi çalışmalar dilerim.
+
+Saygılarımla,
+{GONDEREN}`
+ },
+ {
+  id:"sigorta-iptal",
+  name:"Sigorta İptal Talebi",
+  subject:"{PLAKA} - Sigorta İptal Talebi",
+  body:`Merhaba {ALICI},
+
+{PLAKA} plakalı araca ait sigorta poliçesinin iptal işleminin gerçekleştirilmesini rica ederim.
+
+{ACIKLAMA}
+
+Bilgilerinize sunar, iyi çalışmalar dilerim.
+
+Saygılarımla,
+{GONDEREN}`
+ },
+ {
+  id:"proforma",
+  name:"Proforma Onay Talebi",
+  subject:"{PLAKA} - Proforma Onay Talebi",
+  body:`Merhaba {ALICI},
+
+{PLAKA} plakalı araca yapılan işlemlere ait proforma hazırlanmıştır.
+
+Onayınız halinde faturalandırma işlemi gerçekleştirilecektir.
+
+{ACIKLAMA}
+
+Bilgilerinize sunar, iyi çalışmalar dilerim.
+
+Saygılarımla,
+{GONDEREN}`
+ },
+ {
+  id:"fatura",
+  name:"Fatura Bilgilendirme",
+  subject:"{PLAKA} - Fatura Bilgilendirme",
+  body:`Merhaba {ALICI},
+
+{PLAKA} plakalı araca ilişkin fatura işlemi tamamlanmıştır.
+
+{ACIKLAMA}
+
+Bilgilerinize sunar, iyi çalışmalar dilerim.
+
+Saygılarımla,
+{GONDEREN}`
+ },
+ {
+  id:"teslim",
+  name:"Araç Teslim Yetkilendirmesi",
+  subject:"{PLAKA} - Araç Teslim Yetkilendirmesi",
+  body:`Merhaba {ALICI},
+
+{PLAKA} plakalı aracın teslim işlemi için ilgili kişi yetkilendirilmiştir.
+
+{ACIKLAMA}
+
+Bilgilerinize sunar, iyi çalışmalar dilerim.
+
+Saygılarımla,
+{GONDEREN}`
+ },
+ {
+  id:"ruhsat",
+  name:"Ruhsat Görseli Talebi",
+  subject:"{PLAKA} - Ruhsat Görseli Talebi",
+  body:`Merhaba {ALICI},
+
+{PLAKA} plakalı araca ait güncel ruhsat görselinin tarafımızla paylaşılmasını rica ederim.
+
+{ACIKLAMA}
+
+Bilgilerinize sunar, iyi çalışmalar dilerim.
+
+Saygılarımla,
+{GONDEREN}`
+ },
+ {
+  id:"genel",
+  name:"Genel Ödeme Talebi",
+  subject:"{PLAKA} - Ödeme Talebi",
+  body:`Merhaba {ALICI},
+
+{PLAKA} plakalı araca ilişkin aşağıdaki ödemenin gerçekleştirilmesini rica ederim.
+
+Tutar: {TUTAR}
+Tarih: {TARIH}
+
+{ACIKLAMA}
+
+Bilgilerinize sunar, iyi çalışmalar dilerim.
+
+Saygılarımla,
+{GONDEREN}`
+ }
+];
+
+function getTemplates(){
+  try{
+    const x=JSON.parse(localStorage.getItem(STORE_KEY));
+    if(Array.isArray(x) && x.length) return x;
+  }catch(e){}
+  localStorage.setItem(STORE_KEY,JSON.stringify(defaultTemplates));
+  return JSON.parse(JSON.stringify(defaultTemplates));
+}
+
+let templates=getTemplates();
+
+const $=id=>document.getElementById(id);
+
+function saveTemplates(){
+  localStorage.setItem(STORE_KEY,JSON.stringify(templates));
+}
+
+function renderTemplates(){
+  $("templateSelect").innerHTML="";
+
+  templates.forEach(t=>{
+    const o=document.createElement("option");
+    o.value=t.id;
+    o.textContent=t.name;
+    $("templateSelect").appendChild(o);
+  });
+
+  if(templates.length){
+    loadTemplate(templates[0].id);
+  }
+}
+
+function selectedTemplate(){
+  return templates.find(x=>x.id===$("templateSelect").value);
+}
+
+function loadTemplate(id){
+  const t=templates.find(x=>x.id===id);
+  if(!t)return;
+
+  $("tplName").value=t.name;
+  $("tplSubject").value=t.subject;
+  $("tplBody").value=t.body;
+
+  refresh();
+}
+
+function replaceVars(text){
+  return (text||"")
+    .replaceAll("{ALICI}",$("recipientName").value.trim()||"Yetkili")
+    .replaceAll("{PLAKA}",$("plate").value.trim()||"")
+    .replaceAll("{TUTAR}",$("amount").value.trim()||"")
+    .replaceAll("{TARIH}",$("date").value.trim()||"")
+    .replaceAll("{ACIKLAMA}",$("note").value.trim()||"")
+    .replaceAll("{GONDEREN}","Çayan Otomotiv • RENEW");
+}
+
+function refresh(){
+  const t=selectedTemplate();
+  if(!t)return;
+
+  $("subject").value=replaceVars(t.subject);
+  $("preview").textContent=replaceVars(t.body);
+}
+
+function toggleManager(){
+  $("templateManager").classList.toggle("show");
+}
+
+function saveTemplate(){
+
+  let id=$("templateSelect").value;
+
+  if(!id){
+    id="tpl-"+Date.now();
+  }
+
+  let current=templates.find(x=>x.id===id);
+
+  if(!current){
+    current={id};
+    templates.push(current);
+  }
+
+  current.name=$("tplName").value.trim()||"Yeni Şablon";
+  current.subject=$("tplSubject").value;
+  current.body=$("tplBody").value;
+
+  saveTemplates();
+
+  const selected=id;
+  renderTemplates();
+  $("templateSelect").value=selected;
+
+  setStatus("Şablon kaydedildi.");
+  refresh();
+}
+
+function newTemplate(){
+
+  const id="tpl-"+Date.now();
+
+  templates.push({
+    id,
+    name:"Yeni Şablon",
+    subject:"{PLAKA} - ",
+    body:`Merhaba {ALICI},
+
+{ACIKLAMA}
+
+Bilgilerinize sunar, iyi çalışmalar dilerim.
+
+Saygılarımla,
+{GONDEREN}`
+  });
+
+  saveTemplates();
+  renderTemplates();
+
+  $("templateSelect").value=id;
+  loadTemplate(id);
+
+  $("templateManager").classList.add("show");
+}
+
+function deleteTemplate(){
+
+  if(templates.length<=1){
+    alert("En az bir şablon bulunmalıdır.");
+    return;
+  }
+
+  const id=$("templateSelect").value;
+
+  if(!confirm("Seçili mail şablonu silinsin mi?"))return;
+
+  templates=templates.filter(x=>x.id!==id);
+
+  saveTemplates();
+  renderTemplates();
+
+  setStatus("Şablon silindi.");
+}
+
+function copyMail(){
+  navigator.clipboard.writeText($("preview").textContent)
+    .then(()=>setStatus("Mail metni panoya kopyalandı."));
+}
+
+function copySubject(){
+  navigator.clipboard.writeText($("subject").value)
+    .then(()=>setStatus("Mail konusu panoya kopyalandı."));
+}
+
+function openMail(){
+
+  const to=$("recipientEmail").value.trim();
+  const subject=encodeURIComponent($("subject").value);
+  const body=encodeURIComponent($("preview").textContent);
+
+  location.href=`mailto:${to}?subject=${subject}&body=${body}`;
+}
+
+function clearForm(){
+  $("recipientName").value="";
+  $("recipientEmail").value="";
+  $("plate").value="";
+  $("amount").value="";
+  $("note").value="";
+  refresh();
+}
+
+function setStatus(text){
+  $("status").textContent=text;
+
+  setTimeout(()=>{
+    if($("status").textContent===text){
+      $("status").textContent="";
+    }
+  },3500);
+}
+
+function toggleMailOnly(){
+  document.body.classList.toggle("fullmail");
+}
+
+/* Eski mail alanını iframe içinde yalnızca görsel olarak gizle */
+function hideOldMail(){
+
+  try{
+    const frame=$("paymentFrame");
+    const doc=frame.contentDocument || frame.contentWindow.document;
+
+    if(!doc)return;
+
+    const all=[...doc.querySelectorAll("h1,h2,h3,h4,b,strong,div,span")];
+
+    const target=all.find(el=>{
+      const t=(el.textContent||"")
+        .replace(/\s+/g," ")
+        .trim()
+        .toLocaleUpperCase("tr-TR");
+
+      return t==="MAİL & ÖDEME İŞLEMLERİ" ||
+             t.includes("MAİL & ÖDEME İŞLEMLERİ");
+    });
+
+    if(!target)return;
+
+    let node=target;
+
+    for(let i=0;i<6 && node;i++,node=node.parentElement){
+
+      const r=node.getBoundingClientRect();
+
+      if(
+        r.width>250 &&
+        r.height>80 &&
+        r.height<1400
+      ){
+        node.style.display="none";
+        break;
+      }
+    }
+
+  }catch(e){
+    console.warn("Eski mail alanı gizlenemedi:",e);
+  }
+}
+
+$("paymentFrame").addEventListener("load",()=>{
+  setTimeout(hideOldMail,700);
+  setTimeout(hideOldMail,1800);
+});
+
+$("templateSelect").addEventListener("change",e=>{
+  loadTemplate(e.target.value);
+});
+
+[
+ "recipientName",
+ "recipientEmail",
+ "plate",
+ "amount",
+ "date",
+ "note"
+].forEach(id=>{
+  $(id).addEventListener("input",refresh);
+});
+
+const today=new Date();
+$("date").value=today.toLocaleDateString("tr-TR");
+
+renderTemplates();
+
+/* Şablon yöneticisine yeni buton ekle */
+const newBtn=document.createElement("button");
+newBtn.className="btn light";
+newBtn.textContent="+ Yeni Şablon";
+newBtn.onclick=newTemplate;
+
+$("templateManager").insertBefore(
+  newBtn,
+  $("templateManager").firstChild
+);
+
+</script>
+
+</body>
+</html>

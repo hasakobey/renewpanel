@@ -1,0 +1,6 @@
+/* Layout only: retain existing inputs, calculation functions, values and actions. */
+(()=>{function init(){const card=document.getElementById('finansKartPanel'),work=card?.querySelector('.rc-workspace');if(!work)return;card.classList.add('kc-console');let anchor=work;card.querySelectorAll('.rc-summary-pane>.rc-section,.rc-summary-pane>.rc-trust').forEach(el=>{anchor.after(el);anchor=el});
+const table=document.getElementById('rcCompareBody');
+function decorate(){if(!table)return;const rows=[...table.rows];const values=rows.map(r=>Number(r.cells[3].textContent.replace(/[^0-9,]/g,'').replace(',','.'))||0);const max=Math.max(1,...values);rows.forEach((row,i)=>{let track=row.querySelector('.kc-track');if(!track){track=document.createElement('span');track.className='kc-track';track.setAttribute('aria-hidden','true');const fill=document.createElement('span');fill.className='kc-fill';track.append(fill);row.cells[3].append(track)}track.firstElementChild.style.width=(values[i]/max*100)+'%';row.classList.toggle('kc-selected',parseInt(row.cells[0].textContent)===Number(document.getElementById('taksit').value))})}
+if(table){const observer=new MutationObserver(records=>{if(records.some(r=>r.target===table))decorate()});observer.observe(table,{childList:true});decorate()}
+}if(document.readyState!=='complete')window.addEventListener('load',init);else init()})();

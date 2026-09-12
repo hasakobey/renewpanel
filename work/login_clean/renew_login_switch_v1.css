@@ -1,0 +1,50 @@
+.login-overlay{align-items:center}
+.login-card.renew-login-switch{position:relative;width:min(760px,94vw);max-width:760px;display:grid;grid-template-columns:1fr 1.15fr;overflow:hidden;padding:0;border-radius:28px}
+
+.renew-split-panel{position:relative;display:flex;align-items:center;justify-content:center;padding:34px 30px}
+.renew-split-inner{position:relative;z-index:1;width:100%;display:grid;gap:14px;justify-items:center;text-align:center;animation:renewSplitFade .4s cubic-bezier(.22,1,.36,1) both}
+@keyframes renewSplitFade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+
+.renew-split-color{background:linear-gradient(135deg,#0f1c2e,#173f6b);color:#fff;clip-path:polygon(0 0,100% 0,88% 100%,0 100%)}
+.renew-split-color h2{color:#fff;margin:0;font-size:22px;font-weight:800}
+.renew-split-color p{color:rgba(255,255,255,.82);font-size:13px;margin:0;max-width:250px;line-height:1.5}
+
+.renew-split-white{background:#fff}
+.renew-split-white .login-logo{margin:0 auto}
+.renew-split-white h2{margin:2px 0 0}
+.renew-split-white>p{color:var(--muted);font-size:12px;margin:0}
+.renew-split-white form{width:100%;display:grid;gap:14px;text-align:left;margin-top:4px}
+
+.renew-split-cta{display:inline-flex;align-items:center;justify-content:center;padding:12px 30px;border-radius:14px;border:2px solid #fff;color:#fff;font-weight:800;font-size:12px;letter-spacing:.03em;text-decoration:none;transition:transform .18s ease,background .18s ease,color .18s ease}
+.renew-split-cta:hover{background:#fff;color:var(--renew-navy,#10243d);transform:translateY(-2px)}
+
+/* NOT: style.css'teki '.login-card label{display:grid}' kurali (ozgulluk 0,1,1)
+   tek class'li kurali eziyordu; bu yuzden tum pill kurallari '.login-card'
+   ile prefixlenip ozgulluk 0,2,x'e cikarildi. */
+.login-card .renew-pill-field{display:flex;align-items:center;gap:12px;background:#eef1f5;border:1px solid transparent;border-radius:14px;padding:13px 18px;font-size:13px;font-weight:700;color:var(--text,#0f172a);animation:renewSplitFade .32s cubic-bezier(.22,1,.36,1) both;transition:box-shadow .18s ease,background .18s ease,border-color .18s ease}
+.login-card .renew-pill-field:nth-of-type(2){animation-delay:.05s}
+.login-card .renew-pill-field:focus-within{background:#fff;border-color:#c3d3e6;box-shadow:0 0 0 3px rgba(23,63,107,.14)}
+.login-card .renew-pill-icon{font-size:15px;opacity:.55;flex:0 0 auto;line-height:1}
+.login-card .renew-pill-field input{border:0;background:transparent;padding:0;flex:1;min-width:0;font-size:14px;font-weight:700;color:var(--text,#0f172a);outline:0;box-shadow:none}
+.login-card .renew-pill-field input::placeholder{color:#7b8a9c;font-weight:700}
+
+.renew-split-white form .btn.primary{border-radius:14px;padding:13px;font-weight:800;animation:renewSplitFade .32s cubic-bezier(.22,1,.36,1) .1s both;transition:transform .16s ease,box-shadow .16s ease}
+.renew-split-white form .btn.primary:hover{transform:translateY(-1px);box-shadow:0 8px 18px rgba(37,99,235,.28)}
+
+
+@media(max-width:640px){
+  .login-card.renew-login-switch{grid-template-columns:1fr;width:min(360px,92vw);border-radius:18px}
+  .renew-split-color{clip-path:polygon(0 0,100% 0,100% 82%,0 100%);padding:28px 24px 44px}
+  .renew-split-white{padding:26px 22px}
+}
+
+/* Basarili giris gecisi: merkezden genisleyen mavi dalga */
+.renew-login-transition{position:fixed;inset:0;z-index:100000;display:flex;align-items:center;justify-content:center;pointer-events:none}
+.renew-login-transition::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 50% 50%,#173f6b,#0f1c2e 78%);clip-path:circle(0% at 50% 50%);transition:clip-path .55s cubic-bezier(.65,0,.35,1)}
+.renew-login-transition.is-active::before{clip-path:circle(150% at 50% 50%)}
+.renew-login-transition-ring,.renew-login-transition-check{position:relative;z-index:1;opacity:0;transition:opacity .2s ease .18s}
+.renew-login-transition.is-active .renew-login-transition-ring,.renew-login-transition.is-active .renew-login-transition-check{opacity:1}
+.renew-login-transition-ring{width:64px;height:64px;border-radius:50%;border:4px solid rgba(255,255,255,.3);border-top-color:#fff;animation:renewSpin .7s linear infinite}
+.renew-login-transition-check{width:72px;height:72px;border-radius:50%;background:var(--green,#16a34a);display:flex;align-items:center;justify-content:center;color:#fff;font-size:34px;font-weight:900;box-shadow:0 0 0 10px rgba(22,163,74,.18);animation:renewCheckPop .4s cubic-bezier(.34,1.56,.64,1) both}
+@keyframes renewSpin{to{transform:rotate(360deg)}}
+@keyframes renewCheckPop{from{transform:scale(0)}to{transform:scale(1)}}

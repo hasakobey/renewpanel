@@ -1,0 +1,13 @@
+/* Keep stock/sale action buttons fully inside the modal viewport. */
+.renew-form-modal .modalbox{display:flex;flex-direction:column;max-height:92vh}
+.renew-form-modal .modalhead{flex:0 0 auto}
+.modal{z-index:10000!important}
+.renew-form-modal{padding:22px!important;align-items:center!important;justify-content:center!important}
+.renew-form-modal .modalbox{margin:auto!important;max-width:calc(100vw - 44px)!important}
+@media(max-width:850px){.renew-form-modal{padding:0!important;align-items:flex-end!important}.renew-form-modal .modalbox{max-width:100vw!important;margin:0!important}}
+.renew-form-modal .renew-form-body{flex:1 1 auto;min-height:0;max-height:none;padding-bottom:0;overscroll-behavior:contain}
+.renew-form-modal .renew-form-actions{bottom:0;margin:18px -24px 0;padding:14px 24px calc(14px + env(safe-area-inset-bottom));box-shadow:0 -8px 24px #17355212}
+@media(max-width:560px){.renew-form-modal .renew-form-body{padding-bottom:0}.renew-form-modal .renew-form-actions{margin:16px -14px 0;padding:12px 14px calc(12px + env(safe-area-inset-bottom))}}
+.purchase-rule-note{display:block;margin-top:8px;padding:9px 11px;border-radius:10px;background:#fff7e6;color:#8a5400;font-size:12px;font-weight:700;line-height:1.35;border:1px solid #f4d79b}
+.purchase-rule-note.is-free{background:#eafaf1;color:#087443;border-color:#bcebd0}
+.warn-text{color:#a55b00}

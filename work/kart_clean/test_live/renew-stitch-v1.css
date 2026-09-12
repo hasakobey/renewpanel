@@ -1,0 +1,163 @@
+body.rst-v1{display:block!important;background:#f8fafc!important;background-image:none!important;color:#0b1c30!important;padding:0 0 24px!important;font-family:Inter,'Segoe UI',sans-serif!important}
+body.rst-v1:before,body.rst-v1:after{display:none!important}
+.rst-header{background:white;border-bottom:1px solid #e2e8f0;box-shadow:0 2px 8px #0f254a06;position:relative;z-index:110}
+.rst-header-inner{max-width:1440px;margin:auto;padding:14px 24px;display:flex;align-items:center;gap:40px}
+.rst-brand{display:flex;align-items:center;gap:12px;flex:none;color:#06182e}
+.rst-brand>b{display:grid;place-items:center;background:#00102d;color:white;border-radius:10px;width:38px;height:38px;font-size:23px}
+.rst-brand strong{display:block;font-family:'Space Grotesk',sans-serif;font-size:20px}
+.rst-brand small{display:block;font-size:9px;margin-top:3px;letter-spacing:.6px}
+body.rst-v1 .rst-header #finansModSecici{position:static!important;display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;max-width:660px;width:100%!important;margin:0!important;padding:0!important;border:0!important;background:white!important;box-shadow:none!important;gap:8px!important}
+body.rst-v1 .finans-mod-btn{background:transparent!important;color:#0b1c30!important;border:0!important;border-radius:9px!important;box-shadow:none!important;font-size:13px!important;min-height:46px!important}
+body.rst-v1 .finans-mod-btn.active{background:#dce9ff!important;color:#003ea8!important}
+body.rst-v1 .wrapper{width:min(1392px,calc(100% - 48px))!important;margin:26px auto!important;grid-template-columns:256px minmax(0,1fr)!important;gap:24px!important;align-items:start!important}
+body.rst-v1 .ms-left-column{gap:16px;grid-row:auto!important}
+body.rst-v1 .side-panel,body.rst-v1 .mail-panel{border:1px solid #e2e8f0!important;background:white!important;border-radius:12px!important;box-shadow:0 1px 3px #0f254a05!important;padding:16px!important}
+body.rst-v1 .side-panel:before{background:white!important;color:#0b1c30!important;border-bottom:1px solid #e2e8f0!important;font-size:12px!important;letter-spacing:.5px!important}
+body.rst-v1 .toggle-section{background:#eff4ff!important;color:#0f254a!important;border-radius:9px!important;font-size:12px!important;padding:12px!important;letter-spacing:0!important}
+body.rst-v1 .bank-card{background:#f0f5fa!important;border:0!important;border-radius:8px!important;padding:11px!important}
+body.rst-v1 .bank-name{font-size:11px!important;color:#0b1c30!important}
+body.rst-v1 .bank-iban{font-size:10px!important;overflow-wrap:anywhere;letter-spacing:0!important}
+body.rst-v1 .mail-panel{background:#00102d!important;color:white!important}
+body.rst-v1 .mail-panel-toggle{background:transparent!important;color:white!important;border:0!important;box-shadow:none!important;padding:8px!important;letter-spacing:0!important;text-transform:none!important}
+body.rst-v1 #finansKartPanel.kc-console{padding:24px!important;background:white!important;border:1px solid #e2e8f0!important;border-radius:14px!important;box-shadow:0 2px 5px #0f254a0a!important}
+body.rst-v1 #finansKartPanel.kc-console:before{display:none!important}
+body.rst-v1 #finansKartPanel .brand{padding:0 0 16px!important;border-bottom:1px solid #e2e8f0!important;background:none!important}
+body.rst-v1 #finansKartPanel .brand h1{color:#0051d5!important;font-size:11px!important;letter-spacing:1px!important}
+body.rst-v1 #finansKartPanel .brand h2{font:600 25px/1.3 'Space Grotesk',Inter,sans-serif!important;color:#00102d!important}
+body.rst-v1 #finansKartPanel.kc-console .rc-workspace{grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;background:white!important;border:0!important;box-shadow:none!important;border-radius:0!important;gap:26px!important;overflow:visible!important}
+body.rst-v1 #finansKartPanel.kc-console .rc-input-pane{padding:8px 0!important;border:0!important;background:white!important;align-content:start}
+body.rst-v1 #finansKartPanel.kc-console .rc-summary-pane{padding:12px!important;background:#f8fafc!important;border:1px solid #eef2f6;border-radius:14px}
+body.rst-v1 #finansKartPanel.kc-console #tutar{background:#f0f5fa!important;border-color:#94a3b8!important;font-size:32px!important;min-height:60px!important;border-radius:11px!important}
+body.rst-v1 #finansKartPanel.kc-console .taksit-btn{background:#eff4ff!important;border:0!important;border-radius:11px!important;box-shadow:none!important}
+body.rst-v1 #finansKartPanel.kc-console .taksit-btn.active{background:#00102d!important;color:white!important;box-shadow:0 3px 7px #00102d20!important}
+body.rst-v1 #finansKartPanel.kc-console #sonuc .result-item{background:white!important;border:0!important;border-radius:9px!important;padding:10px!important;min-height:65px!important}
+body.rst-v1 #finansKartPanel.kc-console #sonuc .result-item strong{font-family:'Space Grotesk',Inter,sans-serif!important;color:#00102d!important;font-size:19px!important}
+body.rst-v1 #finansKartPanel.kc-console #sonuc .result-item:nth-child(7){background:white!important;border-left:3px solid #0051d5!important;padding:16px!important}
+body.rst-v1 #finansKartPanel.kc-console #sonuc .result-item:nth-child(7) strong{font-size:34px!important;line-height:1.2!important}
+body.rst-v1 #finansKartPanel.kc-console #sonuc .result-item:last-child{background:#dcfce7!important;padding:15px!important}
+body.rst-v1 #finansKartPanel.kc-console #sonuc .result-item:last-child strong{color:#166534!important;font-size:27px!important}
+body.rst-v1 .rst-actions{margin-top:22px;padding-top:16px;border-top:1px solid #e2e8f0}
+body.rst-v1 #finansKartPanel.kc-console .rc-mini-actions{margin-top:0!important}
+body.rst-v1 #finansKartPanel.kc-console .rc-mini-actions button:first-child{background:#0051d5!important;color:white!important;border-color:#0051d5!important}
+body.rst-v1 #finansKartPanel.kc-console .btn-container{grid-template-columns:repeat(3,minmax(0,1fr))!important;margin-top:12px!important}
+body.rst-v1 #finansKartPanel.kc-console .action-btn{grid-column:auto!important;font-size:11px!important;border-radius:8px!important;min-height:38px!important;padding:8px!important}
+body.rst-v1 #finansKartPanel.kc-console>.rc-section{margin-top:24px!important;padding:18px!important;border:1px solid #e2e8f0!important;border-radius:12px!important}
+body.rst-v1 #finansKartPanel .rc-section-head{background:white!important;border-bottom:1px solid #e2e8f0!important;padding:0 0 13px!important}
+body.rst-v1 #finansKartPanel .rc-section-head b{font-family:'Space Grotesk',Inter,sans-serif;font-size:18px!important}
+body.rst-v1 #finansKartPanel.kc-console .kc-bars{display:grid;gap:8px;padding-top:13px}
+body.rst-v1 #finansKartPanel.kc-console .kc-bar-row{background:#f0f5fa;border:1px solid transparent;border-radius:10px;padding:12px;transition:background .15s,box-shadow .15s}
+body.rst-v1 #finansKartPanel.kc-console .kc-bar-row:hover{transform:none;box-shadow:0 2px 8px #0051d514;background:#e9f1ff}
+body.rst-v1 #finansKartPanel.kc-console .kc-bar-row.kc-selected{background:white;border:2px solid #0051d5;padding:11px;box-shadow:none}
+body.rst-v1 #finansKartPanel.kc-console .kc-track{height:7px}
+body.rst-v1 #finansKartPanel.kc-console .kc-fill{background:#0051d5}
+body.rst-v1 #finansKartPanel.kc-console .kc-selected .kc-fill{background:#00102d}
+body.rst-v1 #finansKartPanel.kc-console .rc-history-item{border-bottom:1px solid #e2e8f0!important;padding:14px 8px 14px 24px!important}
+body.rst-v1 #finansKartPanel.kc-console .rc-history-item:hover{background:#eff4ff!important;transform:none}
+@keyframes rstFlash{from{box-shadow:0 0 0 3px #0051d520}to{box-shadow:0 0 0 0 transparent}}
+body.rst-v1 .rst-flash{animation:rstFlash .4s ease-out}
+@media(max-width:1190px){body.rst-v1 .wrapper{grid-template-columns:225px minmax(0,1fr)!important;gap:16px!important}body.rst-v1 #finansKartPanel.kc-console .rc-workspace{grid-template-columns:minmax(0,1fr)!important}}
+@media(max-width:850px){.rst-header-inner{flex-direction:column;align-items:stretch;gap:12px;padding:12px 16px}.rst-brand{justify-content:center}body.rst-v1 .rst-header #finansModSecici{max-width:none}body.rst-v1 .wrapper{grid-template-columns:minmax(0,1fr)!important;width:calc(100% - 24px)!important;margin:14px auto!important}body.rst-v1 .finans-center-column{grid-row:1!important}body.rst-v1 .ms-left-column{grid-row:2!important}body.rst-v1 #finansKartPanel.kc-console{padding:15px!important}body.rst-v1 .finans-mod-btn{font-size:11px!important}body.rst-v1 #finansKartPanel.kc-console .btn-container{grid-template-columns:1fr!important}}
+@media(max-width:700px){body.rst-v1{padding-bottom:90px!important}body.rst-v1 #finansKartPanel.kc-console #sonuc .result-item strong{font-size:17px!important}body.rst-v1 #finansKartPanel.kc-console #sonuc .result-item:nth-child(7) strong{font-size:30px!important}body.rst-v1 #finansKartPanel.kc-console #sonuc .result-item:last-child strong{font-size:25px!important}}
+@media(prefers-reduced-motion:reduce){body.rst-v1 *{animation:none!important;transition:none!important}}
+@media print{.rst-header{display:none!important}}
+/* Stitch motion and denser financial hierarchy; no generated business content. */
+body.rst-v1{--rst-blue:#0051d5;--rst-ice:#f0f5fa}
+body.rst-v1 .rst-bank-panel{min-width:0;background:white;border:1px solid #e2e8f0;border-radius:12px;padding:16px;box-shadow:0 1px 3px #0f254a08}
+body.rst-v1 .side-panel:before{display:none!important}
+body.rst-v1 .side-panel>.toggle-section,body.rst-v1 .rst-bank-panel>.toggle-section{background:white!important;padding:0 0 13px!important;border-radius:0!important;border-bottom:1px solid #e5eeff!important;font-size:13px!important;min-height:38px!important}
+body.rst-v1 #musteriContent{margin:14px 0 0!important}
+body.rst-v1 #musteriContent input{background:#f0f5fa!important;border:1px solid #e5eeff!important;min-height:42px!important;padding:10px!important;font-size:13px!important;border-radius:8px!important}
+body.rst-v1 .bank-card{display:grid!important;grid-template-columns:minmax(0,1fr) 34px!important;gap:0!important;border:1px solid transparent!important;padding:10px!important;overflow:visible!important;transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease!important}
+body.rst-v1 .bank-card:before{display:none!important}
+body.rst-v1 .bank-info{display:contents}
+body.rst-v1 .bank-name{grid-column:1/-1;display:flex;align-items:center;gap:6px;margin:0 0 8px!important;font-size:11px!important;letter-spacing:0!important}
+body.rst-v1 .bank-name:before{content:'';width:7px;height:7px;border-radius:50%;background:#0051d5;flex:none}
+body.rst-v1 .bank-card:nth-child(1) .bank-name:before{background:#dc2626}
+body.rst-v1 .bank-card:nth-child(3) .bank-name:before{background:#d49b00}
+body.rst-v1 .bank-card:nth-child(4) .bank-name:before{background:#059669}
+body.rst-v1 .bank-name:after{display:none!important}
+body.rst-v1 .bank-iban{background:white;padding:8px 5px;border-radius:5px 0 0 5px;font-size:10px!important;line-height:1.6!important;min-width:0;letter-spacing:0!important;font-variant-numeric:tabular-nums}
+body.rst-v1 .bank-copy-btn{position:relative;min-width:34px!important;width:34px!important;min-height:34px!important;height:100%;padding:0!important;background:white!important;color:#0051d5!important;border:0!important;border-radius:0 5px 5px 0!important;font-size:0!important;box-shadow:none!important}
+body.rst-v1 .bank-copy-btn:before{content:'⧉';font-size:23px;line-height:1}
+body.rst-v1 .bank-copy-btn:hover{background:#dce9ff!important}
+body.rst-v1 .bank-tools{display:grid!important;grid-template-columns:1fr 1fr!important;gap:6px!important;margin-top:12px}
+body.rst-v1 .bank-tools button{font-size:10px!important;min-height:36px!important;padding:7px 3px!important;background:#eff4ff!important;border:0!important;border-radius:7px!important;color:#0f254a!important}
+body.rst-v1 #finansKartPanel.kc-console .form-group{padding:0!important;background:transparent!important;border:0!important;margin:0 0 20px!important}
+body.rst-v1 #finansKartPanel.kc-console .form-group label{font:500 12px/1.5 Inter,'Segoe UI',sans-serif!important;letter-spacing:0!important;color:#0b1c30!important;text-transform:none!important}
+body.rst-v1 #finansKartPanel.kc-console select{background:#f0f5fa!important;border:1px solid #94a3b8!important;border-radius:10px!important;min-height:44px!important;padding:10px!important;font-size:13px!important}
+body.rst-v1 #finansKartPanel.kc-console #tutar{min-height:64px!important;font:600 34px/1.2 'Space Grotesk',sans-serif!important;color:#00102d!important}
+body.rst-v1 #finansKartPanel.kc-console #sonuc{gap:8px!important}
+body.rst-v1 #finansKartPanel.kc-console #sonuc .result-item{min-height:58px!important;box-shadow:0 1px 2px #0f254a06;transition:box-shadow .2s ease,transform .2s ease!important}
+body.rst-v1 #finansKartPanel.kc-console #sonuc .result-item span{font:500 10px/1.4 Inter,sans-serif!important;letter-spacing:.25px!important;color:#44474e!important}
+body.rst-v1 #finansKartPanel.kc-console #sonuc .result-item strong{font-weight:600!important;line-height:1.25!important;font-variant-numeric:tabular-nums;display:block;transform-origin:left center}
+body.rst-v1 #finansKartPanel.kc-console #sonuc .result-item:nth-child(7){min-height:92px!important}
+body.rst-v1 #finansKartPanel.kc-console #sonuc .result-item:last-child{position:relative;padding-right:48px!important;min-height:85px!important}
+body.rst-v1 #finansKartPanel.kc-console #sonuc .result-item:last-child:after{content:'₺';position:absolute;right:12px;top:50%;transform:translateY(-50%);width:30px;height:30px;border-radius:50%;background:#f3fff6;display:grid;place-items:center;color:#166534;font-weight:700}
+body.rst-v1 #finansKartPanel.kc-console #sonuc .result-item:nth-child(3) strong,body.rst-v1 #finansKartPanel.kc-console #sonuc .result-item:nth-child(4) strong{color:#0051d5!important}
+body.rst-v1 #finansKartPanel.kc-console .taksit-btn{min-height:64px!important;font:600 17px/1.2 'Space Grotesk',sans-serif!important;transition:transform .2s ease,background .2s ease,box-shadow .2s ease!important}
+body.rst-v1 #finansKartPanel.kc-console #kcAmountSlider{height:7px!important;min-height:7px!important;margin:20px 0 10px!important;accent-color:#0051d5}
+body.rst-v1 #finansKartPanel.kc-console #kcAmountSlider::-webkit-slider-thumb{background:#0051d5!important;border:3px solid white!important;box-shadow:0 0 0 1px #0051d5,0 2px 5px #0051d530!important;transition:box-shadow .2s,transform .2s}
+body.rst-v1 #finansKartPanel.kc-console #kcAmountSlider:active::-webkit-slider-thumb{transform:scale(1.14);box-shadow:0 0 0 5px #0051d51a!important}
+body.rst-v1 #finansKartPanel.kc-console .kc-bar-row{grid-template-columns:112px minmax(0,1fr) 170px;gap:16px;min-height:72px;border-left:4px solid transparent;transition:transform .2s ease,box-shadow .2s ease,background .2s ease,border-color .2s ease!important}
+body.rst-v1 #finansKartPanel.kc-console .kc-bar-row.kc-selected{border-width:1px 1px 1px 4px;padding:12px;background:#fff!important;box-shadow:0 3px 9px #0051d510!important}
+body.rst-v1 #finansKartPanel.kc-console .kc-bar-values small{font-size:13px;color:#0051d5;font-weight:600}
+body.rst-v1 #finansKartPanel.kc-console .kc-bar-values b{font-size:15px;color:#166534}
+body.rst-v1 #finansKartPanel.kc-console .kc-fill{transition:width .3s ease-out,background .2s!important;transform-origin:left}
+body.rst-v1 button:focus-visible,body.rst-v1 .toggle-section:focus-visible{outline:3px solid #93b9fa!important;outline-offset:3px}
+@media(hover:hover){body.rst-v1 .bank-card:hover{transform:translateY(-2px)!important;border-color:#b4c5f4!important;box-shadow:0 6px 14px #0f254a12!important}body.rst-v1 #finansKartPanel.kc-console .kc-bar-row:hover{transform:translateX(2px)!important}body.rst-v1 #finansKartPanel.kc-console #sonuc .result-item:hover{transform:translateY(-2px);box-shadow:0 4px 12px #0f254a12!important}body.rst-v1 button:hover{filter:brightness(.98)}body.rst-v1 .taksit-btn:hover{transform:translateY(-2px)!important}}
+body.rst-v1 button:active{transform:scale(.98)!important}
+@media(min-width:1050px){body.rst-v1 .wrapper{grid-template-columns:248px minmax(0,1fr)!important}body.rst-v1 #finansKartPanel.kc-console .rc-workspace{grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important}}
+@media(max-width:600px){body.rst-v1 #finansKartPanel.kc-console .kc-bar-row{grid-template-columns:80px minmax(0,1fr);gap:6px;min-height:85px}body.rst-v1 #finansKartPanel.kc-console .kc-bar-values{grid-column:2;grid-row:1;text-align:right}body.rst-v1 #finansKartPanel.kc-console .kc-track{grid-column:1/-1;grid-row:2}body.rst-v1 #finansKartPanel.kc-console .taksit-btn{font-size:14px!important;min-height:56px!important}body.rst-v1 #finansKartPanel.kc-console #sonuc .result-item:last-child strong{font-size:24px!important}body.rst-v1 .bank-iban{font-size:12px!important}}
+@media(prefers-reduced-motion:reduce){body.rst-v1 button,body.rst-v1 .bank-card,body.rst-v1 .result-item{transform:none!important}}
+/* Consistent local vector icons and the reference comparison-matrix composition. */
+body.rst-v1 .rst-icon{display:inline-flex!important;width:20px;height:20px;flex:0 0 20px;align-items:center;justify-content:center;vertical-align:middle;color:inherit}
+body.rst-v1 .rst-icon svg{display:block;width:100%;height:100%}
+body.rst-v1 .rst-icon-label{display:flex;align-items:center;justify-content:center;gap:8px}
+body.rst-v1 .brand h2.rst-icon-label,body.rst-v1 .rc-section-head b.rst-icon-label{justify-content:flex-start!important}
+body.rst-v1 .brand h2>.rst-icon{color:#0051d5;background:#e5eeff;width:34px;height:34px;flex-basis:34px;padding:7px;border-radius:9px}
+body.rst-v1 .rc-section-head b>.rst-icon{color:#0051d5}
+body.rst-v1 .rst-bank-panel .rst-icon,body.rst-v1 .side-panel .rst-icon{color:#0051d5}
+body.rst-v1 #finansKartPanel.kc-console .rc-section-head b{font-size:20px!important;font-weight:600!important}
+body.rst-v1 .rst-currency-field{position:relative;min-width:0}
+body.rst-v1 .rst-currency-symbol{position:absolute;z-index:1;left:16px;top:50%;transform:translateY(-50%);font:700 26px 'Space Grotesk',sans-serif;color:#0051d5}
+body.rst-v1 #finansKartPanel.kc-console .rst-currency-field #tutar{padding-left:46px!important}
+body.rst-v1 #finansKartPanel.kc-console .taksit-btn b,body.rst-v1 #finansKartPanel.kc-console .taksit-btn small{display:block;font-family:'Space Grotesk',sans-serif}
+body.rst-v1 #finansKartPanel.kc-console .taksit-btn small{font-size:12px;font-weight:400;margin-top:4px;opacity:.75}
+body.rst-v1 .rst-slider-selected{color:#0051d5!important;font-weight:600;text-align:center}
+body.rst-v1 #finansKartPanel.kc-console #sonuc .result-item:nth-child(7){position:relative;padding-top:32px!important;min-height:108px!important}
+body.rst-v1 #finansKartPanel.kc-console #sonuc .result-item:nth-child(7)>span:first-child{position:absolute;left:16px;top:13px}
+body.rst-v1 .rst-monthly-badge{position:absolute;right:12px;top:10px;border-radius:4px;padding:3px 6px;font-size:9px;color:#0051d5;background:#eff4ff;font-weight:600}
+body.rst-v1 #finansKartPanel.kc-console #sonuc .result-item:last-child:after{display:none!important}
+body.rst-v1 #finansKartPanel.kc-console #sonuc .rst-cash-icon{position:absolute;right:15px;top:50%;transform:translateY(-50%);width:43px;height:43px;padding:10px;display:flex!important;border-radius:50%;background:#f3fff6;color:#166534!important}
+body.rst-v1 #finansKartPanel.kc-console #sonuc .result-item:last-child{padding-right:66px!important}
+body.rst-v1 .bank-copy-btn:before{display:none!important}
+body.rst-v1 .bank-copy-btn .rst-icon{width:17px;height:17px}
+body.rst-v1 #finansKartPanel.kc-console .btn-container{display:flex!important;flex-direction:row!important;gap:8px!important;flex-wrap:wrap}
+body.rst-v1 #finansKartPanel.kc-console .action-btn{width:auto!important;flex:0 1 auto;padding:8px 12px!important;min-height:34px!important;font-size:11px!important}
+body.rst-v1 #finansKartPanel.kc-console #copyBtn,body.rst-v1 #finansKartPanel.kc-console #pdfBtn{background:#eff4ff!important;color:#0f254a!important;border:0!important}
+body.rst-v1 #finansKartPanel.kc-console #copyBtn .rst-icon{color:#0051d5}
+body.rst-v1 #finansKartPanel.kc-console #pdfBtn .rst-icon{color:#dc2626}
+body.rst-v1 #finansKartPanel.kc-console #wpBtn{order:3;margin-left:auto!important;background:#dcfce7!important;color:#166534!important;border:0!important}
+body.rst-v1 #finansKartPanel.kc-console .rc-mini-actions button{min-height:48px!important;font-size:14px!important}
+body.rst-v1 #finansKartPanel.kc-console .rc-mini-actions button:last-child .rst-icon{color:#166534}
+body.rst-v1 #finansKartPanel.kc-console .kc-bar-row{grid-template-columns:36px 126px minmax(100px,1fr) minmax(245px,.9fr);gap:12px;padding:12px!important}
+body.rst-v1 .rst-term{width:36px;height:36px;display:grid;place-items:center;border-radius:9px;background:white;font:600 16px 'Space Grotesk',sans-serif;box-shadow:0 1px 2px #00102d09}
+body.rst-v1 .kc-selected .rst-term{background:#00102d;color:white}
+body.rst-v1 .rst-current{display:none;border-radius:20px;background:#00102d;color:white;font-size:8px;padding:3px 6px;margin-top:5px;width:max-content}
+body.rst-v1 .kc-selected .rst-current{display:block}
+body.rst-v1 .rst-cost{min-width:0}
+body.rst-v1 .rst-cost-head{display:flex;justify-content:space-between;align-items:center;gap:6px;font-size:9px;margin-bottom:6px;color:#44474e}
+body.rst-v1 .rst-cost-head b{font-size:9px;color:#00102d;font-weight:500;text-align:right}
+body.rst-v1 #finansKartPanel.kc-console .kc-track{margin:0!important;height:7px!important;display:block}
+body.rst-v1 #finansKartPanel.kc-console .rst-labeled-values{display:grid;grid-template-columns:1fr 1fr;gap:12px;text-align:right;align-items:end}
+body.rst-v1 #finansKartPanel.kc-console .rst-labeled-values>small,body.rst-v1 #finansKartPanel.kc-console .rst-labeled-values>b{font:600 16px/1.3 'Space Grotesk',sans-serif!important;color:#00102d;margin:0;white-space:nowrap}
+body.rst-v1 #finansKartPanel.kc-console .rst-labeled-values>small:before,body.rst-v1 #finansKartPanel.kc-console .rst-labeled-values>b:before{display:block;font:400 9px/1.5 Inter,sans-serif;color:#44474e;margin-bottom:4px}
+body.rst-v1 .rst-labeled-values>small:before{content:'AYLIK TAKSİT'}
+body.rst-v1 .rst-labeled-values>b:before{content:'TOPLAM GERİ ÖDEME'}
+body.rst-v1 #finansKartPanel.kc-console .kc-selected .rst-labeled-values>small{color:#0051d5!important}
+body.rst-v1 #finansKartPanel.kc-console .kc-selected .rst-labeled-values>b{color:#166534!important}
+body.rst-v1 #finansKartPanel.kc-console .kc-bar-opt small:before{content:'Komisyon: '}
+body.rst-v1 .rst-recall{padding:7px!important;width:33px!important;height:33px!important;flex-basis:33px!important;background:#dce9ff;border-radius:8px;color:#0051d5}
+body.rst-v1 #finansKartPanel.kc-console .rc-history-item>span:first-child{flex:1}
+@media(max-width:1250px){body.rst-v1 #finansKartPanel.kc-console .kc-bar-row{grid-template-columns:32px 105px minmax(0,1fr);gap:10px}.rst-cost{grid-column:2/-1;grid-row:2}body.rst-v1 #finansKartPanel.kc-console .rst-labeled-values{grid-column:3;grid-row:1}body.rst-v1 #finansKartPanel.kc-console .rst-labeled-values>small,body.rst-v1 #finansKartPanel.kc-console .rst-labeled-values>b{font-size:14px!important}}
+@media(max-width:600px){body.rst-v1 #finansKartPanel.kc-console .kc-bar-row{grid-template-columns:32px minmax(0,1fr)!important;gap:10px}.rst-cost{grid-column:1/-1;grid-row:3}body.rst-v1 #finansKartPanel.kc-console .rst-labeled-values{grid-column:1/-1;grid-row:2;text-align:left}body.rst-v1 #finansKartPanel.kc-console .kc-bar-opt{display:flex;gap:8px;align-items:center;flex-wrap:wrap}body.rst-v1 .rst-current{margin:0}body.rst-v1 #finansKartPanel.kc-console .rc-section-head b{font-size:17px!important}body.rst-v1 #finansKartPanel.kc-console #wpBtn{width:100%!important;margin-left:0!important}body.rst-v1 .rst-monthly-badge{font-size:8px;right:8px}body.rst-v1 #finansKartPanel.kc-console #sonuc .result-item:nth-child(7)>span:first-child{font-size:9px!important}body.rst-v1 #finansKartPanel.kc-console .brand h2{font-size:21px!important}body.rst-v1 #finansKartPanel.kc-console .rc-mini-actions button{font-size:12px!important}}

@@ -1,0 +1,17 @@
+/* RENEW PRO 8.5 — collapsible dashboard sections; data and calculations stay untouched. */
+(()=>{'use strict';
+const definitions=[
+ {id:'summary',icon:'▦',title:'Yönetici Özeti',desc:'Stok, satış, ciro ve kârlılığın hızlı görünümü.',tone:'blue',targets:[['#dashKpis','self']]},
+ {id:'quick',icon:'⚡',title:'Hızlı Yönetim',desc:'Yönetici nabzı, sık kullanılan işlemler ve günlük kontroller.',tone:'violet',targets:[['.dash-command-grid','self'],['#renewManagementCenter','self']]},
+ {id:'analysis',icon:'◔',title:'Dönem Analizi',desc:'Aylık karşılaştırmalar, stok bekleme riski ve kâr dağılımı.',tone:'orange',targets:[['.section-label','self'],['#monthCompare','self'],['.dashboard-risk-profit','self']]},
+ {id:'operations',icon:'🚘',title:'Operasyon ve Araçlar',desc:'Kritik stoklar, aylık alınan araçlar ve marka dağılımı.',tone:'green',targets:[['#criticalStock','card','wide'],['#dashAcquisitions','card','wide'],['#brandDist','card','wide']]},
+ {id:'team',icon:'◎',title:'Ekip Performansı',desc:'Danışman, satış ve ekspertiz sonuçlarının ekip görünümü.',tone:'navy',targets:[['#dashConsultants','card','wide'],['#topSales','card','half'],['#lossSales','card','half'],['#expertiseSummary','card','wide']]},
+ {id:'system',icon:'↻',title:'Sistem Hareketleri',desc:'Son kullanıcı işlemleri ve kayıt hareketleri.',tone:'slate',targets:[['#recentActivity','card','wide']]}
+];
+function resolve(selector,mode){const node=document.querySelector(selector);if(!node)return null;return mode==='card'?node.closest('.card'):node}
+function cleanEmptyGrids(){document.querySelectorAll('#dashboard>.grid2,#dashboard>.grid3').forEach(x=>{if(!x.children.length)x.remove()})}
+function buildSections(){const dashboard=document.getElementById('dashboard');if(!dashboard||document.getElementById('renew-section-summary'))return;const anchor=document.getElementById('dashAlerts');let after=anchor;
+ definitions.forEach((d,sectionIndex)=>{const section=document.createElement('section');section.id='renew-section-'+d.id;section.className=`renew-dashboard-section tone-${d.tone}`;section.style.setProperty('--section-index',sectionIndex);section.innerHTML=`<button class="renew-section-head" type="button" aria-expanded="true"><span class="renew-section-icon">${d.icon}</span><span class="renew-section-copy"><b>${d.title}</b><small>${d.desc}</small></span><i></i><em>⌃</em></button><div class="renew-section-body renew-section-grid"></div>`;after.insertAdjacentElement('afterend',section);after=section;const body=section.querySelector('.renew-section-body');d.targets.forEach(([selector,mode,size])=>{const node=resolve(selector,mode);if(node){node.classList.add('renew-section-item');if(size)node.classList.add('renew-section-'+size);body.appendChild(node)}});const collapsed=localStorage.getItem('renew_section_'+d.id)==='closed';setCollapsed(section,collapsed,false);section.querySelector('.renew-section-head').onclick=()=>setCollapsed(section,!section.classList.contains('is-collapsed'),true)});cleanEmptyGrids()}
+function setCollapsed(section,collapsed,save){section.classList.toggle('is-collapsed',collapsed);const button=section.querySelector('.renew-section-head');button?.setAttribute('aria-expanded',String(!collapsed));if(save)localStorage.setItem('renew_section_'+section.id.replace('renew-section-',''),collapsed?'closed':'open')}
+document.addEventListener('DOMContentLoaded',()=>setTimeout(buildSections,0));
+})();

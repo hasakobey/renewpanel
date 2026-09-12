@@ -1,0 +1,88 @@
+body.ms-open{overflow:hidden!important}
+body.ms-ready .wrapper{grid-template-columns:280px minmax(0,1fr)!important;align-items:start!important}
+.ms-left-column{display:flex;flex-direction:column;gap:16px;min-width:0}
+.ms-left-column>.side-panel,.ms-left-column>.mail-panel{width:100%!important;max-width:100%!important;margin:0!important;min-width:0!important}
+.ms-left-column .mail-panel-toggle{width:100%;min-width:0;white-space:normal;gap:8px}
+@media(max-width:1450px){body.ms-ready .rc-workspace{grid-template-columns:minmax(0,1fr)!important}}
+@media(max-width:1100px){body.ms-ready .wrapper{grid-template-columns:minmax(0,1fr)!important}.ms-left-column{grid-row:2}.ms-ready .finans-center-column{grid-row:1}}
+#mailStudio{--ms-ink:#102b49;--ms-muted:#647b98;--ms-paper:#ffffff;--ms-line:#d5e2f1;--ms-accent:#1766aa;--ms-green:#1766aa;box-sizing:border-box;width:min(1240px,calc(100vw - 40px));max-width:none;max-height:calc(100dvh - 40px);margin:auto;padding:0;border:1px solid #d5e2f1;border-radius:22px;background:#f1f6fc;color:var(--ms-ink);box-shadow:0 30px 100px #141b284d;font-family:Inter,'Segoe UI',sans-serif;overflow:auto;overscroll-behavior:contain}
+#mailStudio::backdrop{background:#1421309e;backdrop-filter:blur(5px)}
+#mailStudio *{box-sizing:border-box;min-width:0}
+#mailStudio [hidden]{display:none!important}
+#mailStudio .ms-top{position:sticky;top:0;z-index:3;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:20px 26px;background:#f1f6fcf5;border-bottom:1px solid var(--ms-line);backdrop-filter:blur(12px)}
+#mailStudio .ms-top span{font-size:10px;font-weight:700;letter-spacing:1.7px;color:var(--ms-accent)}
+#mailStudio h2{font-size:23px;letter-spacing:-.7px;margin:5px 0 0;color:var(--ms-ink)}
+#mailStudio .ms-close{width:42px;height:42px;flex:none;border:1px solid var(--ms-line);border-radius:50%;background:var(--ms-paper);color:var(--ms-ink);font-size:25px;cursor:pointer}
+#mailStudio .ms-layout{display:grid;grid-template-columns:260px minmax(0,1fr);align-items:start;gap:22px;padding:24px}
+#mailStudio .ms-rail{padding:14px;background:#ffffff70;border:1px solid #fff;border-radius:17px;position:sticky;top:108px}
+#mailStudio .ms-rail-head{display:flex;justify-content:space-between;align-items:center;padding:5px 6px 18px}
+#mailStudio .ms-rail-head small{font-size:10px;color:var(--ms-accent);font-weight:700;letter-spacing:1px}
+#mailStudio h3{font-size:19px;margin:6px 0 0}
+#mailStudio .ms-rail-head>span{background:white;border:1px solid var(--ms-line);padding:4px 10px;border-radius:20px;font-size:12px;color:var(--ms-muted)}
+#mailStudio .ms-nav{display:grid;gap:6px}
+#mailStudio .ms-tile{display:flex;align-items:center;gap:11px;width:100%;padding:12px 9px;border:1px solid transparent;border-radius:12px;background:transparent;color:var(--ms-ink);text-align:left;cursor:pointer;transition:background .18s,box-shadow .18s,transform .18s}
+#mailStudio .ms-tile.active{border-left:3px solid var(--ms-accent);background:white;border-color:#9ec4ec;box-shadow:0 6px 15px #173a600d}
+#mailStudio .ms-tile:hover{background:#edf5ff;transform:translateY(-2px);box-shadow:0 6px 18px #12345614}
+#mailStudio .ms-icon{display:grid;place-items:center;flex:none;width:33px;height:36px;background:#e5f1ff;color:var(--ms-accent);border-radius:10px;font-size:20px}
+#mailStudio .active .ms-icon{background:var(--ms-accent);color:#fff}
+#mailStudio .ms-tile b{font-size:12px;line-height:1.4;display:block}
+#mailStudio .ms-tile small{display:block;margin-top:4px;font-size:11px;line-height:1.45;color:var(--ms-muted)}
+#mailStudio .ms-rail>p{border-top:1px solid var(--ms-line);margin:14px 0 0;padding:14px 6px 3px;font-size:11px;line-height:1.7;color:var(--ms-muted)}
+#mailStudio .ms-paper{display:block;position:relative;margin:0;padding:0;width:auto;max-width:none;background:var(--ms-paper);border-radius:18px;box-shadow:0 14px 35px #163d6712;overflow:hidden;border:1px solid var(--ms-line)}
+#mailStudio .ms-paper:before{content:'';display:block;height:4px;background:linear-gradient(90deg,#155391,#3f93da,#1766aa)}
+#mailStudio .ms-letterhead{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:23px 26px;border-bottom:1px solid var(--ms-line)}
+#mailStudio .ms-brand{display:flex;gap:11px;align-items:center}
+#mailStudio .ms-brand>b{width:40px;height:40px;border-radius:50%;background:#102b49;color:#ffffff;display:grid;place-items:center;border:2px solid #d5e7fa;font-size:18px}
+#mailStudio .ms-brand strong{font-size:16px;letter-spacing:.6px}
+#mailStudio .ms-brand small{display:block;font-size:11px;margin-top:4px;color:var(--ms-muted)}
+#mailStudio .ms-date{text-align:right;font-size:11px;color:var(--ms-muted)}
+#mailStudio .ms-date span{display:block;margin-top:8px;color:var(--ms-green);background:#e7f2ff;border-radius:20px;padding:5px 9px;font-size:10px}
+#mailStudio .mail-section{border:0!important;border-radius:0!important;margin:0!important;background:transparent!important;box-shadow:none!important}
+#mailStudio .mail-section-title{display:none!important}
+#mailStudio .mail-section-body.show{display:block!important;padding:22px 26px!important;border:0!important;background:transparent!important;animation:msEnter .45s ease-out}
+#mailStudio .mail-grid{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:15px!important}
+#mailStudio .mail-grid>div{grid-column:auto!important;margin:0!important}
+#mailStudio .mail-grid>.mail-full,#mailStudio .mail-grid>.ms-message{grid-column:1/-1!important}
+#mailStudio .form-group{padding:0!important;border:0!important;background:transparent!important;box-shadow:none!important}
+#mailStudio label{display:block;font-size:11px!important;font-weight:650!important;text-transform:none!important;letter-spacing:.1px!important;color:var(--ms-muted)!important;margin-bottom:7px!important}
+#mailStudio input,#mailStudio select{width:100%;min-height:44px!important;height:auto!important;border:0!important;border-bottom:2px solid var(--ms-line)!important;border-radius:0!important;background:#ffffff!important;padding:10px 2px!important;font-size:14px!important;font-weight:600!important;color:var(--ms-ink)!important;box-shadow:none!important;outline-offset:3px}
+#mailStudio input::placeholder{color:#7c8da3!important;font-weight:400}
+#mailStudio input:focus,#mailStudio select:focus{border-color:var(--ms-accent)!important;outline:2px solid #15539122!important}
+#mailStudio .mail-choice{display:flex!important;gap:5px!important;padding:4px!important;border-radius:12px!important;background:#eaf1f9!important}
+#mailStudio .mail-choice button{flex:1;min-height:39px!important;border:0!important;border-radius:9px!important;background:transparent!important;color:var(--ms-muted)!important;padding:8px!important;font-size:12px!important;box-shadow:none!important}
+#mailStudio .mail-choice button.active{background:#102b49!important;color:white!important}
+#mailStudio .ms-message{border-top:1px solid var(--ms-line);padding-top:20px}
+#mailStudio .ms-message>label{display:none}
+#mailStudio .ms-subject{font-size:11px;letter-spacing:1px;font-weight:750;text-transform:uppercase;color:var(--ms-accent);margin-bottom:18px}
+#mailStudio .ms-letter{color:#253c58;font-family:'Newsreader',Georgia,serif;font-size:19px;line-height:1.7;overflow-wrap:anywhere}
+#mailStudio .ms-letter p{margin:0 0 16px;white-space:pre-wrap}
+#mailStudio .ms-letter .ms-block-label{font-family:'Segoe UI',sans-serif;font-size:10px;font-weight:700;letter-spacing:1px;color:var(--ms-muted);border-bottom:1px solid var(--ms-line);padding-bottom:6px;margin-top:22px}
+#mailStudio .ms-raw{position:absolute!important;left:0!important;width:1px!important;height:1px!important;min-height:0!important;padding:0!important;opacity:0!important;overflow:hidden!important}
+#mailStudio .ms-raw.ms-raw-visible{position:static!important;width:100%!important;height:260px!important;padding:12px!important;opacity:1!important;border:1px solid var(--ms-line)!important;background:#ffffff!important;color:var(--ms-ink)!important;font:12px/1.7 monospace!important;margin:10px 0!important}
+#mailStudio .ms-raw-toggle{border:0;background:transparent;color:var(--ms-muted);text-decoration:underline;text-underline-offset:3px;padding:8px 0;cursor:pointer;font-size:11px}
+#mailStudio .ms-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:15px}
+#mailStudio .ms-actions button{min-height:48px!important;padding:12px!important;border:1px solid var(--ms-line)!important;border-radius:11px!important;margin:0!important;font-size:12px!important;white-space:normal!important;line-height:1.4!important;transition:transform .15s,box-shadow .15s!important}
+#mailStudio .mail-copy-btn{background:white!important;color:var(--ms-ink)!important}
+#mailStudio .mail-outlook-btn{background:linear-gradient(135deg,#155391,#103b68)!important;color:white!important;border-color:transparent!important}
+#mailStudio .ms-actions button:hover{transform:translateY(-1px);box-shadow:0 5px 12px #1766aa22!important}
+#mailStudio .mail-note,#mailStudio .mail-subject-preview{color:var(--ms-muted)!important;font-size:11px!important;line-height:1.6!important;margin-top:12px!important;overflow-wrap:anywhere;background:transparent!important}
+#mailStudio button:focus-visible{outline:2px solid var(--ms-accent);outline-offset:3px}
+@keyframes msEnter{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:none}}
+@media(max-width:1000px){#mailStudio .mail-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
+@media(max-width:760px){#mailStudio{width:calc(100vw - 16px);max-height:calc(100dvh - 16px);border-radius:16px}#mailStudio .ms-top{padding:15px 16px}#mailStudio h2{font-size:19px}#mailStudio .ms-layout{grid-template-columns:1fr;padding:12px;gap:12px}#mailStudio .ms-rail{position:static;padding:10px}#mailStudio .ms-rail-head{padding:2px 4px 10px}#mailStudio .ms-rail-head h3{font-size:16px;margin-top:3px}#mailStudio .ms-nav{grid-template-columns:repeat(2,minmax(0,1fr));gap:5px}#mailStudio .ms-tile{padding:9px 6px;gap:7px}#mailStudio .ms-tile small,#mailStudio .ms-rail>p{display:none}#mailStudio .ms-icon{width:27px;height:29px;font-size:16px}#mailStudio .ms-tile b{font-size:11px}#mailStudio .ms-letterhead{padding:17px 14px}#mailStudio .mail-section-body.show{padding:17px 14px!important}#mailStudio .ms-date{font-size:10px}#mailStudio .ms-brand small{font-size:10px}#mailStudio .ms-letter{font-size:15px}#mailStudio .ms-actions{grid-template-columns:1fr}}
+@media(max-width:420px){#mailStudio .mail-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}#mailStudio .ms-top span{font-size:8px}#mailStudio .ms-brand>b{width:32px;height:32px}#mailStudio .ms-letterhead{gap:7px}}
+@media(prefers-reduced-motion:reduce){#mailStudio *,#mailStudio *:before{animation:none!important;transition:none!important}}
+@media print{#mailStudio{display:none!important}}
+#mailStudio input,#mailStudio select{transition:border-color .2s,box-shadow .2s}
+#mailStudio input:focus,#mailStudio select:focus{box-shadow:0 2px 0 var(--ms-accent)!important}
+#mailStudio .ms-value{border-bottom:1px dotted var(--ms-accent);color:#155391;font-weight:600}
+#mailStudio .ms-detail-row{display:flex;justify-content:space-between;gap:20px;padding:10px 0;border-bottom:1px solid var(--ms-line);font:13px/1.6 Inter,'Segoe UI',sans-serif}
+#mailStudio .ms-detail-row>span:first-child{color:var(--ms-muted)}
+#mailStudio .ms-detail-row>span:last-child{text-align:right;overflow-wrap:anywhere}
+#mailStudio .ms-toast{position:sticky;bottom:12px;width:max-content;max-width:90%;margin:0 auto 12px;padding:12px 22px;border-radius:12px;background:#102b49;color:white;font:600 13px Inter,'Segoe UI',sans-serif;box-shadow:0 8px 22px #102b4933;z-index:10}
+#mailStudio button{transition:transform .18s,box-shadow .18s}
+#mailStudio button:hover{transform:translateY(-1px)}
+#mailStudio h2,#mailStudio h3,#mailStudio button,#mailStudio .ms-brand{font-family:'Space Grotesk',Inter,'Segoe UI',sans-serif}
+#mailStudio .ms-letter p{font-family:'Newsreader',Georgia,serif!important;font-size:19px!important;line-height:1.65!important}
+#mailStudio .ms-letter .ms-block-label{font-family:Inter,'Segoe UI',sans-serif!important;font-size:11px!important;margin-top:20px}
+#mailStudio .mail-choice{max-width:340px}

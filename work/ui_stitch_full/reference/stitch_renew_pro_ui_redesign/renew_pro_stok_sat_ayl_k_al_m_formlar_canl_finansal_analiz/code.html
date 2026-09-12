@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RENEW PRO — Stok / Satış / Alım Form Modalı & Canlı Finansal Analiz</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      fontFamily: {
+        sans: ['Inter', 'sans-serif'],
+        display: ['Space Grotesk', 'sans-serif'],
+      },
+      colors: {
+        brand: {
+          50: '#eff6ff',
+          100: '#dbeafe',
+          500: '#0052d9',
+          600: '#0044b5',
+          700: '#003691',
+        },
+        navy: {
+          900: '#071526',
+          800: '#0c223c',
+          700: '#142b45',
+          600: '#233f63',
+        }
+      }
+    }
+  }
+}
+</script>
+<style>
+.tabular-nums { font-variant-numeric: tabular-nums; }
+/* Custom scrollbar for modal internal scroll */
+.custom-scroll::-webkit-scrollbar { width: 6px; }
+.custom-scroll::-webkit-scrollbar-track { background: #f1f5f9; border-radius: 4px; }
+.custom-scroll::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+.custom-scroll::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+</style>
+</head>
+<body class="bg-[#0b1727]/70 font-sans text-slate-800 antialiased min-h-screen flex items-center justify-center p-4 md:p-6 backdrop-blur-sm">
+
+  <!-- Background Mockup Layer representing the parent RENEW PRO Dashboard behind the modal -->
+  <div class="fixed inset-0 pointer-events-none opacity-20 filter blur-xs overflow-hidden select-none -z-10 flex">
+    <div class="w-64 bg-navy-900 h-full border-r border-slate-700"></div>
+    <div class="flex-1 bg-slate-100 p-8 space-y-6">
+      <div class="h-10 bg-white rounded-lg shadow-sm w-full"></div>
+      <div class="grid grid-cols-4 gap-4">
+        <div class="h-28 bg-white rounded-xl shadow-sm"></div>
+        <div class="h-28 bg-white rounded-xl shadow-sm"></div>
+        <div class="h-28 bg-white rounded-xl shadow-sm"></div>
+        <div class="h-28 bg-white rounded-xl shadow-sm"></div>
+      </div>
+      <div class="h-96 bg-white rounded-xl shadow-sm"></div>
+    </div>
+  </div>
+
+  <!-- MAIN CENTERED WIDE MODAL CONTAINER (max-w-6xl) -->
+  <div class="bg-white w-full max-w-[1140px] rounded-2xl shadow-2xl border border-slate-200/80 flex flex-col max-h-[92vh] overflow-hidden transition-all relative z-10 animate-in fade-in duration-200">
+    
+    <!-- 1. COMPACT MODAL HEADER & TABS -->
+    <header class="px-6 py-4 border-b border-slate-200 bg-white flex items-center justify-between shrink-0">
+      <div class="flex items-center space-x-4">
+        <div class="w-10 h-10 rounded-xl bg-brand-50 text-brand-600 flex items-center justify-center font-display font-bold text-xl border border-brand-100 shadow-xs">
+          R
+        </div>
+        <div>
+          <div class="flex items-center space-x-2.5">
+            <h2 id="modalTitle" class="text-lg font-bold font-display text-navy-700 tracking-tight">Yeni Stok Girişi & Araç Kayıt Formu</h2>
+            <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 mr-1.5 animate-pulse"></span>Canlı Formül Aktif
+            </span>
+          </div>
+          <p class="text-xs text-slate-500 mt-0.5">Çayan Tarsus Otomotiv • 19 Sütun Excel Veri Eşitleme ve SKS Finansman Denetimi</p>
+        </div>
+      </div>
+
+      <!-- Form Switcher Tabs (Stok / Satış / Aylık Alım) -->
+      <div class="flex items-center space-x-3">
+        <div class="bg-slate-100 p-1 rounded-xl flex items-center space-x-1 border border-slate-200/70 text-xs font-medium">
+          <button id="tabStock" onclick="switchFormType('stock')" class="px-3.5 py-1.5 rounded-lg bg-white font-semibold text-brand-600 shadow-xs transition-all flex items-center space-x-1.5">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+            <span>Güncel Stok Girişi</span>
+          </button>
+          <button id="tabSale" onclick="switchFormType('sale')" class="px-3.5 py-1.5 rounded-lg text-slate-600 hover:text-slate-900 transition-all flex items-center space-x-1.5">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+            <span>Satış Kaydı</span>
+          </button>
+          <button id="tabAcq" onclick="switchFormType('acq')" class="px-3.5 py-1.5 rounded-lg text-slate-600 hover:text-slate-900 transition-all flex items-center space-x-1.5">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+            <span>Aylık Alım</span>
+          </button>
+        </div>
+
+        <!-- Close 'X' Button -->
+        <button class="w-8 h-8 rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-100 flex items-center justify-center transition-colors" title="Kapat (Esc)">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+        </button>
+      </div>
+    </header>
+
+    <!-- 2. SCROLLABLE FORM BODY WITH CONTROLLED SCROLL -->
+    <div class="flex-1 overflow-y-auto custom-scroll p-6 bg-slate-50/70">
+      
+      <!-- Top Dynamic System Status Banners (Switchable states: Normal, Hesaplama Bekleniyor, Kayıt Hatası vb.) -->
+      <div id="stateBannerContainer" class="mb-5 space-y-2">
+        <!-- Default Notice Banner -->
+        <div id="bannerRuleNotice" class="bg-blue-50/80 border border-blue-200/90 rounded-xl p-3 flex items-start space-x-3 text-xs text-blue-900 shadow-xs">
+          <div class="w-5 h-5 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center shrink-0 mt-0.5 font-bold">i</div>
+          <div class="flex-1">
+            <p class="font-medium" id="bannerRuleText"><strong>Şirket Aracı & Takas Kuralı:</strong> "ŞİRKET ARACI" alım türünde noter ve sigorta giderleri sıfırlanır. Alış bedeline göre SKS finansman payı aylık %3.00 oranıyla günlük hesaplanarak toplam maliyete dinamik yansıtılır.</p>
+          </div>
+          <div class="flex items-center space-x-2 shrink-0">
+            <span class="text-[11px] text-blue-600 font-semibold bg-white/80 px-2 py-0.5 rounded border border-blue-200">MS Excel v8.4 Birebir</span>
+          </div>
+        </div>
+
+        <!-- Simulated Error Banner (Hidden by default, can be toggled in state demo bar) -->
+        <div id="bannerErrorState" class="hidden bg-rose-50 border border-rose-200 rounded-xl p-3.5 flex items-start justify-between text-xs text-rose-900 shadow-xs">
+          <div class="flex items-start space-x-3">
+            <div class="w-5 h-5 rounded-full bg-rose-200 text-rose-700 flex items-center justify-center shrink-0 font-bold mt-0.5">!</div>
+            <div>
+              <p class="font-bold text-rose-800">Kayıt Gerçekleştirilemedi (HTTP 422 - Doğrulama Hatası)</p>
+              <p class="text-rose-700 mt-0.5">Formdaki girilmiş bilgileriniz korundu. Lütfen kırmızı ile işaretlenen <strong>Alım Türü</strong> ve <strong>Alış Fiyatı</strong> alanlarını kontrol edip yeniden "Kaydet" butonuna basınız.</p>
+            </div>
+          </div>
+          <button onclick="document.getElementById('bannerErrorState').classList.add('hidden')" class="text-rose-500 hover:text-rose-800 font-bold ml-4">✕</button>
+        </div>
+      </div>
+
+      <!-- MAIN 2-COLUMN LAYOUT: (Left: Segmented White Cards Form) vs (Right: Sticky Live Financial Analysis) -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+        
+        <!-- ================= LEFT COLUMN: FORM SECTIONS (7 Cols) ================= -->
+        <div class="lg:col-span-7 space-y-5">
+          
+          <!-- SECTION 1: ARAÇ KİMLİK VE TEKNİK BİLGİLERİ -->
+          <section class="bg-white rounded-xl border border-slate-200/90 shadow-xs p-5 relative overflow-hidden">
+            <div class="flex items-center justify-between pb-3 mb-4 border-b border-slate-100">
+              <div class="flex items-center space-x-2.5">
+                <span class="w-6 h-6 rounded-lg bg-navy-700 text-white flex items-center justify-center text-xs font-bold font-display">1</span>
+                <h3 class="text-sm font-bold text-navy-700">Araç Kimlik ve Teknik Bilgileri</h3>
+              </div>
+              <span class="text-[11px] font-medium text-slate-500 bg-slate-100 px-2 py-0.5 rounded">Zorunlu Alanlar: Plaka, Yıl, KM</span>
+            </div>
+
+            <div class="grid grid-cols-3 gap-3.5">
+              <!-- Plaka -->
+              <div>
+                <label class="block text-xs font-semibold text-slate-700 mb-1">Plaka <span class="text-rose-500">*</span></label>
+                <div class="relative">
+                  <div class="absolute inset-y-0 left-0 pl-2.5 flex items-center pointer-events-none">
+                    <span class="text-[10px] font-bold bg-blue-700 text-white px-1 py-0.5 rounded-xs tracking-wider">TR</span>
+                  </div>
+                  <input id="inputPlate" type="text" value="33 ARB 585" class="w-full pl-11 pr-3 py-2 text-xs font-bold uppercase tracking-wider bg-slate-50 border border-slate-300 rounded-lg focus:bg-white focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 outline-none transition-all" placeholder="33 XXX 00">
+                </div>
+              </div>
+
+              <!-- Model Yılı -->
+              <div>
+                <label class="block text-xs font-semibold text-slate-700 mb-1">Model Yılı <span class="text-rose-500">*</span></label>
+                <input id="inputYear" type="number" value="2022" class="w-full px-3 py-2 text-xs font-medium bg-slate-50 border border-slate-300 rounded-lg focus:bg-white focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 outline-none transition-all tabular-nums" placeholder="Örn: 2023">
+              </div>
+
+              <!-- KM -->
+              <div>
+                <label class="block text-xs font-semibold text-slate-700 mb-1">Kilometre (KM) <span class="text-rose-500">*</span></label>
+                <div class="relative">
+                  <input id="inputKm" type="text" value="68.400" class="w-full pl-3 pr-8 py-2 text-xs font-medium bg-slate-50 border border-slate-300 rounded-lg focus:bg-white focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 outline-none transition-all tabular-nums" placeholder="0">
+                  <span class="absolute right-2.5 top-2 text-[10px] text-slate-400 font-bold">KM</span>
+                </div>
+              </div>
+
+              <!-- Marka -->
+              <div>
+                <label class="block text-xs font-semibold text-slate-700 mb-1">Marka <span class="text-rose-500">*</span></label>
+                <input id="inputBrand" type="text" value="Renault" class="w-full px-3 py-2 text-xs font-medium bg-slate-50 border border-slate-300 rounded-lg focus:bg-white focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 outline-none transition-all" placeholder="Örn: Renault">
+              </div>
+
+              <!-- Model -->
+              <div>
+                <label class="block text-xs font-semibold text-slate-700 mb-1">Model <span class="text-rose-500">*</span></label>
+                <input id="inputModel" type="text" value="Megane Sedan" class="w-full px-3 py-2 text-xs font-medium bg-slate-50 border border-slate-300 rounded-lg focus:bg-white focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 outline-none transition-all" placeholder="Örn: Megane Sedan">
+              </div>
+
+              <!-- Versiyon -->
+              <div>
+                <label class="block text-xs font-semibold text-slate-700 mb-1">Versiyon / Paket</label>
+                <input id="inputVersion" type="text" value="Touch 1.3 TCe 140 bg EDC" class="w-full px-3 py-2 text-xs font-medium bg-slate-50 border border-slate-300 rounded-lg focus:bg-white focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 outline-none transition-all" placeholder="Örn: Touch EDC">
+              </div>
+
+              <!-- Renk -->
+              <div>
+                <label class="block text-xs font-semibold text-slate-700 mb-1">Renk</label>
+                <input id="inputColor" type="text" value="Saf Beyaz" class="w-full px-3 py-2 text-xs font-medium bg-slate-50 border border-slate-300 rounded-lg focus:bg-white focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 outline-none transition-all" placeholder="Beyaz, Gri vb.">
+              </div>
+
+              <!-- Yakıt Türü -->
+              <div>
+                <label class="block text-xs font-semibold text-slate-700 mb-1">Yakıt</label>
+                <select id="inputFuel" class="w-full px-2.5 py-2 text-xs font-medium bg-slate-50 border border-slate-300 rounded-lg focus:bg-white focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 outline-none transition-all">
+                  <option value="BENZİN" selected>BENZİN</option>
+                  <option value="DİZEL">DİZEL</option>
+                  <option value="BENZİN/LPG">BENZİN/LPG</option>
+                  <option value="HİBRİT">HİBRİT</option>
+                  <option value="ELEKTRİK">ELEKTRİK</option>
+                </select>
+              </div>
+
+              <!-- Vites Türü -->
+              <div>
+                <label class="block text-xs font-semibold text-slate-700 mb-1">Vites</label>
+                <select id="inputTrans" class="w-full px-2.5 py-2 text-xs font-medium bg-slate-50 border border-slate-300 rounded-lg focus:bg-white focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 outline-none transition-all">
+                  <option value="OTOMATİK" selected>OTOMATİK</option>
+                  <option value="MANUEL">MANUEL</option>
+                </select>
+              </div>
+            </div>
+          </section>
+
+          <!-- SECTION 2: ALIM TÜRÜ, TARİH VE KAYNAK BİLGİLERİ -->
+          <section class="bg-white rounded-xl border border-slate-200/90 shadow-xs p-5 relative">
+            <div class="flex items-center justify-between pb-3 mb-4 border-b border-slate-100">
+              <div class="flex items-center space-x-2.5">
+                <span class="w-6 h-6 rounded-lg bg-navy-700 text-white flex items-center justify-center text-xs font-bold font-display">2</span>
+                <h3 class="text-sm font-bold text-navy-700">Alım Türü, Tarih ve Kaynak Bilgileri</h3>
+              </div>
+              <span class="text-[11px] text-brand-600 bg-brand-50 font-medium px-2 py-0.5 rounded border border-brand-100">Gider / Noter Kuralları Buraya Bağlıdır</span>
+            </div>
+
+            <div class="grid grid-cols-3 gap-3.5">
+              <!-- Alım Türü -->
+              <div>
+                <label class="block text-xs font-semibold text-slate-700 mb-1">Alım Türü <span class="text-rose-500">*</span></label>
+                <select id="inputPurchaseType" onchange="updateCalculations()" class="w-full px-2.5 py-2 text-xs font-bold text-navy-800 bg-amber-50/50 border border-amber-300 rounded-lg focus:bg-white focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 outline-none transition-all">
+                  <option value="TAKAS">TAKAS (Sıfır Araç Takası)</option>
+                  <option value="NAKİT">NAKİT ALIM</option>
+                  <option value="ŞİRKET ARACI">ŞİRKET ARACI (Noter & Sigorta Hariç)</option>
+                  <option value="KONSİNYE">KONSİNYE</option>
+                  <option value="İHALE ALIMI">İHALE ALIMI</option>
+                </select>
+              </div>
+
+              <!-- Alış Tarihi -->
+              <div>
+                <label class="block text-xs font-semibold text-slate-700 mb-1">Alış Tarihi <span class="text-rose-500">*</span></label>
+                <input id="inputPurchaseDate" type="date" value="2024-11-18" onchange="updateCalculations()" class="w-full px-3 py-2 text-xs font-medium bg-slate-50 border border-slate-300 rounded-lg focus:bg-white focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 outline-none transition-all">
+              </div>
+
+              <!-- Alınan Kişi / Ekspertiz Personeli -->
+              <div>
+                <label class="block text-xs font-semibold text-slate-700 mb-1">Alınan Kişi / Ekspertiz</label>
+                <select id="inputAcquiredBy" class="w-full px-2.5 py-2 text-xs font-medium bg-slate-50 border border-slate-300 rounded-lg focus:bg-white focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 outline-none transition-all">
+                  <option value="Murat Kaya" selected>Murat Kaya (Kıdemli Ekspertiz)</option>
+                  <option value="Ahmet Yılmaz">Ahmet Yılmaz (Danışman)</option>
+                  <option value="Emre Koç">Emre Koç (Alım Birimi)</option>
+                  <option value="Serkan Demir">Serkan Demir</option>
+                  <option value="Doğrudan Müşteri">Doğrudan Müşteri Girişi</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Satış Modundayken Görünen Ek Alanlar (Satış Tarihi, Müşteri, Danışman) -->
+            <div id="saleSpecificFields" class="hidden mt-4 pt-3.5 border-t border-slate-100 grid grid-cols-3 gap-3.5 bg-brand-50/30 -mx-5 -mb-5 p-5 rounded-b-xl border-dashed">
+              <div>
+                <label class="block text-xs font-semibold text-navy-800 mb-1">Satış Tarihi <span class="text-rose-500">*</span></label>
+                <input id="inputSaleDate" type="date" value="2024-12-05" onchange="updateCalculations()" class="w-full px-3 py-2 text-xs font-medium bg-white border border-brand-300 rounded-lg focus:ring-2 focus:ring-brand-500/20 outline-none">
+              </div>
+              <div>
+                <label class="block text-xs font-semibold text-navy-800 mb-1">Satış Danışmanı <span class="text-rose-500">*</span></label>
+                <select id="inputConsultant" class="w-full px-2.5 py-2 text-xs font-medium bg-white border border-brand-300 rounded-lg">
+                  <option value="Murat Kaya">Murat Kaya</option>
+                  <option value="Ahmet Yılmaz" selected>Ahmet Yılmaz</option>
+                  <option value="Emre Koç">Emre Koç</option>
+                  <option value="Serkan Demir">Serkan Demir</option>
+                </select>
+              </div>
+              <div>
+                <label class="block text-xs font-semibold text-navy-800 mb-1">Müşteri Bilgisi</label>
+                <input id="inputCustomer" type="text" value="Kemal Güneş (Bireysel Satış)" class="w-full px-3 py-2 text-xs font-medium bg-white border border-brand-300 rounded-lg" placeholder="Ad Soyad / Firma">
+              </div>
+            </div>
+          </section>
+
+          <!-- SECTION 3: FİNANSMAN, MALİYET VE FİYAT GİRİŞLERİ -->
+          <section class="bg-white rounded-xl border border-slate-200/90 shadow-xs p-5 relative">
+            <div class="flex items-center justify-between pb-3 mb-4 border-b border-slate-100">
+              <div class="flex items-center space-x-2.5">
+                <span class="w-6 h-6 rounded-lg bg-navy-700 text-white flex items-center justify-center text-xs font-bold font-display">3</span>
+                <h3 class="text-sm font-bold text-navy-700">Fiyat, Maliyet ve Sabit Gider Dökümü</h3>
+              </div>
+              <span class="text-[11px] text-slate-500">Para Birimi: ₺ (Türk Lirası)</span>
+            </div>
+
+            <!-- Fiyat Girişleri Grid -->
+            <div class="grid grid-cols-2 gap-4 mb-4">
+              <!-- Alış Fiyatı -->
+              <div>
+                <label class="block text-xs font-semibold text-slate-700 mb-1">Alış Fiyatı (Ham Bedel) <span class="text-rose-500">*</span></label>
+                <div class="relative">
+                  <span class="absolute left-3 top-2 text-xs text-slate-400 font-bold">₺</span>
+                  <input id="inputPurchasePrice" type="number" value="1120000" oninput="updateCalculations()" class="w-full pl-8 pr-3 py-2 text-sm font-bold text-navy-900 bg-slate-50 border border-slate-300 rounded-lg focus:bg-white focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 outline-none tabular-nums" placeholder="0">
+                </div>
+                <span class="text-[10px] text-slate-400 mt-1 block">Aracın satın alındığı çıplak fatura/dekont bedeli.</span>
+              </div>
+
+              <!-- Liste Satış / Satış Bedeli -->
+              <div id="colSaleOrListPrice">
+                <label id="lblSaleOrList" class="block text-xs font-semibold text-slate-700 mb-1">Liste Satış Fiyatı (Hedef) <span class="text-rose-500">*</span></label>
+                <div class="relative">
+                  <span class="absolute left-3 top-2 text-xs text-slate-400 font-bold">₺</span>
+                  <input id="inputListPrice" type="number" value="1240000" oninput="updateCalculations()" class="w-full pl-8 pr-3 py-2 text-sm font-bold text-navy-900 bg-slate-50 border border-slate-300 rounded-lg focus:bg-white focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 outline-none tabular-nums" placeholder="0">
+                </div>
+                <span id="subSaleOrList" class="text-[10px] text-slate-400 mt-1 block">Stok etiket ve ilan vitrin satış fiyatı.</span>
+              </div>
+            </div>
+
+            <!-- Sabit Giderler Dökümü (Noter, Ekspertiz, 150 Nokta, Sigorta) -->
+            <div class="bg-slate-50 border border-slate-200/80 rounded-xl p-3.5 mb-4">
+              <div class="flex items-center justify-between mb-2.5">
+                <span class="text-xs font-bold text-navy-700 flex items-center space-x-1.5">
+                  <svg class="w-3.5 h-3.5 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
+                  <span>Sabit Gider Dökümü (Parametre Merkezinden)</span>
+                </span>
+                <span id="fixedSumBadge" class="text-xs font-bold text-slate-700 font-display tabular-nums">₺19.600</span>
+              </div>
+              <div class="grid grid-cols-4 gap-2.5 text-center">
+                <div class="bg-white p-2 rounded-lg border border-slate-200/60 shadow-2xs">
+                  <div class="text-[10px] text-slate-500">Noter Masrafı</div>
+                  <div id="costNotary" class="text-xs font-bold text-slate-800 tabular-nums mt-0.5">₺2.600</div>
+                  <div id="exemptNotary" class="hidden text-[9px] text-amber-600 font-bold">Muaf</div>
+                </div>
+                <div class="bg-white p-2 rounded-lg border border-slate-200/60 shadow-2xs">
+                  <div class="text-[10px] text-slate-500">Ekspertiz</div>
+                  <div id="costExp" class="text-xs font-bold text-slate-800 tabular-nums mt-0.5">₺8.500</div>
+                </div>
+                <div class="bg-white p-2 rounded-lg border border-slate-200/60 shadow-2xs">
+                  <div class="text-[10px] text-slate-500">150 Nokta</div>
+                  <div id="cost150" class="text-xs font-bold text-slate-800 tabular-nums mt-0.5">₺4.500</div>
+                </div>
+                <div class="bg-white p-2 rounded-lg border border-slate-200/60 shadow-2xs">
+                  <div class="text-[10px] text-slate-500">Sigorta Gideri</div>
+                  <div id="costIns" class="text-xs font-bold text-slate-800 tabular-nums mt-0.5">₺4.000</div>
+                  <div id="exemptIns" class="hidden text-[9px] text-amber-600 font-bold">Muaf</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Ek Masraf / Onarım Masrafı -->
+            <div>
+              <label class="block text-xs font-semibold text-slate-700 mb-1">Ekstra Masraf (Boya, Onarım, Kuaför, Aksesuar)</label>
+              <div class="relative">
+                <span class="absolute left-3 top-2 text-xs text-slate-400 font-bold">₺</span>
+                <input id="inputExtraCost" type="number" value="0" oninput="updateCalculations()" class="w-full pl-8 pr-3 py-2 text-xs font-medium bg-slate-50 border border-slate-300 rounded-lg focus:bg-white focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 outline-none tabular-nums" placeholder="0">
+              </div>
+            </div>
+
+          </section>
+
+        </div>
+
+        <!-- ================= RIGHT COLUMN: CANLI FİNANSAL ANALİZ KARTI (5 Cols) ================= -->
+        <div class="lg:col-span-5 space-y-4 sticky top-0">
+          
+          <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
+            <!-- Header of Financial Card -->
+            <div class="bg-gradient-to-r from-navy-800 to-navy-700 p-4 text-white flex items-center justify-between">
+              <div>
+                <div class="flex items-center space-x-2">
+                  <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+                  <h4 class="text-xs font-bold uppercase tracking-wider text-slate-200">Canlı Finansal Analiz</h4>
+                </div>
+                <p class="text-[11px] text-slate-300 mt-0.5">Excel formül motoru anlık simülasyonu</p>
+              </div>
+              <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-white/10 text-amber-300 border border-white/20">
+                Önizleme — Kaydedilmedi
+              </span>
+            </div>
+
+            <div class="p-5 space-y-4">
+              
+              <!-- Big Number 1: TOPLAM MALİYET -->
+              <div class="bg-slate-50 border border-slate-200/80 rounded-xl p-3.5 flex items-center justify-between">
+                <div>
+                  <span class="text-[11px] font-semibold text-slate-500 block uppercase tracking-wider">Toplam Araç Maliyeti</span>
+                  <div id="liveTotalCost" class="text-2xl font-bold font-display text-navy-900 tabular-nums mt-0.5">₺1.173.800</div>
+                  <span class="text-[10px] text-slate-400">Alış + Sabit Gider + Ek Masraf + SKS Dahil</span>
+                </div>
+                <div class="w-10 h-10 rounded-xl bg-blue-100 text-brand-600 flex items-center justify-center font-bold">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                </div>
+              </div>
+
+              <!-- Big Number 2: TAHMİNİ NET KÂR / SATIŞ KÂRI (Green / Red indicator) -->
+              <div id="boxProfit" class="bg-emerald-50/80 border border-emerald-200 rounded-xl p-3.5 flex items-center justify-between transition-all">
+                <div>
+                  <span id="lblProfitTitle" class="text-[11px] font-bold text-emerald-800 block uppercase tracking-wider">Tahmini Net Kâr (Beklenen)</span>
+                  <div id="liveProfitValue" class="text-2xl font-bold font-display text-emerald-700 tabular-nums mt-0.5">+₺66.200</div>
+                  <div class="flex items-center space-x-2 mt-0.5">
+                    <span id="liveProfitMargin" class="text-[11px] font-bold text-emerald-800 bg-emerald-100/70 px-1.5 py-0.2 rounded tabular-nums">%5.3 Net Marj</span>
+                    <span class="text-[10px] text-emerald-700">Satış sonrası net kazanç</span>
+                  </div>
+                </div>
+                <div id="profitIconBadge" class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold text-lg">
+                  ▲
+                </div>
+              </div>
+
+              <!-- SKS Süresi ve Finansman Detayı -->
+              <div class="border border-slate-200/80 rounded-xl p-3.5 space-y-2.5 bg-white">
+                <div class="flex items-center justify-between text-xs pb-2 border-b border-slate-100">
+                  <span class="text-slate-600 flex items-center space-x-1.5">
+                    <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    <span>Stokta Bekleme (SKS)</span>
+                  </span>
+                  <span id="liveSksDays" class="font-bold px-2 py-0.5 rounded-full text-[11px] bg-rose-100 text-rose-700 tabular-nums">94 Gün (Kritik Eşik)</span>
+                </div>
+
+                <div class="flex items-center justify-between text-xs">
+                  <span class="text-slate-500">SKS Finansman Faizi (%3/Ay):</span>
+                  <span id="liveSksFinance" class="font-bold text-rose-600 tabular-nums">₺34.200</span>
+                </div>
+
+                <div class="flex items-center justify-between text-xs">
+                  <span class="text-slate-500">Ham Alış Bedeli:</span>
+                  <span id="liveRawPurchase" class="font-semibold text-slate-700 tabular-nums">₺1.120.000</span>
+                </div>
+
+                <div class="flex items-center justify-between text-xs">
+                  <span class="text-slate-500">Sabit Giderler Toplamı:</span>
+                  <span id="liveFixedExpense" class="font-semibold text-slate-700 tabular-nums">₺19.600</span>
+                </div>
+
+                <div class="flex items-center justify-between text-xs pt-1.5 border-t border-slate-100">
+                  <span class="text-slate-500 font-medium">Hedef / Satış Farkı:</span>
+                  <span id="liveGrossDiff" class="font-bold text-slate-900 tabular-nums">₺120.000</span>
+                </div>
+              </div>
+
+              <!-- Durum & Hesaplama Bilgi Çubuğu -->
+              <div id="liveEngineState" class="bg-slate-100 rounded-lg p-2.5 flex items-center justify-between text-[11px] text-slate-600">
+                <span class="flex items-center space-x-1.5">
+                  <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                  <span>Formül Motoru: <strong>Hazır & Senkronize</strong></span>
+                </span>
+                <span class="text-slate-400">0.04 ms</span>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Mini Interactive State Tester Bar for review (shows error, calculating, etc.) -->
+          <div class="bg-slate-100/90 border border-slate-200/80 rounded-xl p-3">
+            <div class="text-[10px] font-bold uppercase tracking-wider text-slate-500 mb-1.5">Arayüz Durum Test Butonları:</div>
+            <div class="flex flex-wrap gap-1.5 text-[11px]">
+              <button onclick="simulateState('normal')" class="px-2 py-1 bg-white border border-slate-300 rounded font-medium hover:bg-slate-50">Normal Durum</button>
+              <button onclick="simulateState('calculating')" class="px-2 py-1 bg-white border border-slate-300 rounded font-medium hover:bg-slate-50">Hesaplanıyor...</button>
+              <button onclick="simulateState('error')" class="px-2 py-1 bg-rose-100 border border-rose-200 text-rose-700 rounded font-semibold hover:bg-rose-200">Kayıt Hatası</button>
+              <button onclick="simulateState('loss')" class="px-2 py-1 bg-white border border-slate-300 rounded font-medium hover:bg-slate-50">Zararlı Durum</button>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- 3. FIXED BOTTOM ACTION BAR (VAZGEÇ / KAYDET ALANI) -->
+    <footer class="px-6 py-3.5 bg-white border-t border-slate-200 flex items-center justify-between shrink-0 shadow-lg relative z-20">
+      <div class="flex items-center space-x-3 text-xs text-slate-500">
+        <span class="flex items-center space-x-1">
+          <svg class="w-4 h-4 text-emerald-600" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+          <span class="font-medium text-slate-700">Veriler güvenli TLS ile şifrelenir</span>
+        </span>
+        <span>•</span>
+        <span>ESC ile iptal edilebilir</span>
+      </div>
+
+      <div class="flex items-center space-x-3">
+        <!-- Vazgeç Butonu -->
+        <button type="button" class="px-5 py-2.5 rounded-xl border border-slate-300 text-xs font-semibold text-slate-700 hover:bg-slate-50 hover:text-slate-900 transition-colors">
+          Vazgeç
+        </button>
+
+        <!-- Kaydet / Güncelle Butonu -->
+        <button id="btnSubmitSave" type="button" onclick="handleSaveAction()" class="px-6 py-2.5 rounded-xl bg-brand-600 hover:bg-brand-700 text-white text-xs font-bold shadow-md shadow-brand-600/20 flex items-center space-x-2 transition-all active:scale-[0.98]">
+          <svg id="saveIconDefault" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+          <svg id="saveIconSpinner" class="hidden w-4 h-4 animate-spin text-white" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+          <span id="saveBtnText">Stok Kaydını Tamamla</span>
+        </button>
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- JAVASCRIPT: CANLI FORMÜL, MOD DEĞİŞİMİ VE HESAPLAMA MOTORU -->
+  <script>
+    let currentMode = 'stock'; // 'stock' | 'sale' | 'acq'
+
+    function formatTRY(amount) {
+      return new Intl.NumberFormat('tr-TR', { style: 'currency', currency: 'TRY', maximumFractionDigits: 0 }).format(amount);
+    }
+
+    function switchFormType(mode) {
+      currentMode = mode;
+      
+      // Update Tab button visuals
+      const tabs = ['tabStock', 'tabSale', 'tabAcq'];
+      tabs.forEach(t => {
+        const btn = document.getElementById(t);
+        btn.className = "px-3.5 py-1.5 rounded-lg text-slate-600 hover:text-slate-900 transition-all flex items-center space-x-1.5";
+      });
+
+      const titleEl = document.getElementById('modalTitle');
+      const saleSpecific = document.getElementById('saleSpecificFields');
+      const bannerRule = document.getElementById('bannerRuleText');
+      const btnText = document.getElementById('saveBtnText');
+      const lblSaleOrList = document.getElementById('lblSaleOrList');
+      const subSaleOrList = document.getElementById('subSaleOrList');
+      const lblProfitTitle = document.getElementById('lblProfitTitle');
+
+      if (mode === 'stock') {
+        document.getElementById('tabStock').className = "px-3.5 py-1.5 rounded-lg bg-white font-semibold text-brand-600 shadow-xs transition-all flex items-center space-x-1.5";
+        titleEl.textContent = "Yeni Stok Girişi & Araç Kayıt Formu";
+        saleSpecific.classList.add('hidden');
+        lblSaleOrList.innerHTML = 'Liste Satış Fiyatı (Hedef) <span class="text-rose-500">*</span>';
+        subSaleOrList.textContent = 'Stok etiket ve ilan vitrin satış fiyatı.';
+        lblProfitTitle.textContent = "Tahmini Net Kâr (Beklenen)";
+        bannerRule.innerHTML = '<strong>Şirket Aracı & Takas Kuralı:</strong> "ŞİRKET ARACI" alım türünde noter ve sigorta giderleri sıfırlanır. Alış bedeline göre SKS finansman payı aylık %3.00 oranıyla günlük hesaplanarak toplam maliyete yansıtılır.';
+        btnText.textContent = "Stok Kaydını Tamamla";
+      } else if (mode === 'sale') {
+        document.getElementById('tabSale').className = "px-3.5 py-1.5 rounded-lg bg-white font-semibold text-brand-600 shadow-xs transition-all flex items-center space-x-1.5";
+        titleEl.textContent = "Araç Satış Kaydı & Kesinleşen Kârlılık Formu";
+        saleSpecific.classList.remove('hidden');
+        lblSaleOrList.innerHTML = 'Gerçekleşen Satış Bedeli <span class="text-rose-500">*</span>';
+        subSaleOrList.textContent = 'Müşteri faturası veya noter satış sözleşme tutarı.';
+        lblProfitTitle.textContent = "Gerçekleşen Net Kâr";
+        bannerRule.innerHTML = '<strong>Satış Kârlılık Kuralı:</strong> Gerçekleşen satış fiyatı üzerinden noter, ekspertiz, 150 nokta, sigorta, ek giderler ve bekleme süresine ait SKS finansman maliyeti düşülerek <strong>Net Kâr</strong> hesaplanır.';
+        btnText.textContent = "Satışı Onayla & Stoğu Düş";
+      } else if (mode === 'acq') {
+        document.getElementById('tabAcq').className = "px-3.5 py-1.5 rounded-lg bg-white font-semibold text-brand-600 shadow-xs transition-all flex items-center space-x-1.5";
+        titleEl.textContent = "Aylık Araç Alım & Kaynak Takip Formu";
+        saleSpecific.classList.add('hidden');
+        lblSaleOrList.innerHTML = 'Tahmini Değerleme / Piyasa Fiyatı';
+        subSaleOrList.textContent = 'İsteğe bağlı kasko / piyasa referans değeri.';
+        lblProfitTitle.textContent = "Alım Maliyet Oranı";
+        bannerRule.innerHTML = '<strong>Aylık Alım Kuralları:</strong> Satış verisi olmayan alımlarda yapay kâr hesabı eklenmez. Yalnızca mevcut <strong>Alış + Ek Masraf</strong> toplamı kaydedilir.';
+        btnText.textContent = "Aylık Alım Kaydını Ekle";
+      }
+
+      updateCalculations();
+    }
+
+    function updateCalculations() {
+      const purchasePrice = parseFloat(document.getElementById('inputPurchasePrice').value) || 0;
+      const listPrice = parseFloat(document.getElementById('inputListPrice').value) || 0;
+      const extraCost = parseFloat(document.getElementById('inputExtraCost').value) || 0;
+      const purchaseType = document.getElementById('inputPurchaseType').value;
+
+      // Base Fixed Costs
+      let notary = 2600;
+      let expertise = 8500;
+      let check150 = 4500;
+      let insurance = 4000;
+
+      // Rule: ŞİRKET ARACI muafiyeti
+      const isCompanyCar = purchaseType === 'ŞİRKET ARACI';
+      if (isCompanyCar) {
+        notary = 0;
+        insurance = 0;
+        document.getElementById('costNotary').classList.add('hidden');
+        document.getElementById('exemptNotary').classList.remove('hidden');
+        document.getElementById('costIns').classList.add('hidden');
+        document.getElementById('exemptIns').classList.remove('hidden');
+      } else {
+        document.getElementById('costNotary').classList.remove('hidden');
+        document.getElementById('exemptNotary').classList.add('hidden');
+        document.getElementById('costIns').classList.remove('hidden');
+        document.getElementById('exemptIns').classList.add('hidden');
+      }
+
+      const totalFixed = notary + expertise + check150 + insurance;
+      document.getElementById('fixedSumBadge').textContent = formatTRY(totalFixed);
+      document.getElementById('liveFixedExpense').textContent = formatTRY(totalFixed);
+      document.getElementById('liveRawPurchase').textContent = formatTRY(purchasePrice);
+
+      // SKS Calculation (94 Days sample, 3% monthly)
+      const days = 94;
+      const monthlyRate = 0.03;
+      const dailyRate = monthlyRate / 30;
+      let sksFinance = (purchaseType === 'KONSİNYE') ? 0 : Math.round(purchasePrice * dailyRate * days);
+      document.getElementById('liveSksFinance').textContent = formatTRY(sksFinance);
+
+      // Total Cost
+      const totalCost = purchasePrice + totalFixed + extraCost + sksFinance;
+      document.getElementById('liveTotalCost').textContent = formatTRY(totalCost);
+
+      // Net Profit
+      const profit = listPrice - totalCost;
+      const profitBox = document.getElementById('boxProfit');
+      const profitVal = document.getElementById('liveProfitValue');
+      const profitMargin = document.getElementById('liveProfitMargin');
+      const profitIcon = document.getElementById('profitIconBadge');
+
+      if (currentMode === 'acq') {
+        profitVal.textContent = formatTRY(purchasePrice + extraCost);
+        profitVal.className = "text-2xl font-bold font-display text-navy-800 tabular-nums mt-0.5";
+        profitMargin.textContent = "Alış + Masraf Net";
+        profitMargin.className = "text-[11px] font-bold text-navy-800 bg-slate-200 px-1.5 py-0.2 rounded tabular-nums";
+        profitBox.className = "bg-slate-50 border border-slate-200 rounded-xl p-3.5 flex items-center justify-between";
+        profitIcon.textContent = "🛒";
+        profitIcon.className = "w-10 h-10 rounded-xl bg-slate-200 text-slate-700 flex items-center justify-center font-bold text-lg";
+      } else if (profit >= 0) {
+        profitVal.textContent = "+" + formatTRY(profit);
+        profitVal.className = "text-2xl font-bold font-display text-emerald-700 tabular-nums mt-0.5";
+        const marginPct = listPrice > 0 ? ((profit / listPrice) * 100).toFixed(1) : 0;
+        profitMargin.textContent = `%${marginPct} Net Marj`;
+        profitMargin.className = "text-[11px] font-bold text-emerald-800 bg-emerald-100/70 px-1.5 py-0.2 rounded tabular-nums";
+        profitBox.className = "bg-emerald-50/80 border border-emerald-200 rounded-xl p-3.5 flex items-center justify-between transition-all";
+        profitIcon.textContent = "▲";
+        profitIcon.className = "w-10 h-10 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold text-lg";
+      } else {
+        profitVal.textContent = "-" + formatTRY(Math.abs(profit));
+        profitVal.className = "text-2xl font-bold font-display text-rose-700 tabular-nums mt-0.5";
+        const marginPct = listPrice > 0 ? ((profit / listPrice) * 100).toFixed(1) : 0;
+        profitMargin.textContent = `%${marginPct} Zarar Marjı`;
+        profitMargin.className = "text-[11px] font-bold text-rose-800 bg-rose-100 px-1.5 py-0.2 rounded tabular-nums";
+        profitBox.className = "bg-rose-50 border border-rose-200 rounded-xl p-3.5 flex items-center justify-between transition-all";
+        profitIcon.textContent = "▼";
+        profitIcon.className = "w-10 h-10 rounded-xl bg-rose-100 text-rose-700 flex items-center justify-center font-bold text-lg";
+      }
+
+      document.getElementById('liveGrossDiff').textContent = formatTRY(listPrice - purchasePrice);
+    }
+
+    function simulateState(state) {
+      const bannerError = document.getElementById('bannerErrorState');
+      const bannerRule = document.getElementById('bannerRuleNotice');
+      const engineState = document.getElementById('liveEngineState');
+
+      if (state === 'error') {
+        bannerError.classList.remove('hidden');
+        document.getElementById('inputPurchasePrice').classList.add('border-rose-500', 'bg-rose-50');
+      } else if (state === 'calculating') {
+        bannerError.classList.add('hidden');
+        document.getElementById('inputPurchasePrice').classList.remove('border-rose-500', 'bg-rose-50');
+        engineState.innerHTML = '<span class="flex items-center space-x-1.5 text-amber-600"><span class="w-1.5 h-1.5 rounded-full bg-amber-500 animate-ping"></span><span>Hesaplanıyor... <strong>SKS ve Formül Eşitleniyor</strong></span></span><span class="text-amber-600 font-mono text-xs">...</span>';
+        setTimeout(() => updateCalculations(), 700);
+      } else if (state === 'loss') {
+        document.getElementById('inputListPrice').value = "1050000"; // Lower than cost
+        updateCalculations();
+      } else {
+        bannerError.classList.add('hidden');
+        document.getElementById('inputPurchasePrice').classList.remove('border-rose-500', 'bg-rose-50');
+        document.getElementById('inputListPrice').value = "1240000";
+        engineState.innerHTML = '<span class="flex items-center space-x-1.5 text-slate-600"><span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span><span>Formül Motoru: <strong>Hazır & Senkronize</strong></span></span><span class="text-slate-400">0.04 ms</span>';
+        updateCalculations();
+      }
+    }
+
+    function handleSaveAction() {
+      const btn = document.getElementById('btnSubmitSave');
+      const spinner = document.getElementById('saveIconSpinner');
+      const defIcon = document.getElementById('saveIconDefault');
+      const text = document.getElementById('saveBtnText');
+
+      defIcon.classList.add('hidden');
+      spinner.classList.remove('hidden');
+      text.textContent = "Kaydediliyor...";
+      btn.disabled = true;
+
+      setTimeout(() => {
+        defIcon.classList.remove('hidden');
+        spinner.classList.add('hidden');
+        text.textContent = "Kayıt Başarılı!";
+        btn.classList.remove('bg-brand-600', 'hover:bg-brand-700');
+        btn.classList.add('bg-emerald-600', 'hover:bg-emerald-700');
+        
+        setTimeout(() => {
+          btn.disabled = false;
+          btn.classList.remove('bg-emerald-600', 'hover:bg-emerald-700');
+          btn.classList.add('bg-brand-600', 'hover:bg-brand-700');
+          switchFormType(currentMode);
+        }, 1500);
+      }, 1000);
+    }
+
+    // Initial calculation on page load
+    updateCalculations();
+  </script>
+</body>
+</html>

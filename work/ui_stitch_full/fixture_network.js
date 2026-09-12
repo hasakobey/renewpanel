@@ -1,0 +1,15 @@
+window.ACQUISITIONS=[];window.ACQSUMMARY={};
+window.fetch=async function(url,opt={}){const u=String(url);let data={};
+ if(u.includes('/api/auth/me'))data={username:'administrator',role:'administrator',active:true,permissions:[]};
+ else if(u.includes('financial-preview'))data=window.financeFixture||{};
+ else if(u.includes('/media-studio/'))data={slots:[],plate:'TEST 002'};
+ else if(u.includes('/api/dashboard'))data=window.fixtureData||{};
+ else if(u.includes('/api/stocks'))data=window.testStocks||[];
+ else if(u.includes('/api/sales'))data=window.fixtureSales||[];
+ else if(u.includes('/api/settings'))data=typeof SETTINGS==='undefined'?{}:SETTINGS;
+ else if(u.includes('/api/performance'))data=typeof PERF==='undefined'?[]:PERF;
+ else if(u.includes('/api/acquisitions/summary'))data=ACQSUMMARY;
+ else if(u.includes('vehicle-sources'))data={stocks:window.testStocks||[],sales:window.fixtureSales||[],acquisitions:[]};
+ else if(u.includes('/api/'))data=[];
+ return new Response(JSON.stringify(data),{status:200,headers:{'Content-Type':'application/json'}});
+};

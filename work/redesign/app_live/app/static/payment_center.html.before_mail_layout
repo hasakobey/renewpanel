@@ -1,0 +1,2480 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RENEW PRO • Ödeme Merkezi</title>
+    <!-- Sekme İkonu (Favicon) -->
+    <link rel="icon" type="image/x-icon" href="renew.ico">
+    <style>
+        :root {
+            --bg-gradient: linear-gradient(135deg, #090d16 0%, #172033 100%);
+            --card-bg: #ffffff;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --border-color: #e2e8f0;
+            --input-bg: #f8fafc;
+            --result-bg: #f8fafc;
+            --primary: #000000;
+            --primary-hover: #333333;
+        }
+
+        [data-theme="dark"] {
+            --bg-gradient: linear-gradient(135deg, #020617 0%, #0f172a 100%);
+            --card-bg: #111827;
+            --text-main: #f9fafb;
+            --text-muted: #9ca3af;
+            --border-color: #374151;
+            --input-bg: #1f2937;
+            --result-bg: #1f2937;
+            --primary: #ffffff;
+            --primary-hover: #e5e7eb;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; transition: background 0.3s, color 0.3s, border-color 0.3s; }
+        body { background: var(--bg-gradient); display: flex; justify-content: center; align-items: center; min-height: 100vh; color: var(--text-main); padding: 20px; }
+        
+        .wrapper { display: flex; gap: 20px; width: 100%; max-width: 1280px; align-items: flex-start; justify-content: center; }
+
+        .side-panel { width: 320px; background: var(--card-bg); padding: 20px; border-radius: 16px; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.35); border-top: 4px solid var(--text-main); }
+        .side-panel h3 { font-size: 0.85rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; font-weight: 700; text-align: center; }
+
+        .card { background: var(--card-bg); padding: 30px; border-radius: 16px; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.35); width: 100%; max-width: 580px; border-top: 4px solid var(--text-main); position: relative; }
+        
+        .top-actions { position: absolute; top: 20px; right: 20px; display: flex; gap: 8px; }
+        .icon-btn { background: var(--input-bg); border: 1px solid var(--border-color); color: var(--text-main); width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 1rem; }
+        
+        .logo-header { text-align: center; margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px solid var(--border-color); padding-right: 80px; }
+        .logo-header img { height: 38px; object-fit: contain; }
+
+        .brand { text-align: center; margin-bottom: 20px; }
+        .brand h1 { font-size: 0.85rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 2.5px; font-weight: 700; }
+        .brand h2 { font-size: 1.3rem; color: var(--text-main); margin-top: 4px; font-weight: 800; }
+        
+        .form-group { margin-bottom: 16px; }
+        
+        .toggle-section { margin-bottom: 16px; background: var(--input-bg); padding: 10px 14px; border-radius: 10px; border: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center; cursor: pointer; }
+        .toggle-section span { font-size: 0.85rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; }
+        .toggle-switch { font-size: 1rem; font-weight: bold; color: var(--text-main); }
+        
+        .collapsible-content { display: none; margin-bottom: 16px; animation: fadeIn 0.3s ease-in-out; }
+        .collapsible-content.show { display: block; }
+
+        label { display: block; margin-bottom: 6px; font-weight: 700; color: var(--text-muted); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px; }
+        input, select { width: 100%; padding: 12px; border: 1.5px solid var(--border-color); border-radius: 8px; font-size: 0.95rem; outline: none; background: var(--input-bg); font-weight: 600; color: var(--text-main); }
+        input:focus, select:focus { border-color: var(--text-main); box-shadow: 0 0 0 3px rgba(100, 116, 139, 0.15); }
+        
+        .quick-taksit { display: flex; gap: 6px; margin-bottom: 14px; }
+        .taksit-btn { flex: 1; padding: 8px; border: 1.5px solid var(--border-color); background: var(--input-bg); border-radius: 8px; font-weight: 700; cursor: pointer; color: var(--text-muted); font-size: 0.8rem; }
+        .taksit-btn:hover { border-color: var(--text-main); color: var(--text-main); }
+        .taksit-btn.active { background: var(--text-main); color: var(--card-bg); border-color: var(--text-main); }
+
+        .result-box { margin-top: 20px; background: var(--result-bg); border-radius: 10px; border: 1px solid var(--border-color); display: none; overflow: hidden; animation: fadeIn 0.4s ease-in-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+
+        .result-item { display: flex; justify-content: space-between; padding: 10px 14px; font-size: 0.85rem; border-bottom: 1px solid var(--border-color); }
+        .result-item:last-child { border-bottom: none; font-weight: bold; background: var(--text-main); color: var(--card-bg); font-size: 0.95rem; padding: 12px 14px; }
+        .result-item span { color: var(--text-muted); font-weight: 600; }
+        .result-item strong { color: var(--text-main); }
+        .result-item:last-child span, .result-item:last-child strong { color: var(--card-bg); }
+
+        .btn-container { display: flex; flex-direction: column; gap: 10px; margin-top: 20px; }
+        .action-btn { flex: 1; padding: 12px; border-radius: 8px; font-weight: 700; font-size: 0.9rem; cursor: pointer; border: 1.5px solid var(--border-color); text-align: center; display: flex; align-items: center; justify-content: center; gap: 6px; }
+        
+        .copy-btn { background-color: var(--input-bg); color: var(--text-main); display: none; }
+        .copy-btn:hover { background-color: var(--border-color); }
+
+        .pdf-btn { background-color: var(--text-main); color: var(--card-bg); border-color: var(--text-main); display: none; }
+        .pdf-btn:hover { opacity: 0.9; }
+
+        .bank-card { background: var(--input-bg); border: 1px solid var(--border-color); border-radius: 8px; padding: 10px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+        .bank-info { flex: 1; }
+        .bank-name { font-size: 0.75rem; font-weight: 800; color: var(--text-main); margin-bottom: 3px; }
+        .bank-iban { font-size: 0.75rem; font-family: monospace; font-weight: 700; color: var(--text-main); }
+        
+        .bank-copy-btn { background: var(--card-bg); border: 1px solid var(--border-color); color: var(--text-main); padding: 6px 10px; border-radius: 6px; font-size: 0.7rem; font-weight: 700; cursor: pointer; white-space: nowrap; }
+        .bank-copy-btn:hover { background: var(--text-main); color: var(--card-bg); }
+
+        @media (max-width: 850px) {
+            .wrapper { flex-direction: column-reverse; align-items: center; }
+            .side-panel { width: 100%; max-width: 580px; }
+        }
+
+        /* PDF / yazdırma görünümü */
+        .print-sheet { display:none; }
+        .pdf-modal { display:none; position:fixed; inset:0; z-index:9999; background:rgba(2,6,23,.62); backdrop-filter:blur(5px); align-items:center; justify-content:center; padding:20px; }
+        .pdf-modal.show { display:flex; }
+        .pdf-modal-card { width:100%; max-width:430px; background:var(--card-bg); color:var(--text-main); border-radius:16px; box-shadow:0 30px 80px rgba(0,0,0,.35); overflow:hidden; border:1px solid var(--border-color); }
+        .pdf-modal-head { padding:18px 20px; border-bottom:1px solid var(--border-color); }
+        .pdf-modal-head strong { display:block; font-size:1rem; margin-bottom:4px; }
+        .pdf-modal-head span { color:var(--text-muted); font-size:.8rem; }
+        .pdf-modal-actions { padding:16px; display:grid; gap:10px; }
+        .pdf-choice { width:100%; padding:13px 14px; border-radius:10px; border:1px solid var(--border-color); background:var(--input-bg); color:var(--text-main); font-weight:800; cursor:pointer; text-align:left; }
+        .pdf-choice.primary { background:var(--text-main); color:var(--card-bg); border-color:var(--text-main); }
+        .pdf-modal-close { width:100%; border:0; background:transparent; color:var(--text-muted); padding:4px 10px 16px; cursor:pointer; font-weight:700; }
+        .bank-tools { display:flex; gap:8px; margin-top:12px; }
+        .bank-tools button { flex:1; padding:9px 8px; border-radius:8px; border:1px solid var(--border-color); background:var(--input-bg); color:var(--text-main); font-size:.72rem; font-weight:800; cursor:pointer; }
+        @media print {
+            @page { size:A4; margin:12mm; }
+            * { transition:none !important; }
+            body { background:#fff !important; color:#111827 !important; padding:0 !important; display:block !important; min-height:auto !important; }
+            .wrapper, .pdf-modal { display:none !important; }
+            .print-sheet.active { display:block !important; }
+            .print-doc { font-family:'Segoe UI',Arial,sans-serif; color:#111827; }
+            .print-header { border:2px solid #111827; border-radius:12px; padding:18px 20px; margin-bottom:16px; display:flex; justify-content:space-between; align-items:flex-end; }
+            .print-header h1 { font-size:18px; margin:0 0 4px; }
+            .print-header .sub { font-size:11px; font-weight:700; letter-spacing:1px; color:#64748b; }
+            .print-customer { background:#f8fafc; border:1px solid #dbe3ee; border-radius:10px; padding:12px 14px; margin-bottom:14px; }
+            .print-customer b { font-size:13px; }
+            .print-customer div { margin-top:4px; font-size:12px; color:#475569; }
+            .print-table { width:100%; border-collapse:separate; border-spacing:0; border:1px solid #dbe3ee; border-radius:10px; overflow:hidden; }
+            .print-table td { padding:11px 13px; border-bottom:1px solid #dbe3ee; font-size:12px; }
+            .print-table tr:last-child td { border-bottom:0; }
+            .print-table td:first-child { color:#52627a; font-weight:700; width:58%; }
+            .print-table td:last-child { text-align:right; font-weight:800; }
+            .print-table tr.total td { background:#0f172a; color:#fff; font-size:14px; font-weight:900; }
+            .print-bank { border:1px solid #dbe3ee; border-radius:10px; padding:13px 14px; margin-bottom:10px; page-break-inside:avoid; }
+            .print-bank-name { font-size:12px; font-weight:900; margin-bottom:6px; }
+            .print-bank-iban { font-family:Consolas,monospace; font-size:13px; font-weight:800; }
+            .print-footer { margin-top:16px; border-top:1px solid #dbe3ee; padding-top:10px; font-size:10px; color:#64748b; text-align:center; }
+        }
+    
+
+        /* =========================================================
+           2026 UI REFRESH — HESAPLAMA ALANI BİREBİR KORUNDU
+           Aşağıdaki dokunuşlar yalnızca sayfa zemini, üst marka alanı,
+           sol panel ve sonuç sonrası aksiyon butonlarını etkiler.
+           Tutar / taksit / sonuç tablosu stillerine dokunulmamıştır.
+           ========================================================= */
+        body {
+            background:
+                radial-gradient(circle at 15% 18%, rgba(255,255,255,.08) 0, rgba(255,255,255,0) 28%),
+                radial-gradient(circle at 88% 82%, rgba(255,214,0,.08) 0, rgba(255,214,0,0) 24%),
+                linear-gradient(135deg, #07101f 0%, #101a2c 52%, #080d17 100%);
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            background-image: linear-gradient(rgba(255,255,255,.018) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(255,255,255,.018) 1px, transparent 1px);
+            background-size: 28px 28px;
+            mask-image: linear-gradient(to bottom, rgba(0,0,0,.75), transparent 92%);
+        }
+
+        .wrapper {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Sol yardımcı panel — işlev aynı, görünüm daha premium */
+        .side-panel {
+            border-top: 0;
+            box-shadow: 0 28px 70px -28px rgba(0,0,0,.72);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .side-panel::before {
+            content: "ÇAYAN OTOMOTİV  •  RENEW TARSUS";
+            display: block;
+            margin: -20px -20px 18px;
+            padding: 12px 16px;
+            background: #0f172a;
+            color: #fff;
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+            text-align: center;
+        }
+
+        [data-theme="dark"] .side-panel::before {
+            background: #020617;
+        }
+
+        .side-panel .toggle-section {
+            transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+        }
+
+        .side-panel .toggle-section:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 8px 18px rgba(15,23,42,.08);
+        }
+
+        .bank-card {
+            transition: transform .18s ease, box-shadow .18s ease;
+        }
+
+        .bank-card:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 8px 18px rgba(15,23,42,.08);
+        }
+
+        /* Ana kartın yalnızca üst marka bölümü */
+        .card {
+            box-shadow: 0 30px 80px -32px rgba(0,0,0,.78);
+        }
+
+        .logo-header {
+            position: relative;
+        }
+
+        .logo-header::after {
+            content: "RENEW • GÜVENLİ ÖDEME";
+            position: absolute;
+            left: 50%;
+            bottom: -9px;
+            transform: translateX(-50%);
+            background: var(--card-bg);
+            color: var(--text-muted);
+            padding: 0 10px;
+            font-size: 9px;
+            font-weight: 800;
+            letter-spacing: 1.4px;
+            white-space: nowrap;
+        }
+
+        .brand h1 {
+            opacity: .92;
+        }
+
+        .brand h2 {
+            letter-spacing: -.2px;
+        }
+
+        .icon-btn {
+            transition: transform .18s ease, box-shadow .18s ease;
+        }
+
+        .icon-btn:hover {
+            transform: translateY(-1px) rotate(4deg);
+            box-shadow: 0 8px 18px rgba(15,23,42,.12);
+        }
+
+        /* Sonuç alanının altındaki işlemler — hesaplama görünümünü etkilemez */
+        .btn-container {
+            padding-top: 2px;
+        }
+
+        .action-btn {
+            min-height: 44px;
+            transition: transform .18s ease, box-shadow .18s ease, opacity .18s ease;
+        }
+
+        .action-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 10px 22px rgba(15,23,42,.12);
+        }
+
+        #wpBtn {
+            font-size: .92rem !important;
+            box-shadow: 0 10px 22px rgba(37,211,102,.14);
+        }
+
+        @media (max-width: 850px) {
+            body { padding: 12px; }
+            .side-panel::before { margin-left: -20px; margin-right: -20px; }
+        }
+
+
+        /* Mail hazırlama paneli */
+        .mail-panel { width: 320px; background: var(--card-bg); padding: 20px; border-radius: 16px; box-shadow: 0 25px 50px -12px rgba(0,0,0,.35); position: relative; overflow: hidden; }
+        .mail-panel::before { content: "MÜŞTERİ • HAZIR MAİL"; display:block; margin:-20px -20px 18px; padding:12px 16px; background:#0f172a; color:#fff; font-size:10px; font-weight:800; letter-spacing:1.5px; text-align:center; }
+        [data-theme="dark"] .mail-panel::before { background:#020617; }
+        .mail-panel h3 { font-size:.95rem; margin-bottom:14px; color:var(--text-main); }
+        .mail-grid { display:grid; gap:12px; }
+        .mail-choice { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+        .mail-choice button { padding:10px 8px; border:1.5px solid var(--border-color); background:var(--input-bg); color:var(--text-muted); border-radius:8px; font-weight:700; cursor:pointer; }
+        .mail-choice button.active { background:var(--text-main); color:var(--card-bg); border-color:var(--text-main); }
+        .mail-preview { width:100%; min-height:235px; resize:vertical; padding:12px; border:1.5px solid var(--border-color); border-radius:10px; background:var(--input-bg); color:var(--text-main); font:600 .78rem/1.55 'Segoe UI',Tahoma,Geneva,Verdana,sans-serif; outline:none; }
+        .mail-copy-btn { width:100%; margin-top:10px; padding:12px; border:none; border-radius:9px; background:var(--text-main); color:var(--card-bg); font-weight:800; cursor:pointer; }
+        .mail-outlook-btn { width:100%; margin-top:8px; padding:12px; border:none; border-radius:9px; background:#0A64AD; color:#fff; font-weight:800; cursor:pointer; }
+        .mail-outlook-btn:hover { opacity:.92; }
+        .mail-note { margin-top:8px; color:var(--text-muted); font-size:.7rem; line-height:1.4; text-align:center; }
+        @media (max-width: 1180px) { .wrapper { flex-wrap:wrap; } .mail-panel { width:100%; max-width:580px; } }
+    
+        /* Sağ panel: açılır/kapanır mail ve ödeme bildirimi */
+        .collapsible-mail{padding:0 18px 18px!important;}
+        .collapsible-mail::before{display:none!important;}
+        .mail-panel-toggle{width:calc(100% + 36px);margin:0 -18px;border:0;background:#0b1220;color:#fff;padding:16px 18px;display:flex;align-items:center;justify-content:space-between;font-weight:900;font-size:.95rem;cursor:pointer;letter-spacing:.2px;}
+        .mail-panel-toggle #mailPanelIcon{font-size:1.25rem;line-height:1;}
+        .mail-panel-content{display:none;padding-top:14px;}
+        .mail-panel-content.show{display:block;}
+        .mail-section{border:1px solid #dfe5ec;border-radius:14px;overflow:hidden;background:#fff;margin-bottom:12px;}
+        .mail-section-title{width:100%;border:0;background:#f6f8fb;color:#111827;padding:13px 14px;display:flex;justify-content:space-between;align-items:center;font-weight:900;cursor:pointer;text-align:left;}
+        .mail-section-body{display:none;padding:14px;}
+        .mail-section-body.show{display:block;}
+        .short-preview{min-height:170px!important;}
+        body[data-theme="light"] .mail-section{background:#fff!important;}
+        body[data-theme="light"] .mail-section-title{background:#f6f8fb!important;color:#111827!important;}
+        .top-actions{display:none!important;}
+
+
+
+/* ===== V3: ORTALANMIŞ RENEW KİMLİĞİ + GELİŞMİŞ SAĞ ACCORDION ===== */
+.card:before{
+  content:"ÖDEME MERKEZİ"!important;
+  background:#0b1220!important;
+  justify-content:flex-start!important;
+  padding-right:30px!important;
+}
+.card:after{display:none!important;}
+.logo-header{
+  margin:2px 0 18px!important;
+  padding:0!important;
+  border:0!important;
+  text-align:center!important;
+  display:flex!important;
+  justify-content:center!important;
+  align-items:center!important;
+}
+.renew-logo-shell{
+  min-width:190px;
+  min-height:68px;
+  padding:12px 28px;
+  border:1px solid #e2e8f0;
+  border-radius:18px;
+  background:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  box-shadow:0 10px 28px rgba(15,23,42,.08);
+  position:relative;
+}
+.renew-logo-shell:after{
+  content:"";
+  position:absolute;
+  left:34px;right:34px;bottom:-1px;
+  height:4px;
+  border-radius:4px 4px 0 0;
+  background:var(--renew-yellow,#f7d117);
+}
+.renew-logo-shell img{
+  display:block;
+  max-width:155px!important;
+  width:auto!important;
+  height:40px!important;
+  object-fit:contain!important;
+  filter:none!important;
+}
+.renew-fallback{
+  display:none;
+  align-items:center;
+  justify-content:center;
+  color:#0b1220;
+  font-size:32px;
+  font-weight:1000;
+  letter-spacing:-2px;
+  text-transform:lowercase;
+  line-height:1;
+}
+
+/* Sağ paneli soldaki kartlarla aynı aileye getir */
+.collapsible-mail{
+  padding:18px!important;
+  border-radius:22px!important;
+}
+.mail-panel-toggle{
+  width:100%!important;
+  margin:0!important;
+  padding:14px 15px!important;
+  min-height:54px;
+  border:1px solid #d9e1ea!important;
+  border-radius:14px!important;
+  background:#eef2f6!important;
+  color:#334155!important;
+  box-shadow:none!important;
+  font-size:.82rem!important;
+  font-weight:900!important;
+  letter-spacing:.45px!important;
+  text-transform:uppercase;
+  transition:transform .18s ease, border-color .18s ease, background .18s ease!important;
+}
+.mail-panel-toggle:hover{
+  background:#e7edf3!important;
+  border-color:#c4ced9!important;
+  transform:translateY(-1px);
+}
+.mail-panel-toggle .mail-plus,
+.mail-section-title .mail-plus{
+  flex:0 0 30px;
+  width:30px;
+  height:30px;
+  border-radius:10px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  background:#0b1220;
+  color:#fff!important;
+  font-size:18px!important;
+  font-weight:800!important;
+  line-height:1;
+  box-shadow:0 5px 12px rgba(15,23,42,.12);
+}
+.mail-panel-content{
+  padding-top:12px!important;
+  animation:slideMailIn .24s ease both;
+}
+.mail-panel-content.show{display:block!important;}
+@keyframes slideMailIn{
+  from{opacity:0;transform:translateY(-7px)}
+  to{opacity:1;transform:translateY(0)}
+}
+.mail-section{
+  margin-bottom:10px!important;
+  border:1px solid #dbe3ec!important;
+  border-radius:14px!important;
+  background:#fff!important;
+  box-shadow:0 6px 16px rgba(15,23,42,.035)!important;
+}
+.mail-section-title{
+  min-height:52px;
+  padding:11px 12px 11px 14px!important;
+  border:0!important;
+  border-radius:13px!important;
+  background:#f8fafc!important;
+  color:#334155!important;
+  font-size:.82rem!important;
+  font-weight:850!important;
+  letter-spacing:.15px;
+}
+.mail-section-title:hover{background:#f1f5f9!important;}
+.mail-section-body.show{
+  display:block!important;
+  animation:slideSectionIn .22s ease both;
+}
+@keyframes slideSectionIn{
+  from{opacity:0;transform:translateY(-5px)}
+  to{opacity:1;transform:translateY(0)}
+}
+.mail-section-body{border-top:1px solid #e5eaf0;}
+
+@media(max-width:850px){
+ .renew-logo-shell{min-width:170px;min-height:62px;padding:10px 22px}
+ .renew-logo-shell img{max-width:140px!important;height:36px!important}
+}
+
+
+/* Sigorta iptali dosya alanı */
+.insurance-file-box{margin-top:4px;padding:12px;border:1px dashed #cbd5e1;border-radius:12px;background:#f8fafc}
+.insurance-file-input{width:100%;padding:10px;border:1px solid #dbe3ec;border-radius:10px;background:#fff;color:#0f172a;font-weight:700;cursor:pointer}
+.insurance-file-info{margin-top:8px;font-size:.78rem;line-height:1.4;color:#64748b;font-weight:700;word-break:break-word}
+.insurance-file-info.ready{color:#166534}
+.insurance-preview{display:none;margin-top:10px;max-width:100%;max-height:150px;border-radius:10px;border:1px solid #e2e8f0;object-fit:contain;background:#fff}
+
+</style>
+
+<style>
+/* =========================================================
+   TASARIM V2 — RENEW PREMIUM DASHBOARD
+   İşlevler, ID'ler ve JavaScript aynen korunmuştur.
+   ========================================================= */
+:root{
+  --renew-yellow:#f7d117;
+  --renew-yellow-soft:rgba(247,209,23,.16);
+  --panel-shadow:0 22px 55px rgba(2,6,23,.22);
+  --panel-radius:22px;
+}
+
+body{
+  align-items:flex-start;
+  padding:34px 24px 48px;
+  background:
+    radial-gradient(circle at 50% -10%, rgba(247,209,23,.16), transparent 28%),
+    radial-gradient(circle at 8% 85%, rgba(255,255,255,.07), transparent 24%),
+    linear-gradient(145deg,#07101d 0%,#0d1728 45%,#070b13 100%);
+}
+
+body::after{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  background:linear-gradient(115deg,transparent 0 44%,rgba(255,255,255,.025) 44% 45%,transparent 45% 100%);
+}
+
+.wrapper{
+  max-width:1440px;
+  gap:18px;
+  display:grid;
+  grid-template-columns:310px minmax(500px,620px) 330px;
+  align-items:start;
+}
+
+.side-panel,.card,.mail-panel{
+  border:1px solid rgba(255,255,255,.10);
+  border-radius:var(--panel-radius);
+  box-shadow:var(--panel-shadow);
+  backdrop-filter:blur(10px);
+}
+
+.side-panel,.mail-panel{
+  width:100%;
+  padding:18px;
+}
+
+.card{
+  max-width:none;
+  padding:28px 30px 30px;
+  border-top:0;
+  overflow:hidden;
+}
+
+.card::before{
+  content:"";
+  position:absolute;
+  left:0; top:0; right:0;
+  height:5px;
+  background:linear-gradient(90deg,#111827 0 58%,var(--renew-yellow) 58% 100%);
+}
+
+.side-panel::before,.mail-panel::before{
+  margin:-18px -18px 18px;
+  padding:13px 16px;
+  background:linear-gradient(90deg,#0b1220,#111827);
+  color:#fff;
+  letter-spacing:1.7px;
+  border-bottom:3px solid var(--renew-yellow);
+}
+
+.logo-header{
+  margin-bottom:16px;
+  padding:3px 76px 18px 0;
+  border-bottom:1px solid var(--border-color);
+}
+.logo-header img{height:42px;filter:drop-shadow(0 5px 10px rgba(0,0,0,.08));}
+.logo-header::after{
+  content:"ÇAYAN OTOMOTİV  •  RENEW TARSUS";
+  bottom:-7px;
+  color:var(--text-muted);
+  font-size:8.5px;
+  letter-spacing:1.3px;
+}
+
+.brand{margin-bottom:22px;}
+.brand h1{font-size:.78rem;letter-spacing:3px;}
+.brand h2{font-size:1.42rem;letter-spacing:-.35px;}
+
+.top-actions{top:18px;right:18px;}
+.icon-btn{
+  width:38px;height:38px;
+  border-radius:11px;
+  box-shadow:0 7px 18px rgba(15,23,42,.08);
+}
+
+.form-group{margin-bottom:17px;}
+label{font-size:.72rem;letter-spacing:.7px;margin-bottom:7px;}
+input,select{
+  min-height:46px;
+  border-radius:11px;
+  border-width:1px;
+  padding:12px 14px;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.55);
+}
+input:focus,select:focus{
+  border-color:#94a3b8;
+  box-shadow:0 0 0 4px rgba(148,163,184,.12);
+}
+
+/* Ana tutar alanı güçlü, işlev aynı */
+#tutar{
+  min-height:58px;
+  font-size:1.35rem;
+  font-weight:850;
+  letter-spacing:.2px;
+  background:linear-gradient(180deg,var(--input-bg),var(--card-bg));
+  border:1.5px solid #cbd5e1;
+}
+#tutar:focus{border-color:#111827;box-shadow:0 0 0 4px rgba(247,209,23,.20);}
+
+.quick-taksit{gap:8px;margin-bottom:15px;}
+.taksit-btn{
+  min-height:40px;
+  border-radius:10px;
+  transition:transform .16s ease,box-shadow .16s ease,border-color .16s ease;
+}
+.taksit-btn:hover{transform:translateY(-1px);box-shadow:0 8px 18px rgba(15,23,42,.08);}
+.taksit-btn.active{
+  background:#101827;
+  border-color:#101827;
+  color:#fff;
+  box-shadow:inset 0 -3px 0 var(--renew-yellow),0 9px 20px rgba(15,23,42,.16);
+}
+
+.result-box{
+  margin-top:22px;
+  border-radius:14px;
+  box-shadow:0 12px 30px rgba(15,23,42,.06);
+}
+.result-item{padding:11px 15px;}
+.result-item:last-child{
+  background:linear-gradient(90deg,#0b1220,#182235);
+  position:relative;
+  padding:15px;
+}
+.result-item:last-child::before{
+  content:"";position:absolute;left:0;top:0;bottom:0;width:5px;background:var(--renew-yellow);
+}
+
+.btn-container{gap:9px;margin-top:18px;}
+.action-btn{
+  min-height:44px;
+  border-radius:11px;
+  transition:transform .16s ease,box-shadow .16s ease,opacity .16s ease;
+}
+.action-btn:hover{transform:translateY(-1px);box-shadow:0 9px 18px rgba(15,23,42,.10);}
+#wpBtn{box-shadow:0 9px 20px rgba(37,211,102,.16);}
+.pdf-btn{background:linear-gradient(90deg,#0b1220,#172033);}
+
+.toggle-section{
+  border-radius:12px;
+  padding:12px 13px;
+  background:linear-gradient(180deg,var(--input-bg),rgba(248,250,252,.6));
+}
+.toggle-section span:first-child{font-size:.77rem;letter-spacing:.55px;}
+
+.bank-card{
+  border-radius:12px;
+  padding:12px;
+  margin-bottom:9px;
+  background:linear-gradient(180deg,var(--input-bg),var(--card-bg));
+}
+.bank-name{font-size:.73rem;letter-spacing:.2px;}
+.bank-iban{font-size:.71rem;line-height:1.35;}
+.bank-copy-btn{border-radius:8px;padding:7px 9px;}
+.bank-tools button{border-radius:9px;min-height:36px;}
+
+.mail-panel h3{
+  text-align:left;
+  font-size:1rem;
+  margin-bottom:14px;
+  padding-bottom:10px;
+  border-bottom:1px solid var(--border-color);
+}
+.mail-grid{gap:11px;}
+.mail-choice button{
+  border-radius:10px;
+  min-height:42px;
+  transition:.16s ease;
+}
+.mail-choice button.active{
+  background:#101827;
+  color:#fff;
+  border-color:#101827;
+  box-shadow:inset 0 -3px 0 var(--renew-yellow);
+}
+.mail-preview{
+  min-height:248px;
+  border-radius:12px;
+  font-size:.76rem;
+  line-height:1.58;
+  background:linear-gradient(180deg,var(--input-bg),var(--card-bg));
+}
+.mail-copy-btn,.mail-outlook-btn{
+  min-height:44px;
+  border-radius:11px;
+  transition:transform .16s ease,box-shadow .16s ease;
+}
+.mail-copy-btn:hover,.mail-outlook-btn:hover{transform:translateY(-1px);box-shadow:0 9px 18px rgba(15,23,42,.12);}
+.mail-copy-btn{background:linear-gradient(90deg,#0b1220,#182235);}
+.mail-outlook-btn{background:linear-gradient(90deg,#075b9c,#0A64AD);}
+.mail-note{font-size:.68rem;}
+
+.pdf-modal-card{border-radius:20px;overflow:hidden;}
+.pdf-modal-head{border-top:4px solid var(--renew-yellow);}
+.pdf-choice{border-radius:11px;min-height:48px;}
+.pdf-choice.primary{background:linear-gradient(90deg,#0b1220,#182235);}
+
+[data-theme="dark"] .card::before{background:linear-gradient(90deg,#e5e7eb 0 58%,var(--renew-yellow) 58% 100%);}
+[data-theme="dark"] #tutar{border-color:#475569;}
+[data-theme="dark"] .toggle-section,
+[data-theme="dark"] .bank-card,
+[data-theme="dark"] .mail-preview{background:#172033;}
+
+@media (max-width:1220px){
+  .wrapper{grid-template-columns:minmax(290px,1fr) minmax(500px,1.7fr);max-width:980px;}
+  .mail-panel{grid-column:1 / -1;max-width:none;}
+  .mail-grid{grid-template-columns:repeat(2,minmax(0,1fr));column-gap:12px;}
+  .mail-grid > div:nth-last-child(-n+3){grid-column:1 / -1;}
+}
+@media (max-width:850px){
+  body{padding:18px 12px 30px;}
+  .wrapper{display:flex;flex-direction:column;max-width:620px;gap:14px;}
+  .card{order:1;width:100%;padding:24px 18px;}
+  .side-panel{order:2;max-width:none;}
+  .mail-panel{order:3;max-width:none;}
+  .mail-grid{display:grid;grid-template-columns:1fr;}
+  .mail-grid > div:nth-last-child(-n+3){grid-column:auto;}
+  .logo-header{padding-right:58px;}
+  .brand h2{font-size:1.28rem;}
+}
+
+        /* Sağ panel: açılır/kapanır mail ve ödeme bildirimi */
+        .collapsible-mail{padding:0 18px 18px!important;}
+        .collapsible-mail::before{display:none!important;}
+        .mail-panel-toggle{width:calc(100% + 36px);margin:0 -18px;border:0;background:#0b1220;color:#fff;padding:16px 18px;display:flex;align-items:center;justify-content:space-between;font-weight:900;font-size:.95rem;cursor:pointer;letter-spacing:.2px;}
+        .mail-panel-toggle #mailPanelIcon{font-size:1.25rem;line-height:1;}
+        .mail-panel-content{display:none;padding-top:14px;}
+        .mail-panel-content.show{display:block;}
+        .mail-section{border:1px solid #dfe5ec;border-radius:14px;overflow:hidden;background:#fff;margin-bottom:12px;}
+        .mail-section-title{width:100%;border:0;background:#f6f8fb;color:#111827;padding:13px 14px;display:flex;justify-content:space-between;align-items:center;font-weight:900;cursor:pointer;text-align:left;}
+        .mail-section-body{display:none;padding:14px;}
+        .mail-section-body.show{display:block;}
+        .short-preview{min-height:170px!important;}
+        body[data-theme="light"] .mail-section{background:#fff!important;}
+        body[data-theme="light"] .mail-section-title{background:#f6f8fb!important;color:#111827!important;}
+        .top-actions{display:none!important;}
+
+
+
+/* ===== V3: ORTALANMIŞ RENEW KİMLİĞİ + GELİŞMİŞ SAĞ ACCORDION ===== */
+.card:before{
+  content:"ÖDEME MERKEZİ"!important;
+  background:#0b1220!important;
+  justify-content:flex-start!important;
+  padding-right:30px!important;
+}
+.card:after{display:none!important;}
+.logo-header{
+  margin:2px 0 18px!important;
+  padding:0!important;
+  border:0!important;
+  text-align:center!important;
+  display:flex!important;
+  justify-content:center!important;
+  align-items:center!important;
+}
+.renew-logo-shell{
+  min-width:190px;
+  min-height:68px;
+  padding:12px 28px;
+  border:1px solid #e2e8f0;
+  border-radius:18px;
+  background:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  box-shadow:0 10px 28px rgba(15,23,42,.08);
+  position:relative;
+}
+.renew-logo-shell:after{
+  content:"";
+  position:absolute;
+  left:34px;right:34px;bottom:-1px;
+  height:4px;
+  border-radius:4px 4px 0 0;
+  background:var(--renew-yellow,#f7d117);
+}
+.renew-logo-shell img{
+  display:block;
+  max-width:155px!important;
+  width:auto!important;
+  height:40px!important;
+  object-fit:contain!important;
+  filter:none!important;
+}
+.renew-fallback{
+  display:none;
+  align-items:center;
+  justify-content:center;
+  color:#0b1220;
+  font-size:32px;
+  font-weight:1000;
+  letter-spacing:-2px;
+  text-transform:lowercase;
+  line-height:1;
+}
+
+/* Sağ paneli soldaki kartlarla aynı aileye getir */
+.collapsible-mail{
+  padding:18px!important;
+  border-radius:22px!important;
+}
+.mail-panel-toggle{
+  width:100%!important;
+  margin:0!important;
+  padding:14px 15px!important;
+  min-height:54px;
+  border:1px solid #d9e1ea!important;
+  border-radius:14px!important;
+  background:#eef2f6!important;
+  color:#334155!important;
+  box-shadow:none!important;
+  font-size:.82rem!important;
+  font-weight:900!important;
+  letter-spacing:.45px!important;
+  text-transform:uppercase;
+  transition:transform .18s ease, border-color .18s ease, background .18s ease!important;
+}
+.mail-panel-toggle:hover{
+  background:#e7edf3!important;
+  border-color:#c4ced9!important;
+  transform:translateY(-1px);
+}
+.mail-panel-toggle .mail-plus,
+.mail-section-title .mail-plus{
+  flex:0 0 30px;
+  width:30px;
+  height:30px;
+  border-radius:10px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  background:#0b1220;
+  color:#fff!important;
+  font-size:18px!important;
+  font-weight:800!important;
+  line-height:1;
+  box-shadow:0 5px 12px rgba(15,23,42,.12);
+}
+.mail-panel-content{
+  padding-top:12px!important;
+  animation:slideMailIn .24s ease both;
+}
+.mail-panel-content.show{display:block!important;}
+@keyframes slideMailIn{
+  from{opacity:0;transform:translateY(-7px)}
+  to{opacity:1;transform:translateY(0)}
+}
+.mail-section{
+  margin-bottom:10px!important;
+  border:1px solid #dbe3ec!important;
+  border-radius:14px!important;
+  background:#fff!important;
+  box-shadow:0 6px 16px rgba(15,23,42,.035)!important;
+}
+.mail-section-title{
+  min-height:52px;
+  padding:11px 12px 11px 14px!important;
+  border:0!important;
+  border-radius:13px!important;
+  background:#f8fafc!important;
+  color:#334155!important;
+  font-size:.82rem!important;
+  font-weight:850!important;
+  letter-spacing:.15px;
+}
+.mail-section-title:hover{background:#f1f5f9!important;}
+.mail-section-body.show{
+  display:block!important;
+  animation:slideSectionIn .22s ease both;
+}
+@keyframes slideSectionIn{
+  from{opacity:0;transform:translateY(-5px)}
+  to{opacity:1;transform:translateY(0)}
+}
+.mail-section-body{border-top:1px solid #e5eaf0;}
+
+@media(max-width:850px){
+ .renew-logo-shell{min-width:170px;min-height:62px;padding:10px 22px}
+ .renew-logo-shell img{max-width:140px!important;height:36px!important}
+}
+
+</style>
+
+
+<style>
+/* =========================================================
+   TASARIM V2.5 — RENEW COMMAND CENTER
+   Fonksiyonlar ve alan kimlikleri korunur; yalnızca görünüm yenilenir.
+   ========================================================= */
+:root{--renew-yellow:#f7d117;--ink:#0b1220;--panel:#ffffff;--line:#dfe5ec;--soft:#f4f7fa;--blue:#0a64ad}
+body{
+  align-items:flex-start!important;
+  padding:34px 22px 48px!important;
+  background:
+   radial-gradient(circle at 8% 10%,rgba(247,209,23,.16),transparent 19%),
+   radial-gradient(circle at 92% 14%,rgba(255,255,255,.10),transparent 18%),
+   linear-gradient(145deg,#050a12 0%,#0d1727 48%,#111d30 100%)!important;
+}
+body:after{content:"";position:fixed;inset:0;pointer-events:none;background:linear-gradient(120deg,transparent 0 49.8%,rgba(255,255,255,.025) 50%,transparent 50.2%);background-size:34px 34px;opacity:.55}
+.wrapper{
+  max-width:1480px!important;
+  display:grid!important;
+  grid-template-columns:310px minmax(520px,1fr) 350px!important;
+  gap:18px!important;
+  align-items:start!important;
+}
+.side-panel,.mail-panel,.card{border:0!important;box-shadow:0 24px 70px rgba(0,0,0,.26)!important;background:var(--card-bg)!important;position:relative}
+.side-panel,.mail-panel{border-radius:22px!important;padding:0 18px 20px!important;overflow:hidden}
+.card{max-width:none!important;border-radius:26px!important;padding:0 30px 30px!important;overflow:hidden}
+
+/* gerçek anlamda farklı üst kimlik şeridi */
+.card:before{content:"ÖDEME MERKEZİ";display:flex;align-items:center;height:46px;margin:0 -30px 22px;padding:0 30px;background:linear-gradient(90deg,#090f1b 0 78%,var(--renew-yellow) 78%);color:#fff;font-size:11px;font-weight:900;letter-spacing:2px}
+.card:after{content:"RENEW";position:absolute;top:13px;right:18px;font-size:11px;font-weight:1000;letter-spacing:2.5px;color:#0b1220}
+.side-panel:before,.mail-panel:before{margin:0 -18px 18px!important;padding:16px 18px!important;background:#0b1220!important;color:#fff!important;font-size:11px!important;letter-spacing:1.4px!important;text-align:left!important}
+.side-panel:before{content:"BANKA & ALICI BİLGİLERİ"!important}
+.mail-panel:before{content:"MÜŞTERİ & MAİL HAZIRLAMA"!important}
+
+.logo-header{margin-top:-7px!important;padding:6px 64px 15px 0!important;border-bottom:0!important;text-align:left!important}
+.logo-header img{height:44px!important}
+.logo-header:after{display:none!important}
+.brand{text-align:left!important;margin:0 0 24px!important;padding:0 0 18px!important;border-bottom:1px solid var(--border-color)!important}
+.brand h1{font-size:.72rem!important;letter-spacing:1.8px!important}
+.brand h2{font-size:1.55rem!important;line-height:1.15!important;margin-top:6px!important}
+.top-actions{top:58px!important;right:26px!important}
+.icon-btn{width:42px!important;height:42px!important;border-radius:12px!important}
+
+/* işlem formu artık kart içinde ayrı modül hissinde */
+.card>.form-group{background:var(--soft);border:1px solid var(--line);border-radius:16px;padding:16px 16px 14px;margin-bottom:14px!important}
+[data-theme="dark"] .card>.form-group{background:#172033;border-color:#354154}
+.card>.form-group:first-of-type{position:relative;border:2px solid #111827;padding:18px 18px 16px}
+.card>.form-group:first-of-type:before{content:"ANA TUTAR";position:absolute;top:-9px;left:14px;background:var(--card-bg);padding:0 8px;font-size:10px;font-weight:900;letter-spacing:1.2px;color:#111827}
+#tutar{font-size:1.55rem!important;min-height:58px!important;background:var(--card-bg)!important;border-radius:12px!important;font-weight:900!important;letter-spacing:.2px}
+.quick-taksit{display:grid!important;grid-template-columns:repeat(4,1fr)!important;gap:9px!important}
+.taksit-btn{min-height:48px!important;border-radius:12px!important;font-size:.86rem!important;background:var(--card-bg)!important}
+.taksit-btn.active{background:#0b1220!important;color:#fff!important;box-shadow:inset 0 -5px 0 var(--renew-yellow)!important}
+
+/* sonuç: özet fişi görünümü */
+.result-box{border:0!important;border-radius:18px!important;background:#f8fafc!important;box-shadow:inset 0 0 0 1px var(--line),0 14px 34px rgba(15,23,42,.08)!important;overflow:hidden!important}
+.result-box:before{content:"ÖDEME ÖZETİ";display:block;background:#eaf0f5;color:#364152;padding:11px 15px;font-size:10px;font-weight:900;letter-spacing:1.35px;border-bottom:1px solid var(--line)}
+.result-item{padding:12px 16px!important;font-size:.88rem!important}
+.result-item strong{font-size:.96rem!important}
+.result-item:last-child{padding:17px 16px!important;background:#0b1220!important}
+.result-item:last-child span{font-size:.88rem!important;letter-spacing:.5px}
+.result-item:last-child strong{font-size:1.25rem!important}
+.result-item:last-child:before{width:7px!important}
+
+/* aksiyonlar 2x2 dashboard butonları */
+.btn-container{display:grid!important;grid-template-columns:1fr 1fr!important;gap:10px!important}
+.action-btn{min-height:50px!important;border-radius:13px!important;font-size:.86rem!important}
+#pdfBtn{grid-column:1/-1!important;min-height:58px!important;font-size:.98rem!important;background:linear-gradient(100deg,#0b1220,#1d293d)!important;border:0!important;box-shadow:inset 0 -5px 0 var(--renew-yellow),0 14px 28px rgba(15,23,42,.18)!important}
+
+/* yan panellerde accordion değil modül kart hissi */
+.toggle-section{border:0!important;background:#eef2f6!important;border-radius:13px!important;padding:13px 14px!important;margin-bottom:12px!important}
+[data-theme="dark"] .toggle-section{background:#172033!important}
+.bank-card{padding:13px!important;border-radius:14px!important;background:var(--card-bg)!important;border:1px solid var(--line)!important;box-shadow:none!important}
+.bank-card:hover{border-color:#aeb8c5!important;transform:none!important}
+.bank-copy-btn{min-height:34px;border-radius:9px!important}
+.bank-tools{display:grid!important;grid-template-columns:1fr 1fr!important;gap:8px!important}
+.bank-tools button{min-height:42px!important}
+.mail-panel h3{font-size:1.08rem!important;border:0!important;margin:0 0 10px!important;padding:0!important}
+.mail-grid input,.mail-grid select{min-height:44px!important;border-radius:11px!important}
+.mail-choice{display:grid!important;grid-template-columns:1fr 1fr!important;gap:8px!important}
+.mail-preview{min-height:285px!important;border-radius:14px!important;padding:14px!important;background:#f6f8fb!important;border:1px solid var(--line)!important}
+.mail-copy-btn,.mail-outlook-btn{min-height:50px!important;border-radius:13px!important}
+.mail-outlook-btn{box-shadow:0 10px 24px rgba(10,100,173,.18)!important}
+
+/* PDF seçim penceresi: büyük, net ve açıklamalı */
+.pdf-modal{background:rgba(3,8,17,.78)!important;backdrop-filter:blur(10px)!important}
+.pdf-modal-card{max-width:580px!important;border-radius:24px!important;border:0!important;box-shadow:0 35px 100px rgba(0,0,0,.42)!important}
+.pdf-modal-head{padding:24px 26px 20px!important;border-top:7px solid var(--renew-yellow)!important;background:#fff!important}
+.pdf-modal-head strong{font-size:1.35rem!important;color:#0b1220!important;margin-bottom:7px!important}
+.pdf-modal-head span{font-size:.9rem!important;line-height:1.45!important;color:#667085!important}
+.pdf-modal-actions{padding:20px 22px!important;grid-template-columns:1fr 1fr!important;gap:12px!important;background:#f6f8fb!important}
+.pdf-choice{min-height:112px!important;border-radius:16px!important;padding:18px!important;text-align:left!important;font-size:.98rem!important;line-height:1.35!important;box-shadow:0 7px 18px rgba(15,23,42,.07)!important}
+.pdf-choice.primary{background:#0b1220!important;box-shadow:inset 0 -5px 0 var(--renew-yellow),0 10px 24px rgba(15,23,42,.16)!important}
+.pdf-modal-close{padding:14px 18px 18px!important;font-size:.9rem!important;background:#fff!important}
+
+@media(max-width:1240px){.wrapper{grid-template-columns:300px minmax(500px,1fr)!important;max-width:1000px!important}.mail-panel{grid-column:1/-1!important;width:100%!important;max-width:none!important}}
+@media(max-width:850px){body{padding:14px 10px 28px!important}.wrapper{display:flex!important;flex-direction:column!important;gap:12px!important}.card{order:1!important;padding:0 18px 22px!important}.card:before{margin:0 -18px 18px;padding:0 18px}.side-panel{order:2!important;width:100%!important}.mail-panel{order:3!important;width:100%!important}.btn-container{grid-template-columns:1fr!important}#pdfBtn{grid-column:auto!important}.pdf-modal-actions{grid-template-columns:1fr!important}.pdf-choice{min-height:88px!important}}
+
+        /* Sağ panel: açılır/kapanır mail ve ödeme bildirimi */
+        .collapsible-mail{padding:0 18px 18px!important;}
+        .collapsible-mail::before{display:none!important;}
+        .mail-panel-toggle{width:calc(100% + 36px);margin:0 -18px;border:0;background:#0b1220;color:#fff;padding:16px 18px;display:flex;align-items:center;justify-content:space-between;font-weight:900;font-size:.95rem;cursor:pointer;letter-spacing:.2px;}
+        .mail-panel-toggle #mailPanelIcon{font-size:1.25rem;line-height:1;}
+        .mail-panel-content{display:none;padding-top:14px;}
+        .mail-panel-content.show{display:block;}
+        .mail-section{border:1px solid #dfe5ec;border-radius:14px;overflow:hidden;background:#fff;margin-bottom:12px;}
+        .mail-section-title{width:100%;border:0;background:#f6f8fb;color:#111827;padding:13px 14px;display:flex;justify-content:space-between;align-items:center;font-weight:900;cursor:pointer;text-align:left;}
+        .mail-section-body{display:none;padding:14px;}
+        .mail-section-body.show{display:block;}
+        .short-preview{min-height:170px!important;}
+        body[data-theme="light"] .mail-section{background:#fff!important;}
+        body[data-theme="light"] .mail-section-title{background:#f6f8fb!important;color:#111827!important;}
+        .top-actions{display:none!important;}
+
+
+
+/* ===== V3: ORTALANMIŞ RENEW KİMLİĞİ + GELİŞMİŞ SAĞ ACCORDION ===== */
+.card:before{
+  content:"ÖDEME MERKEZİ"!important;
+  background:#0b1220!important;
+  justify-content:flex-start!important;
+  padding-right:30px!important;
+}
+.card:after{display:none!important;}
+.logo-header{
+  margin:2px 0 18px!important;
+  padding:0!important;
+  border:0!important;
+  text-align:center!important;
+  display:flex!important;
+  justify-content:center!important;
+  align-items:center!important;
+}
+.renew-logo-shell{
+  min-width:190px;
+  min-height:68px;
+  padding:12px 28px;
+  border:1px solid #e2e8f0;
+  border-radius:18px;
+  background:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  box-shadow:0 10px 28px rgba(15,23,42,.08);
+  position:relative;
+}
+.renew-logo-shell:after{
+  content:"";
+  position:absolute;
+  left:34px;right:34px;bottom:-1px;
+  height:4px;
+  border-radius:4px 4px 0 0;
+  background:var(--renew-yellow,#f7d117);
+}
+.renew-logo-shell img{
+  display:block;
+  max-width:155px!important;
+  width:auto!important;
+  height:40px!important;
+  object-fit:contain!important;
+  filter:none!important;
+}
+.renew-fallback{
+  display:none;
+  align-items:center;
+  justify-content:center;
+  color:#0b1220;
+  font-size:32px;
+  font-weight:1000;
+  letter-spacing:-2px;
+  text-transform:lowercase;
+  line-height:1;
+}
+
+/* Sağ paneli soldaki kartlarla aynı aileye getir */
+.collapsible-mail{
+  padding:18px!important;
+  border-radius:22px!important;
+}
+.mail-panel-toggle{
+  width:100%!important;
+  margin:0!important;
+  padding:14px 15px!important;
+  min-height:54px;
+  border:1px solid #d9e1ea!important;
+  border-radius:14px!important;
+  background:#eef2f6!important;
+  color:#334155!important;
+  box-shadow:none!important;
+  font-size:.82rem!important;
+  font-weight:900!important;
+  letter-spacing:.45px!important;
+  text-transform:uppercase;
+  transition:transform .18s ease, border-color .18s ease, background .18s ease!important;
+}
+.mail-panel-toggle:hover{
+  background:#e7edf3!important;
+  border-color:#c4ced9!important;
+  transform:translateY(-1px);
+}
+.mail-panel-toggle .mail-plus,
+.mail-section-title .mail-plus{
+  flex:0 0 30px;
+  width:30px;
+  height:30px;
+  border-radius:10px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  background:#0b1220;
+  color:#fff!important;
+  font-size:18px!important;
+  font-weight:800!important;
+  line-height:1;
+  box-shadow:0 5px 12px rgba(15,23,42,.12);
+}
+.mail-panel-content{
+  padding-top:12px!important;
+  animation:slideMailIn .24s ease both;
+}
+.mail-panel-content.show{display:block!important;}
+@keyframes slideMailIn{
+  from{opacity:0;transform:translateY(-7px)}
+  to{opacity:1;transform:translateY(0)}
+}
+.mail-section{
+  margin-bottom:10px!important;
+  border:1px solid #dbe3ec!important;
+  border-radius:14px!important;
+  background:#fff!important;
+  box-shadow:0 6px 16px rgba(15,23,42,.035)!important;
+}
+.mail-section-title{
+  min-height:52px;
+  padding:11px 12px 11px 14px!important;
+  border:0!important;
+  border-radius:13px!important;
+  background:#f8fafc!important;
+  color:#334155!important;
+  font-size:.82rem!important;
+  font-weight:850!important;
+  letter-spacing:.15px;
+}
+.mail-section-title:hover{background:#f1f5f9!important;}
+.mail-section-body.show{
+  display:block!important;
+  animation:slideSectionIn .22s ease both;
+}
+@keyframes slideSectionIn{
+  from{opacity:0;transform:translateY(-5px)}
+  to{opacity:1;transform:translateY(0)}
+}
+.mail-section-body{border-top:1px solid #e5eaf0;}
+
+@media(max-width:850px){
+ .renew-logo-shell{min-width:170px;min-height:62px;padding:10px 22px}
+ .renew-logo-shell img{max-width:140px!important;height:36px!important}
+}
+
+</style>
+
+
+<style>
+/* =========================================================
+   OKUNAKLILIK DÜZELTMESİ — GÜNDÜZ / GECE
+   ========================================================= */
+[data-theme="light"] {
+  --card-bg:#ffffff;
+  --text-main:#111827;
+  --text-muted:#475569;
+  --border-color:#cbd5e1;
+  --input-bg:#f8fafc;
+  --result-bg:#f8fafc;
+}
+[data-theme="dark"] {
+  --card-bg:#111827;
+  --text-main:#f8fafc;
+  --text-muted:#d1d5db;
+  --border-color:#475569;
+  --input-bg:#1f2937;
+  --result-bg:#182235;
+}
+[data-theme="light"] .side-panel,
+[data-theme="light"] .card,
+[data-theme="light"] .mail-panel { color:#111827; }
+[data-theme="dark"] .side-panel,
+[data-theme="dark"] .card,
+[data-theme="dark"] .mail-panel { color:#f8fafc; }
+
+[data-theme="light"] label,
+[data-theme="light"] .brand h1,
+[data-theme="light"] .toggle-section span,
+[data-theme="light"] .mail-note,
+[data-theme="light"] .pdf-modal-head span { color:#475569 !important; }
+[data-theme="dark"] label,
+[data-theme="dark"] .brand h1,
+[data-theme="dark"] .toggle-section span,
+[data-theme="dark"] .mail-note,
+[data-theme="dark"] .pdf-modal-head span { color:#d1d5db !important; }
+
+[data-theme="light"] input, [data-theme="light"] select, [data-theme="light"] .mail-preview,
+[data-theme="light"] .bank-card, [data-theme="light"] .toggle-section, [data-theme="light"] .pdf-choice {
+  background:#f8fafc !important; color:#111827 !important; border-color:#cbd5e1 !important;
+}
+[data-theme="dark"] input, [data-theme="dark"] select, [data-theme="dark"] .mail-preview,
+[data-theme="dark"] .bank-card, [data-theme="dark"] .toggle-section, [data-theme="dark"] .pdf-choice {
+  background:#1f2937 !important; color:#f8fafc !important; border-color:#4b5563 !important;
+}
+[data-theme="dark"] input::placeholder, [data-theme="dark"] .mail-preview::placeholder { color:#9ca3af !important; opacity:1; }
+[data-theme="light"] input::placeholder, [data-theme="light"] .mail-preview::placeholder { color:#64748b !important; opacity:1; }
+
+[data-theme="light"] .bank-name, [data-theme="light"] .bank-iban, [data-theme="light"] .mail-panel h3,
+[data-theme="light"] .brand h2, [data-theme="light"] .result-item strong { color:#111827 !important; }
+[data-theme="dark"] .bank-name, [data-theme="dark"] .bank-iban, [data-theme="dark"] .mail-panel h3,
+[data-theme="dark"] .brand h2, [data-theme="dark"] .result-item strong { color:#f8fafc !important; }
+
+[data-theme="light"] .result-item span { color:#475569 !important; }
+[data-theme="dark"] .result-item span { color:#d1d5db !important; }
+[data-theme="light"] .result-item:last-child span, [data-theme="light"] .result-item:last-child strong,
+[data-theme="dark"] .result-item:last-child span, [data-theme="dark"] .result-item:last-child strong { color:#ffffff !important; }
+
+[data-theme="light"] .taksit-btn { color:#334155 !important; background:#f8fafc !important; }
+[data-theme="dark"] .taksit-btn { color:#e5e7eb !important; background:#1f2937 !important; }
+[data-theme="light"] .taksit-btn.active, [data-theme="dark"] .taksit-btn.active,
+[data-theme="light"] .mail-choice button.active, [data-theme="dark"] .mail-choice button.active {
+  background:#111827 !important; color:#ffffff !important; border-color:#111827 !important;
+}
+[data-theme="dark"] .bank-copy-btn { background:#111827 !important; color:#f8fafc !important; border-color:#4b5563 !important; }
+[data-theme="light"] .bank-copy-btn { background:#ffffff !important; color:#111827 !important; border-color:#cbd5e1 !important; }
+[data-theme="dark"] .copy-btn { background:#1f2937 !important; color:#f8fafc !important; }
+[data-theme="light"] .copy-btn { background:#f8fafc !important; color:#111827 !important; }
+[data-theme="dark"] .pdf-modal-card { background:#111827 !important; color:#f8fafc !important; }
+[data-theme="light"] .pdf-modal-card { background:#ffffff !important; color:#111827 !important; }
+
+        /* Sağ panel: açılır/kapanır mail ve ödeme bildirimi */
+        .collapsible-mail{padding:0 18px 18px!important;}
+        .collapsible-mail::before{display:none!important;}
+        .mail-panel-toggle{width:calc(100% + 36px);margin:0 -18px;border:0;background:#0b1220;color:#fff;padding:16px 18px;display:flex;align-items:center;justify-content:space-between;font-weight:900;font-size:.95rem;cursor:pointer;letter-spacing:.2px;}
+        .mail-panel-toggle #mailPanelIcon{font-size:1.25rem;line-height:1;}
+        .mail-panel-content{display:none;padding-top:14px;}
+        .mail-panel-content.show{display:block;}
+        .mail-section{border:1px solid #dfe5ec;border-radius:14px;overflow:hidden;background:#fff;margin-bottom:12px;}
+        .mail-section-title{width:100%;border:0;background:#f6f8fb;color:#111827;padding:13px 14px;display:flex;justify-content:space-between;align-items:center;font-weight:900;cursor:pointer;text-align:left;}
+        .mail-section-body{display:none;padding:14px;}
+        .mail-section-body.show{display:block;}
+        .short-preview{min-height:170px!important;}
+        body[data-theme="light"] .mail-section{background:#fff!important;}
+        body[data-theme="light"] .mail-section-title{background:#f6f8fb!important;color:#111827!important;}
+        .top-actions{display:none!important;}
+
+
+
+/* ===== V3: ORTALANMIŞ RENEW KİMLİĞİ + GELİŞMİŞ SAĞ ACCORDION ===== */
+.card:before{
+  content:"ÖDEME MERKEZİ"!important;
+  background:#0b1220!important;
+  justify-content:flex-start!important;
+  padding-right:30px!important;
+}
+.card:after{display:none!important;}
+.logo-header{
+  margin:2px 0 18px!important;
+  padding:0!important;
+  border:0!important;
+  text-align:center!important;
+  display:flex!important;
+  justify-content:center!important;
+  align-items:center!important;
+}
+.renew-logo-shell{
+  min-width:190px;
+  min-height:68px;
+  padding:12px 28px;
+  border:1px solid #e2e8f0;
+  border-radius:18px;
+  background:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  box-shadow:0 10px 28px rgba(15,23,42,.08);
+  position:relative;
+}
+.renew-logo-shell:after{
+  content:"";
+  position:absolute;
+  left:34px;right:34px;bottom:-1px;
+  height:4px;
+  border-radius:4px 4px 0 0;
+  background:var(--renew-yellow,#f7d117);
+}
+.renew-logo-shell img{
+  display:block;
+  max-width:155px!important;
+  width:auto!important;
+  height:40px!important;
+  object-fit:contain!important;
+  filter:none!important;
+}
+.renew-fallback{
+  display:none;
+  align-items:center;
+  justify-content:center;
+  color:#0b1220;
+  font-size:32px;
+  font-weight:1000;
+  letter-spacing:-2px;
+  text-transform:lowercase;
+  line-height:1;
+}
+
+/* Sağ paneli soldaki kartlarla aynı aileye getir */
+.collapsible-mail{
+  padding:18px!important;
+  border-radius:22px!important;
+}
+.mail-panel-toggle{
+  width:100%!important;
+  margin:0!important;
+  padding:14px 15px!important;
+  min-height:54px;
+  border:1px solid #d9e1ea!important;
+  border-radius:14px!important;
+  background:#eef2f6!important;
+  color:#334155!important;
+  box-shadow:none!important;
+  font-size:.82rem!important;
+  font-weight:900!important;
+  letter-spacing:.45px!important;
+  text-transform:uppercase;
+  transition:transform .18s ease, border-color .18s ease, background .18s ease!important;
+}
+.mail-panel-toggle:hover{
+  background:#e7edf3!important;
+  border-color:#c4ced9!important;
+  transform:translateY(-1px);
+}
+.mail-panel-toggle .mail-plus,
+.mail-section-title .mail-plus{
+  flex:0 0 30px;
+  width:30px;
+  height:30px;
+  border-radius:10px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  background:#0b1220;
+  color:#fff!important;
+  font-size:18px!important;
+  font-weight:800!important;
+  line-height:1;
+  box-shadow:0 5px 12px rgba(15,23,42,.12);
+}
+.mail-panel-content{
+  padding-top:12px!important;
+  animation:slideMailIn .24s ease both;
+}
+.mail-panel-content.show{display:block!important;}
+@keyframes slideMailIn{
+  from{opacity:0;transform:translateY(-7px)}
+  to{opacity:1;transform:translateY(0)}
+}
+.mail-section{
+  margin-bottom:10px!important;
+  border:1px solid #dbe3ec!important;
+  border-radius:14px!important;
+  background:#fff!important;
+  box-shadow:0 6px 16px rgba(15,23,42,.035)!important;
+}
+.mail-section-title{
+  min-height:52px;
+  padding:11px 12px 11px 14px!important;
+  border:0!important;
+  border-radius:13px!important;
+  background:#f8fafc!important;
+  color:#334155!important;
+  font-size:.82rem!important;
+  font-weight:850!important;
+  letter-spacing:.15px;
+}
+.mail-section-title:hover{background:#f1f5f9!important;}
+.mail-section-body.show{
+  display:block!important;
+  animation:slideSectionIn .22s ease both;
+}
+@keyframes slideSectionIn{
+  from{opacity:0;transform:translateY(-5px)}
+  to{opacity:1;transform:translateY(0)}
+}
+.mail-section-body{border-top:1px solid #e5eaf0;}
+
+@media(max-width:850px){
+ .renew-logo-shell{min-width:170px;min-height:62px;padding:10px 22px}
+ .renew-logo-shell img{max-width:140px!important;height:36px!important}
+}
+
+</style>
+
+<style>
+/* Logosuz üst alan */
+.card > .brand { margin-top: 4px !important; }
+
+/* Mobil işlem butonları */
+@media (max-width: 600px) {
+    body { padding: 10px !important; }
+    .card, .side-panel, .mail-panel { border-radius: 14px !important; }
+    .btn-container { gap: 8px !important; }
+    .action-btn { width: 100% !important; min-height: 48px; font-size: 0.95rem !important; }
+    #wpBtn { min-height: 50px; border-radius: 10px !important; }
+    .quick-taksit { display: grid !important; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 8px !important; }
+    .result-item { gap: 12px; align-items: center; }
+    .result-item span { max-width: 58%; }
+    .result-item strong { text-align: right; }
+}
+</style>
+
+
+<style>
+/* ===== WEB + MOBİL YERLEŞİM DÜZELTMESİ ===== */
+html,body{overflow-x:hidden!important;}
+body{width:100%!important;}
+.wrapper{
+  width:min(1480px,calc(100vw - 44px))!important;
+  margin:0 auto!important;
+  grid-template-columns:310px minmax(0,1fr) 350px!important;
+}
+.side-panel,.mail-panel,.card{min-width:0!important;}
+
+/* Önceki stillerden kalan absolute pseudo başlık, içerik üstüne binmesin */
+.card::before{
+  position:relative!important;
+  left:auto!important;right:auto!important;top:auto!important;bottom:auto!important;
+  width:auto!important;
+  height:46px!important;
+  box-sizing:border-box!important;
+  margin:0 -30px 22px!important;
+  padding:0 30px!important;
+  flex:none!important;
+  z-index:1!important;
+}
+.card>.brand{position:relative!important;z-index:2!important;}
+
+@media (max-width:1240px) and (min-width:851px){
+  body{padding:28px 18px 42px!important;}
+  .wrapper{
+    width:100%!important;
+    max-width:1100px!important;
+    grid-template-columns:300px minmax(0,1fr)!important;
+    gap:18px!important;
+  }
+  .side-panel{width:100%!important;}
+  .card{width:100%!important;max-width:none!important;}
+  .mail-panel{grid-column:1/-1!important;width:100%!important;max-width:none!important;}
+  .brand h2{font-size:1.42rem!important;}
+}
+
+@media (max-width:850px){
+  body{padding:14px 10px 28px!important;}
+  .wrapper{width:100%!important;max-width:620px!important;margin:0 auto!important;}
+  .card::before{margin:0 -18px 18px!important;padding:0 18px!important;height:44px!important;}
+  .card,.side-panel,.mail-panel{width:100%!important;max-width:none!important;}
+  .brand h1{font-size:.68rem!important;}
+  .brand h2{font-size:1.24rem!important;line-height:1.2!important;}
+}
+</style>
+
+<style id="renewProEmbeddedTheme">
+:root{--rp-bg:#eef3f8;--rp-card:#fff;--rp-ink:#0f172a;--rp-muted:#64748b;--rp-line:#d9e3ee;--rp-navy:#173f6b;--rp-navy2:#223b5d;--rp-soft:#f7f9fc}
+html,body{background:var(--rp-bg)!important;color:var(--rp-ink)!important;min-height:auto!important}
+body{padding:14px!important;display:block!important;overflow-x:hidden!important}
+body::before,body::after{display:none!important}
+.wrapper{width:100%!important;max-width:none!important;display:grid!important;grid-template-columns:300px minmax(0,1fr) 320px!important;gap:12px!important;align-items:start!important}
+.side-panel,.card,.mail-panel{background:#fff!important;border:1px solid var(--rp-line)!important;border-radius:12px!important;box-shadow:none!important;backdrop-filter:none!important}
+.side-panel,.mail-panel{padding:0 14px 14px!important}.card{padding:0 18px 18px!important}
+.card:before,.side-panel:before,.mail-panel:before{margin:0 -14px 14px!important;padding:13px 14px!important;min-height:44px!important;background:linear-gradient(135deg,var(--rp-navy),var(--rp-navy2))!important;color:#fff!important;border:0!important;border-radius:11px 11px 0 0!important;font-size:10px!important;font-weight:900!important;letter-spacing:.8px!important;box-shadow:none!important}
+.card:before{margin:0 -18px 14px!important;padding:13px 18px!important;content:"ÖDEME MERKEZİ"!important}.card:after{display:none!important}
+.side-panel:before{content:"BANKA & ALICI BİLGİLERİ"!important}.mail-panel:before{content:"MÜŞTERİ & MAİL HAZIRLAMA"!important}
+.logo-header{display:none!important}.brand{text-align:left!important;margin:0 0 14px!important;padding:0 0 12px!important;border-bottom:1px solid var(--rp-line)!important}.brand h1{color:var(--rp-muted)!important;font-size:10px!important;letter-spacing:1.2px!important}.brand h2{color:var(--rp-ink)!important;font-size:18px!important;margin-top:4px!important}.top-actions{display:none!important}
+.form-group{margin-bottom:12px!important}.card>.form-group{background:var(--rp-soft)!important;border:1px solid var(--rp-line)!important;border-radius:10px!important;padding:12px!important}.card>.form-group:first-of-type{border:1px solid #cbd5e1!important}.card>.form-group:first-of-type:before{display:none!important}
+label{color:var(--rp-muted)!important;font-size:10px!important;letter-spacing:.35px!important;font-weight:800!important}
+input,select,textarea{background:#fff!important;color:var(--rp-ink)!important;border:1px solid #cbd5e1!important;border-radius:8px!important;box-shadow:none!important;min-height:40px!important}
+input:focus,select:focus,textarea:focus{border-color:#7aa2ca!important;box-shadow:0 0 0 3px rgba(37,99,235,.08)!important}
+#tutar{min-height:52px!important;font-size:20px!important;border:1.5px solid #94a3b8!important}
+.quick-taksit{display:grid!important;grid-template-columns:repeat(4,1fr)!important;gap:7px!important}
+.taksit-btn{min-height:40px!important;background:#fff!important;color:#475569!important;border:1px solid #cbd5e1!important;border-radius:8px!important;box-shadow:none!important}.taksit-btn.active{background:var(--rp-navy)!important;color:#fff!important;border-color:var(--rp-navy)!important;box-shadow:none!important}
+.toggle-section,.mail-panel-toggle,.mail-section-title{background:#f3f6fa!important;color:#334155!important;border:1px solid var(--rp-line)!important;border-radius:8px!important;box-shadow:none!important}.toggle-section{padding:10px 11px!important}
+.bank-card,.mail-section{background:#fff!important;border:1px solid var(--rp-line)!important;border-radius:9px!important;box-shadow:none!important}.bank-card{padding:10px!important}
+.bank-tools{display:grid!important;grid-template-columns:1fr 1fr!important;gap:6px!important}.bank-tools button,.bank-copy-btn{min-height:34px!important;border-radius:7px!important}
+.result-box{background:#fff!important;border:1px solid var(--rp-line)!important;border-radius:10px!important;box-shadow:none!important}.result-box:before{background:#edf2f7!important;color:#475569!important;border-bottom:1px solid var(--rp-line)!important}.result-item{border-bottom:1px solid #e8eef5!important}.result-item:last-child{background:linear-gradient(135deg,var(--rp-navy),var(--rp-navy2))!important;border:0!important}.result-item:last-child:before{display:none!important}
+.btn-container{display:grid!important;grid-template-columns:1fr 1fr!important;gap:8px!important}.action-btn{min-height:42px!important;border-radius:8px!important;box-shadow:none!important}#pdfBtn{grid-column:1/-1!important;min-height:46px!important;background:linear-gradient(135deg,var(--rp-navy),var(--rp-navy2))!important;border:0!important;box-shadow:none!important}
+.mail-panel{overflow:hidden!important}.collapsible-mail{padding:0 14px 14px!important}.mail-panel-toggle{width:100%!important;margin:0!important;min-height:44px!important;padding:10px 12px!important}
+.mail-panel-toggle .mail-plus,.mail-section-title .mail-plus{background:var(--rp-navy)!important;border-radius:7px!important;width:26px!important;height:26px!important;box-shadow:none!important}
+.mail-preview{background:#fff!important;border:1px solid var(--rp-line)!important;border-radius:8px!important;min-height:210px!important}.mail-copy-btn{background:var(--rp-navy)!important;border-radius:8px!important}.mail-outlook-btn{border-radius:8px!important;box-shadow:none!important}
+.pdf-modal{background:rgba(15,23,42,.58)!important;backdrop-filter:blur(3px)!important}.pdf-modal-card{border-radius:12px!important;border:1px solid var(--rp-line)!important;box-shadow:0 20px 60px rgba(15,23,42,.2)!important}.pdf-modal-head{border-top:0!important;background:#fff!important}.pdf-modal-actions{background:#f8fafc!important}.pdf-choice{min-height:86px!important;border-radius:9px!important;box-shadow:none!important}.pdf-choice.primary{background:var(--rp-navy)!important;box-shadow:none!important}
+@media(max-width:1150px){.wrapper{grid-template-columns:280px minmax(0,1fr)!important}.mail-panel{grid-column:1/-1!important}}
+@media(max-width:800px){body{padding:8px!important}.wrapper{display:flex!important;flex-direction:column!important}.card,.side-panel,.mail-panel{width:100%!important}.quick-taksit{grid-template-columns:repeat(2,1fr)!important}.btn-container{grid-template-columns:1fr!important}#pdfBtn{grid-column:auto!important}}
+</style>
+</head>
+<body data-embedded="renew-pro" data-theme="light">
+
+<div class="wrapper">
+    <div class="side-panel">
+        <div class="toggle-section" onclick="musteriAlaniniAcKapat()">
+            <span>👤 İsim & Açıklama Ekle</span>
+            <span id="toggleIcon" class="toggle-switch">+</span>
+        </div>
+
+        <div id="musteriContent" class="collapsible-content">
+            <div class="form-group">
+                <label>İsim - Soyisim</label>
+                <input type="text" id="islemYapan" placeholder="Örn: Ahmet Yılmaz">
+            </div>
+            <div class="form-group" style="margin-bottom: 0;">
+                <label>Açıklama Başlığı</label>
+                <input type="text" id="aracBedeliAciklama" value="2. El Araç Bedeli" placeholder="Örn: 2. El Araç Bedeli">
+            </div>
+        </div>
+
+        <div class="toggle-section" onclick="bankaAlaniniAcKapat()" style="margin-bottom: 0;">
+            <span>🏦 Banka IBAN Listesi</span>
+            <span id="bankToggleIcon" class="toggle-switch">+</span>
+        </div>
+
+        <div id="bankContent" class="collapsible-content" style="margin-top: 12px;">
+            <div class="bank-card">
+                <div class="bank-info">
+                    <div class="bank-name">ZİRAAT BANKASI</div>
+                    <div class="bank-iban">TR97 0001 0027 9034 1200 4750 54</div>
+                </div>
+                <button type="button" class="bank-copy-btn" onclick="bankaMetniKopyala('T.C. ZİRAAT BANKASI A.Ş.', 'TR97 0001 0027 9034 1200 4750 54', this)">Kopyala</button>
+            </div>
+
+            <div class="bank-card">
+                <div class="bank-info">
+                    <div class="bank-name">İŞ BANKASI</div>
+                    <div class="bank-iban">TR48 0006 4000 0016 6211 1037 73</div>
+                </div>
+                <button type="button" class="bank-copy-btn" onclick="bankaMetniKopyala('TÜRKIYE İŞ BANKASI A.Ş.', 'TR48 0006 4000 0016 6211 1037 73', this)">Kopyala</button>
+            </div>
+
+            <div class="bank-card">
+                <div class="bank-info">
+                    <div class="bank-name">VAKIFBANK</div>
+                    <div class="bank-iban">TR22 0001 5001 5800 7284 2782 75</div>
+                </div>
+                <button type="button" class="bank-copy-btn" onclick="bankaMetniKopyala('TÜRKIYE VAKIFLAR BANKASI T.A.O.', 'TR22 0001 5001 5800 7284 2782 75', this)">Kopyala</button>
+            </div>
+
+            <div class="bank-card" style="margin-bottom: 0;">
+                <div class="bank-info">
+                    <div class="bank-name">GARANTİ BANKASI</div>
+                    <div class="bank-iban">TR36 0006 2001 6840 0006 2025 63</div>
+                </div>
+                <button type="button" class="bank-copy-btn" onclick="bankaMetniKopyala('GARANTİ BANKASI', 'TR36 0006 2001 6840 0006 2025 63', this)">Kopyala</button>
+            </div>
+            <div class="bank-tools">
+                <button type="button" onclick="tumBankaBilgileriniKopyala(this)">📋 Tümünü Kopyala</button>
+                <button type="button" onclick="bankaPdfYazdir()">📄 PDF Kaydet</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="brand">
+            <h1>RENEW</h1>
+            <h2>Kredi Kartı Ödeme Yönetimi</h2>
+        </div>
+
+        <div class="form-group">
+            <label>Kredi Kartından Çekilecek Tutar (₺)</label>
+            <input type="text" id="tutar" placeholder="Örn: 250.000" oninput="paraBicimlendir(this)">
+        </div>
+
+        <div class="form-group">
+            <label>Hızlı Taksit Seçimi</label>
+            <div class="quick-taksit">
+                <button type="button" class="taksit-btn" onclick="taksitSec(3)">3 Taksit</button>
+                <button type="button" class="taksit-btn" onclick="taksitSec(6)">6 Taksit</button>
+                <button type="button" class="taksit-btn" onclick="taksitSec(9)">9 Taksit</button>
+                <button type="button" class="taksit-btn active" onclick="taksitSec(12)">12 Taksit</button>
+            </div>
+            
+            <label>Veya Detaylı Taksit Sayısı</label>
+            <select id="taksit" onchange="dropdownDegisti()">
+                <option value="1">1 Taksit</option>
+                <option value="2">2 Taksit</option>
+                <option value="3">3 Taksit</option>
+                <option value="4">4 Taksit</option>
+                <option value="5">5 Taksit</option>
+                <option value="6">6 Taksit</option>
+                <option value="7">7 Taksit</option>
+                <option value="8">8 Taksit</option>
+                <option value="9">9 Taksit</option>
+                <option value="10">10 Taksit</option>
+                <option value="11">11 Taksit</option>
+                <option value="12" selected>12 Taksit</option>
+            </select>
+        </div>
+
+        <div id="sonuc" class="result-box">
+            <div class="result-item"><span>ÇEKİLEN TUTAR</span> <strong id="pdfTutarOzet">₺0,00</strong></div>
+            <div class="result-item"><span>TAKSİT SAYISI</span> <strong id="pdfTaksitOzet">12 Taksit</strong></div>
+            <div class="result-item"><span>TOPLAM KOMİSYON ORANI</span> <strong id="toplamKomisyonOrani">0%</strong></div>
+            <div class="result-item"><span>AYLIK KOMİSYON ORANI</span> <strong id="aylikKomisyonOrani">0%</strong></div>
+            <div class="result-item"><span>TOPLAM KOMİSYON TUTARI</span> <strong id="toplamKomisyonTutari">₺0,00</strong></div>
+            <div class="result-item"><span>AYLIK KOMİSYON TUTARI</span> <strong id="aylikKomisyonTutar">₺0,00</strong></div>
+            <div class="result-item"><span>AYLIK TAKSİT TUTARI</span> <strong id="aylikTaksitTutari">₺0,00</strong></div>
+            <div class="result-item"><span>TOPLAM GERİ ÖDEME</span> <strong id="toplamGeriOdeme">₺0,00</strong></div>
+        </div>
+
+        <div class="btn-container">
+            <button type="button" id="copyBtn" class="action-btn copy-btn" onclick="sonucuKopyala()" style="display:none;">📋 Metni Kopyala</button>
+            <button type="button" id="wpBtn" class="action-btn" style="display:none; background-color: #25D366; color: white; border: none;" onclick="whatsappGonder()">WhatsApp'a Gönder</button>
+            <button type="button" id="pdfBtn" class="action-btn pdf-btn" onclick="pdfYazdir()" style="display:none;">📄 PDF Olarak Kaydet / Yazdır</button>
+        </div>
+    </div>
+
+    <div class="mail-panel collapsible-mail">
+        <button type="button" class="mail-panel-toggle" onclick="mailPanelAcKapat()">
+            <span>📨 Mail & Ödeme İşlemleri</span>
+            <span id="mailPanelIcon" class="mail-plus">+</span>
+        </button>
+        <div id="mailPanelContent" class="mail-panel-content">
+            <div class="mail-section">
+                <button type="button" class="mail-section-title" onclick="mailBolumAcKapat('tahsilatBolum','tahsilatIcon')">
+                    <span>💳 Kredi Kartı Tahsilat Maili</span><span id="tahsilatIcon" class="mail-plus">+</span>
+                </button>
+                <div id="tahsilatBolum" class="mail-section-body">
+                    <div class="payment-template-select"><label>Mail Şablonu</label><select id="mailTemplateSelect" onchange="mailMetniGuncelle()"></select></div>
+                    <div class="mail-grid">
+                        <div class="form-group" style="margin-bottom:0">
+                            <label>Alıcı Adı Soyadı</label>
+                            <input type="text" id="mailAlici" placeholder="Örn: Hasan Hüseyin Sürmeli" oninput="mailMetniGuncelle()">
+                        </div>
+                        <div class="form-group" style="margin-bottom:0">
+                            <label>T.C. Kimlik No</label>
+                            <input type="text" id="mailTc" maxlength="11" inputmode="numeric" placeholder="11 haneli T.C." oninput="this.value=this.value.replace(/\D/g,'').slice(0,11);mailMetniGuncelle()">
+                        </div>
+                        <div class="form-group" style="margin-bottom:0">
+                            <label>Cep No</label>
+                            <input type="text" id="mailCep" placeholder="Örn: 05xx xxx xx xx" oninput="mailMetniGuncelle()">
+                        </div>
+                        <div class="form-group" style="margin-bottom:0">
+                            <label>Çekilecek Tutar</label>
+                            <input type="text" id="mailTutar" placeholder="Ana tutardan otomatik gelir" oninput="mailTutarBicimlendir(this)">
+                        </div>
+                        <div>
+                            <label>Kredi Kartı Kullanımı</label>
+                            <div class="mail-choice">
+                                <button type="button" id="tekKartBtn" class="active" onclick="kartTipiSec('Tek Kredi Kartı')">Tek Kart</button>
+                                <button type="button" id="cokKartBtn" onclick="kartTipiSec('Birden Fazla Kredi Kartı')">Birden Fazla</button>
+                            </div>
+                        </div>
+                        <div>
+                            <label>Hazır Mail Metni</label>
+                            <textarea id="mailOnizleme" class="mail-preview" readonly></textarea>
+                            <button type="button" class="mail-copy-btn" onclick="mailMetniniKopyala(this)">📋 Mail Metnini Kopyala</button>
+                            <button type="button" class="mail-outlook-btn" onclick="outlooktaHazirla()">🌐 Outlook Web'de Hazırla</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mail-section">
+                <button type="button" class="mail-section-title" onclick="mailBolumAcKapat('odemeBolum','odemeIcon')">
+                    <span>💸 Ödeme Bildirimi</span><span id="odemeIcon" class="mail-plus">+</span>
+                </button>
+                <div id="odemeBolum" class="mail-section-body">
+                    <div class="payment-template-select"><label>Mail Şablonu</label><select id="odemeTemplateSelect" onchange="odemeMetniGuncelle()"></select></div>
+                    <div class="mail-grid">
+                        <div class="form-group" style="margin-bottom:0">
+                            <label>İsim Soyisim</label>
+                            <input type="text" id="odemeIsim" placeholder="Örn: Hasan Hüseyin Sürmeli" oninput="odemeMetniGuncelle()">
+                        </div>
+                        <div class="form-group" style="margin-bottom:0">
+                            <label>Gönderilen Tutar</label>
+                            <input type="text" id="odemeTutar" placeholder="Örn: 100.000" oninput="odemeTutarBicimlendir(this)">
+                        </div>
+                        <div class="form-group" style="margin-bottom:0">
+                            <label>Banka</label>
+                            <select id="odemeBanka" onchange="odemeMetniGuncelle()">
+                                <option value="T.C. Ziraat Bankası A.Ş.">T.C. Ziraat Bankası A.Ş.</option>
+                                <option value="Türkiye İş Bankası A.Ş.">Türkiye İş Bankası A.Ş.</option>
+                                <option value="Türkiye Vakıflar Bankası T.A.O.">VakıfBank</option>
+                                <option value="Garanti Bankası">Garanti Bankası</option>
+                                <option value="Diğer">Diğer</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label>Hazır Ödeme Bildirimi Metni</label>
+                            <textarea id="odemeOnizleme" class="mail-preview short-preview" readonly></textarea>
+                            <button type="button" class="mail-copy-btn" onclick="odemeMetniniKopyala(this)">📋 Ödeme Bildirimini Kopyala</button>
+                            <button type="button" class="mail-outlook-btn" onclick="odemeOutlooktaHazirla()">🌐 Outlook Web'de Hazırla</button>
+                            <div class="mail-note">Alıcılar ve bilgi (CC) otomatik doldurulur. Konu; isim-soyisim, tutar ve banka bilgisine göre otomatik oluşturulur.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mail-section">
+                <button type="button" class="mail-section-title" onclick="mailBolumAcKapat('sigortaBolum','sigortaIcon')">
+                    <span>🛡️ Sigorta İptali</span><span id="sigortaIcon" class="mail-plus">+</span>
+                </button>
+                <div id="sigortaBolum" class="mail-section-body">
+                    <div class="payment-template-select"><label>Mail Şablonu</label><select id="sigortaTemplateSelect" onchange="sigortaMetniGuncelle()"></select></div>
+                    <div class="mail-grid">
+                        <div class="form-group" style="margin-bottom:0">
+                            <label>Plaka</label>
+                            <input type="text" id="sigortaPlaka" placeholder="Örn: 33 ABC 123" oninput="sigortaPlakaBicimlendir(this);sigortaMetniGuncelle()">
+                        </div>
+                        <div>
+                            <label>Hazır Sigorta İptali Metni</label>
+                            <textarea id="sigortaOnizleme" class="mail-preview short-preview" readonly></textarea>
+                            <button type="button" class="mail-copy-btn" onclick="sigortaMetniniKopyala(this)">📋 Sigorta İptali Metnini Kopyala</button>
+                            <button type="button" class="mail-outlook-btn" onclick="sigortaOutlooktaHazirla()">🌐 Outlook Web'de Hazırla</button>
+                            <div class="mail-note">Alıcılar otomatik doldurulur. Bilgi (CC) boş bırakılır. Gerekli PDF veya fotoğrafı Outlook Web açıldıktan sonra siz ekleyebilirsiniz.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mail-section">
+                <button type="button" class="mail-section-title" onclick="mailBolumAcKapat('devirBolum','devirIcon')">
+                    <span>🚘 Devir İşlemi Maili</span><span id="devirIcon" class="mail-plus">+</span>
+                </button>
+                <div id="devirBolum" class="mail-section-body">
+                    <div class="payment-template-select"><label>Mail Şablonu</label><select id="devirTemplateSelect" onchange="devirMetniGuncelle()"></select></div>
+                    <div class="mail-grid">
+                        <div class="form-group" style="margin-bottom:0"><label>Araç Bedeli</label><input type="text" id="devirTutar" placeholder="Örn: 1.290.000" inputmode="numeric" oninput="devirTutarBicimlendir(this)"></div>
+                        <div class="form-group" style="margin-bottom:0"><label>Araç KM</label><input type="text" id="devirKm" placeholder="Örn: 35.000" inputmode="numeric" oninput="devirKmBicimlendir(this)"></div>
+                        <div class="form-group" style="margin-bottom:0"><label>İmza Yetkilisi</label><select id="devirYetkili" onchange="devirMetniGuncelle()"><option value="Ali Çayan">Ali Çayan</option><option value="Emirhan Çayan">Emirhan Çayan</option><option value="Denizhan Çayan">Denizhan Çayan</option><option value="Onur İpek">Onur İpek</option></select></div>
+                        <div><label>Plaka Durumu</label><div class="mail-choice"><button type="button" id="plakaAyniBtn" class="active" onclick="devirPlakaSec('ayni')">Plaka Aynı</button><button type="button" id="plakaDegisecekBtn" onclick="devirPlakaSec('degisecek')">Plaka Değişecek</button></div></div>
+                        <div><label>Hazır Devir Maili</label><textarea id="devirOnizleme" class="mail-preview short-preview" readonly></textarea><button type="button" class="mail-copy-btn" onclick="devirMetniniKopyala(this)">📋 Devir Mailini Kopyala</button><button type="button" class="mail-outlook-btn" onclick="devirOutlooktaHazirla()">🌐 Outlook Web'de Hazırla</button><div class="mail-note">Alıcı: g.n.d@hotmail.com • Bilgi (CC) boş • Konu: Çayan Devir Hk.</div></div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div id="pdfModal" class="pdf-modal" onclick="modalDisinaTikla(event)"><div class="pdf-modal-card"><div class="pdf-modal-head"><strong>PDF Olarak Kaydet / Yazdır</strong><span>Hazırlamak istediğiniz belgeyi seçin.</span></div><div class="pdf-modal-actions"><button type="button" class="pdf-choice primary" onclick="krediKartiPdfYazdir()">💳 Kredi Kartı Ödeme Bilgileri<br><span style="font-size:.78rem;font-weight:600;opacity:.75">Tutar, taksit, komisyon ve toplam ödeme</span></button><button type="button" class="pdf-choice" onclick="bankaPdfYazdir()">🏦 Banka Hesap Bilgileri<br><span style="font-size:.78rem;font-weight:600;opacity:.75">Tüm IBAN’lar ve ödeme açıklaması</span></button></div><button type="button" class="pdf-modal-close" onclick="pdfSeciminiKapat()">Vazgeç</button></div></div>
+<section id="printKredi" class="print-sheet print-doc"><div class="print-header"><div><div class="sub">ÇAYAN OTOMOTİV • RENEW TARSUS</div><h1>Kredi Kartı Ödeme Bilgileri</h1></div><div class="sub">RENEW • GÜVENLİ ÖDEME</div></div><div class="print-customer" style="text-align:center;"><b id="printKrediIsim">ÖRNEKTİR</b><div id="printKrediAciklama" style="display:none;"></div></div><table class="print-table"><tr><td>ÇEKİLEN TUTAR</td><td id="pkTutar">₺0,00</td></tr><tr><td>TAKSİT SAYISI</td><td id="pkTaksit">-</td></tr><tr><td>TOPLAM KOMİSYON ORANI</td><td id="pkToplamOran">-</td></tr><tr><td>AYLIK KOMİSYON ORANI</td><td id="pkAylikOran">-</td></tr><tr><td>TOPLAM KOMİSYON TUTARI</td><td id="pkToplamKomisyon">-</td></tr><tr><td>AYLIK KOMİSYON TUTARI</td><td id="pkAylikKomisyon">-</td></tr><tr><td>AYLIK TAKSİT TUTARI</td><td id="pkAylikTaksit">-</td></tr><tr class="total"><td>TOPLAM GERİ ÖDEME</td><td id="pkToplam">-</td></tr></table><div class="print-footer">Bu belge Çayan Tarsus Renew ödeme ekranındaki güncel hesaplama bilgilerine göre hazırlanmıştır.</div></section>
+<section id="printBanka" class="print-sheet print-doc"><div class="print-header"><div><div class="sub">ÇAYAN OTOMOTİV • RENEW TARSUS</div><h1>Banka Hesap Bilgileri</h1></div><div class="sub">RENEW • ÖDEME BİLGİLERİ</div></div><div class="print-customer"><b>Alıcı Bilgileri: Çayan Otomotiv</b></div><div class="print-bank"><div class="print-bank-name">T.C. ZİRAAT BANKASI A.Ş.</div><div class="print-bank-iban">TR97 0001 0027 9034 1200 4750 54</div></div><div class="print-bank"><div class="print-bank-name">TÜRKİYE İŞ BANKASI A.Ş.</div><div class="print-bank-iban">TR48 0006 4000 0016 6211 1037 73</div></div><div class="print-bank"><div class="print-bank-name">TÜRKİYE VAKIFLAR BANKASI T.A.O.</div><div class="print-bank-iban">TR22 0001 5001 5800 7284 2782 75</div></div><div class="print-bank"><div class="print-bank-name">GARANTİ BANKASI</div><div class="print-bank-iban">TR36 0006 2001 6840 0006 2025 63</div></div><div class="print-customer" style="margin-top:18px"><b>Ödeme Açıklaması</b><div id="printBankaAciklama">2. El Araç Bedeli</div><div id="printBankaIsim">-</div></div><div class="print-footer">Lütfen ödeme açıklaması alanına yukarıdaki açıklama ve isim-soyisim bilgisini yazınız.</div></section>
+
+<script>
+    const oranlar = { 1: 0.038422, 2: 0.065303, 3: 0.087666, 4: 0.110371, 5: 0.134559, 6: 0.157943, 7: 0.180916, 8: 0.208313, 9: 0.237317, 10: 0.265022, 11: 0.299207, 12: 0.329787 };
+
+    function musteriAlaniniAcKapat() {
+        const content = document.getElementById('musteriContent');
+        const icon = document.getElementById('toggleIcon');
+        content.classList.toggle('show');
+        icon.innerText = content.classList.contains('show') ? '-' : '+';
+    }
+
+    function bankaAlaniniAcKapat() {
+        const content = document.getElementById('bankContent');
+        const icon = document.getElementById('bankToggleIcon');
+        content.classList.toggle('show');
+        icon.innerText = content.classList.contains('show') ? '-' : '+';
+    }
+
+    function paraBicimlendir(input) {
+        let deger = input.value.replace(/\D/g, '');
+        if (deger !== '') deger = parseInt(deger, 10).toLocaleString('tr-TR');
+        input.value = deger;
+        const mailTutar = document.getElementById('mailTutar');
+        if (mailTutar) { mailTutar.value = deger; mailMetniGuncelle(); }
+        hesapla();
+    }
+
+    function hamTutarAl() {
+        const inputVal = document.getElementById('tutar').value;
+        return parseFloat(inputVal.replace(/\./g, '')) || 0;
+    }
+
+    function taksitSec(sayi) {
+        document.getElementById('taksit').value = sayi;
+        document.querySelectorAll('.taksit-btn').forEach(btn => btn.classList.toggle('active', btn.innerText.includes(sayi)));
+        hesapla();
+    }
+
+    function dropdownDegisti() {
+        let val = document.getElementById('taksit').value;
+        document.querySelectorAll('.taksit-btn').forEach(btn => btn.classList.toggle('active', btn.innerText.includes(val)));
+        hesapla();
+    }
+
+    function hesapla() {
+        const tutar = hamTutarAl();
+        const taksit = parseInt(document.getElementById('taksit').value);
+        if (tutar <= 0) {
+            document.getElementById('sonuc').style.display = 'none';
+            document.getElementById('copyBtn').style.display = 'none';
+            document.getElementById('wpBtn').style.display = 'none';
+            document.getElementById('pdfBtn').style.display = 'none';
+            return;
+        }
+        const komisyonOrani = oranlar[taksit] || 0;
+        const komisyonTutari = tutar * komisyonOrani;
+        const toplam = tutar + komisyonTutari;
+        
+        const f = (n) => '₺' + n.toLocaleString('tr-TR', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+        
+        document.getElementById('pdfTutarOzet').innerText = f(tutar);
+        document.getElementById('pdfTaksitOzet').innerText = taksit + ' Taksit';
+        document.getElementById('toplamKomisyonOrani').innerText = (komisyonOrani * 100).toFixed(2).replace('.', ',') + '%';
+        document.getElementById('aylikKomisyonOrani').innerText = ((komisyonOrani/taksit) * 100).toFixed(2).replace('.', ',') + '%';
+        document.getElementById('toplamKomisyonTutari').innerText = f(komisyonTutari);
+        document.getElementById('aylikKomisyonTutar').innerText = f(komisyonTutari / taksit);
+        document.getElementById('aylikTaksitTutari').innerText = f(toplam / taksit);
+        document.getElementById('toplamGeriOdeme').innerText = f(toplam);
+
+        document.getElementById('sonuc').style.display = 'block';
+        document.getElementById('copyBtn').style.display = 'block';
+        document.getElementById('wpBtn').style.display = 'flex';
+        document.getElementById('pdfBtn').style.display = 'block';
+    }
+
+    function musteriBilgisiAl() { const isim=document.getElementById('islemYapan').value.trim(); const aciklama=document.getElementById('aracBedeliAciklama').value.trim()||"2. El Araç Bedeli"; return {isim,aciklama}; }
+    function olusturMetin() {
+        const {isim,aciklama}=musteriBilgisiAl();
+        const isimSatiri = isim ? `*İsim Soyisim:* ${isim}\n` : '';
+        const cekilenTutar = document.getElementById('pdfTutarOzet').innerText;
+        const aylikTaksit = document.getElementById('aylikTaksitTutari').innerText;
+        return `${isimSatiri}*Açıklama:* ${aciklama}\n\n*KREDİ KARTI ÖDEME BİLGİLERİ*\n\n*Çekilen Tutar: ${cekilenTutar}*\nTaksit Sayısı: ${document.getElementById('pdfTaksitOzet').innerText}\nToplam Komisyon Oranı: ${document.getElementById('toplamKomisyonOrani').innerText}\nAylık Komisyon Oranı: ${document.getElementById('aylikKomisyonOrani').innerText}\nToplam Komisyon Tutarı: ${document.getElementById('toplamKomisyonTutari').innerText}\nAylık Komisyon Tutarı: ${document.getElementById('aylikKomisyonTutar').innerText}\n*Aylık Taksit Tutarı: ${aylikTaksit}*\n*Toplam Geri Ödeme: ${document.getElementById('toplamGeriOdeme').innerText}*`;
+    }
+    function sonucuKopyala(){ const metin = olusturMetin().replace(/^\*Açıklama:\*.*\n\n/m, ""); navigator.clipboard.writeText(metin); const b=document.getElementById('copyBtn'); b.innerText="✅ Kopyalandı!"; setTimeout(()=>b.innerText="📋 Metni Kopyala",2000); }
+    function whatsappGonder(){
+        const url = "https://wa.me/?text=" + encodeURIComponent(olusturMetin());
+        const mobil = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent);
+        if (mobil) { window.location.href = url; } else { window.open(url, '_blank', 'noopener'); }
+    }
+    const bankalar=[['T.C. ZİRAAT BANKASI A.Ş.','TR97 0001 0027 9034 1200 4750 54'],['TÜRKİYE İŞ BANKASI A.Ş.','TR48 0006 4000 0016 6211 1037 73'],['TÜRKİYE VAKIFLAR BANKASI T.A.O.','TR22 0001 5001 5800 7284 2782 75'],['GARANTİ BANKASI','TR36 0006 2001 6840 0006 2025 63']];
+    function bankaKopyaMetni(banka,iban){
+        const {isim,aciklama}=musteriBilgisiAl();
+        return `Alıcı Bilgileri: Çayan Otomotiv\n\nBanka: ${banka}\nIBAN: ${iban}\n\nÖdeme Açıklaması: ${aciklama}${isim ? ` - ${isim}` : ''}`;
+    }
+    function bankaMetniKopyala(banka,iban,btn){ navigator.clipboard.writeText(bankaKopyaMetni(banka,iban)); btn.innerText="✓ Kopyalandı"; setTimeout(()=>btn.innerText="Kopyala",2000); }
+    function tumBankaBilgileriniKopyala(btn){
+        const {isim,aciklama}=musteriBilgisiAl();
+        let m=`Alıcı Bilgileri: Çayan Otomotiv\n\n🏦 BANKA HESAP BİLGİLERİ\n\n` + bankalar.map(([b,i])=>`Banka: ${b}\nIBAN: ${i}`).join('\n\n') + `\n\nÖdeme Açıklaması: ${aciklama}${isim ? ` - ${isim}` : ''}`;
+        navigator.clipboard.writeText(m);
+        const e=btn.innerText; btn.innerText="✅ Kopyalandı"; setTimeout(()=>btn.innerText=e,2000);
+    }
+    function pdfYazdir(){ document.getElementById('pdfModal').classList.add('show'); }
+    function pdfSeciminiKapat(){ document.getElementById('pdfModal').classList.remove('show'); }
+    function modalDisinaTikla(e){ if(e.target.id==='pdfModal') pdfSeciminiKapat(); }
+    function yazdirmaBilgileriniHazirla(){
+        const {isim,aciklama}=musteriBilgisiAl();
+        document.getElementById('printKrediIsim').innerText='ÖRNEKTİR';
+        document.getElementById('printKrediAciklama').innerText='';
+        document.getElementById('printBankaIsim').innerText=isim||'-';
+        document.getElementById('printBankaAciklama').innerText=aciklama;
+        const x={pkTutar:'pdfTutarOzet',pkTaksit:'pdfTaksitOzet',pkToplamOran:'toplamKomisyonOrani',pkAylikOran:'aylikKomisyonOrani',pkToplamKomisyon:'toplamKomisyonTutari',pkAylikKomisyon:'aylikKomisyonTutar',pkAylikTaksit:'aylikTaksitTutari',pkToplam:'toplamGeriOdeme'};
+        Object.entries(x).forEach(([a,b])=>document.getElementById(a).innerText=document.getElementById(b).innerText);
+        return {isim};
+    }
+    function temizDosyaAdi(m){ return (m||'Musteri').replace(/[\/:*?"<>|]/g,'').replace(/\s+/g,'_'); }
+    function yazdir(tur){
+        const bilgi=yazdirmaBilgileriniHazirla();
+        pdfSeciminiKapat();
+        const kaynak = tur==='banka' ? document.getElementById('printBanka') : document.getElementById('printKredi');
+        const ad = temizDosyaAdi(bilgi.isim);
+        const baslik = tur==='banka' ? `Cayan_Renew_Banka_Hesaplari_${ad}` : `Cayan_Renew_Kredi_Karti_Odeme_${ad}`;
+
+        const stil = `
+            @page{size:A4;margin:11mm}
+            *{box-sizing:border-box;-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
+            body{margin:0;background:#fff!important;color:#000!important;font-family:Arial,'Segoe UI',sans-serif;font-size:16px}
+            .print-sheet{display:block!important;max-width:100%;margin:0 auto}
+            .print-doc{color:#000!important;background:#fff!important}
+            .print-header{border:0;border-radius:0;padding:20px 22px;margin-bottom:20px;display:flex;justify-content:space-between;align-items:flex-end;background:#0b1220;color:#fff;box-shadow:inset 0 -7px 0 #f7d117}
+            .print-header h1{font-size:30px;line-height:1.1;margin:7px 0 3px;font-weight:900;letter-spacing:-.4px}
+            .print-header .sub{font-size:14px;font-weight:800;letter-spacing:1.5px;color:#d8dee8}
+            .print-customer{background:#f3f6f9;border:2px solid #d9e0e7;border-radius:14px;padding:17px 18px;margin-bottom:18px}
+            .print-customer b{font-size:19px;color:#000!important}.print-customer div{margin-top:8px;font-size:17px;line-height:1.45;color:#344054;font-weight:600}
+            .print-table{width:100%;border-collapse:separate;border-spacing:0;border:2px solid #d9e0e7;border-radius:14px;overflow:hidden}
+            .print-table td{padding:17px 18px;border-bottom:1px solid #bfc7d1;font-size:17px;line-height:1.25}
+            .print-table tr:last-child td{border-bottom:0}
+            .print-table td:first-child{color:#111!important;font-weight:800;width:56%}
+            .print-table td:last-child{text-align:right;font-weight:900;font-size:18px;color:#000!important}
+            .print-table tr.total td{background:#0b1220!important;color:#fff!important;font-size:22px;font-weight:900;padding:19px 17px;border:0}
+            .print-bank{border:2px solid #d9e0e7;border-radius:14px;padding:18px 19px;margin-bottom:13px;page-break-inside:avoid;background:#fff}
+            .print-bank-name{font-size:19px;font-weight:900;margin-bottom:10px;color:#0b1220}
+            .print-bank-iban{font-family:Consolas,'Courier New',monospace;font-size:20px;line-height:1.35;font-weight:900;letter-spacing:.25px;color:#111827}
+            .print-footer{margin-top:21px;border-top:2px solid #d9e0e7;padding-top:13px;font-size:14px;line-height:1.45;color:#334155!important;text-align:center;font-weight:600}
+            .print-sheet,.print-sheet *{visibility:visible!important;opacity:1!important;text-shadow:none!important}
+            .print-table,.print-table tr,.print-table td{background:#fff;color:#000}
+            .print-table tr.total td{background:#0b1220!important;color:#fff!important}
+        `;
+
+        const pencere = window.open('', '_blank', 'width=900,height=700');
+        if(!pencere){
+            alert('Yazdırma penceresi tarayıcı tarafından engellendi. Lütfen bu site için açılır pencerelere izin verin.');
+            return;
+        }
+        pencere.document.open();
+        pencere.document.write(`<!DOCTYPE html><html lang="tr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${baslik}</title><style>${stil}
+        /* Sağ panel: açılır/kapanır mail ve ödeme bildirimi */
+        .collapsible-mail{padding:0 18px 18px!important;}
+        .collapsible-mail::before{display:none!important;}
+        .mail-panel-toggle{width:calc(100% + 36px);margin:0 -18px;border:0;background:#0b1220;color:#fff;padding:16px 18px;display:flex;align-items:center;justify-content:space-between;font-weight:900;font-size:.95rem;cursor:pointer;letter-spacing:.2px;}
+        .mail-panel-toggle #mailPanelIcon{font-size:1.25rem;line-height:1;}
+        .mail-panel-content{display:none;padding-top:14px;}
+        .mail-panel-content.show{display:block;}
+        .mail-section{border:1px solid #dfe5ec;border-radius:14px;overflow:hidden;background:#fff;margin-bottom:12px;}
+        .mail-section-title{width:100%;border:0;background:#f6f8fb;color:#111827;padding:13px 14px;display:flex;justify-content:space-between;align-items:center;font-weight:900;cursor:pointer;text-align:left;}
+        .mail-section-body{display:none;padding:14px;}
+        .mail-section-body.show{display:block;}
+        .short-preview{min-height:170px!important;}
+        body[data-theme="light"] .mail-section{background:#fff!important;}
+        body[data-theme="light"] .mail-section-title{background:#f6f8fb!important;color:#111827!important;}
+        .top-actions{display:none!important;}
+
+
+
+/* ===== V3: ORTALANMIŞ RENEW KİMLİĞİ + GELİŞMİŞ SAĞ ACCORDION ===== */
+.card:before{
+  content:"ÖDEME MERKEZİ"!important;
+  background:#0b1220!important;
+  justify-content:flex-start!important;
+  padding-right:30px!important;
+}
+.card:after{display:none!important;}
+.logo-header{
+  margin:2px 0 18px!important;
+  padding:0!important;
+  border:0!important;
+  text-align:center!important;
+  display:flex!important;
+  justify-content:center!important;
+  align-items:center!important;
+}
+.renew-logo-shell{
+  min-width:190px;
+  min-height:68px;
+  padding:12px 28px;
+  border:1px solid #e2e8f0;
+  border-radius:18px;
+  background:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  box-shadow:0 10px 28px rgba(15,23,42,.08);
+  position:relative;
+}
+.renew-logo-shell:after{
+  content:"";
+  position:absolute;
+  left:34px;right:34px;bottom:-1px;
+  height:4px;
+  border-radius:4px 4px 0 0;
+  background:var(--renew-yellow,#f7d117);
+}
+.renew-logo-shell img{
+  display:block;
+  max-width:155px!important;
+  width:auto!important;
+  height:40px!important;
+  object-fit:contain!important;
+  filter:none!important;
+}
+.renew-fallback{
+  display:none;
+  align-items:center;
+  justify-content:center;
+  color:#0b1220;
+  font-size:32px;
+  font-weight:1000;
+  letter-spacing:-2px;
+  text-transform:lowercase;
+  line-height:1;
+}
+
+/* Sağ paneli soldaki kartlarla aynı aileye getir */
+.collapsible-mail{
+  padding:18px!important;
+  border-radius:22px!important;
+}
+.mail-panel-toggle{
+  width:100%!important;
+  margin:0!important;
+  padding:14px 15px!important;
+  min-height:54px;
+  border:1px solid #d9e1ea!important;
+  border-radius:14px!important;
+  background:#eef2f6!important;
+  color:#334155!important;
+  box-shadow:none!important;
+  font-size:.82rem!important;
+  font-weight:900!important;
+  letter-spacing:.45px!important;
+  text-transform:uppercase;
+  transition:transform .18s ease, border-color .18s ease, background .18s ease!important;
+}
+.mail-panel-toggle:hover{
+  background:#e7edf3!important;
+  border-color:#c4ced9!important;
+  transform:translateY(-1px);
+}
+.mail-panel-toggle .mail-plus,
+.mail-section-title .mail-plus{
+  flex:0 0 30px;
+  width:30px;
+  height:30px;
+  border-radius:10px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  background:#0b1220;
+  color:#fff!important;
+  font-size:18px!important;
+  font-weight:800!important;
+  line-height:1;
+  box-shadow:0 5px 12px rgba(15,23,42,.12);
+}
+.mail-panel-content{
+  padding-top:12px!important;
+  animation:slideMailIn .24s ease both;
+}
+.mail-panel-content.show{display:block!important;}
+@keyframes slideMailIn{
+  from{opacity:0;transform:translateY(-7px)}
+  to{opacity:1;transform:translateY(0)}
+}
+.mail-section{
+  margin-bottom:10px!important;
+  border:1px solid #dbe3ec!important;
+  border-radius:14px!important;
+  background:#fff!important;
+  box-shadow:0 6px 16px rgba(15,23,42,.035)!important;
+}
+.mail-section-title{
+  min-height:52px;
+  padding:11px 12px 11px 14px!important;
+  border:0!important;
+  border-radius:13px!important;
+  background:#f8fafc!important;
+  color:#334155!important;
+  font-size:.82rem!important;
+  font-weight:850!important;
+  letter-spacing:.15px;
+}
+.mail-section-title:hover{background:#f1f5f9!important;}
+.mail-section-body.show{
+  display:block!important;
+  animation:slideSectionIn .22s ease both;
+}
+@keyframes slideSectionIn{
+  from{opacity:0;transform:translateY(-5px)}
+  to{opacity:1;transform:translateY(0)}
+}
+.mail-section-body{border-top:1px solid #e5eaf0;}
+
+@media(max-width:850px){
+ .renew-logo-shell{min-width:170px;min-height:62px;padding:10px 22px}
+ .renew-logo-shell img{max-width:140px!important;height:36px!important}
+}
+
+</style>
+
+<style>
+/* Logosuz üst alan */
+.card > .brand { margin-top: 4px !important; }
+
+/* Mobil işlem butonları */
+@media (max-width: 600px) {
+    body { padding: 10px !important; }
+    .card, .side-panel, .mail-panel { border-radius: 14px !important; }
+    .btn-container { gap: 8px !important; }
+    .action-btn { width: 100% !important; min-height: 48px; font-size: 0.95rem !important; }
+    #wpBtn { min-height: 50px; border-radius: 10px !important; }
+    .quick-taksit { display: grid !important; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 8px !important; }
+    .result-item { gap: 12px; align-items: center; }
+    .result-item span { max-width: 58%; }
+    .result-item strong { text-align: right; }
+}
+</style>
+
+
+<style>
+/* ===== WEB + MOBİL YERLEŞİM DÜZELTMESİ ===== */
+html,body{overflow-x:hidden!important;}
+body{width:100%!important;}
+.wrapper{
+  width:min(1480px,calc(100vw - 44px))!important;
+  margin:0 auto!important;
+  grid-template-columns:310px minmax(0,1fr) 350px!important;
+}
+.side-panel,.mail-panel,.card{min-width:0!important;}
+
+/* Önceki stillerden kalan absolute pseudo başlık, içerik üstüne binmesin */
+.card::before{
+  position:relative!important;
+  left:auto!important;right:auto!important;top:auto!important;bottom:auto!important;
+  width:auto!important;
+  height:46px!important;
+  box-sizing:border-box!important;
+  margin:0 -30px 22px!important;
+  padding:0 30px!important;
+  flex:none!important;
+  z-index:1!important;
+}
+.card>.brand{position:relative!important;z-index:2!important;}
+
+@media (max-width:1240px) and (min-width:851px){
+  body{padding:28px 18px 42px!important;}
+  .wrapper{
+    width:100%!important;
+    max-width:1100px!important;
+    grid-template-columns:300px minmax(0,1fr)!important;
+    gap:18px!important;
+  }
+  .side-panel{width:100%!important;}
+  .card{width:100%!important;max-width:none!important;}
+  .mail-panel{grid-column:1/-1!important;width:100%!important;max-width:none!important;}
+  .brand h2{font-size:1.42rem!important;}
+}
+
+@media (max-width:850px){
+  body{padding:14px 10px 28px!important;}
+  .wrapper{width:100%!important;max-width:620px!important;margin:0 auto!important;}
+  .card::before{margin:0 -18px 18px!important;padding:0 18px!important;height:44px!important;}
+  .card,.side-panel,.mail-panel{width:100%!important;max-width:none!important;}
+  .brand h1{font-size:.68rem!important;}
+  .brand h2{font-size:1.24rem!important;line-height:1.2!important;}
+}
+</style>
+
+</head><body>${kaynak.outerHTML}<script>window.onload=function(){setTimeout(function(){window.print();},250)}<\/script></body></html>`);
+        pencere.document.close();
+    }
+    function krediKartiPdfYazdir(){ if(hamTutarAl()<=0){alert('Kredi kartı PDF’i için önce çekilecek tutarı giriniz.');return;} yazdir('kredi'); }
+    function bankaPdfYazdir(){ yazdir('banka'); }
+
+
+
+    /* V7.21 — RENEW PRO MAIL ŞABLON BAĞLANTISI */
+    const RENEW_MAIL_TPL_KEY='renewpro_mail_templates_v721';
+    function renewMailTpl(type){
+      try{const a=JSON.parse(localStorage.getItem(RENEW_MAIL_TPL_KEY)||'[]');return a.find(x=>x.type===type&&x.active!==false)||null}catch(e){return null}
+    }
+    function renewTplApply(text,vars){return String(text||'').replace(/\{([a-zA-Z0-9_]+)\}/g,(m,k)=>vars[k]??m)}
+    window.addEventListener('message',e=>{if(e.origin===location.origin&&e.data?.type==='renew-mail-templates-updated'){mailMetniGuncelle();odemeMetniGuncelle();sigortaMetniGuncelle();devirMetniGuncelle();}});
+
+    let seciliKartTipi = 'Tek Kredi Kartı';
+
+    function kartTipiSec(tip) {
+        seciliKartTipi = tip;
+        document.getElementById('tekKartBtn').classList.toggle('active', tip === 'Tek Kredi Kartı');
+        document.getElementById('cokKartBtn').classList.toggle('active', tip !== 'Tek Kredi Kartı');
+        mailMetniGuncelle();
+    }
+
+    function mailTutarBicimlendir(input) {
+        let deger = input.value.replace(/\D/g, '');
+        if (deger !== '') deger = parseInt(deger, 10).toLocaleString('tr-TR');
+        input.value = deger;
+        mailMetniGuncelle();
+    }
+
+    function mailMetniOlustur() {
+        const alici = document.getElementById('mailAlici').value.trim() || '[ALICI ADI SOYADI]';
+        const tc = document.getElementById('mailTc').value.trim() || '[TC KİMLİK NO]';
+        const cep = document.getElementById('mailCep').value.trim() || '[CEP NO]';
+        const tutarHam = document.getElementById('mailTutar').value.trim() || '[TUTAR]';
+        const tutar = tutarHam === '[TUTAR]' ? tutarHam : tutarHam + ' TL';
+
+        return `Merhaba,
+
+Aşağıda bilgileri bulunan müşterimizin kredi kartı tahsilat işlemi için desteğinizi rica ederim.
+
+MÜŞTERİ BİLGİLERİ
+
+Alıcı Adı Soyadı: ${alici}
+T.C. Kimlik No: ${tc}
+Cep Telefonu: ${cep}
+
+ÖDEME BİLGİLERİ
+
+Çekilecek Tutar: ${tutar}
+Kredi Kartı Kullanımı: ${seciliKartTipi}
+
+İlgili tutarın belirtilen kredi kartı/kartları üzerinden tahsilat işleminin gerçekleştirilmesini rica ederim.
+
+İyi çalışmalar.`;
+    }
+
+    function mailMetniGuncelle() {
+        const alan = document.getElementById('mailOnizleme');
+        if (alan) alan.value = mailMetniOlustur();
+    }
+
+    function mailMetniniKopyala(btn) {
+        const metin = mailMetniOlustur();
+        navigator.clipboard.writeText(metin).then(() => {
+            const eski = btn.innerText;
+            btn.innerText = '✅ Mail Metni Kopyalandı';
+            setTimeout(() => btn.innerText = eski, 1800);
+        }).catch(() => {
+            const alan = document.getElementById('mailOnizleme');
+            alan.removeAttribute('readonly'); alan.select(); document.execCommand('copy'); alan.setAttribute('readonly','readonly');
+            btn.innerText = '✅ Mail Metni Kopyalandı';
+            setTimeout(() => btn.innerText = '📋 Mail Metnini Kopyala', 1800);
+        });
+    }
+
+    const outlookAlicilar = [
+        'seval.avseven@cayan.com.tr',
+        'muhasebe@cayan.com.tr',
+        'tahsilatsorgu@cayan.com.tr'
+    ];
+    const outlookBilgi = [
+        'emirhan.cayan.cayan@ys.renault.com.tr',
+        'denizhan.cayan.cayan@ys.renault.com.tr'
+    ];
+    const outlookKonu = 'Kredi Kartı Tahsilat Hk.';
+
+    function outlookMailAc(konu, body) {
+        // Outlook Web yeni ileti ekranını doğrudan açar.
+        // CC/Bilgi alanını özellikle boş bırakıyoruz.
+        // encodeURIComponent kullanıldığı için konu ve gövdede '+' karakteri oluşmaz.
+        const to = outlookAlicilar.join(';');
+
+        const url = 'https://outlook.office.com/mail/deeplink/compose?'
+            + 'to=' + encodeURIComponent(to)
+            + '&subject=' + encodeURIComponent(konu)
+            + '&body=' + encodeURIComponent(body);
+
+        window.open(url, '_blank', 'noopener,noreferrer');
+    }
+
+    function outlooktaHazirla() {
+        const tpl=renewMailTpl('tahsilat');
+        if(tpl){
+          const alici=document.getElementById('mailAlici').value.trim()||'[ALICI ADI SOYADI]', tc=document.getElementById('mailTc').value.trim()||'[TC KİMLİK NO]', cep=document.getElementById('mailCep').value.trim()||'[CEP NO]', th=document.getElementById('mailTutar').value.trim()||'[TUTAR]', tutar=th==='[TUTAR]'?th:th+' TL';
+          const subject=renewTplApply(tpl.subject,{alici,tc,cep,tutar,kart_tipi:seciliKartTipi});
+          const to=(tpl.to||'').split(';').filter(Boolean).join(';'), cc=(tpl.cc||'').split(';').filter(Boolean).join(';');
+          const url='https://outlook.office.com/mail/deeplink/compose?to='+encodeURIComponent(to)+'&cc='+encodeURIComponent(cc)+'&subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(mailMetniOlustur());window.open(url,'_blank','noopener,noreferrer');return;
+        }
+        outlookMailAc(outlookKonu, mailMetniOlustur());
+    }
+
+    function mailPanelAcKapat() {
+        const content = document.getElementById('mailPanelContent');
+        const icon = document.getElementById('mailPanelIcon');
+        content.classList.toggle('show');
+        icon.innerText = content.classList.contains('show') ? '−' : '+';
+    }
+
+    function mailBolumAcKapat(id, iconId) {
+        const content = document.getElementById(id);
+        const icon = document.getElementById(iconId);
+        content.classList.toggle('show');
+        icon.innerText = content.classList.contains('show') ? '−' : '+';
+    }
+
+    function odemeTutarBicimlendir(input) {
+        let deger = input.value.replace(/\D/g, '');
+        if (deger !== '') deger = parseInt(deger, 10).toLocaleString('tr-TR');
+        input.value = deger;
+        odemeMetniGuncelle();
+    }
+
+    function odemeMetniOlustur() {
+        const isim = document.getElementById('odemeIsim').value.trim() || '[İSİM SOYİSİM]';
+        const tutarHam = document.getElementById('odemeTutar').value.trim() || '[TUTAR]';
+        const tutar = tutarHam === '[TUTAR]' ? tutarHam : tutarHam + ' TL';
+        const banka = document.getElementById('odemeBanka').value || '[BANKA]';
+        return `Merhaba,
+
+${isim} isimli müşterimiz tarafından ${banka} hesabımıza ${tutar} tutarında ödeme gönderimi sağlanmıştır.
+
+Kontrolünü sağlayabilir miyiz?
+
+İyi çalışmalar.`;
+    }
+
+    function odemeMetniGuncelle() {
+        const alan = document.getElementById('odemeOnizleme');
+        if (alan) alan.value = odemeMetniOlustur();
+    }
+
+    function odemeMetniniKopyala(btn) {
+        const metin = odemeMetniOlustur();
+        navigator.clipboard.writeText(metin).then(() => {
+            const eski = btn.innerText;
+            btn.innerText = '✅ Ödeme Bildirimi Kopyalandı';
+            setTimeout(() => btn.innerText = eski, 1800);
+        }).catch(() => {
+            const alan = document.getElementById('odemeOnizleme');
+            alan.removeAttribute('readonly'); alan.select(); document.execCommand('copy'); alan.setAttribute('readonly','readonly');
+            btn.innerText = '✅ Ödeme Bildirimi Kopyalandı';
+            setTimeout(() => btn.innerText = '📋 Ödeme Bildirimini Kopyala', 1800);
+        });
+    }
+
+    function odemeKonuOlustur() {
+        const isim = document.getElementById('odemeIsim').value.trim() || 'İsim Soyisim';
+        const tutarHam = document.getElementById('odemeTutar').value.trim() || 'Tutar';
+        const tutar = tutarHam === 'Tutar' ? tutarHam : tutarHam + ' TL';
+        const bankaSecim = document.getElementById('odemeBanka');
+        const banka = bankaSecim.options[bankaSecim.selectedIndex]?.text || 'Banka';
+        return `${isim} - ${tutar} - ${banka}`;
+    }
+
+    function odemeOutlooktaHazirla() {
+        outlookMailAc(odemeKonuOlustur(), odemeMetniOlustur());
+    }
+
+
+
+    function sigortaPlakaBicimlendir(input) {
+        input.value = input.value.toLocaleUpperCase('tr-TR').replace(/[^0-9A-ZÇĞİÖŞÜ ]/g, '').replace(/\s+/g, ' ').trimStart();
+    }
+
+    function sigortaKonuOlustur() {
+        const plaka = document.getElementById('sigortaPlaka').value.trim() || 'PLAKA';
+        return `${plaka} - Sigorta İptali Hk.`;
+    }
+
+    function sigortaMetniOlustur() {
+        const plaka = document.getElementById('sigortaPlaka').value.trim() || '[PLAKA]';
+        return `Merhaba,
+
+${plaka} plakalı aracın sigorta iptal işlemini gerçekleştirebilir misiniz?
+
+İyi çalışmalar,
+Saygılarımla.`;
+    }
+
+    function sigortaMetniGuncelle() {
+        const alan = document.getElementById('sigortaOnizleme');
+        if (alan) alan.value = sigortaMetniOlustur();
+    }
+
+    function sigortaMetniniKopyala(btn) {
+        const metin = sigortaMetniOlustur();
+        navigator.clipboard.writeText(metin).then(() => {
+            const eski = btn.innerText;
+            btn.innerText = '✅ Sigorta İptali Metni Kopyalandı';
+            setTimeout(() => btn.innerText = eski, 1800);
+        }).catch(() => {
+            const alan = document.getElementById('sigortaOnizleme');
+            alan.removeAttribute('readonly'); alan.select(); document.execCommand('copy'); alan.setAttribute('readonly','readonly');
+            btn.innerText = '✅ Sigorta İptali Metni Kopyalandı';
+            setTimeout(() => btn.innerText = '📋 Sigorta İptali Metnini Kopyala', 1800);
+        });
+    }
+
+    function sigortaOutlooktaHazirla() {
+        // Sigorta iptali için yalnızca iki alıcı kullanılır. Bilgi (CC) boş bırakılır.
+        const sigortaAlicilar = [
+            'muhasebe@cayan.com.tr',
+            'Sezen.Tanrisever@kocstellantissigorta.com.tr'
+        ];
+        const to = sigortaAlicilar.join(';');
+        const url = 'https://outlook.office.com/mail/deeplink/compose?'
+            + 'to=' + encodeURIComponent(to)
+            + '&subject=' + encodeURIComponent(sigortaKonuOlustur())
+            + '&body=' + encodeURIComponent(sigortaMetniOlustur());
+        window.open(url, '_blank', 'noopener,noreferrer');
+    }
+
+
+    document.addEventListener('DOMContentLoaded', () => {
+        mailMetniGuncelle();
+        odemeMetniGuncelle();
+        sigortaMetniGuncelle();
+    });
+
+
+    /* ===== DEVİR İŞLEMİ MAİLİ ===== */
+    let devirPlakaDurumu = 'ayni';
+    function devirTutarBicimlendir(input){ let d=input.value.replace(/\D/g,''); if(d!=='') d=parseInt(d,10).toLocaleString('tr-TR'); input.value=d; devirMetniGuncelle(); }
+    function devirKmBicimlendir(input){ let d=input.value.replace(/\D/g,''); if(d!=='') d=parseInt(d,10).toLocaleString('tr-TR'); input.value=d; devirMetniGuncelle(); }
+    function devirPlakaSec(durum){ devirPlakaDurumu=durum; document.getElementById('plakaAyniBtn').classList.toggle('active',durum==='ayni'); document.getElementById('plakaDegisecekBtn').classList.toggle('active',durum==='degisecek'); devirMetniGuncelle(); }
+    function devirMetniOlustur(){ const t=document.getElementById('devirTutar').value.trim(); const k=document.getElementById('devirKm').value.trim(); const y=document.getElementById('devirYetkili').value; const tutar=t?t+' TL':'[ARAÇ BEDELİ]'; const km=k?k+' KM':'[KM]'; const p=devirPlakaDurumu==='degisecek'?'Plaka değişecektir.':'Plaka aynı kalacaktır.'; const tpl=renewMailTpl('devir'); if(tpl)return renewTplApply(tpl.body,{yetkili:y,tutar,km,plaka_durumu:p}); return `Merhaba, Çayan Otomotiv adına ${y} imza yetkilisidir. Araç bedeli ${tutar}'dir. Araç ${km}'dedir. ${p} İyi çalışmalar.`; }
+    function devirMetniGuncelle(){ const a=document.getElementById('devirOnizleme'); if(a) a.value=devirMetniOlustur(); }
+    function devirMetniniKopyala(btn){ const m=devirMetniOlustur(); navigator.clipboard.writeText(m).then(()=>{const e=btn.innerText;btn.innerText='✅ Devir Maili Kopyalandı';setTimeout(()=>btn.innerText=e,1800)}).catch(()=>{const a=document.getElementById('devirOnizleme');a.removeAttribute('readonly');a.select();document.execCommand('copy');a.setAttribute('readonly','readonly');}); }
+    function devirOutlooktaHazirla(){ const url='https://outlook.office.com/mail/deeplink/compose?to='+encodeURIComponent('g.n.d@hotmail.com')+'&subject='+encodeURIComponent('Çayan Devir Hk.')+'&body='+encodeURIComponent(devirMetniOlustur()); window.open(url,'_blank','noopener,noreferrer'); }
+    document.addEventListener('DOMContentLoaded',devirMetniGuncelle);
+</script>
+
+</body>
+</html>
+<style id="v723PreviewFix">
+.mail-preview{white-space:pre-wrap!important;word-break:normal!important;overflow-wrap:anywhere!important;line-height:1.58!important;text-align:left!important;font-family:'Segoe UI',Arial,sans-serif!important}
+.mail-preview *{white-space:inherit!important}
+.mail-section{overflow:visible!important}
+</style>
+<script>
+(function(){
+ const KEY='renewpro_devir_authorities_v723';
+ function authorities(){try{return JSON.parse(localStorage.getItem(KEY)||'[]')}catch(e){return[]}}
+ function syncDevirAuthority(){
+   const s=document.getElementById('devirYetkili');if(!s)return;
+   const arr=authorities();if(!arr.length)return;
+   const old=s.value;s.innerHTML=arr.map(a=>'<option value="'+String(a.name||'').replace(/"/g,'&quot;')+'">'+(a.name||'Yetkili')+(a.title?' — '+a.title:'')+'</option>').join('');
+   if([...s.options].some(o=>o.value===old))s.value=old;
+   if(typeof devirMetniGuncelle==='function')devirMetniGuncelle();
+ }
+ window.addEventListener('storage',e=>{if(e.key===KEY)syncDevirAuthority()});
+ window.addEventListener('message',e=>{if(e.origin===location.origin&&e.data?.type==='renew-mail-templates-updated')syncDevirAuthority()});
+ document.addEventListener('DOMContentLoaded',syncDevirAuthority);
+ setTimeout(syncDevirAuthority,250);
+})();
+</script>
+
+<style id="v724StablePayment">
+*{transition:none!important}
+.payment-template-select{margin:0 0 10px;padding:10px;border:1px solid #d9e3ee;border-radius:9px;background:#f7f9fc}
+.payment-template-select label{margin-bottom:5px}.payment-template-select select{width:100%}
+.mail-preview{box-sizing:border-box!important;width:100%!important;white-space:pre-wrap!important;overflow-wrap:anywhere!important;word-break:normal!important;line-height:1.55!important;text-align:left!important;resize:vertical!important}
+.wrapper{min-width:0!important}.card,.side-panel,.mail-panel{min-width:0!important}
+@media(max-width:1250px){.wrapper{grid-template-columns:290px minmax(0,1fr)!important}.mail-panel{grid-column:1/-1!important}}
+@media(max-width:850px){.wrapper{display:flex!important;flex-direction:column!important}.card,.side-panel,.mail-panel{width:100%!important}}
+</style>
+<script>
+/* V7.24 Central mail config bridge */
+let RENEW_MAIL_CONFIG={templates:[],custom_vars:[],authorities:[]};
+async function loadCentralMailConfig(){
+ try{
+  const r=await fetch('/api/mail-config',{credentials:'same-origin'});if(!r.ok)return;
+  RENEW_MAIL_CONFIG=await r.json();populatePaymentTemplates();populateDevirAuthorities();
+  mailMetniGuncelle();odemeMetniGuncelle();sigortaMetniGuncelle();devirMetniGuncelle();
+ }catch(e){}
+}
+function moduleTemplates(module){return (RENEW_MAIL_CONFIG.templates||[]).filter(x=>x.module===module&&x.active!==false)}
+function fillTplSelect(id,module){
+ const s=document.getElementById(id);if(!s)return;const old=s.value,arr=moduleTemplates(module);
+ s.innerHTML=arr.map(x=>'<option value="'+x.id+'">'+(x.name||x.type||'Şablon')+'</option>').join('');
+ if(old&&arr.some(x=>x.id===old))s.value=old
+}
+function populatePaymentTemplates(){fillTplSelect('mailTemplateSelect','tahsilat');fillTplSelect('odemeTemplateSelect','odeme');fillTplSelect('sigortaTemplateSelect','sigorta');fillTplSelect('devirTemplateSelect','devir')}
+function selectedTpl(module){
+ const ids={tahsilat:'mailTemplateSelect',odeme:'odemeTemplateSelect',sigorta:'sigortaTemplateSelect',devir:'devirTemplateSelect'};
+ const id=document.getElementById(ids[module])?.value;return moduleTemplates(module).find(x=>x.id===id)||moduleTemplates(module)[0]||null
+}
+function tplApply(text,v){return String(text||'').replace(/\{([a-zA-Z0-9_ğüşöçıİĞÜŞÖÇ]+)\}/g,(m,k)=>v[k]??m)}
+function currentAuthority(){
+ const s=document.getElementById('devirYetkili'),id=s?.value;return (RENEW_MAIL_CONFIG.authorities||[]).find(x=>x.id===id)||(RENEW_MAIL_CONFIG.authorities||[])[0]||{}
+}
+function populateDevirAuthorities(){
+ const s=document.getElementById('devirYetkili');if(!s)return;const old=s.value,arr=RENEW_MAIL_CONFIG.authorities||[];
+ s.innerHTML=arr.map(a=>'<option value="'+a.id+'">'+(a.name||'Yetkili')+(a.title?' — '+a.title:'')+'</option>').join('');
+ if(old&&arr.some(a=>a.id===old))s.value=old
+}
+const _oldMail=mailMetniOlustur,_oldOdeme=odemeMetniOlustur,_oldSigorta=sigortaMetniOlustur,_oldDevir=devirMetniOlustur;
+mailMetniOlustur=function(){
+ const t=selectedTpl('tahsilat');if(!t)return _oldMail();
+ const alici=document.getElementById('mailAlici').value.trim()||'[ALICI ADI SOYADI]',tc=document.getElementById('mailTc').value.trim()||'[TC KİMLİK NO]',cep=document.getElementById('mailCep').value.trim()||'[CEP NO]',h=document.getElementById('mailTutar').value.trim()||'[TUTAR]',tutar=h==='[TUTAR]'?h:h+' TL';
+ return tplApply(t.body,{alici,tc,cep,tutar,kart_tipi:seciliKartTipi})
+};
+odemeMetniOlustur=function(){
+ const t=selectedTpl('odeme');if(!t)return _oldOdeme();
+ const isim=document.getElementById('odemeIsim').value.trim()||'[İSİM SOYİSİM]',h=document.getElementById('odemeTutar').value.trim()||'[TUTAR]',tutar=h==='[TUTAR]'?h:h+' TL',banka=document.getElementById('odemeBanka').value||'[BANKA]';
+ return tplApply(t.body,{isim,tutar,banka})
+};
+sigortaMetniOlustur=function(){
+ const t=selectedTpl('sigorta');if(!t)return _oldSigorta();const plaka=document.getElementById('sigortaPlaka').value.trim()||'[PLAKA]';return tplApply(t.body,{plaka})
+};
+devirMetniOlustur=function(){
+ const t=selectedTpl('devir');if(!t)return _oldDevir();const h=document.getElementById('devirTutar').value.trim(),k=document.getElementById('devirKm').value.trim(),a=currentAuthority(),tutar=h?h+' TL':'[ARAÇ BEDELİ]',km=k?k+' KM':'[KM]',plaka_durumu=devirPlakaDurumu==='degisecek'?'Plaka değişecektir.':'Plaka aynı kalacaktır.';
+ return tplApply(t.body,{yetkili:a.name||'[YETKİLİ]',yetkili_unvan:a.title||'',yetkili_tel:a.phone||'',tutar,km,plaka_durumu})
+};
+function openTplOutlook(module,body){
+ const t=selectedTpl(module);if(!t)return;
+ const vars={};
+ if(module==='tahsilat'){const h=document.getElementById('mailTutar').value.trim();Object.assign(vars,{alici:document.getElementById('mailAlici').value.trim(),tc:document.getElementById('mailTc').value.trim(),cep:document.getElementById('mailCep').value.trim(),tutar:h?h+' TL':'',kart_tipi:seciliKartTipi})}
+ if(module==='odeme'){const h=document.getElementById('odemeTutar').value.trim();Object.assign(vars,{isim:document.getElementById('odemeIsim').value.trim(),tutar:h?h+' TL':'',banka:document.getElementById('odemeBanka').value})}
+ if(module==='sigorta')Object.assign(vars,{plaka:document.getElementById('sigortaPlaka').value.trim()});
+ if(module==='devir'){const a=currentAuthority(),h=document.getElementById('devirTutar').value.trim(),k=document.getElementById('devirKm').value.trim();Object.assign(vars,{yetkili:a.name||'',yetkili_unvan:a.title||'',yetkili_tel:a.phone||'',tutar:h?h+' TL':'',km:k?k+' KM':'',plaka_durumu:devirPlakaDurumu==='degisecek'?'Plaka değişecektir.':'Plaka aynı kalacaktır.'})}
+ const url='https://outlook.office.com/mail/deeplink/compose?to='+encodeURIComponent(t.to||'')+'&cc='+encodeURIComponent(t.cc||'')+'&subject='+encodeURIComponent(tplApply(t.subject,vars))+'&body='+encodeURIComponent(body);window.open(url,'_blank','noopener,noreferrer')
+}
+outlooktaHazirla=function(){openTplOutlook('tahsilat',mailMetniOlustur())};
+odemeOutlooktaHazirla=function(){openTplOutlook('odeme',odemeMetniOlustur())};
+sigortaOutlooktaHazirla=function(){openTplOutlook('sigorta',sigortaMetniOlustur())};
+devirOutlooktaHazirla=function(){openTplOutlook('devir',devirMetniOlustur())};
+window.addEventListener('message',e=>{if(e.origin===location.origin&&e.data?.type==='renew-mail-config-updated')loadCentralMailConfig()});
+document.addEventListener('visibilitychange',()=>{if(!document.hidden)loadCentralMailConfig()});
+document.addEventListener('DOMContentLoaded',loadCentralMailConfig);
+setTimeout(loadCentralMailConfig,250);
+</script>
+
+<style id="v725FullEmbed">
+html,body{width:100%!important;max-width:100%!important;overflow-x:hidden!important}
+body{padding:10px!important}
+.wrapper{display:grid!important;grid-template-columns:280px minmax(0,1fr)!important;gap:12px!important;width:100%!important;max-width:100%!important;align-items:start!important}
+.side-panel{grid-column:1!important;min-width:0!important}
+.card{grid-column:2!important;min-width:0!important}
+.mail-panel{grid-column:1/-1!important;width:100%!important;min-width:0!important}
+.mail-panel-content{width:100%!important}
+.mail-section,.mail-section-body,.mail-grid{min-width:0!important;max-width:100%!important}
+.mail-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+.mail-preview{width:100%!important;max-width:100%!important;min-width:0!important;box-sizing:border-box!important;white-space:pre-wrap!important;overflow-wrap:anywhere!important;word-break:normal!important;line-height:1.58!important}
+.payment-template-select{grid-column:1/-1!important}
+@media(max-width:900px){
+ body{padding:7px!important}.wrapper{display:flex!important;flex-direction:column!important}
+ .side-panel,.card,.mail-panel{width:100%!important}
+ .mail-grid{grid-template-columns:1fr!important}
+}
+</style>

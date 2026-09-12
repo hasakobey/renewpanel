@@ -1,0 +1,25 @@
+# Sirlar / ortam degiskenleri
+.env
+.env.*
+!.env.example
+*serviceAccount*.json
+firebase-adminsdk*.json
+
+# Gercek musteri/finans verisi, DB yedekleri, uretilmis ciktilar
+backups/
+output/
+outputs/
+tmp/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Node (varsa)
+node_modules/
+
+# Isletim sistemi / editor
+.DS_Store
+Thumbs.db

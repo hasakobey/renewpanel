@@ -1,0 +1,507 @@
+:root{
+  --navy:#06182e;
+  --navy2:#0b2f55;
+  --blue:#2f79ff;
+  --green:#15ad65;
+  --purple:#7a55e7;
+  --orange:#ff8a1f;
+  --yellow:#f4b400;
+  --red:#ef4d4d;
+  --bg:#f4f7fb;
+  --card:#ffffff;
+  --line:#dfe7f0;
+  --text:#142238;
+  --muted:#708195;
+  --shadow:0 8px 24px rgba(26,52,83,.07);
+}
+
+body{
+  background:var(--bg)!important;
+  color:var(--text)!important;
+}
+
+/* =========================
+   SOL MENÜ
+   ========================= */
+.app>aside{
+  background:linear-gradient(180deg,#04162b 0%,#082847 55%,#06192f 100%)!important;
+  border-right:1px solid rgba(255,255,255,.06)!important;
+  box-shadow:6px 0 26px rgba(9,31,55,.16)!important;
+}
+
+.app>aside .brand{
+  padding:20px 14px 18px!important;
+}
+
+.app>aside .brand-mark{
+  width:42px!important;
+  height:42px!important;
+  border-radius:12px!important;
+  background:#fff!important;
+  color:#0b3158!important;
+  box-shadow:0 8px 20px rgba(0,0,0,.18)!important;
+  font-weight:900!important;
+}
+
+.app>aside .brand b{
+  color:#fff!important;
+  font-size:17px!important;
+  letter-spacing:.4px!important;
+}
+
+.app>aside .brand small{
+  color:rgba(255,255,255,.55)!important;
+}
+
+.app>aside .nav-group>span{
+  color:rgba(255,255,255,.35)!important;
+  font-size:9px!important;
+  letter-spacing:.9px!important;
+}
+
+.app>aside button.nav{
+  position:relative!important;
+  margin:3px 8px!important;
+  border-radius:10px!important;
+  color:#e6eef8!important;
+  border:1px solid transparent!important;
+  transition:.16s ease!important;
+}
+
+.app>aside button.nav:hover{
+  background:rgba(255,255,255,.07)!important;
+  transform:translateX(2px);
+}
+
+.app>aside button.nav.active{
+  background:linear-gradient(135deg,#155ca8,#0f437b)!important;
+  border-color:rgba(255,255,255,.12)!important;
+  box-shadow:0 7px 20px rgba(0,0,0,.18)!important;
+}
+
+.app>aside button.nav i{
+  width:31px!important;
+  height:31px!important;
+  border-radius:8px!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  background:rgba(255,255,255,.08)!important;
+}
+
+.app>aside button.nav.active i{
+  background:rgba(255,255,255,.14)!important;
+}
+
+.app>aside button.nav b{
+  color:inherit!important;
+  font-weight:800!important;
+}
+
+.app>aside button.nav small{
+  color:rgba(230,238,248,.55)!important;
+}
+
+/* sidebar notification badges */
+.rp-side-badge{
+  margin-left:auto;
+  min-width:22px;
+  height:22px;
+  padding:0 6px;
+  border-radius:999px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  font-size:9px;
+  font-weight:900;
+  color:#fff;
+}
+.rp-side-badge.red{background:var(--red)}
+.rp-side-badge.orange{background:var(--orange)}
+
+/* =========================
+   TOPBAR
+   ========================= */
+main>.topbar{
+  background:rgba(255,255,255,.95)!important;
+  backdrop-filter:blur(8px);
+  border-bottom:1px solid #e3e9f0!important;
+  box-shadow:0 5px 18px rgba(24,50,81,.04)!important;
+}
+
+main>.topbar h1{
+  color:#11243b!important;
+  font-weight:900!important;
+}
+
+#buildVersion{
+  border-radius:999px;
+  padding:4px 8px!important;
+  background:#edf5ff!important;
+  color:#2f6fd6!important;
+}
+
+/* =========================
+   DASHBOARD HERO
+   ========================= */
+#dashboard .hero{
+  background:transparent!important;
+  border:0!important;
+  box-shadow:none!important;
+  padding-left:0!important;
+  padding-right:0!important;
+}
+
+#dashboard .hero h2{
+  color:#10233b!important;
+  font-weight:900!important;
+}
+
+#dashboard .hero p{
+  color:var(--muted)!important;
+}
+
+/* =========================
+   KPI KARTLARI
+   ========================= */
+#dashKpis{
+  gap:12px!important;
+}
+
+#dashKpis>*{
+  position:relative!important;
+  overflow:hidden!important;
+  background:#fff!important;
+  border:1px solid var(--line)!important;
+  border-radius:14px!important;
+  box-shadow:var(--shadow)!important;
+  padding:17px 15px 15px 17px!important;
+  min-height:100px!important;
+  transition:transform .16s ease,box-shadow .16s ease!important;
+}
+
+#dashKpis>*:hover{
+  transform:translateY(-2px);
+  box-shadow:0 12px 28px rgba(24,50,81,.10)!important;
+}
+
+#dashKpis>*::before{
+  content:"";
+  position:absolute;
+  left:0;
+  top:0;
+  bottom:0;
+  width:4px;
+  background:#cfd8e4;
+}
+
+#dashKpis .rp-kpi-icon{
+  position:absolute;
+  right:13px;
+  top:13px;
+  width:34px;
+  height:34px;
+  border-radius:10px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:18px;
+  background:#f2f6fb;
+}
+
+#dashKpis .rp-kpi-blue::before{background:var(--blue)}
+#dashKpis .rp-kpi-green::before{background:var(--green)}
+#dashKpis .rp-kpi-purple::before{background:var(--purple)}
+#dashKpis .rp-kpi-orange::before{background:var(--orange)}
+#dashKpis .rp-kpi-yellow::before{background:var(--yellow)}
+#dashKpis .rp-kpi-red::before{background:var(--red)}
+
+#dashKpis .rp-kpi-blue .rp-kpi-icon{background:#eaf2ff}
+#dashKpis .rp-kpi-green .rp-kpi-icon{background:#eaf9f1}
+#dashKpis .rp-kpi-purple .rp-kpi-icon{background:#f2edff}
+#dashKpis .rp-kpi-orange .rp-kpi-icon{background:#fff1e5}
+#dashKpis .rp-kpi-yellow .rp-kpi-icon{background:#fff6dd}
+#dashKpis .rp-kpi-red .rp-kpi-icon{background:#ffecec}
+
+#dashKpis b,
+#dashKpis strong{
+  color:#5e7187!important;
+  font-size:10px!important;
+  text-transform:uppercase;
+  letter-spacing:.2px;
+}
+
+#dashKpis .value,
+#dashKpis h3,
+#dashKpis h2{
+  color:#152238!important;
+  font-weight:900!important;
+}
+
+/* =========================
+   AYLIK KARŞILAŞTIRMA
+   ========================= */
+#monthCompare{
+  gap:12px!important;
+}
+
+#monthCompare>*{
+  position:relative;
+  overflow:hidden;
+  background:#fff!important;
+  border:1px solid var(--line)!important;
+  border-radius:14px!important;
+  box-shadow:var(--shadow)!important;
+  padding:17px!important;
+}
+
+#monthCompare>*::after{
+  content:"";
+  position:absolute;
+  right:18px;
+  bottom:14px;
+  width:115px;
+  height:44px;
+  opacity:.12;
+  border-bottom:3px solid currentColor;
+  border-right:3px solid currentColor;
+  transform:skewX(-25deg);
+}
+
+#monthCompare>*:nth-child(1){color:var(--blue)}
+#monthCompare>*:nth-child(2){color:var(--green)}
+#monthCompare>*:nth-child(3){color:var(--purple)}
+
+#monthCompare>* *{
+  position:relative;
+  z-index:1;
+}
+
+/* =========================
+   GENEL KARTLAR
+   ========================= */
+#dashboard .card{
+  background:#fff!important;
+  border:1px solid var(--line)!important;
+  border-radius:14px!important;
+  box-shadow:var(--shadow)!important;
+}
+
+#dashboard .card h3{
+  color:#13243b!important;
+  font-weight:900!important;
+}
+
+/* =========================
+   SKS RİSK KARTI
+   ========================= */
+#risk{
+  gap:8px!important;
+}
+
+#risk>*{
+  border-radius:10px!important;
+  font-weight:800!important;
+  border:1px solid transparent!important;
+}
+
+#risk>*:nth-child(1){
+  background:#dff8e9!important;
+  color:#0d7649!important;
+  border-color:#c4ead3!important;
+}
+
+#risk>*:nth-child(2){
+  background:#fff3bf!important;
+  color:#8a6800!important;
+  border-color:#f0dea0!important;
+}
+
+#risk>*:nth-child(3){
+  background:#ffe5c8!important;
+  color:#a84e08!important;
+  border-color:#f2cda4!important;
+}
+
+#risk>*:nth-child(4){
+  background:#ffdede!important;
+  color:#b62f2f!important;
+  border-color:#efbcbc!important;
+}
+
+#rpRiskBar{
+  display:flex;
+  height:9px;
+  border-radius:999px;
+  overflow:hidden;
+  margin-top:10px;
+  background:#eef2f7;
+}
+
+#rpRiskBar span:nth-child(1){background:var(--green)}
+#rpRiskBar span:nth-child(2){background:#f7c325}
+#rpRiskBar span:nth-child(3){background:var(--orange)}
+#rpRiskBar span:nth-child(4){background:var(--red)}
+
+/* =========================
+   KÂR/ZARAR KARTI
+   ========================= */
+#profitSplit{
+  gap:9px!important;
+}
+
+#profitSplit>*:first-child{
+  background:#ddf8e8!important;
+  color:#0f7849!important;
+  border-radius:10px!important;
+}
+
+#profitSplit>*:last-child{
+  background:#ffe1e1!important;
+  color:#b52f2f!important;
+  border-radius:10px!important;
+}
+
+#rpProfitBar{
+  display:flex;
+  height:9px;
+  border-radius:999px;
+  overflow:hidden;
+  margin-top:10px;
+  background:#eef2f7;
+}
+#rpProfitBar .good{background:var(--green)}
+#rpProfitBar .bad{background:#ffb3b3}
+
+/* =========================
+   ALIM PERFORMANSI
+   ========================= */
+#purchaseMonth>*{
+  border-radius:10px!important;
+  background:#dcf8e7!important;
+  color:#0b7446!important;
+}
+
+/* =========================
+   KRİTİK STOK TABLOSU
+   ========================= */
+#criticalStock table{
+  width:100%!important;
+  border-collapse:separate!important;
+  border-spacing:0!important;
+  overflow:hidden;
+  border-radius:10px!important;
+}
+
+#criticalStock thead th{
+  background:linear-gradient(180deg,#173c63,#14334f)!important;
+  color:#fff!important;
+  border:0!important;
+  font-size:10px!important;
+  padding:10px 9px!important;
+}
+
+#criticalStock tbody td{
+  padding:9px!important;
+  border-bottom:1px solid #e7edf3!important;
+}
+
+#criticalStock tr.rp-critical-row td{
+  background:linear-gradient(90deg,rgba(239,77,77,.07),rgba(239,77,77,.01))!important;
+}
+#criticalStock tr.rp-critical-row{
+  box-shadow:inset 4px 0 0 var(--red)!important;
+}
+#criticalStock tr.rp-high-row{
+  box-shadow:inset 4px 0 0 var(--orange)!important;
+}
+
+.rp-sks-pill{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-width:42px;
+  padding:5px 8px;
+  border-radius:7px;
+  font-size:10px;
+  font-weight:900;
+}
+.rp-sks-normal{background:#dff8e9;color:#0d7047}
+.rp-sks-follow{background:#fff3bf;color:#8d6900}
+.rp-sks-high{background:#ffe3c5;color:#a84f09}
+.rp-sks-critical{
+  background:linear-gradient(135deg,#f25454,#d63838);
+  color:#fff;
+  box-shadow:0 3px 10px rgba(214,56,56,.20)
+}
+
+.rp-profit-good{
+  color:#07804e!important;
+  font-weight:900!important;
+}
+.rp-profit-bad{
+  color:#c23636!important;
+  font-weight:900!important;
+}
+
+/* =========================
+   AKSİYON MERKEZİ
+   ========================= */
+#rpActionCenter{
+  margin-top:14px!important;
+}
+
+.rp-action-row{
+  display:grid;
+  grid-template-columns:auto 1fr auto;
+  gap:10px;
+  align-items:center;
+  padding:10px 11px;
+  border:1px solid #e4eaf0;
+  border-radius:10px;
+  margin-top:8px;
+  background:#fbfcfe;
+}
+.rp-action-row.critical{
+  background:#fff7f7;
+  border-color:#f0c4c4;
+}
+.rp-action-row.high{
+  background:#fffaf5;
+  border-color:#efd2b7;
+}
+.rp-action-icon{
+  width:32px;
+  height:32px;
+  border-radius:9px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.rp-action-row.critical .rp-action-icon{background:#ffe6e6}
+.rp-action-row.high .rp-action-icon{background:#ffeddc}
+.rp-action-main b{
+  display:block;
+  color:#15324f;
+  font-size:10px;
+}
+.rp-action-main small{
+  display:block;
+  color:#718196;
+  font-size:9px;
+  margin-top:2px;
+}
+.rp-action-day{
+  font-weight:900;
+  font-size:11px;
+}
+.rp-action-row.critical .rp-action-day{color:var(--red)}
+.rp-action-row.high .rp-action-day{color:var(--orange)}
+
+/* =========================
+   RESPONSIVE
+   ========================= */
+@media(max-width:900px){
+  .rp-action-row{grid-template-columns:auto 1fr}
+  .rp-action-day{grid-column:2}
+}

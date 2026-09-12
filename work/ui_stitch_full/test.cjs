@@ -1,0 +1,17 @@
+const {chromium}=require('C:/Users/Hasan/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright');
+const assert=require('node:assert/strict');
+(async()=>{const browser=await chromium.launch({headless:true,channel:'msedge'});try{const page=await browser.newPage();const errors=[];page.on('pageerror',e=>errors.push(e.message));await page.goto('http://127.0.0.1:8898/fixture.html');await page.waitForTimeout(1300);
+console.log('Initialization errors',errors);assert.equal(await page.locator('#dashKpis>.kpi').count(),12);
+const baseline=await page.locator('#dashKpis>.kpi>strong').allTextContents();
+for(const width of [1440,1024,768,390,360]){await page.setViewportSize({width,height:950});for(const id of ['dashboard','stocks','sales','acquisitions','photos']){await page.evaluate(id=>page(id),id);await page.waitForTimeout(140);
+ const bounds=await page.evaluate(()=>({width:innerWidth,document:document.documentElement.scrollWidth}));assert.ok(bounds.document<=width+1,JSON.stringify({page:id,...bounds}));
+ await page.screenshot({path:`work/ui_stitch_full/${id}-${width}.png`,fullPage:width===1440});
+ }await page.evaluate(()=>page('dashboard'));assert.deepEqual(await page.locator('#dashKpis>.kpi>strong').allTextContents(),baseline)}
+await page.locator('[data-trend="sales_count"]').click();assert.equal(await page.locator('[data-trend="sales_count"]').getAttribute('aria-pressed'),'true');assert.equal(await page.locator('.ui-trend-column').count(),2);
+for(const fn of ['openStock','openSale','openAcquisition']){await page.evaluate(fn=>window[fn](),fn);await page.waitForTimeout(180);assert.ok(await page.locator('#modal.show').isVisible());const inputs=await page.locator('#modalBody input,#modalBody select,#modalBody textarea').count();assert.ok(inputs>=10,`${fn}: missing fields`);const actions=await page.locator('#modalBody .actions').boundingBox();assert.ok(actions.y+actions.height<=951,`${fn}: footer off screen`);await page.screenshot({path:`work/ui_stitch_full/${fn}-mobile.png`});await page.locator('#modal .modalhead button').click()}
+await page.evaluate(()=>page('photos'));await page.locator('.studio-vehicle').first().click();await page.waitForTimeout(200);assert.equal(await page.locator('.photo-slot').count(),25);await page.screenshot({path:'work/ui_stitch_full/photos-selected-mobile.png'});
+await page.setViewportSize({width:1440,height:950});await page.evaluate(()=>{page('stocks');rtToggleMode()});assert.ok(await page.locator('#stockTable th').count()>=19);await page.evaluate(()=>page('sales'));assert.ok(await page.locator('#salesTable th').count()>=30);
+await page.evaluate(()=>{page('stocks');rtOpenStockDetail(901)});assert.ok(await page.locator('#rtDrawer.open').isVisible());assert.ok((await page.locator('#rtDrawerBody').textContent()).includes('114.402'));await page.screenshot({path:'work/ui_stitch_full/drawer-desktop.png'});await page.evaluate(()=>rtCloseDrawer());
+await page.evaluate(()=>page('dashboard'));await page.emulateMedia({reducedMotion:'reduce'});assert.equal(await page.locator('.ui-trend-bar').first().evaluate(x=>getComputedStyle(x).animationName),'none');
+assert.deepEqual(errors,[]);console.log('PASS 25 viewport/module combinations, KPI preservation, graph tabs, 3 form footers/fields, 25 photo slots, reduced motion, no uncaught errors');
+}finally{await browser.close()}})().catch(e=>{console.error(e);process.exit(1)});

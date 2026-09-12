@@ -1,0 +1,998 @@
+<!DOCTYPE html>
+
+<html lang="tr"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Space+Grotesk:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}
+/* Custom Animations & Micro-interactions */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulseDot {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.35);
+    opacity: 0.45;
+  }
+}
+
+@keyframes pulseBadge {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(186, 26, 26, 0.25);
+  }
+  50% {
+    transform: scale(1.02);
+    box-shadow: 0 0 0 4px rgba(186, 26, 26, 0.15);
+  }
+}
+
+@keyframes pulseRadar {
+  0% {
+    box-shadow: 0 0 0 0 rgba(118, 220, 255, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 6px rgba(118, 220, 255, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(118, 220, 255, 0);
+  }
+}
+
+@keyframes expandWidth {
+  from {
+    transform: scaleX(0);
+    transform-origin: left;
+  }
+  to {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+}
+
+.animate-fade-in-up {
+  opacity: 0;
+  animation: fadeInUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-bar {
+  animation: expandWidth 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.kpi-card {
+  transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.kpi-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 28px rgba(0, 82, 217, 0.08);
+}
+.kpi-card:hover .kpi-icon-badge {
+  transform: scale(1.08) rotate(-4deg);
+}
+
+.kpi-icon-badge {
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.attention-card {
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease;
+  border: 1px solid transparent;
+}
+.attention-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+}
+.attention-card-error:hover {
+  border-color: rgba(186, 26, 26, 0.35);
+}
+.attention-card-info:hover {
+  border-color: rgba(0, 103, 128, 0.35);
+}
+
+.interactive-row {
+  cursor: pointer;
+  transition: background-color 0.15s ease, transform 0.15s ease;
+}
+.interactive-row:hover {
+  background-color: #F0F6FF !important;
+}
+
+.pulse-dot-live {
+  animation: pulseDot 2s infinite ease-in-out;
+}
+
+.pulse-badge-critic {
+  animation: pulseBadge 2.2s infinite ease-in-out;
+}
+
+.pulse-radar-dot {
+  animation: pulseRadar 2s infinite cubic-bezier(0.4, 0, 0.6, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{"colors":{"tertiary-fixed":"#eaddff","on-primary-container":"#cbd6ff","on-primary-fixed":"#00174b","inverse-primary":"#b4c5ff","surface-dim":"#c5dcfd","inverse-on-surface":"#eaf1ff","on-background":"#031c36","secondary-fixed":"#b7eaff","inverse-surface":"#1b314c","on-tertiary-fixed":"#25005a","error":"#ba1a1a","on-error":"#ffffff","surface-tint":"#0353da","secondary":"#006780","primary":"#003da6","error-container":"#ffdad6","tertiary-container":"#732de3","outline":"#737686","surface-container-lowest":"#ffffff","primary-fixed-dim":"#b4c5ff","secondary-fixed-dim":"#6cd3f7","on-surface-variant":"#434654","secondary-container":"#76dcff","on-secondary-fixed-variant":"#004e61","on-secondary-container":"#006077","on-surface":"#031c36","tertiary-fixed-dim":"#d2bbff","surface-container-low":"#eff4ff","tertiary":"#5900c4","on-secondary":"#ffffff","surface-bright":"#f8f9ff","surface-container":"#e6eeff","primary-container":"#0052d9","on-primary":"#ffffff","background":"#f8f9ff","on-primary-fixed-variant":"#003ea8","on-tertiary-container":"#e1d0ff","on-secondary-fixed":"#001f28","surface-container-high":"#dce9ff","on-tertiary-fixed-variant":"#5a00c6","surface-variant":"d3e4ff","on-tertiary":"#ffffff","on-error-container":"#93000a","primary-fixed":"#dbe1ff","outline-variant":"#c3c6d7","surface-container-highest":"#d3e4ff","surface":"#f8f9ff"},"borderRadius":{"DEFAULT":"0.125rem","lg":"0.25rem","xl":"0.5rem","full":"0.75rem"},"spacing":{"space-base":"1rem","sidebar-width-expanded":"17.5rem","header-height":"4rem","sidebar-width-collapsed":"4.5rem","space-sm":"0.5rem","space-lg":"1.25rem","gutter-mobile":"1rem","space-4xl":"3rem","space-xs":"0.25rem","space-2xl":"2rem","space-3xl":"2.5rem","space-2xs":"0.125rem","gutter-desktop":"1.5rem","space-xl":"1.5rem","space-md":"0.75rem"},"fontFamily":{"table-numeric":["Inter"],"headline-md":["Space Grotesk"],"label-ui":["Inter"],"body-sm":["Inter"],"table-data":["Inter"],"metric-kpi-md":["Space Grotesk"],"metric-kpi-xl":["Space Grotesk"],"body-md":["Inter"],"headline-lg":["Space Grotesk"],"label-caps":["Space Grotesk"],"headline-sm":["Space Grotesk"],"headline-lg-mobile":["Space Grotesk"],"display-lg":["Space Grotesk"],"body-lg":["Inter"]},"fontSize":{"table-numeric":["13px",{"lineHeight":"18px","letterSpacing":"0.02em","fontWeight":"500"}],"headline-md":["20px",{"lineHeight":"28px","letterSpacing":"-0.01em","fontWeight":"600"}],"label-ui":["12px",{"lineHeight":"16px","letterSpacing":"0.01em","fontWeight":"500"}],"body-sm":["12px",{"lineHeight":"16px","letterSpacing":"0.01em","fontWeight":"400"}],"table-data":["13px",{"lineHeight":"18px","letterSpacing":"0em","fontWeight":"400"}],"metric-kpi-md":["24px",{"lineHeight":"30px","letterSpacing":"-0.01em","fontWeight":"600"}],"metric-kpi-xl":["32px",{"lineHeight":"38px","letterSpacing":"-0.02em","fontWeight":"700"}],"body-md":["14px",{"lineHeight":"20px","letterSpacing":"0em","fontWeight":"400"}],"headline-lg":["28px",{"lineHeight":"36px","letterSpacing":"-0.02em","fontWeight":"600"}],"label-caps":["11px",{"lineHeight":"14px","letterSpacing":"0.08em","fontWeight":"600"}],"headline-sm":["16px",{"lineHeight":"24px","letterSpacing":"0em","fontWeight":"600"}],"headline-lg-mobile":["22px",{"lineHeight":"28px","letterSpacing":"-0.01em","fontWeight":"600"}],"display-lg":["36px",{"lineHeight":"44px","letterSpacing":"-0.03em","fontWeight":"700"}],"body-lg":["16px",{"lineHeight":"24px","letterSpacing":"-0.01em","fontWeight":"400"}]}}}}</script></head><body class="bg-surface font-body-md text-on-surface antialiased"><aside class="fixed left-0 top-0 h-full w-[244px] bg-[#0B1D30] z-50 flex flex-col justify-between py-space-base shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="flex flex-col"><div class="px-space-lg mb-space-xl flex items-center gap-space-sm"><div class="w-9 h-9 rounded-lg bg-gradient-to-br from-[#BA1A1A] via-primary-container to-primary flex items-center justify-center shadow-inner transition-transform hover:scale-105"><span class="font-headline-md text-headline-md text-on-primary font-bold">R</span></div><div class="flex flex-col"><span class="font-headline-sm text-headline-sm text-[#F8FAFD] tracking-tight uppercase">RENEW PRO</span><span class="font-label-caps text-label-caps text-[#8DA0B8] tracking-widest">ÇAYAN TARSUS</span></div></div><nav class="flex flex-col gap-space-xs px-space-sm" data-active-classes="bg-primary-container text-on-primary font-semibold shadow-sm"><div class="px-space-md pt-space-xs pb-space-2xs"><span class="font-label-caps text-label-caps text-[#647C96] uppercase tracking-wider">Yönetim</span></div><a aria-current="page" class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg transition-all bg-primary-container text-on-primary font-semibold shadow-sm hover:translate-x-0.5" data-path="genel-dashboard" href="#"><span class="material-symbols-outlined text-[20px]">grid_view</span><span class="font-body-md text-body-md">Genel Dashboard</span></a><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg text-[#DCE6F2] hover:bg-surface-variant/10 hover:text-on-primary hover:translate-x-0.5 transition-all" data-path="arac-envanteri" href="#"><span class="material-symbols-outlined text-[20px]">directions_car</span><span class="font-body-md text-body-md">Araç Envanteri</span></a><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg text-[#DCE6F2] hover:bg-surface-variant/10 hover:text-on-primary hover:translate-x-0.5 transition-all" data-path="servis-operasyonlari" href="#"><span class="material-symbols-outlined text-[20px]">build</span><span class="font-body-md text-body-md">Servis Operasyonları</span></a><div class="px-space-md pt-space-md pb-space-2xs"><span class="font-label-caps text-label-caps text-[#647C96] uppercase tracking-wider">Performans</span></div><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg text-[#DCE6F2] hover:bg-surface-variant/10 hover:text-on-primary hover:translate-x-0.5 transition-all" data-path="satis-ve-ciro" href="#"><span class="material-symbols-outlined text-[20px]">trending_up</span><span class="font-body-md text-body-md">Satış &amp; Ciro</span></a><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg text-[#DCE6F2] hover:bg-surface-variant/10 hover:text-on-primary hover:translate-x-0.5 transition-all" data-path="ekspertiz-raporlari" href="#"><span class="material-symbols-outlined text-[20px]">fact_check</span><span class="font-body-md text-body-md">Ekspertiz Raporları</span></a><div class="px-space-md pt-space-md pb-space-2xs"><span class="font-label-caps text-label-caps text-[#647C96] uppercase tracking-wider">Veri &amp; Senkronizasyon</span></div><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg text-[#DCE6F2] hover:bg-surface-variant/10 hover:text-on-primary hover:translate-x-0.5 transition-all" data-path="telemetri-akisi" href="#"><span class="material-symbols-outlined text-[20px]">sensors</span><span class="font-body-md text-body-md">Telemetri Akışı</span></a><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg text-[#DCE6F2] hover:bg-surface-variant/10 hover:text-on-primary hover:translate-x-0.5 transition-all" data-path="filo-entegrasyonu" href="#"><span class="material-symbols-outlined text-[20px]">sync</span><span class="font-body-md text-body-md">Filo Entegrasyonu</span></a><div class="px-space-md pt-space-md pb-space-2xs"><span class="font-label-caps text-label-caps text-[#647C96] uppercase tracking-wider">Sistem</span></div><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg text-[#DCE6F2] hover:bg-surface-variant/10 hover:text-on-primary hover:translate-x-0.5 transition-all" data-path="kullanicilar-ve-roller" href="#"><span class="material-symbols-outlined text-[20px]">manage_accounts</span><span class="font-body-md text-body-md">Kullanıcılar &amp; Roller</span></a><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg text-[#DCE6F2] hover:bg-surface-variant/10 hover:text-on-primary hover:translate-x-0.5 transition-all" data-path="sistem-ayarlari" href="#"><span class="material-symbols-outlined text-[20px]">settings</span><span class="font-body-md text-body-md">Sistem Ayarları</span></a></nav></div><div class="px-space-lg pt-space-md flex items-center justify-between"><span class="font-label-caps text-label-caps text-[#647C96]">v2.4.6 Telemetry</span><span class="w-2.5 h-2.5 rounded-full bg-secondary-container pulse-radar-dot"></span></div></aside><div class="pl-[244px]"><header class="fixed top-0 left-[244px] right-0 h-[68px] bg-surface-container-lowest z-40 flex items-center justify-between px-space-xl border-b border-surface-container/60"><div class="flex items-center gap-space-lg"><div class="relative flex items-center w-72"><span class="material-symbols-outlined absolute left-3 text-outline text-[18px]">search</span><input class="w-full h-9 pl-9 pr-3 rounded-lg bg-surface-container-low font-body-sm text-body-sm text-on-surface placeholder:text-on-surface-variant/60 focus:outline-none focus:bg-surface-container-lowest focus:ring-1 focus:ring-primary transition-all" placeholder="Hızlı plaka, şasi no veya model ara..." type="text"/></div></div><div class="flex items-center gap-space-md"><div class="flex items-center gap-space-xs bg-surface-container-low px-space-md py-space-xs rounded-lg cursor-pointer hover:bg-surface-container transition-colors"><span class="material-symbols-outlined text-primary text-[18px]">calendar_today</span><span class="font-label-ui text-label-ui text-on-surface font-semibold">Eylül 2026</span><span class="material-symbols-outlined text-outline text-[16px]">expand_more</span></div><button class="w-9 h-9 rounded-lg bg-surface-container-low hover:bg-surface-container flex items-center justify-center text-on-surface transition-transform active:scale-95 hover:rotate-45" type="button"><span class="material-symbols-outlined text-[18px]">refresh</span></button><button class="relative w-9 h-9 rounded-lg bg-surface-container-low hover:bg-surface-container flex items-center justify-center text-on-surface transition-transform active:scale-95" type="button"><span class="material-symbols-outlined text-[18px]">notifications</span><span class="absolute top-2 right-2 w-2 h-2 rounded-full bg-error animate-ping"></span><span class="absolute top-2 right-2 w-2 h-2 rounded-full bg-error"></span></button><div class="flex items-center gap-space-sm pl-space-xs"><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center cursor-pointer shadow-sm hover:shadow-md transition-shadow"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div><div class="flex flex-col text-left"><span class="font-body-sm text-body-sm font-semibold text-on-surface leading-tight">Seval Avseven</span><span class="font-label-ui text-label-ui text-on-surface-variant leading-tight">Yönetici</span></div></div></div></header><main class="w-full pt-[68px] bg-[#F4F7FB]"><div class="max-w-[1440px] mx-auto p-space-xl min-h-[calc(100vh-68px)]"><div class="flex flex-col w-full gap-space-xl">
+<!-- ÜST AKSİYON & BİLGİ BANDI -->
+<section class="flex flex-col lg:flex-row lg:items-center justify-between gap-space-md animate-fade-in-up" style="animation-delay: 0.05s;">
+<div class="flex flex-col gap-space-2xs">
+<div class="flex items-center gap-space-sm">
+<h1 class="font-headline-lg text-headline-lg text-on-surface tracking-tight">Genel Dashboard</h1>
+<span class="inline-flex items-center gap-1.5 px-space-sm py-space-2xs rounded-full bg-surface-container text-primary font-label-caps text-label-caps uppercase tracking-wider">
+<span class="w-2 h-2 rounded-full bg-primary pulse-dot-live"></span>
+          Canlı Veri
+        </span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">
+        Seçili dönemin (Eylül 2026) stok, satış ve kârlılık özeti. 
+        <span class="text-outline font-body-sm text-body-sm ml-space-xs">• Son eşitleme: Bugün 17:45 (Çayan Tarsus Ana Sunucu)</span>
+</p>
+</div>
+<!-- Hızlı İşlemler Grubu -->
+<div class="flex flex-wrap items-center gap-space-xs sm:gap-space-sm">
+<button class="inline-flex items-center gap-space-xs px-space-base py-space-sm rounded-lg bg-primary-container hover:bg-primary text-on-primary font-body-md text-body-md font-semibold transition-all shadow-sm active:scale-[0.98] hover:shadow-md cursor-pointer" type="button">
+<span class="material-symbols-outlined text-[18px]">add</span>
+<span>+ Yeni Stok</span>
+</button>
+<button class="inline-flex items-center gap-space-xs px-space-base py-space-sm rounded-lg bg-surface-container-lowest hover:bg-surface-container text-on-surface font-body-md text-body-md font-medium transition-all shadow-sm active:scale-[0.98] hover:shadow-md cursor-pointer" type="button">
+<span class="material-symbols-outlined text-[18px] text-primary">sell</span>
+<span>+ Yeni Satış</span>
+</button>
+<button class="inline-flex items-center gap-space-xs px-space-base py-space-sm rounded-lg bg-surface-container-lowest hover:bg-surface-container text-on-surface font-body-md text-body-md font-medium transition-all shadow-sm active:scale-[0.98] hover:shadow-md cursor-pointer" type="button">
+<span class="material-symbols-outlined text-[18px] text-secondary">shopping_bag</span>
+<span>+ Yeni Alım</span>
+</button>
+<button class="inline-flex items-center gap-space-xs px-space-base py-space-sm rounded-lg bg-surface-container-lowest hover:bg-surface-container text-on-surface font-body-md text-body-md font-medium transition-all shadow-sm active:scale-[0.98] hover:shadow-md cursor-pointer" type="button">
+<span class="material-symbols-outlined text-[18px] text-outline">description</span>
+<span>Raporlar</span>
+</button>
+</div>
+</section>
+<!-- DİKKAT GEREKTİRENLER (Kritik Bildirim Bandı) -->
+<section class="flex flex-col gap-space-sm animate-fade-in-up" style="animation-delay: 0.1s;">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-error text-[20px] animate-bounce" style="animation-duration: 2.5s;">warning</span>
+<span class="font-headline-sm text-headline-sm text-on-surface font-semibold">Dikkat Gerektirenler</span>
+<span class="px-space-xs py-space-2xs rounded-full bg-error-container text-on-error-container font-label-caps text-label-caps ml-space-xs pulse-badge-critic">3 kritik aksiyon</span>
+</div>
+<span class="font-label-ui text-label-ui text-on-surface-variant">Otomatik Analiz Motoru</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-base">
+<!-- Kritik Kart 1 -->
+<div class="attention-card attention-card-error bg-error-container/40 p-space-md rounded-xl flex flex-col justify-between gap-space-sm shadow-sm cursor-pointer group">
+<div class="flex items-start justify-between gap-space-sm">
+<div class="flex items-center gap-space-xs">
+<span class="px-space-xs py-space-2xs bg-surface-container-lowest rounded text-on-surface font-label-caps text-label-caps tracking-widest font-bold">33 ARB 585</span>
+<span class="font-body-sm text-body-sm font-semibold text-on-surface">Renault Megane Sedan</span>
+</div>
+<span class="px-space-xs py-space-2xs rounded bg-error text-on-error font-label-caps text-label-caps font-bold pulse-badge-critic">94 Gün (Kritik)</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-error-container">Finansman yükü marjı eritiyor, acil fiyat revizyonu ve satış aksiyonu önerilir.</p>
+<div class="flex items-center justify-between pt-space-xs text-error font-label-ui text-label-ui font-semibold">
+<span>Stok Maliyeti: ₺1.280.000</span>
+<span class="material-symbols-outlined text-[16px] transition-transform group-hover:translate-x-1">arrow_forward</span>
+</div>
+</div>
+<!-- Kritik Kart 2 -->
+<div class="attention-card attention-card-error bg-error-container/40 p-space-md rounded-xl flex flex-col justify-between gap-space-sm shadow-sm cursor-pointer group">
+<div class="flex items-start justify-between gap-space-sm">
+<div class="flex items-center gap-space-xs">
+<span class="px-space-xs py-space-2xs bg-surface-container-lowest rounded text-on-surface font-label-caps text-label-caps tracking-widest font-bold">33 CAY 102</span>
+<span class="font-body-sm text-body-sm font-semibold text-on-surface">Fiat Egea Lounge</span>
+</div>
+<span class="px-space-xs py-space-2xs rounded bg-error text-on-error font-label-caps text-label-caps font-bold">-₺18.500 Zarar</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-error-container">Zararına satış onaylandı. Ekspertiz onarımı ve ek masraflar kâr marjını negatife çekti.</p>
+<div class="flex items-center justify-between pt-space-xs text-error font-label-ui text-label-ui font-semibold">
+<span>Danışman: Emre Koç</span>
+<span class="material-symbols-outlined text-[16px] transition-transform group-hover:translate-x-1">arrow_forward</span>
+</div>
+</div>
+<!-- Kritik Kart 3 -->
+<div class="attention-card attention-card-info bg-surface-container-high p-space-md rounded-xl flex flex-col justify-between gap-space-sm shadow-sm cursor-pointer group">
+<div class="flex items-start justify-between gap-space-sm">
+<div class="flex items-center gap-space-xs">
+<span class="px-space-xs py-space-2xs bg-surface-container-lowest rounded text-on-surface font-label-caps text-label-caps font-bold">SATIŞ KOTASI</span>
+<span class="font-body-sm text-body-sm font-semibold text-on-surface">Ahmet Yılmaz (Danışman)</span>
+</div>
+<span class="px-space-xs py-space-2xs rounded bg-secondary text-on-secondary font-label-caps text-label-caps font-bold">4/8 Satış (%50)</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Aylık hedef altında kaldı; kalan 9 iş gününde 4 adet kapanış için açık fırsat havuzu incelenmeli.</p>
+<div class="flex items-center justify-between pt-space-xs text-secondary font-label-ui text-label-ui font-semibold">
+<span>Kalan Kota: 4 Araç</span>
+<span class="material-symbols-outlined text-[16px] transition-transform group-hover:translate-x-1">arrow_forward</span>
+</div>
+</div>
+</div>
+</section>
+<!-- 12 KPI ALANI (2 Mantıksal Grup) -->
+<section class="flex flex-col gap-space-xl">
+<!-- GRUP A: STOK ÖZETİ -->
+<div class="flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<div class="w-2.5 h-2.5 rounded-full bg-primary pulse-dot-live"></div>
+<h2 class="font-headline-sm text-headline-sm text-on-surface font-semibold tracking-tight">Grup A: Stok ve Sermaye Bağlanma Özeti</h2>
+</div>
+<span class="font-label-caps text-label-caps text-outline uppercase">Aktif 42 Araçlık Portföy</span>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-space-md">
+<!-- KPI 1: Güncel Stok -->
+<div class="kpi-card bg-surface-container-lowest p-space-md rounded-xl shadow-sm flex flex-col justify-between gap-space-md cursor-pointer animate-fade-in-up" style="animation-delay: 0.15s;">
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Güncel Stok</span>
+<div class="kpi-icon-badge w-8 h-8 rounded-lg bg-surface-container-low flex items-center justify-center text-primary">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9C2.1 11.1 2 11.5 2 12v4c0 .6.4 1 1 1h2m14 0a2 2 0 11-4 0m4 0a2 2 0 10-4 0m-10 0a2 2 0 11-4 0m4 0a2 2 0 10-4 0" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</div>
+</div>
+<div class="flex flex-col">
+<span class="font-metric-kpi-md text-metric-kpi-md text-on-surface font-table-numeric">42 Adet</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">42 aktif galeri aracı</span>
+</div>
+</div>
+<!-- KPI 2: Stok Alış -->
+<div class="kpi-card bg-surface-container-lowest p-space-md rounded-xl shadow-sm flex flex-col justify-between gap-space-md cursor-pointer animate-fade-in-up" style="animation-delay: 0.19s;">
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Stok Alış</span>
+<div class="kpi-icon-badge w-8 h-8 rounded-lg bg-surface-container-low flex items-center justify-center text-primary">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</div>
+</div>
+<div class="flex flex-col">
+<span class="font-metric-kpi-md text-metric-kpi-md text-on-surface font-table-numeric">₺48.650.000</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Alış bedelleri toplamı</span>
+</div>
+</div>
+<!-- KPI 3: Stok Maliyeti -->
+<div class="kpi-card bg-surface-container-lowest p-space-md rounded-xl shadow-sm flex flex-col justify-between gap-space-md cursor-pointer animate-fade-in-up" style="animation-delay: 0.23s;">
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Stok Maliyeti</span>
+<div class="kpi-icon-badge w-8 h-8 rounded-lg bg-surface-container-low flex items-center justify-center text-secondary">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</div>
+</div>
+<div class="flex flex-col">
+<span class="font-metric-kpi-md text-metric-kpi-md text-on-surface font-table-numeric">₺51.240.000</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Masraf + SKS dahil</span>
+</div>
+</div>
+<!-- KPI 4: Stok Satış -->
+<div class="kpi-card bg-surface-container-lowest p-space-md rounded-xl shadow-sm flex flex-col justify-between gap-space-md cursor-pointer animate-fade-in-up" style="animation-delay: 0.27s;">
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Stok Satış</span>
+<div class="kpi-icon-badge w-8 h-8 rounded-lg bg-surface-container-low flex items-center justify-center text-primary-container">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</div>
+</div>
+<div class="flex flex-col">
+<span class="font-metric-kpi-md text-metric-kpi-md text-on-surface font-table-numeric">₺56.800.000</span>
+<span class="font-body-sm text-body-sm text-secondary-fixed-dim/90 font-medium">Liste Satış (+%16.7 brüt)</span>
+</div>
+</div>
+<!-- KPI 5: Tahmini Stok Kârı -->
+<div class="kpi-card bg-surface-container-lowest p-space-md rounded-xl shadow-sm flex flex-col justify-between gap-space-md cursor-pointer animate-fade-in-up" style="animation-delay: 0.31s;">
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Tahmini Kâr</span>
+<div class="kpi-icon-badge w-8 h-8 rounded-lg bg-surface-container-low flex items-center justify-center text-primary">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</div>
+</div>
+<div class="flex flex-col">
+<span class="font-metric-kpi-md text-metric-kpi-md text-on-surface font-table-numeric">₺5.560.000</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">%9.8 tahmini net marj</span>
+</div>
+</div>
+<!-- KPI 6: SKS Finansman -->
+<div class="kpi-card bg-surface-container-lowest p-space-md rounded-xl shadow-sm flex flex-col justify-between gap-space-md cursor-pointer animate-fade-in-up" style="animation-delay: 0.35s;">
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">SKS Finansman</span>
+<div class="kpi-icon-badge w-8 h-8 rounded-lg bg-error-container/50 flex items-center justify-center text-error">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</div>
+</div>
+<div class="flex flex-col">
+<span class="font-metric-kpi-md text-metric-kpi-md text-error font-table-numeric">₺1.120.000</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Biriken faiz &amp; vade yükü</span>
+</div>
+</div>
+</div>
+</div>
+<!-- GRUP B: SATIŞ VE KÂRLILIK -->
+<div class="flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<div class="w-2.5 h-2.5 rounded-full bg-secondary-container pulse-dot-live"></div>
+<h2 class="font-headline-sm text-headline-sm text-on-surface font-semibold tracking-tight">Grup B: Gerçekleşen Satış &amp; Kârlılık Performansı</h2>
+</div>
+<span class="font-label-caps text-label-caps text-outline uppercase">Eylül 2026 Kapanış Dönemi</span>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-space-md">
+<!-- KPI 7: Aylık Satış -->
+<div class="kpi-card bg-surface-container-lowest p-space-md rounded-xl shadow-sm flex flex-col justify-between gap-space-md cursor-pointer animate-fade-in-up" style="animation-delay: 0.25s;">
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Aylık Satış</span>
+<div class="kpi-icon-badge w-8 h-8 rounded-lg bg-surface-container-low flex items-center justify-center text-primary-container">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</div>
+</div>
+<div class="flex flex-col">
+<span class="font-metric-kpi-md text-metric-kpi-md text-on-surface font-table-numeric">18 Adet</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Tamamlanan satış</span>
+</div>
+</div>
+<!-- KPI 8: Aylık Ciro -->
+<div class="kpi-card bg-surface-container-lowest p-space-md rounded-xl shadow-sm flex flex-col justify-between gap-space-md cursor-pointer animate-fade-in-up" style="animation-delay: 0.29s;">
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Aylık Ciro</span>
+<div class="kpi-icon-badge w-8 h-8 rounded-lg bg-surface-container-low flex items-center justify-center text-primary">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</div>
+</div>
+<div class="flex flex-col">
+<span class="font-metric-kpi-md text-metric-kpi-md text-on-surface font-table-numeric">₺24.850.000</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Toplam satış bedeli</span>
+</div>
+</div>
+<!-- KPI 9: Net Kâr -->
+<div class="kpi-card bg-surface-container-lowest p-space-md rounded-xl shadow-sm flex flex-col justify-between gap-space-md cursor-pointer animate-fade-in-up" style="animation-delay: 0.33s;">
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Net Kâr</span>
+<div class="kpi-icon-badge w-8 h-8 rounded-lg bg-surface-container-low flex items-center justify-center text-primary">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</div>
+</div>
+<div class="flex flex-col">
+<span class="font-metric-kpi-md text-metric-kpi-md text-on-surface font-table-numeric">₺2.140.000</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Vergi &amp; operasyon sonrası</span>
+</div>
+</div>
+<!-- KPI 10: Performans Kârı -->
+<div class="kpi-card bg-surface-container-lowest p-space-md rounded-xl shadow-sm flex flex-col justify-between gap-space-md cursor-pointer animate-fade-in-up" style="animation-delay: 0.37s;">
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Perf. Kârı</span>
+<div class="kpi-icon-badge w-8 h-8 rounded-lg bg-surface-container-low flex items-center justify-center text-primary-container">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</div>
+</div>
+<div class="flex flex-col">
+<span class="font-metric-kpi-md text-metric-kpi-md text-on-surface font-table-numeric">₺2.380.000</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Danışman prim tabanı</span>
+</div>
+</div>
+<!-- KPI 11: Ort. Satış Kârı -->
+<div class="kpi-card bg-surface-container-lowest p-space-md rounded-xl shadow-sm flex flex-col justify-between gap-space-md cursor-pointer animate-fade-in-up" style="animation-delay: 0.41s;">
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Ort. Araç Kârı</span>
+<div class="kpi-icon-badge w-8 h-8 rounded-lg bg-surface-container-low flex items-center justify-center text-secondary">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</div>
+</div>
+<div class="flex flex-col">
+<span class="font-metric-kpi-md text-metric-kpi-md text-on-surface font-table-numeric">₺132.222</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Araç başı net kazanç</span>
+</div>
+</div>
+<!-- KPI 12: Ort. Satış SKS -->
+<div class="kpi-card bg-surface-container-lowest p-space-md rounded-xl shadow-sm flex flex-col justify-between gap-space-md cursor-pointer animate-fade-in-up" style="animation-delay: 0.45s;">
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Ort. Satış SKS</span>
+<div class="kpi-icon-badge w-8 h-8 rounded-lg bg-surface-container-low flex items-center justify-center text-primary">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</div>
+</div>
+<div class="flex flex-col">
+<span class="font-metric-kpi-md text-metric-kpi-md text-on-surface font-table-numeric">34.2 Gün</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Ort. stokta kalma süresi</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- DÖNEM KARŞILAŞTIRMASI (Eylül 2026 vs Ağustos 2026) -->
+<section class="flex flex-col gap-space-sm animate-fade-in-up" style="animation-delay: 0.35s;">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[20px]">compare_arrows</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold">Dönem Karşılaştırması</h3>
+</div>
+<span class="font-label-ui text-label-ui text-on-surface-variant">Eylül 2026 vs Ağustos 2026</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-base">
+<!-- Satış Adedi Karşılaştırma -->
+<div class="kpi-card bg-surface-container-lowest p-space-lg rounded-xl shadow-sm flex items-center justify-between cursor-pointer">
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps text-outline uppercase">Satış Adedi</span>
+<div class="flex items-baseline gap-space-xs mt-space-2xs">
+<span class="font-metric-kpi-xl text-metric-kpi-xl text-on-surface font-table-numeric">18</span>
+<span class="font-body-md text-body-md text-on-surface-variant">Adet</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant mt-space-2xs">Geçen ay: <strong class="font-semibold text-on-surface">15 Adet</strong></span>
+</div>
+<div class="flex flex-col items-end gap-space-2xs">
+<div class="flex items-center gap-space-2xs px-space-sm py-space-2xs rounded-full bg-surface-container-low text-primary font-table-numeric text-body-sm font-semibold transition-transform hover:scale-105">
+<span class="material-symbols-outlined text-[16px]">arrow_upward</span>
+<span>+%20.0</span>
+</div>
+<span class="font-label-ui text-label-ui text-outline">+3 Araç</span>
+</div>
+</div>
+<!-- Ciro Karşılaştırma -->
+<div class="kpi-card bg-surface-container-lowest p-space-lg rounded-xl shadow-sm flex items-center justify-between cursor-pointer">
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps text-outline uppercase">Aylık Toplam Ciro</span>
+<div class="flex items-baseline gap-space-xs mt-space-2xs">
+<span class="font-metric-kpi-xl text-metric-kpi-xl text-on-surface font-table-numeric">₺24.85M</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant mt-space-2xs">Geçen ay: <strong class="font-semibold text-on-surface">₺20.50M</strong></span>
+</div>
+<div class="flex flex-col items-end gap-space-2xs">
+<div class="flex items-center gap-space-2xs px-space-sm py-space-2xs rounded-full bg-surface-container-low text-primary font-table-numeric text-body-sm font-semibold transition-transform hover:scale-105">
+<span class="material-symbols-outlined text-[16px]">arrow_upward</span>
+<span>+%21.2</span>
+</div>
+<span class="font-label-ui text-label-ui text-outline">+₺4.350.000</span>
+</div>
+</div>
+<!-- Performans Kârı Karşılaştırma -->
+<div class="kpi-card bg-surface-container-lowest p-space-lg rounded-xl shadow-sm flex items-center justify-between cursor-pointer">
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps text-outline uppercase">Performans Kârı</span>
+<div class="flex items-baseline gap-space-xs mt-space-2xs">
+<span class="font-metric-kpi-xl text-metric-kpi-xl text-on-surface font-table-numeric">₺2.38M</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant mt-space-2xs">Geçen ay: <strong class="font-semibold text-on-surface">₺1.95M</strong></span>
+</div>
+<div class="flex flex-col items-end gap-space-2xs">
+<div class="flex items-center gap-space-2xs px-space-sm py-space-2xs rounded-full bg-surface-container-low text-primary font-table-numeric text-body-sm font-semibold transition-transform hover:scale-105">
+<span class="material-symbols-outlined text-[16px]">arrow_upward</span>
+<span>+%22.1</span>
+</div>
+<span class="font-label-ui text-label-ui text-outline">+₺430.000</span>
+</div>
+</div>
+</div>
+</section>
+<!-- ANALİZ & RİSK DAĞILIMI (2 Eşit Kolon) -->
+<section class="grid grid-cols-1 lg:grid-cols-2 gap-space-xl animate-fade-in-up" style="animation-delay: 0.4s;">
+<!-- Sol Kolon: SKS / Stok Bekleme Riski -->
+<div class="bg-surface-container-lowest p-space-lg rounded-xl shadow-sm flex flex-col justify-between gap-space-lg transition-all hover:shadow-md">
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-secondary text-[20px]">timelapse</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold">SKS / Stok Bekleme Riski Dağılımı</h3>
+</div>
+<span class="font-table-numeric text-table-numeric text-on-surface-variant">Ort. SKS: <strong>34.2 Gün</strong></span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Stokta kalış süresine göre sermaye ve faiz maliyeti kademeleri</p>
+</div>
+<!-- 4 Renkli Orantılı Çubuk -->
+<div class="flex flex-col gap-space-xs">
+<div class="w-full h-3 rounded-full bg-surface-container flex overflow-hidden">
+<div class="bg-primary h-full animate-bar" style="width: 52.4%" title="0-30 Gün: 22 Araç (%52.4)"></div>
+<div class="bg-secondary-fixed-dim h-full animate-bar" style="width: 26.2%" title="31-60 Gün: 11 Araç (%26.2)"></div>
+<div class="bg-surface-dim h-full animate-bar" style="width: 14.3%" title="61-90 Gün: 6 Araç (%14.3)"></div>
+<div class="bg-error h-full animate-bar" style="width: 7.1%" title="90+ Gün: 3 Araç (%7.1)"></div>
+</div>
+<div class="flex items-center justify-between font-label-caps text-label-caps text-outline px-space-2xs">
+<span>0 Gün</span>
+<span>Hedef Eşik: 45 Gün</span>
+<span>Kritik Eşik: 90 Gün+</span>
+</div>
+</div>
+<!-- 4 Kutu İstatistiği -->
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-space-sm">
+<div class="bg-surface-container-low p-space-sm rounded-lg flex flex-col transition-all hover:-translate-y-0.5">
+<div class="flex items-center gap-space-2xs">
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+<span class="font-label-caps text-label-caps text-on-surface-variant">0-30 GÜN</span>
+</div>
+<span class="font-metric-kpi-md text-metric-kpi-md text-on-surface font-table-numeric mt-space-2xs">22 Araç</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">%52.4 • Normal</span>
+</div>
+<div class="bg-surface-container-low p-space-sm rounded-lg flex flex-col transition-all hover:-translate-y-0.5">
+<div class="flex items-center gap-space-2xs">
+<span class="w-2 h-2 rounded-full bg-secondary-fixed-dim"></span>
+<span class="font-label-caps text-label-caps text-on-surface-variant">31-60 GÜN</span>
+</div>
+<span class="font-metric-kpi-md text-metric-kpi-md text-on-surface font-table-numeric mt-space-2xs">11 Araç</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">%26.2 • İzleme</span>
+</div>
+<div class="bg-surface-container-low p-space-sm rounded-lg flex flex-col transition-all hover:-translate-y-0.5">
+<div class="flex items-center gap-space-2xs">
+<span class="w-2 h-2 rounded-full bg-surface-dim"></span>
+<span class="font-label-caps text-label-caps text-on-surface-variant">61-90 GÜN</span>
+</div>
+<span class="font-metric-kpi-md text-metric-kpi-md text-on-surface font-table-numeric mt-space-2xs">6 Araç</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">%14.3 • Aksiyon</span>
+</div>
+<div class="bg-error-container/50 p-space-sm rounded-lg flex flex-col transition-all hover:-translate-y-0.5">
+<div class="flex items-center gap-space-2xs">
+<span class="w-2 h-2 rounded-full bg-error pulse-dot-live"></span>
+<span class="font-label-caps text-label-caps text-error font-bold">90+ GÜN</span>
+</div>
+<span class="font-metric-kpi-md text-metric-kpi-md text-error font-table-numeric mt-space-2xs">3 Araç</span>
+<span class="font-body-sm text-body-sm text-on-error-container font-medium">%7.1 • Kritik</span>
+</div>
+</div>
+</div>
+<!-- Sağ Kolon: Satış Kâr / Zarar Dağılımı -->
+<div class="bg-surface-container-lowest p-space-lg rounded-xl shadow-sm flex flex-col justify-between gap-space-lg transition-all hover:shadow-md">
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[20px]">pie_chart</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold">Satış Kâr / Zarar Dağılımı</h3>
+</div>
+<span class="font-table-numeric text-table-numeric text-on-surface-variant">Perf. Marjı: <strong>%9.6</strong></span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">18 satışın kârlılık sınıflandırması ve gerçekleşen net hacimler</p>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-space-md">
+<!-- Kârlı / Başabaş -->
+<div class="bg-surface-container-low p-space-md rounded-xl flex flex-col justify-between gap-space-sm transition-all hover:-translate-y-0.5">
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Kârlı &amp; Başabaş Satış</span>
+<span class="px-space-xs py-space-2xs rounded bg-surface-container-lowest text-primary font-label-caps text-label-caps font-semibold">%88.9 Başarı</span>
+</div>
+<div class="flex flex-col">
+<span class="font-metric-kpi-xl text-metric-kpi-xl text-on-surface font-table-numeric">16 Adet</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant mt-space-2xs">Üretilen kâr hacmi:</span>
+<span class="font-table-numeric text-table-numeric font-bold text-primary">+₺2.418.500</span>
+</div>
+<div class="w-full h-1.5 rounded-full bg-surface-container-high overflow-hidden">
+<div class="bg-primary h-full rounded-full animate-bar" style="width: 88.9%"></div>
+</div>
+</div>
+<!-- Zararlı Satış -->
+<div class="bg-error-container/40 p-space-md rounded-xl flex flex-col justify-between gap-space-sm transition-all hover:-translate-y-0.5">
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-error uppercase">Zararlı Satış</span>
+<span class="px-space-xs py-space-2xs rounded bg-error text-on-error font-label-caps text-label-caps font-semibold">%11.1 Risk</span>
+</div>
+<div class="flex flex-col">
+<span class="font-metric-kpi-xl text-metric-kpi-xl text-error font-table-numeric">2 Adet</span>
+<span class="font-body-sm text-body-sm text-on-error-container mt-space-2xs">Gerçekleşen zarar hacmi:</span>
+<span class="font-table-numeric text-table-numeric font-bold text-error">-₺38.500</span>
+</div>
+<div class="w-full h-1.5 rounded-full bg-error-container overflow-hidden">
+<div class="bg-error h-full rounded-full animate-bar" style="width: 11.1%"></div>
+</div>
+</div>
+</div>
+<div class="flex items-center justify-between bg-surface-container-low px-space-md py-space-sm rounded-lg font-body-sm text-body-sm text-on-surface">
+<span>Toplam Satış Hacmi: <strong class="font-table-numeric font-semibold">18 Araç</strong></span>
+<span>Brüt Kâr Marjı: <strong class="font-table-numeric font-semibold">%10.4</strong></span>
+<span>Net Operasyon Kârı: <strong class="font-table-numeric font-semibold">₺2.140.000</strong></span>
+</div>
+</div>
+</section>
+<!-- OPERASYONEL TABLOLAR & PERFORMANS (2 Kolon) -->
+<section class="grid grid-cols-1 lg:grid-cols-12 gap-space-xl animate-fade-in-up" style="animation-delay: 0.45s;">
+<!-- Sol 7 Kolon: Danışman Performansı -->
+<div class="lg:col-span-7 bg-surface-container-lowest p-space-lg rounded-xl shadow-sm flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[20px]">badge</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold">Satış Danışmanı Performans Matrisi</h3>
+</div>
+<span class="font-label-ui text-label-ui text-outline">Eylül 2026 Prim Esasları</span>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left font-table-data text-table-data">
+<thead>
+<tr class="bg-surface-container-low text-on-surface-variant font-label-caps text-label-caps">
+<th class="py-space-sm px-space-md rounded-l-lg">Danışman</th>
+<th class="py-space-sm px-space-md text-center">Satış</th>
+<th class="py-space-sm px-space-md text-right">Ciro</th>
+<th class="py-space-sm px-space-md text-right">Perf. Kârı</th>
+<th class="py-space-sm px-space-md text-right rounded-r-lg">Ort. SKS</th>
+</tr>
+</thead>
+<tbody class="text-on-surface">
+<!-- Murat Kaya -->
+<tr class="interactive-row hover:bg-surface-container-low/60 transition-colors">
+<td class="py-space-sm px-space-md font-semibold flex items-center gap-space-xs">
+<div class="w-7 h-7 rounded-full bg-primary-container text-on-primary flex items-center justify-center text-[12px] font-bold">MK</div>
+<div>
+<div class="font-body-sm text-body-sm font-semibold">Murat Kaya</div>
+<div class="font-label-ui text-label-ui text-outline">Kıdemli Danışman</div>
+</div>
+</td>
+<td class="py-space-sm px-space-md text-center font-table-numeric">
+<span class="px-space-xs py-space-2xs rounded-full bg-surface-container font-semibold">7 Adet</span>
+</td>
+<td class="py-space-sm px-space-md text-right font-table-numeric font-medium">₺9.850.000</td>
+<td class="py-space-sm px-space-md text-right font-table-numeric text-primary font-semibold">₺940.000</td>
+<td class="py-space-sm px-space-md text-right font-table-numeric">28.4 Gün</td>
+</tr>
+<!-- Serkan Demir -->
+<tr class="interactive-row hover:bg-surface-container-low/60 transition-colors">
+<td class="py-space-sm px-space-md font-semibold flex items-center gap-space-xs">
+<div class="w-7 h-7 rounded-full bg-secondary text-on-secondary flex items-center justify-center text-[12px] font-bold">SD</div>
+<div>
+<div class="font-body-sm text-body-sm font-semibold">Serkan Demir</div>
+<div class="font-label-ui text-label-ui text-outline">Danışman</div>
+</div>
+</td>
+<td class="py-space-sm px-space-md text-center font-table-numeric">
+<span class="px-space-xs py-space-2xs rounded-full bg-surface-container font-semibold">5 Adet</span>
+</td>
+<td class="py-space-sm px-space-md text-right font-table-numeric font-medium">₺6.920.000</td>
+<td class="py-space-sm px-space-md text-right font-table-numeric text-primary font-semibold">₺680.000</td>
+<td class="py-space-sm px-space-md text-right font-table-numeric">31.0 Gün</td>
+</tr>
+<!-- Ahmet Yılmaz -->
+<tr class="interactive-row hover:bg-surface-container-low/60 transition-colors">
+<td class="py-space-sm px-space-md font-semibold flex items-center gap-space-xs">
+<div class="w-7 h-7 rounded-full bg-surface-container-highest text-on-surface flex items-center justify-center text-[12px] font-bold">AY</div>
+<div>
+<div class="font-body-sm text-body-sm font-semibold">Ahmet Yılmaz</div>
+<div class="font-label-ui text-label-ui text-secondary">Hedef Altı (%50)</div>
+</div>
+</td>
+<td class="py-space-sm px-space-md text-center font-table-numeric">
+<span class="px-space-xs py-space-2xs rounded-full bg-surface-container-high font-semibold">4 Adet</span>
+</td>
+<td class="py-space-sm px-space-md text-right font-table-numeric font-medium">₺5.420.000</td>
+<td class="py-space-sm px-space-md text-right font-table-numeric text-primary font-semibold">₺520.000</td>
+<td class="py-space-sm px-space-md text-right font-table-numeric">38.5 Gün</td>
+</tr>
+<!-- Emre Koç -->
+<tr class="interactive-row hover:bg-surface-container-low/60 transition-colors">
+<td class="py-space-sm px-space-md font-semibold flex items-center gap-space-xs">
+<div class="w-7 h-7 rounded-full bg-surface-container-highest text-on-surface flex items-center justify-center text-[12px] font-bold">EK</div>
+<div>
+<div class="font-body-sm text-body-sm font-semibold">Emre Koç</div>
+<div class="font-label-ui text-label-ui text-outline">Danışman</div>
+</div>
+</td>
+<td class="py-space-sm px-space-md text-center font-table-numeric">
+<span class="px-space-xs py-space-2xs rounded-full bg-surface-container font-semibold">2 Adet</span>
+</td>
+<td class="py-space-sm px-space-md text-right font-table-numeric font-medium">₺2.660.000</td>
+<td class="py-space-sm px-space-md text-right font-table-numeric text-primary font-semibold">₺240.000</td>
+<td class="py-space-sm px-space-md text-right font-table-numeric">46.0 Gün</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Sağ 5 Kolon: Stok Marka Dağılımı -->
+<div class="lg:col-span-5 bg-surface-container-lowest p-space-lg rounded-xl shadow-sm flex flex-col justify-between gap-space-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-secondary text-[20px]">category</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold">Stok Marka Dağılımı</h3>
+</div>
+<span class="font-label-ui text-label-ui text-outline">Toplam 42 Araç</span>
+</div>
+<div class="flex flex-col gap-space-sm">
+<!-- Renault -->
+<div class="flex flex-col gap-space-2xs group cursor-pointer">
+<div class="flex items-center justify-between font-body-sm text-body-sm">
+<span class="font-semibold text-on-surface group-hover:text-primary transition-colors">Renault</span>
+<span class="font-table-numeric text-on-surface-variant">16 Araç • <strong>%38.1</strong></span>
+</div>
+<div class="w-full h-2 rounded-full bg-surface-container overflow-hidden">
+<div class="bg-primary h-full rounded-full animate-bar" style="width: 38.1%"></div>
+</div>
+</div>
+<!-- Fiat -->
+<div class="flex flex-col gap-space-2xs group cursor-pointer">
+<div class="flex items-center justify-between font-body-sm text-body-sm">
+<span class="font-semibold text-on-surface group-hover:text-secondary transition-colors">Fiat</span>
+<span class="font-table-numeric text-on-surface-variant">12 Araç • <strong>%28.6</strong></span>
+</div>
+<div class="w-full h-2 rounded-full bg-surface-container overflow-hidden">
+<div class="bg-secondary h-full rounded-full animate-bar" style="width: 28.6%"></div>
+</div>
+</div>
+<!-- Volkswagen -->
+<div class="flex flex-col gap-space-2xs group cursor-pointer">
+<div class="flex items-center justify-between font-body-sm text-body-sm">
+<span class="font-semibold text-on-surface group-hover:text-primary-container transition-colors">Volkswagen</span>
+<span class="font-table-numeric text-on-surface-variant">6 Araç • <strong>%14.3</strong></span>
+</div>
+<div class="w-full h-2 rounded-full bg-surface-container overflow-hidden">
+<div class="bg-primary-container h-full rounded-full animate-bar" style="width: 14.3%"></div>
+</div>
+</div>
+<!-- Dacia -->
+<div class="flex flex-col gap-space-2xs group cursor-pointer">
+<div class="flex items-center justify-between font-body-sm text-body-sm">
+<span class="font-semibold text-on-surface group-hover:text-primary transition-colors">Dacia</span>
+<span class="font-table-numeric text-on-surface-variant">5 Araç • <strong>%11.9</strong></span>
+</div>
+<div class="w-full h-2 rounded-full bg-surface-container overflow-hidden">
+<div class="bg-secondary-fixed-dim h-full rounded-full animate-bar" style="width: 11.9%"></div>
+</div>
+</div>
+<!-- Ford -->
+<div class="flex flex-col gap-space-2xs group cursor-pointer">
+<div class="flex items-center justify-between font-body-sm text-body-sm">
+<span class="font-semibold text-on-surface group-hover:text-secondary transition-colors">Ford</span>
+<span class="font-table-numeric text-on-surface-variant">3 Araç • <strong>%7.1</strong></span>
+</div>
+<div class="w-full h-2 rounded-full bg-surface-container overflow-hidden">
+<div class="bg-surface-dim h-full rounded-full animate-bar" style="width: 7.1%"></div>
+</div>
+</div>
+</div>
+<div class="pt-space-xs text-center font-label-caps text-label-caps text-outline">
+        Segment Ağırlığı: %66.7 B ve C Sedan/Hatchback
+      </div>
+</div>
+</section>
+<!-- MİNİ LİSTELER: KÂRLI / ZARARLI SATIŞLAR & KRİTİK SKS STOKLARI -->
+<section class="grid grid-cols-1 lg:grid-cols-12 gap-space-xl animate-fade-in-up" style="animation-delay: 0.5s;">
+<!-- Sol 6 Kolon: Kârlılık Uç Noktaları -->
+<div class="lg:col-span-6 flex flex-col gap-space-base">
+<!-- En Kârlı Satışlar Mini Tablo -->
+<div class="bg-surface-container-lowest p-space-md rounded-xl shadow-sm flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[18px]">trending_up</span>
+<h4 class="font-headline-sm text-headline-sm text-on-surface font-semibold">En Yüksek Marjlı Satışlar</h4>
+</div>
+<span class="font-label-caps text-label-caps text-outline">TOP 2 İŞLEM</span>
+</div>
+<div class="flex flex-col gap-space-xs">
+<div class="interactive-row flex items-center justify-between p-space-sm bg-surface-container-low rounded-lg transition-transform hover:-translate-y-0.5">
+<div class="flex items-center gap-space-sm">
+<span class="px-space-xs py-space-2xs bg-surface-container-lowest font-label-caps text-label-caps rounded font-bold">33 CAY 881</span>
+<div class="flex flex-col">
+<span class="font-body-sm text-body-sm font-semibold text-on-surface">VW Passat 1.5 TSI Elegance</span>
+<span class="font-label-ui text-label-ui text-on-surface-variant">Satış: ₺2.150.000 • SKS: 14 Gün</span>
+</div>
+</div>
+<div class="text-right">
+<span class="font-table-numeric text-table-numeric text-primary font-bold">+₺245.000</span>
+<div class="font-label-ui text-label-ui text-outline">%11.4 Marj</div>
+</div>
+</div>
+<div class="interactive-row flex items-center justify-between p-space-sm bg-surface-container-low rounded-lg transition-transform hover:-translate-y-0.5">
+<div class="flex items-center gap-space-sm">
+<span class="px-space-xs py-space-2xs bg-surface-container-lowest font-label-caps text-label-caps rounded font-bold">33 RNV 402</span>
+<div class="flex flex-col">
+<span class="font-body-sm text-body-sm font-semibold text-on-surface">Renault Austral Techno Esprit</span>
+<span class="font-label-ui text-label-ui text-on-surface-variant">Satış: ₺2.480.000 • SKS: 19 Gün</span>
+</div>
+</div>
+<div class="text-right">
+<span class="font-table-numeric text-table-numeric text-primary font-bold">+₺210.000</span>
+<div class="font-label-ui text-label-ui text-outline">%8.5 Marj</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Zarar Eden Satışlar Mini Tablo -->
+<div class="bg-surface-container-lowest p-space-md rounded-xl shadow-sm flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-error text-[18px]">trending_down</span>
+<h4 class="font-headline-sm text-headline-sm text-on-surface font-semibold">Zarar Eden Satışlar</h4>
+</div>
+<span class="font-label-caps text-label-caps text-error">2 ONAYLI İŞLEM</span>
+</div>
+<div class="flex flex-col gap-space-xs">
+<div class="interactive-row flex items-center justify-between p-space-sm bg-error-container/30 rounded-lg transition-transform hover:-translate-y-0.5">
+<div class="flex items-center gap-space-sm">
+<span class="px-space-xs py-space-2xs bg-surface-container-lowest font-label-caps text-label-caps rounded font-bold">33 CAY 102</span>
+<div class="flex flex-col">
+<span class="font-body-sm text-body-sm font-semibold text-on-surface">Fiat Egea 1.4 Fire Urban</span>
+<span class="font-label-ui text-label-ui text-on-surface-variant">Onarım + Ekspertiz Aşımı</span>
+</div>
+</div>
+<div class="text-right">
+<span class="font-table-numeric text-table-numeric text-error font-bold">-₺18.500</span>
+<div class="font-label-ui text-label-ui text-error/80">SKS: 68 Gün</div>
+</div>
+</div>
+<div class="interactive-row flex items-center justify-between p-space-sm bg-error-container/30 rounded-lg transition-transform hover:-translate-y-0.5">
+<div class="flex items-center gap-space-sm">
+<span class="px-space-xs py-space-2xs bg-surface-container-lowest font-label-caps text-label-caps rounded font-bold">33 TA 714</span>
+<div class="flex flex-col">
+<span class="font-body-sm text-body-sm font-semibold text-on-surface">Renault Clio 1.0 TCe Joy</span>
+<span class="font-label-ui text-label-ui text-on-surface-variant">Takas Dengeleme Satışı</span>
+</div>
+</div>
+<div class="text-right">
+<span class="font-table-numeric text-table-numeric text-error font-bold">-₺20.000</span>
+<div class="font-label-ui text-label-ui text-error/80">SKS: 82 Gün</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Sağ 6 Kolon: Kritik / Yüksek SKS Stokları -->
+<div class="lg:col-span-6 bg-surface-container-lowest p-space-lg rounded-xl shadow-sm flex flex-col justify-between gap-space-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-error text-[20px]">timer_off</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold">Kritik &amp; Yüksek SKS Stokları</h3>
+</div>
+<span class="font-label-caps text-label-caps text-outline">GÜNCELLENMİŞ ENVANTER</span>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left font-table-data text-table-data">
+<thead>
+<tr class="bg-surface-container-low text-on-surface-variant font-label-caps text-label-caps">
+<th class="py-space-sm px-space-md rounded-l-lg">Araç / Plaka</th>
+<th class="py-space-sm px-space-md text-right">Maliyet</th>
+<th class="py-space-sm px-space-md text-right">Liste Fiyat</th>
+<th class="py-space-sm px-space-md text-center rounded-r-lg">Bekleme</th>
+</tr>
+</thead>
+<tbody class="text-on-surface">
+<!-- 33 ARB 585 -->
+<tr class="interactive-row hover:bg-surface-container-low/60 transition-colors">
+<td class="py-space-sm px-space-md">
+<div class="font-semibold font-table-numeric text-on-surface">33 ARB 585</div>
+<div class="font-label-ui text-label-ui text-outline">Renault Megane Sedan 1.3 TCe</div>
+</td>
+<td class="py-space-sm px-space-md text-right font-table-numeric font-medium">₺1.280.000</td>
+<td class="py-space-sm px-space-md text-right font-table-numeric">₺1.340.000</td>
+<td class="py-space-sm px-space-md text-center">
+<span class="px-space-xs py-space-2xs rounded bg-error text-on-error font-table-numeric text-body-sm font-bold pulse-badge-critic inline-block">94 Gün</span>
+</td>
+</tr>
+<!-- 33 TN 419 -->
+<tr class="interactive-row hover:bg-surface-container-low/60 transition-colors">
+<td class="py-space-sm px-space-md">
+<div class="font-semibold font-table-numeric text-on-surface">33 TN 419</div>
+<div class="font-label-ui text-label-ui text-outline">Dacia Sandero Stepway</div>
+</td>
+<td class="py-space-sm px-space-md text-right font-table-numeric font-medium">₺940.000</td>
+<td class="py-space-sm px-space-md text-right font-table-numeric">₺985.000</td>
+<td class="py-space-sm px-space-md text-center">
+<span class="px-space-xs py-space-2xs rounded bg-error text-on-error font-table-numeric text-body-sm font-bold">91 Gün</span>
+</td>
+</tr>
+<!-- 33 BB 650 -->
+<tr class="interactive-row hover:bg-surface-container-low/60 transition-colors">
+<td class="py-space-sm px-space-md">
+<div class="font-semibold font-table-numeric text-on-surface">33 BB 650</div>
+<div class="font-label-ui text-label-ui text-outline">Fiat Egea Cross 1.6 M.Jet</div>
+</td>
+<td class="py-space-sm px-space-md text-right font-table-numeric font-medium">₺1.080.000</td>
+<td class="py-space-sm px-space-md text-right font-table-numeric">₺1.145.000</td>
+<td class="py-space-sm px-space-md text-center">
+<span class="px-space-xs py-space-2xs rounded bg-surface-container-high text-on-surface font-table-numeric text-body-sm font-bold">78 Gün</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="p-space-sm bg-surface-container-low rounded-lg flex items-center justify-between text-on-surface-variant font-body-sm text-body-sm">
+<span>Kritik araçlar için finansman maliyeti günlük <strong>₺3.200</strong> seviyesindedir.</span>
+<button class="text-primary font-semibold hover:underline cursor-pointer active:scale-95 transition-transform" type="button">Toplu Kampanya Aç</button>
+</div>
+</div>
+</section>
+<!-- EN ALT BANT: BU AY ALINAN ARAÇLAR & EKSPERTİZ ÖZETİ -->
+<section class="grid grid-cols-1 lg:grid-cols-12 gap-space-xl animate-fade-in-up" style="animation-delay: 0.55s;">
+<!-- Bu Ay Alınan Araçlar (7 Kolon) -->
+<div class="lg:col-span-7 bg-surface-container-lowest p-space-lg rounded-xl shadow-sm flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[20px]">add_shopping_cart</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold">Bu Ay Alınan Araçlar</h3>
+<span class="px-space-xs py-space-2xs rounded-full bg-surface-container text-primary font-label-caps text-label-caps font-bold">21 Yeni Alım</span>
+</div>
+<a class="font-label-ui text-label-ui text-primary font-semibold hover:underline" href="#">Tümünü İncele</a>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-sm">
+<div class="interactive-row bg-surface-container-low p-space-sm rounded-lg flex flex-col justify-between transition-transform hover:-translate-y-1">
+<div>
+<span class="font-label-caps text-label-caps text-outline">SON GİRİŞ</span>
+<div class="font-semibold font-table-numeric text-on-surface mt-space-2xs">33 CAY 950</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant">2024 Megane 1.3 TCe Icon</div>
+</div>
+<div class="mt-space-sm pt-space-xs flex items-center justify-between font-table-numeric text-body-sm">
+<span class="text-on-surface-variant">Alış:</span>
+<span class="font-semibold text-on-surface">₺1.320.000</span>
+</div>
+</div>
+<div class="interactive-row bg-surface-container-low p-space-sm rounded-lg flex flex-col justify-between transition-transform hover:-translate-y-1">
+<div>
+<span class="font-label-caps text-label-caps text-outline">TAKAS GİRİŞİ</span>
+<div class="font-semibold font-table-numeric text-on-surface mt-space-2xs">33 TY 302</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant">2023 Dacia Duster 1.3 EDC</div>
+</div>
+<div class="mt-space-sm pt-space-xs flex items-center justify-between font-table-numeric text-body-sm">
+<span class="text-on-surface-variant">Alış:</span>
+<span class="font-semibold text-on-surface">₺1.150.000</span>
+</div>
+</div>
+<div class="interactive-row bg-surface-container-low p-space-sm rounded-lg flex flex-col justify-between transition-transform hover:-translate-y-1">
+<div>
+<span class="font-label-caps text-label-caps text-outline">İHALE ALIMI</span>
+<div class="font-semibold font-table-numeric text-on-surface mt-space-2xs">33 FTT 612</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant">2022 Ford Focus Trend X</div>
+</div>
+<div class="mt-space-sm pt-space-xs flex items-center justify-between font-table-numeric text-body-sm">
+<span class="text-on-surface-variant">Alış:</span>
+<span class="font-semibold text-on-surface">₺980.000</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Ekspertiz Özeti & Son Hareketler (5 Kolon) -->
+<div class="lg:col-span-5 bg-surface-container-lowest p-space-lg rounded-xl shadow-sm flex flex-col justify-between gap-space-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-secondary text-[20px]">fact_check</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold">Ekspertiz ve Atölye Durumu</h3>
+</div>
+<span class="font-label-caps text-label-caps text-outline">AKTİF KUYRUK</span>
+</div>
+<div class="flex flex-col gap-space-sm">
+<div class="flex items-center justify-between p-space-xs bg-surface-container-low rounded-lg transition-colors hover:bg-surface-container">
+<div class="flex items-center gap-space-xs">
+<div class="w-2.5 h-2.5 rounded-full bg-secondary"></div>
+<span class="font-body-sm text-body-sm font-semibold text-on-surface">Atölye Hazırlık / Boya Bakım</span>
+</div>
+<span class="font-table-numeric text-table-numeric font-semibold text-on-surface">5 Araç</span>
+</div>
+<div class="flex items-center justify-between p-space-xs bg-surface-container-low rounded-lg transition-colors hover:bg-surface-container">
+<div class="flex items-center gap-space-xs">
+<div class="w-2.5 h-2.5 rounded-full bg-primary-container"></div>
+<span class="font-body-sm text-body-sm font-semibold text-on-surface">Ekspertiz Onayı Bekleyen</span>
+</div>
+<span class="font-table-numeric text-table-numeric font-semibold text-on-surface">3 Araç</span>
+</div>
+<div class="flex items-center justify-between p-space-xs bg-surface-container-low rounded-lg transition-colors hover:bg-surface-container">
+<div class="flex items-center gap-space-xs">
+<div class="w-2.5 h-2.5 rounded-full bg-primary"></div>
+<span class="font-body-sm text-body-sm font-semibold text-on-surface">Satışa Hazır / Vitrin</span>
+</div>
+<span class="font-table-numeric text-table-numeric font-semibold text-primary">34 Araç</span>
+</div>
+</div>
+<div class="flex items-center justify-between pt-space-xs text-outline font-label-ui text-label-ui">
+<span>Son Ekspertiz Raporu: <strong>33 CAY 950 (Hatasız/Boyasız)</strong></span>
+<span>16:30</span>
+</div>
+</div>
+</section>
+</div></div></main></div></body></html>

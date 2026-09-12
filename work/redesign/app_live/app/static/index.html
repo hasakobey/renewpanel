@@ -1,0 +1,288 @@
+<!doctype html><html lang="tr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Çayan Tarsus RENEW PRO</title><link rel="stylesheet" href="/static/style.css?v=7.25.0">  <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+
+<link rel="stylesheet" href="/static/dashboard_pro_v3.css?v=3.0.0">
+<link rel="stylesheet" href="/static/renew_dashboard_v26.css?v=8.0.0-4">
+
+<!-- RENEW_USER_ADMIN_V2_HEAD_BEGIN -->
+<style>
+html.renew-auth-pending::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  z-index:100000;
+  background:linear-gradient(135deg,#0f1c2e,#173f6b);
+}
+html.renew-auth-pending #loginOverlay{
+  visibility:hidden!important;
+  opacity:0!important;
+  pointer-events:none!important;
+}
+</style>
+<script>
+document.documentElement.classList.add('renew-auth-pending');
+try{
+  sessionStorage.setItem(
+    'renew_auth_target',
+    localStorage.getItem('renew_v6_page') || 'dashboard'
+  );
+}catch(e){}
+</script>
+<!-- RENEW_USER_ADMIN_V2_HEAD_END -->
+
+
+<!-- RENEW_LOGIN_PAYMENT_LINK_BEGIN -->
+<style id="renewLoginPaymentStyle">
+  .renew-login-payment-wrap{margin-top:14px}
+  .renew-login-payment-link{
+    width:100%;min-height:54px;display:flex;align-items:center;justify-content:center;
+    gap:10px;padding:12px 14px;border:1px solid #c9d8e8;border-radius:10px;
+    background:linear-gradient(180deg,#f8fbff,#edf4fb);color:#173c61;text-decoration:none;
+    font-weight:900;font-size:13px;box-shadow:0 6px 16px rgba(21,88,161,.08);
+    transition:transform .16s ease,box-shadow .16s ease,border-color .16s ease,background .16s ease
+  }
+  .renew-login-payment-link:hover{
+    transform:translateY(-1px);border-color:#8db2da;
+    background:linear-gradient(180deg,#ffffff,#e8f1fa);
+    box-shadow:0 9px 20px rgba(21,88,161,.13)
+  }
+  .renew-login-payment-icon{
+    width:32px;height:32px;border-radius:9px;display:flex;align-items:center;justify-content:center;
+    background:linear-gradient(135deg,#1558a1,#0c447d);color:#fff;font-size:16px;flex:0 0 32px
+  }
+  .renew-login-payment-text{display:flex;flex-direction:column;align-items:flex-start;line-height:1.15}
+  .renew-login-payment-text b{font-size:13px;color:#173c61}
+  .renew-login-payment-text small{margin-top:3px;font-size:9px;color:#6b7d92;font-weight:700}
+  @media(max-width:600px){
+    .renew-login-payment-link{min-height:52px;padding:11px 12px}
+  }
+</style>
+<!-- RENEW_LOGIN_PAYMENT_LINK_END -->
+
+</head>
+<body><div class="app">
+<aside>
+  <div class="brand"><div class="brand-mark">R</div><div><b>RENEW PRO</b><small>Çayan Tarsus • v8.0.0</small></div></div>
+  <div class="nav-group"><span>YÖNETİM</span>
+    <button class="nav active" data-page="dashboard"><i>▦</i><div><b>Genel Dashboard</b><small>Yönetici özet ekranı</small></div></button>
+    <button class="nav" data-page="stocks"><i>🚗</i><div><b>Güncel Stok</b><small>19 sütun tam görünüm</small></div></button>
+    <button class="nav" data-page="sales"><i>₺</i><div><b>Satılan Araçlar</b><small>30 sütun tam görünüm</small></div></button>
+  </div>
+  <div class="nav-group"><span>PERFORMANS</span>
+    <button class="nav" data-page="acquisitions"><i>🛒</i><div><b>Aylık Alımlar</b><small>Araç & kaynak takibi</small></div></button>
+    <button class="nav" data-page="photos"><i>📷</i><div><b>Araç Fotoğrafları</b><small>Plaka bazlı arşiv</small></div></button>
+    <button class="nav" data-page="vehicle360"><i>◉</i><div><b>Araç 360°</b><small>Tek araç tam geçmiş</small></div></button>
+    <button class="nav" data-page="expertise"><i>⌕</i><div><b>Ekspertiz Takip</b><small>Personel bazlı aylık</small></div></button>
+    <button class="nav" data-page="performance"><i>★</i><div><b>Danışman Performansı</b><small>Hedef, ciro, kâr</small></div></button>
+  </div>
+  <div class="nav-group"><span>VERİ & SENKRONİZASYON</span>
+    <button class="nav" data-page="master"><i>▣</i><div><b>Ana Excel / Yedek</b><small>Tam geri yükleme</small></div></button>
+    <button class="nav" data-page="stock-import"><i>⇩</i><div><b>Stok Excel Aktarımı</b><small>Tüm stokları önizle</small></div></button>
+    <button class="nav" data-page="sales-import"><i>⇄</i><div><b>Satış Excel Aktarımı</b><small>Ay bazlı toplu aktar</small></div></button>
+  </div>
+  <div class="nav-group"><span>SİSTEM</span>
+    <button class="nav" data-page="settings"><i>⚙</i><div><b>Parametre Merkezi</b><small>Tüm Excel ayarları</small></div></button>
+    <button class="nav" data-page="reports"><i>▤</i><div><b>Rapor Merkezi</b><small>PDF & Excel çıktıları</small></div></button>
+    <button class="nav" data-page="profile"><i>◎</i><div><b>Profilim</b><small>Hesabım ve hareketlerim</small></div></button>
+    <button class="nav" data-page="audit"><i>↻</i><div><b>İşlem Geçmişi</b><small>Değişiklik kayıtları</small></div></button>
+    <button class="nav admin-only" data-page="users"><i>👤</i><div><b>Kullanıcı & Yetkiler</b><small>Hesap ve rol yönetimi</small></div></button>
+  </div>
+  <div class="side-tools"><button onclick="clearBrowserCache()">🧹 Arayüz Önbelleğini Temizle</button><button class="side-logout" onclick="logoutUser()">↪ Güvenli Çıkış</button></div>
+</aside>
+
+<main>
+  <header class="topbar"><div><h1 id="pageTitle">Genel Dashboard</h1><p id="status">Sistem hazırlanıyor...</p><span id="buildVersion" style="font-size:10px;font-weight:800;color:#2563eb">V8.0.0 • PRO CONTROL CENTER</span></div>
+    <button id="mobileMenuBtn" class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button><div class="top-actions"><div id="currentUserBox" class="current-user"></div><div class="monthbox"><label>Çalışma Dönemi</label><input type="month" id="globalMonth"></div><button class="btn ghost" onclick="refreshAll()">↻ Yenile</button><details class="top-action-menu"><summary>⇅ Excel İşlemleri</summary><div class="top-action-popover"><button type="button" onclick="document.getElementById('topAcqImportFile').click();this.closest('details').removeAttribute('open')"><span>↑</span><b>Aylık Alım Excel Yükle</b><small>Excel'den aylık alımları içe aktar</small></button><a id="topAcqXlsx" onclick="this.closest('details').removeAttribute('open')"><span>↓</span><b>Aylık Alım Excel İndir</b><small>Seçili dönemi Excel olarak dışa aktar</small></a><a id="excelDownload" onclick="this.closest('details').removeAttribute('open')"><span>▦</span><b>Ana Excel'i İndir</b><small>Güncel ana Excel dosyasını düzenle</small></a><button type="button" onclick="this.closest('details').removeAttribute('open');backup()"><span>◆</span><b>Sistem Yedeği Al</b><small>Veritabanının güvenli yedeğini oluştur</small></button></div></details><input id="topAcqImportFile" type="file" accept=".xlsx,.xls" style="display:none" onchange="previewAcquisitionImport(this.files[0])"></div>
+  </header>
+
+  <section id="dashboard" class="page active">
+    <div class="hero"><div><h2>Yönetici Dashboard</h2><p>Satış, stok, SKS, kârlılık, ekspertiz ve danışman performansının tek ekran özeti.</p></div><div><button class="btn primary" onclick="openStock()">+ Stok Ekle</button> <button class="btn success" onclick="openSale()">+ Satış Ekle</button></div></div>
+    <div id="dashAlerts" class="dash-alerts"></div>
+    <div id="dashKpis" class="kpis kpi12"></div>
+    <div class="dash-command-grid"><div class="card dash-chart-card"><div class="cardhead"><div><h3>Aylık Yönetici Nabzı</h3><p class="hint">Dönem karşılaştırması, hedefler ve temel verimlilik göstergeleri.</p></div><span class="pulse-live">CANLI</span></div><div id="salesTrendChart" class="management-pulse"></div></div><div class="card quick-card"><div class="cardhead"><div><h3>Hızlı İşlemler</h3><p class="hint">Sık kullandığınız işlemlere tek adımda ulaşın.</p></div></div><div class="quick-actions"><button onclick="openStock()"><b>＋</b><span><strong>Yeni Stok</strong><small>Aracı stoğa kaydet</small></span></button><button onclick="openSale()"><b>₺</b><span><strong>Yeni Satış</strong><small>Satış kaydı oluştur</small></span></button><button onclick="openAcquisition()"><b>🛒</b><span><strong>Yeni Alım</strong><small>Aylık alım ekle</small></span></button><button onclick="page('master')"><b>⇅</b><span><strong>Excel Merkezi</strong><small>İçe ve dışa aktar</small></span></button><button onclick="page('reports')"><b>▤</b><span><strong>Raporlar</strong><small>PDF ve Excel raporları</small></span></button><button onclick="backup()"><b>◆</b><span><strong>Yedek Al</strong><small>Verileri güvenle sakla</small></span></button></div></div></div>
+    <h4 class="section-label">AYLIK KARŞILAŞTIRMA</h4><div id="monthCompare" class="compare-grid"></div>
+    <div class="grid3"><div class="card"><h3>SKS / Stok Bekleme Riski</h3><p class="hint">0–30 normal, 31–60 takip, 61–90 aksiyon, 90+ kritik.</p><div id="risk" class="risk"></div><div id="riskSummary"></div></div>
+      <div class="card"><h3>Satış Kâr / Zarar Dağılımı</h3><div id="profitSplit"></div></div>
+      <div class="card"><h3>Bu Ay Alım Performansı</h3><div id="purchaseMonth"></div><div id="purchaseTypes"></div></div></div>
+    <div class="grid2"><div class="card"><h3>Danışman Performansı</h3><div id="dashConsultants"></div></div><div class="card"><h3>Stok Marka Dağılımı</h3><div id="brandDist"></div></div></div>
+    <div class="grid2"><div class="card"><h3>En Kârlı Satışlar</h3><div id="topSales"></div></div><div class="card"><h3>Zarar Eden Satışlar</h3><div id="lossSales"></div></div></div>
+    <div class="card"><div class="cardhead"><h3>Kritik / Yüksek SKS Stokları</h3><button class="btn small" onclick="page('stocks')">Tüm Stoğu Aç</button></div><div id="criticalStock"></div></div>
+    <div class="card"><div class="cardhead"><h3>Bu Ay Alınan Araçlar</h3><button class="btn small" onclick="page('acquisitions')">Aylık Alımları Aç</button></div><div id="dashAcquisitions"></div></div><div class="grid2"><div class="card"><h3>Ekspertiz Özeti</h3><div id="expertiseSummary"></div></div><div class="card"><h3>Son İşlem Hareketleri</h3><div id="recentActivity"></div></div></div>
+  </section>
+
+  <section id="profile" class="page"><div class="profile-hero"><div class="profile-avatar" id="profileAvatar">R</div><div><span class="eyebrow">KULLANICI PROFİLİ</span><h2 id="profileName">Profilim</h2><p id="profileRole">Hesap ve işlem özeti</p></div><button class="btn ghost" onclick="openPasswordChange(false)">Şifremi Değiştir</button></div><div id="profileKpis" class="kpis"></div><div class="grid2 profile-grid"><div class="card"><h3>Yaptığım İşlemler</h3><div id="profileEntitySummary" class="profile-summary"></div></div><div class="card"><h3>Hesap Bilgileri</h3><div id="profileDetails" class="profile-details"></div></div></div><div class="card"><div class="cardhead"><div><h3>Son Hareketlerim</h3><p class="hint">Eklediğiniz, düzenlediğiniz ve sildiğiniz kayıtların özeti.</p></div><input id="profileActionSearch" placeholder="İşlemlerimde ara..." oninput="renderProfileActions()"></div><div id="profileActions"></div></div></section>
+
+  <section id="stocks" class="page"><div class="pageintro"><div><h2>Güncel Stok — Tam Excel Görünümü</h2><p>EXTRA STOK BİLGİSİ’ndeki tüm 19 alan panelde görünür.</p></div><button class="btn primary" onclick="openStock()">+ Yeni Stok</button></div><div id="stockKpis" class="kpis"></div><div class="toolbar"><input id="stockSearch" placeholder="Plaka, marka, model, versiyon ara..." oninput="renderStocks()"><select id="stockBrand" onchange="renderStocks()"><option value="">Tüm Markalar</option></select><select id="stockSks" onchange="renderStocks()"><option value="">Tüm SKS</option><option value="0_30">0–30 Gün</option><option value="31_60">31–60 Gün</option><option value="61_90">61–90 Gün</option><option value="90_plus">90+ Kritik</option></select><select id="stockSort" onchange="renderStocks()"><option value="sks_desc">SKS: Yüksek → Düşük</option><option value="sks_asc">SKS: Düşük → Yüksek</option><option value="brand">Marka A–Z</option><option value="price_desc">Satış Fiyatı: Yüksek</option><option value="profit_desc">Kâr: Yüksek</option></select></div><div id="stockTable" class="card"></div></section>
+
+  <section id="sales" class="page"><div class="pageintro"><div><h2>Satılan Araçlar — Tam Excel Görünümü</h2><p>ARAÇ VERİ GİRİŞİ’ndeki 30 alan; gider, maliyet, net kâr ve ek gelirler dahil.</p></div><button class="btn success" onclick="openSale()">+ Yeni Satış</button></div><div id="salesKpis" class="kpis"></div><div class="toolbar"><input id="salesSearch" placeholder="Plaka, araç, müşteri, danışman ara..." oninput="renderSales()"><select id="salesConsultant" onchange="renderSales()"><option value="">Tüm Danışmanlar</option></select><select id="salesPurchaseType" onchange="renderSales()"><option value="">Tüm Alım Türleri</option></select><select id="salesSks" onchange="renderSales()"><option value="">Tüm SKS</option><option value="0_30">0–30 Gün</option><option value="31_60">31–60 Gün</option><option value="61_90">61–90 Gün</option><option value="90_plus">90+ Gün</option></select><select id="salesProfit" onchange="renderSales()"><option value="">Kâr/Zarar Tümü</option><option value="profit">Kârlı</option><option value="loss">Zararlı</option></select></div><div id="salesTable" class="card"></div></section>
+
+  <section id="acquisitions" class="page"><div class="pageintro"><div><h2>Aylık Araç Alım & Kaynak Takibi</h2><p>Seçili ayda hangi araç kimden / hangi ekspertiz personelinden alındı; maliyet ve dönüşüm tek ekranda.</p></div><div><button class="btn primary" onclick="openAcquisition()">+ Yeni Alım</button> <a id="acqXlsx" class="btn success">⬇ Aylık Excel</a> <a id="acqPdf" class="btn dark">PDF Rapor</a></div></div><div id="acqKpis" class="kpis"></div><div class="grid2"><div class="card"><h3>Personel / Kaynak Özeti</h3><div id="acqPeople"></div></div><div class="card"><h3>Alım Türü Dağılımı</h3><div id="acqTypes"></div></div></div><div class="card"><div class="cardhead"><h3>Bu Ay Alınan Araçlar</h3><a href="/api/template/acquisitions.xlsx" class="btn small">Boş Excel Şablonu</a></div><div id="acqTable"></div></div></section>
+<section id="vehicle360" class="page">
+      <div class="pageintro"><div><h2>Araç 360°</h2><p>Stoktan satışa kadar araç bilgisi, finans, SKS, alım kaynağı ve fotoğraf arşivi tek ekranda.</p></div></div>
+      <div class="card"><div class="photo-toolbar"><label>Araç Seç<select id="vehicle360Select" onchange="if(this.value)openVehicleCard(this.value,true)"><option value="">— Araç Seç —</option></select></label></div></div>
+      <div id="vehicle360Content"><div class="empty">Araç seçin.</div></div>
+    </section>
+<section id="photos" class="page">
+  <div class="pageintro">
+    <div><h2>Araç Medya Merkezi</h2><p>Fotoğraf, ilan sıralaması, ruhsat/ekspertiz belgeleri, arşiv ve araç yedeği tek yerde.</p></div>
+    <div><button class="btn ghost" onclick="openCurrentMediaFolder()">📂 Klasörü Aç</button> <button class="btn success" onclick="downloadVehicleMediaBackup()">💾 Araç Yedeği</button></div>
+  </div>
+  <div class="card">
+    <div class="photo-toolbar">
+      <label>Araç Kaynağı<select id="mediaSourceFilter" onchange="refreshMediaVehicleSelect()"><option value="stocks">Güncel Stok</option><option value="sales">Satılan Araçlar</option><option value="acquisitions">Alınan Araçlar</option></select></label>
+      <label>Araç Seç<select id="mediaVehicleSelect" onchange="selectMediaVehicle(this.value)"><option value="">— Araç Seç —</option></select></label>
+      <label>Plaka<input id="mediaPlate" readonly placeholder="Araç seçildiğinde gelir"></label>
+    </div>
+    <div id="mediaVehicleInfo" class="notice" style="display:none"></div>
+  </div>
+  <div class="media-tabs">
+    <button class="active" onclick="mediaTab('original',this)">📷 Araç Fotoğrafları</button>
+    <button onclick="mediaTab('listing',this)">⭐ İlan Fotoğrafları</button>
+    <button onclick="mediaTab('documents',this)">📄 Belgeler</button>
+    <button onclick="mediaTab('archive',this)">🗄 Arşiv</button>
+  </div>
+  <div class="card">
+    <div class="cardhead"><h3 id="mediaSectionTitle">Araç Fotoğrafları</h3><span id="mediaCount"></span></div>
+    <div class="photo-toolbar">
+      <label id="mediaUploadLabel">Fotoğraf Yükle<input id="mediaFiles" type="file" multiple accept=".jpg,.jpeg,.png,.webp"></label>
+      <button class="btn primary" onclick="uploadMediaFiles()">⬆ Yükle</button>
+      <button class="btn ghost" onclick="loadMediaCenter()">Yenile</button>
+      <button id="listingZipBtn" class="btn success" style="display:none" onclick="downloadListingZip()">📦 İlan ZIP</button>
+      <button id="saveOrderBtn" class="btn dark" style="display:none" onclick="saveListingOrder()">↕ Sıralamayı Kaydet</button>
+    </div>
+    <div id="mediaStatus" class="notice" style="display:none"></div>
+    <div id="mediaGallery" class="media-grid"></div>
+  </div>
+</section>
+<section id="expertise" class="page"><div class="pageintro"><div><h2>Ekspertiz Takip</h2><p>Bu liste danışmanlardan değil, Excel’deki EXPERTİZ TAKİP personellerinden gelir.</p></div><button class="btn primary" onclick="addExpertisePerson()">+ Personel Ekle</button></div><div id="expertiseKpis" class="kpis"></div><div class="card"><div id="expertiseTable"></div><div class="actions"><button class="btn success" onclick="saveExpertise()">Değişiklikleri Kaydet</button></div></div></section>
+
+  <section id="performance" class="page"><div class="pageintro"><div><h2>Danışman Performansı</h2><p>DANIŞMAN AYARLARI + seçili ay satışları üzerinden hesaplanır.</p></div><button class="btn ghost" onclick="page('settings')">Danışman Hedeflerini Düzenle</button></div><div id="perfKpis" class="kpis"></div><div class="card"><div id="perfTable"></div></div></section>
+
+  <section id="master" class="page"><div class="pageintro"><div><h2>Ana Excel / Son Yedek</h2><p>En son RENEW Excel’inizi analiz edin, tam geri yükleyin veya mevcut veriyle birleştirin.</p></div></div><div id="masterStatus" class="notice">Hazır: RENEW ana Excel dosyanızı seçin.</div><div class="card"><div class="toolbar"><input type="file" id="masterFile" accept=".xlsx,.xlsm"><button class="btn primary" onclick="previewMaster()">1. Excel'i Analiz Et</button><button class="btn success" id="masterReplace" disabled onclick="applyMaster('replace')">2A. Tam Geri Yükle</button><button class="btn warning" id="masterMerge" disabled onclick="applyMaster('merge')">2B. Birleştir</button></div><div id="masterSummary"></div><div id="masterSamples"></div></div><div class="card"><h3>Son Ana Excel Aktarımları</h3><div id="importHistory"></div></div></section>
+
+  <section id="stock-import" class="page"><div class="pageintro"><div><h2>Stok Excel Aktarım Merkezi</h2><p>Gönderdiğiniz Stok formatındaki plaka dolu tüm araçlar gösterilir; ay filtresi yoktur.</p></div></div><div id="stockImportStatus" class="notice">Dosya seçin ve önizlemeyi başlatın.</div><div class="card"><div class="toolbar"><input type="file" id="stockFile" accept=".xlsx,.xls"><button class="btn primary" onclick="previewStockImport()">Dosyayı Oku</button><button class="btn success" onclick="applyStockImport('merge')">Seçilenleri Toplu Aktar</button><button class="btn primary" onclick="applyDirtyStockImport()">Sadece Düzenlediklerimi Aktar</button><button class="btn danger" onclick="applyStockImport('replace')">Toplu Aktar + Mevcut Stoğu Sil</button><button class="btn ghost" onclick="selectStockImport(true)">Tümünü Seç</button><button class="btn ghost" onclick="selectStockImport(false)">Seçimi Kaldır</button></div><div id="stockImportKpis" class="kpis"></div><div id="stockImportTable"></div></div></section>
+
+  <section id="sales-import" class="page"><div class="pageintro"><div><h2>Satış Excel Aktarım Merkezi</h2><p>Önce hangi aya aktarım yapılacağını seçin; yalnızca o ayın satışları listelenir.</p></div></div><div id="salesImportStatus" class="notice">Ay ve satış dosyası seçin.</div><div class="card"><div class="toolbar"><input type="month" id="salesImportMonth"><input type="file" id="salesFile" accept=".xlsx,.xls"><button class="btn primary" onclick="previewSalesImport()">Dosyayı Oku</button><button class="btn success" onclick="applySalesImport('merge')">Seçilenleri Toplu Aktar</button><button class="btn primary" onclick="applyDirtySalesImport()">Sadece Düzenlediklerimi Aktar</button><button class="btn danger" onclick="applySalesImport('replace_month')">Toplu Aktar + Bu Ayın Diğer Satışlarını Sil</button><button class="btn ghost" onclick="selectSalesImport(true)">Tümünü Seç</button><button class="btn ghost" onclick="selectSalesImport(false)">Seçimi Kaldır</button></div><div id="salesImportKpis" class="kpis"></div><div id="salesImportTable"></div></div></section>
+
+  <section id="settings" class="page"><div class="pageintro"><div><h2>Parametre Merkezi</h2><p>Excel’deki GİDER, ALIM, SATIŞ ve DANIŞMAN AYARLARI tek ekranda.</p></div><button class="btn success" onclick="saveSettings()">Tüm Parametreleri Kaydet</button></div>
+    <div class="settings-tabs"><button onclick="settingsTab('expenses')" class="active">Gider & SKS</button><button onclick="settingsTab('purchase')">Alım Türleri</button><button onclick="settingsTab('sale')">Satış Türleri</button><button onclick="settingsTab('income')">Ek Gelirler</button><button onclick="settingsTab('consultants')">Danışmanlar</button></div>
+    <div id="set_expenses" class="settings-pane active card"></div><div id="set_purchase" class="settings-pane card"></div><div id="set_sale" class="settings-pane card"></div><div id="set_income" class="settings-pane card"></div><div id="set_consultants" class="settings-pane card"></div></section>
+
+  <section id="reports" class="page"><div class="pageintro"><div><h2>Profesyonel Rapor Merkezi</h2><p>Tüm takip alanları PDF veya Excel olarak düzenli A4 çıktıya dönüşür.</p></div></div><div class="toolbar"><input type="month" id="reportMonth"></div><div class="report-grid">
+    <div class="report-card featured"><b>📘 Yönetici Tam Raporu</b><p>Satış + stok + kârlılık + SKS + ekspertiz.</p><a id="rManagement" class="btn primary">PDF Oluştur</a></div>
+    <div class="report-card"><b>💰 Satış & Kârlılık</b><p>Araç bazlı maliyet ve kâr.</p><a id="rSales" class="btn primary">PDF Oluştur</a></div>
+    <div class="report-card featured"><b>🛒 Aylık Alım & Kaynak</b><p>Araç + alınan kişi + maliyet + ekspertiz dönüşümü.</p><a id="rAcq" class="btn primary">PDF Oluştur</a> <a id="rAcqXlsx" class="btn success">Excel İndir</a></div><div class="report-card"><b>🛒 Alım Performansı</b><p>Ay içinde alınan araçlar.</p><a id="rPurchase" class="btn primary">PDF Oluştur</a></div>
+    <div class="report-card"><b>🚗 Güncel Stok</b><p>19 alan + SKS + tahmini kâr.</p><a href="/api/report/stock" class="btn success">PDF Oluştur</a></div>
+    <div class="report-card"><b>⚠ Kritik SKS</b><p>Stok risk raporu.</p><a href="/api/report/critical-stock" class="btn warning">PDF Oluştur</a></div>
+    <div class="report-card"><b>📉 Kâr / Zarar</b><p>Zararlı ve kârlı satış analizi.</p><a id="rProfit" class="btn danger">PDF Oluştur</a></div>
+    <div class="report-card"><b>★ Danışman Performansı</b><p>Hedef, ciro, kâr, SKS.</p><a id="rConsultant" class="btn primary">PDF Oluştur</a></div>
+    <div class="report-card"><b>⌕ Ekspertiz Takip</b><p>Tüm ekspertiz personelleri.</p><a id="rExpertise" class="btn primary">PDF Oluştur</a></div>
+    <div class="report-card"><b>📊 Güncel Ana Excel</b><p>Şablon/formüller korunur; parametreler de yazılır.</p><a id="rExcel" class="btn success">Excel İndir</a></div>
+  </div></section>
+
+  <section id="audit" class="page">
+  <div class="pageintro"><div><h2>İşlem Geçmişi</h2><p>Kim, neyi, ne zaman değiştirdi? Kullanıcı bazlı denetim kayıtları.</p></div></div>
+  <div class="toolbar"><input id="auditSearch" placeholder="Plaka, detay, eski/yeni değer ara..." oninput="loadAudit()"><select id="auditUser" onchange="loadAudit()"><option value="">Tüm Kullanıcılar</option></select><select id="auditEntity" onchange="loadAudit()"><option value="">Tüm Alanlar</option></select></div>
+  <div class="card"><div id="auditTable"></div></div>
+</section>
+<section id="users" class="page">
+<div class="pageintro users-head"><div><h2>👤 Kullanıcı & Yetki Yönetimi</h2><p>Kullanıcı hesaplarını, rollerini ve erişim yetkilerini yönetin.</p></div><div class="users-actions"><button class="btn primary" onclick="openUserEditor()">+ Yeni Kullanıcı</button><button class="btn ghost" onclick="loadUsers()">↻ Yenile</button></div></div>
+<div id="usersSummary" class="kpis"></div>
+<div class="card"><div class="toolbar"><input id="userSearch" placeholder="Kullanıcı veya ad soyad ara..." oninput="renderUsersClean()"><select id="userRoleFilter" onchange="renderUsersClean()"><option value="">Tüm Roller</option><option value="administrator">Administrator</option><option value="manager">Manager</option><option value="editor">Editor</option><option value="viewer">Viewer</option></select><select id="userStatusFilter" onchange="renderUsersClean()"><option value="">Tüm Durumlar</option><option value="active">Aktif</option><option value="passive">Pasif</option></select></div></div>
+<div class="card"><div id="usersTable"></div></div></section>
+
+
+  <section id="mail-templates" class="page">
+  <div class="pageintro mailstudio-head">
+    <div><h2>✉ Mail Studio</h2><p>Şablonlar, değişkenler ve devir yetkilileri tüm kullanıcılar için merkezi olarak yönetilir.</p></div>
+    <div><span id="mailSaveState" class="save-state">Kayıtlı</span><button class="btn primary" onclick="newMailTemplate()">+ Yeni Şablon</button><button class="btn success" onclick="saveMailTemplates(true)">💾 Kaydet</button></div>
+  </div>
+  <div class="mailstudio-grid">
+    <aside class="card mailstudio-left">
+      <div class="cardhead"><h3>Şablon Kütüphanesi</h3><span id="mailTplCount" class="badge">0</span></div>
+      <div class="mailstudio-filters"><input id="mailTplSearch" placeholder="Şablon ara..." oninput="renderMailTemplateList()"><select id="mailModuleFilter" onchange="renderMailTemplateList()"><option value="">Tüm Modüller</option><option value="tahsilat">Kredi Kartı</option><option value="odeme">Ödeme Bildirimi</option><option value="sigorta">Sigorta</option><option value="devir">Devir</option><option value="general">Genel / Özel</option></select></div>
+      <div id="mailTplList" class="mailtpl-list"></div>
+    </aside>
+    <main class="card mailstudio-editor">
+      <div id="mailTplEmpty" class="empty-state"><b>Bir şablon seçin</b><p>Soldaki kütüphaneden seçim yapın veya yeni şablon ekleyin.</p></div>
+      <div id="mailTplForm" style="display:none">
+        <div class="mailstudio-section">
+          <div class="mailstudio-section-title"><b>1. Şablon Bilgileri</b><small>Şablonun hangi ödeme merkezi bölümünde görüneceğini belirleyin.</small></div>
+          <div class="formgrid two">
+            <label>Şablon Adı<input id="mailTplName" oninput="updateMailTemplateDraft()"></label>
+            <label>Bağlı Modül<select id="mailTplModule" onchange="updateMailTemplateDraft()"><option value="tahsilat">Kredi Kartı Tahsilat</option><option value="odeme">Ödeme Bildirimi</option><option value="sigorta">Sigorta İptali</option><option value="devir">Devir İşlemi</option><option value="general">Genel / Özel</option></select></label>
+            <label>Şablon Türü / Etiket<input id="mailTplType" placeholder="Örn: Kurumsal Devir, Hızlı Tahsilat..." oninput="updateMailTemplateDraft()"></label>
+            <label>Durum<select id="mailTplActive" onchange="updateMailTemplateDraft()"><option value="true">Aktif</option><option value="false">Pasif</option></select></label>
+          </div>
+        </div>
+        <div class="mailstudio-section">
+          <div class="mailstudio-section-title"><b>2. Mail Başlığı & Alıcılar</b><small>Outlook'a aktarılırken otomatik kullanılır.</small></div>
+          <div class="formgrid two">
+            <label class="full">Mail Konusu<input id="mailTplSubject" oninput="updateMailTemplateDraft()"></label>
+            <label>Alıcılar (;)<input id="mailTplTo" oninput="updateMailTemplateDraft()"></label>
+            <label>Bilgi / CC (;)<input id="mailTplCc" oninput="updateMailTemplateDraft()"></label>
+          </div>
+        </div>
+        <div class="mailstudio-section">
+          <div class="mailstudio-section-title"><b>3. Mail İçeriği</b><small>Değişken butonuna basarak imlecin bulunduğu yere ekleyebilirsiniz.</small></div>
+          <textarea id="mailTplBody" class="mailtpl-body" oninput="updateMailTemplateDraft()"></textarea>
+          <div class="mailtpl-vars"><div class="mailtpl-toolhead"><div><b>Değişkenler</b><small>Araç, müşteri, ödeme, yetkili ve özel alanlar.</small></div><button type="button" class="btn ghost small" onclick="addCustomMailVariable()">+ Özel Değişken</button></div><div id="mailTplVars"></div><div id="mailTplCustomVars" class="custom-var-list"></div></div>
+        </div>
+        <div id="devirAuthorityBox" class="mailstudio-section authority-box" style="display:none">
+          <div class="mailtpl-toolhead"><div><b>4. Devir Yetkili Kişileri</b><small>Buradaki kayıtlar Ödeme Merkezi'ndeki yetkili seçim tablosuna anında aktarılır.</small></div><button type="button" class="btn primary small" onclick="addAuthorityPerson()">+ Yetkili Ekle</button></div>
+          <div class="authority-table-head"><span>Ad Soyad</span><span>Unvan / Görev</span><span>Telefon</span><span></span></div>
+          <div id="authorityPeopleList"></div>
+          <div class="authority-preview-row"><label>Önizleme Yetkilisi<select id="authorityPreviewSelect" onchange="renderMailTplPreview()"></select></label></div>
+        </div>
+        <div class="mailstudio-section">
+          <div class="mailstudio-section-title"><b>Canlı Önizleme</b><small>Ödeme Merkezi'ne aktarılacak metnin düzenli görünümü.</small></div>
+          <div class="mailtpl-preview"><pre id="mailTplPreview"></pre><div class="actions"><button class="btn ghost small" onclick="copyMailTemplatePreview()">Metni Kopyala</button></div></div>
+        </div>
+        <div id="userFormError" class="error-box" style="display:none"></div>
+        <div class="mailstudio-bottom"><button class="btn danger" onclick="deleteMailTemplate()">Şablonu Sil</button><div><button class="btn ghost" onclick="resetMailTemplates()">Varsayılanlara Dön</button><button class="btn success" onclick="saveMailTemplates(true)">💾 Kaydet</button></div></div>
+      </div>
+    </main>
+  </div>
+</section>
+<section id="payment-center" class="page">
+    <div class="hero"><div><h2>Ödeme Merkezi</h2><p>Kredi kartı ödeme hesaplama, banka hesapları, müşteri maili, sigorta ve devir işlemleri.</p></div>
+      <div><button class="btn ghost" onclick="reloadPaymentCenter()">↻ Modülü Yenile</button>
+      <button class="btn dark" onclick="openPaymentCenterNewTab()">↗ Ayrı Pencerede Aç</button></div>
+    </div>
+    <div class="card payment-center-shell">
+      <iframe id="paymentCenterFrame" title="Çayan Tarsus Renew Ödeme Merkezi" src="/static/payment_center.html?v=7.25.0"></iframe>
+    </div>
+  </section>
+
+</main></div>
+
+<div id="loginOverlay" class="login-overlay">
+  <div class="login-card">
+    <div class="login-logo">R</div><h2>RENEW PRO</h2><p>Yetkili kullanıcı girişi</p>
+    <form id="loginForm">
+      <label>Kullanıcı Adı<input id="loginUsername" autocomplete="username" required></label>
+      <label>Şifre<input id="loginPassword" type="password" autocomplete="current-password" required></label>
+      <button class="btn primary" type="submit">Giriş Yap</button>
+<div class="renew-login-payment-wrap">
+  <a class="renew-login-payment-link"
+     href="https://kart.renewpanel.xyz"
+     target="_blank"
+     rel="noopener noreferrer"
+     aria-label="Kredi Kartı ve Ödemeler sayfasını yeni sekmede aç">
+    <span class="renew-login-payment-icon">💳</span>
+    <span class="renew-login-payment-text">
+      <b>Kredi Kartı &amp; Ödemeler</b>
+      <small>Yeni sekmede açılır • Giriş ekranı açık kalır</small>
+    </span>
+  </a>
+</div>
+
+    </form>
+    <div id="loginMessage"></div>
+  </div>
+</div>
+<div id="modal" class="modal"><div class="dialog"><div class="modalhead"><h2 id="modalTitle"></h2><button onclick="closeModal()">×</button></div><div id="modalBody"></div></div></div>
+<script src="/static/app.js?v=8.0.0-topbar"></script>
+<script src="/static/user_admin_v2.js?v=1787747024"></script>
+<script src="/static/dashboard_pro_v3.js?v=3.0.2"></script>
+<script src="/static/renew_dashboard_v26.js?v=8.0.0-4"></script>
+</body></html>

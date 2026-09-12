@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+
+<html lang="tr"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{"colors":{"primary-container":"#0051d5","tertiary":"#004191","primary-fixed":"#dbe1ff","inverse-primary":"#b4c5ff","surface-bright":"#f8f9ff","primary":"#003ca3","on-error-container":"#93000a","outline":"#737686","on-primary-fixed":"#00174b","surface-container-high":"#dce9ff","surface-variant":"#d3e4fe","tertiary-container":"#0058be","surface-container-low":"#eff4ff","tertiary-fixed-dim":"#adc6ff","on-secondary-fixed-variant":"#33466d","surface":"#f8f9ff","on-primary-container":"#c8d4ff","tertiary-fixed":"#d8e2ff","on-surface":"#0b1c30","outline-variant":"#c3c6d7","on-secondary":"#ffffff","on-primary-fixed-variant":"#003ea7","inverse-on-surface":"#eaf1ff","on-error":"#ffffff","error-container":"#ffdad6","surface-container-lowest":"#ffffff","secondary-fixed":"#d8e2ff","on-background":"#0b1c30","on-tertiary":"#ffffff","surface-dim":"#cbdbf5","secondary":"#4b5e86","surface-tint":"#0854d7","on-secondary-container":"#44587f","secondary-fixed-dim":"#b3c6f4","on-secondary-fixed":"#021a3f","background":"#f8f9ff","on-tertiary-container":"#c4d5ff","on-surface-variant":"#434654","error":"#ba1a1a","surface-container":"#e5eeff","on-tertiary-fixed-variant":"#004395","on-tertiary-fixed":"#001a42","surface-container-highest":"#d3e4fe","primary-fixed-dim":"#b4c5ff","secondary-container":"#bbcffd","on-primary":"#ffffff","inverse-surface":"#213145"},"borderRadius":{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},"spacing":{"header-height":"4rem","space-xs":"0.5rem","gutter-mobile":"1rem","space-xxl":"3rem","space-sm":"0.75rem","space-md":"1rem","sidebar-collapsed":"4.5rem","sidebar-width":"17.5rem","space-lg":"1.5rem","gutter-desktop":"1.5rem","space-xl":"2rem","space-xxs":"0.25rem"},"fontFamily":{"kpi-display":["Space Grotesk"],"label-md":["Inter"],"headline-lg":["Space Grotesk"],"table-cell":["Inter"],"code-num":["Space Grotesk"],"headline-xl-mobile":["Space Grotesk"],"body-md":["Inter"],"body-lg":["Inter"],"kpi-display-mobile":["Space Grotesk"],"headline-md":["Space Grotesk"],"table-header":["Inter"],"headline-lg-mobile":["Space Grotesk"],"label-sm":["Inter"],"body-sm":["Inter"],"headline-xl":["Space Grotesk"],"kpi-subtext":["Inter"]},"fontSize":{"kpi-display":["32px",{"lineHeight":"36px","letterSpacing":"-0.02em","fontWeight":"700"}],"label-md":["13px",{"lineHeight":"18px","fontWeight":"500"}],"headline-lg":["28px",{"lineHeight":"36px","letterSpacing":"-0.015em","fontWeight":"700"}],"table-cell":["13px",{"lineHeight":"18px","fontWeight":"400"}],"code-num":["13px",{"lineHeight":"18px","fontWeight":"500"}],"headline-xl-mobile":["28px",{"lineHeight":"36px","letterSpacing":"-0.01em","fontWeight":"700"}],"body-md":["14px",{"lineHeight":"20px","fontWeight":"400"}],"body-lg":["16px",{"lineHeight":"24px","fontWeight":"400"}],"kpi-display-mobile":["24px",{"lineHeight":"30px","letterSpacing":"-0.01em","fontWeight":"700"}],"headline-md":["20px",{"lineHeight":"28px","letterSpacing":"-0.01em","fontWeight":"600"}],"table-header":["12px",{"lineHeight":"16px","letterSpacing":"0.04em","fontWeight":"600"}],"headline-lg-mobile":["22px",{"lineHeight":"28px","letterSpacing":"-0.01em","fontWeight":"700"}],"label-sm":["11px",{"lineHeight":"14px","letterSpacing":"0.02em","fontWeight":"600"}],"body-sm":["12px",{"lineHeight":"16px","fontWeight":"400"}],"headline-xl":["36px",{"lineHeight":"44px","letterSpacing":"-0.02em","fontWeight":"700"}],"kpi-subtext":["13px",{"lineHeight":"18px","fontWeight":"500"}]}}}}</script></head><body class="bg-background font-body-md text-on-surface antialiased"><aside class="fixed left-0 top-0 h-screen w-sidebar-width z-50 flex flex-col bg-gradient-to-b from-on-surface to-inverse-surface shadow-2xl text-on-primary select-none"><div class="h-header-height flex items-center gap-space-sm px-space-lg bg-on-surface/40"><div class="w-9 h-9 rounded-lg bg-primary-container flex items-center justify-center font-headline-md text-headline-md text-on-primary font-bold shadow-md">R</div><div class="flex flex-col"><span class="font-headline-md text-label-md font-bold tracking-tight text-surface-container-lowest leading-none">RENEW PRO</span><span class="font-label-sm text-label-sm text-outline-variant tracking-wider uppercase mt-space-xxs">Çayan Tarsus Otomotiv</span></div></div><div class="flex-1 overflow-y-auto px-space-sm py-space-md space-y-space-md"><div class="space-y-space-xxs"><div class="px-space-sm py-space-xxs font-table-header text-table-header text-outline-variant uppercase tracking-wider">YÖNETİM</div><nav class="space-y-space-xxs" data-active-classes="bg-primary-container text-on-primary font-semibold"><a aria-current="page" class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg transition-all bg-primary-container text-on-primary font-semibold" data-path="genel-dashboard" href="#"><span class="material-symbols-outlined text-[18px]">dashboard</span><span>Genel Dashboard</span></a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-secondary-fixed text-body-sm hover:bg-surface-container-high/10 hover:text-surface-container-lowest transition-all" data-path="guncel-stok" href="#"><span class="material-symbols-outlined text-[18px]">directions_car</span><span>Güncel Stok</span></a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-secondary-fixed text-body-sm hover:bg-surface-container-high/10 hover:text-surface-container-lowest transition-all" data-path="satilan-araclar" href="#"><span class="material-symbols-outlined text-[18px]">verified</span><span>Satılan Araçlar</span></a></nav></div><div class="space-y-space-xxs"><div class="px-space-sm py-space-xxs font-table-header text-table-header text-outline-variant uppercase tracking-wider">PERFORMANS</div><nav class="space-y-space-xxs" data-active-classes="bg-primary-container text-on-primary font-semibold"><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-secondary-fixed text-body-sm hover:bg-surface-container-high/10 hover:text-surface-container-lowest transition-all" data-path="aylik-alimlar" href="#"><span class="material-symbols-outlined text-[18px]">event_available</span><span>Aylık Alımlar</span></a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-secondary-fixed text-body-sm hover:bg-surface-container-high/10 hover:text-surface-container-lowest transition-all" data-path="arac-fotograflari" href="#"><span class="material-symbols-outlined text-[18px]">photo_camera</span><span>Araç Fotoğrafları</span></a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-secondary-fixed text-body-sm hover:bg-surface-container-high/10 hover:text-surface-container-lowest transition-all" data-path="video-studyosu" href="#"><span class="material-symbols-outlined text-[18px]">videocam</span><span>Video Stüdyosu</span></a><div class="flex items-center justify-between px-space-sm py-2 rounded-lg text-outline text-body-sm cursor-not-allowed"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-[18px]">360</span><span>Araç 360°</span></div><span class="px-1.5 py-0.5 rounded text-[10px] font-semibold bg-surface-container-highest/20 text-outline-variant">PASİF</span></div><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-secondary-fixed text-body-sm hover:bg-surface-container-high/10 hover:text-surface-container-lowest transition-all" data-path="ekspertiz-takip" href="#"><span class="material-symbols-outlined text-[18px]">assignment</span><span>Ekspertiz Takip</span></a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-secondary-fixed text-body-sm hover:bg-surface-container-high/10 hover:text-surface-container-lowest transition-all" data-path="danisman-performansi" href="#"><span class="material-symbols-outlined text-[18px]">query_stats</span><span>Danışman Performansı</span></a></nav></div><div class="space-y-space-xxs"><div class="px-space-sm py-space-xxs font-table-header text-table-header text-outline-variant uppercase tracking-wider">VERİ &amp; SENKRONİZASYON</div><nav class="space-y-space-xxs" data-active-classes="bg-primary-container text-on-primary font-semibold"><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-secondary-fixed text-body-sm hover:bg-surface-container-high/10 hover:text-surface-container-lowest transition-all" data-path="ana-excel-yedek" href="#"><span class="material-symbols-outlined text-[18px]">cloud_sync</span><span>Ana Excel / Yedek</span></a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-secondary-fixed text-body-sm hover:bg-surface-container-high/10 hover:text-surface-container-lowest transition-all" data-path="stok-excel-aktarimi" href="#"><span class="material-symbols-outlined text-[18px]">file_upload</span><span>Stok Excel Aktarımı</span></a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-secondary-fixed text-body-sm hover:bg-surface-container-high/10 hover:text-surface-container-lowest transition-all" data-path="satis-excel-aktarimi" href="#"><span class="material-symbols-outlined text-[18px]">table_chart</span><span>Satış Excel Aktarımı</span></a></nav></div><div class="space-y-space-xxs"><div class="px-space-sm py-space-xxs font-table-header text-table-header text-outline-variant uppercase tracking-wider">SİSTEM</div><nav class="space-y-space-xxs" data-active-classes="bg-primary-container text-on-primary font-semibold"><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-secondary-fixed text-body-sm hover:bg-surface-container-high/10 hover:text-surface-container-lowest transition-all" data-path="parametre-merkezi" href="#"><span class="material-symbols-outlined text-[18px]">tune</span><span>Parametre Merkezi</span></a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-secondary-fixed text-body-sm hover:bg-surface-container-high/10 hover:text-surface-container-lowest transition-all" data-path="rapor-merkezi" href="#"><span class="material-symbols-outlined text-[18px]">analytics</span><span>Rapor Merkezi</span></a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-secondary-fixed text-body-sm hover:bg-surface-container-high/10 hover:text-surface-container-lowest transition-all" data-path="bildirim-merkezi" href="#"><span class="material-symbols-outlined text-[18px]">notifications</span><span>Bildirim Merkezi</span></a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-secondary-fixed text-body-sm hover:bg-surface-container-high/10 hover:text-surface-container-lowest transition-all" data-path="profilim" href="#"><span class="material-symbols-outlined text-[18px]">account_circle</span><span>Profilim</span></a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-secondary-fixed text-body-sm hover:bg-surface-container-high/10 hover:text-surface-container-lowest transition-all" data-path="islem-gecmisi" href="#"><span class="material-symbols-outlined text-[18px]">history</span><span>İşlem Geçmişi</span></a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-secondary-fixed text-body-sm hover:bg-surface-container-high/10 hover:text-surface-container-lowest transition-all" data-path="kullanici-yetkiler" href="#"><span class="material-symbols-outlined text-[18px]">manage_accounts</span><span>Kullanıcı &amp; Yetkiler</span></a></nav></div></div><div class="p-space-md bg-on-surface/40 flex items-center justify-between"><div class="flex flex-col"><span class="font-headline-md text-label-sm text-surface-container-lowest font-medium">RENEW v8.0.0</span><span class="font-label-sm text-label-sm text-outline-variant">Güvenli Oturum</span></div><button class="p-1.5 rounded-lg text-secondary-fixed hover:bg-surface-container-high/10 hover:text-surface-container-lowest"><span class="material-symbols-outlined text-[18px]">logout</span></button></div></aside><div class="pl-sidebar-width flex flex-col min-h-screen"><header class="fixed top-0 left-sidebar-width right-0 h-header-height bg-surface-container-lowest z-40 px-space-lg flex items-center justify-between shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="flex items-center gap-space-md"><button class="md:hidden p-1.5 rounded-lg text-on-surface hover:bg-surface-container"><span class="material-symbols-outlined">menu</span></button><div class="inline-flex items-center gap-space-xs px-2.5 py-1 rounded-full bg-surface-container-low"><span class="w-2 h-2 rounded-full bg-primary-container animate-pulse"></span><span class="font-code-num text-label-sm text-secondary font-medium tracking-tight">V8.0.0 • PRO CONTROL CENTER</span></div><div class="hidden xl:flex items-center bg-surface-container-low rounded-lg px-space-sm py-1.5 w-64 gap-space-xs"><span class="material-symbols-outlined text-outline text-[18px]">search</span><span class="font-body-sm text-body-sm text-outline">Hızlı Arama (VIN, Plaka)...</span><kbd class="ml-auto font-code-num text-[10px] bg-surface-container-highest px-1 py-0.5 rounded text-on-surface-variant font-semibold">⌘K</kbd></div></div><div class="flex items-center gap-space-md"><div class="flex items-center gap-space-xs bg-surface-container-low px-space-sm py-1.5 rounded-lg"><span class="material-symbols-outlined text-secondary text-[18px]">calendar_month</span><span class="font-code-num text-body-sm font-semibold text-on-surface">2025-02</span></div><button class="p-2 rounded-lg bg-surface-container-low text-secondary hover:bg-surface-container hover:text-on-surface transition-colors" title="Verileri Güncelle"><span class="material-symbols-outlined text-[18px]">sync</span></button><div class="relative"><button class="flex items-center gap-space-xs px-3 py-1.5 rounded-lg bg-primary text-on-primary font-label-md text-label-md shadow-sm hover:bg-primary-container transition-colors"><span class="material-symbols-outlined text-[18px]">download</span><span>Excel Dışa Aktar</span><span class="material-symbols-outlined text-[16px]">expand_more</span></button></div><div class="h-6 w-px bg-outline-variant"></div><div class="flex items-center gap-space-sm"><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div><div class="hidden sm:flex flex-col text-left"><span class="font-body-md text-label-md font-semibold text-on-surface leading-tight">Seval Avseven</span><span class="font-label-sm text-label-sm text-on-surface-variant leading-tight">Yönetici</span></div></div></div></header><main class="w-full pt-header-height flex-1 bg-surface"><div class="flex flex-col w-full">
+<div class="p-space-lg space-y-space-lg">
+<!-- 1. ÜST PANEL & DURUM ÇUBUĞU -->
+<div class="bg-surface-container-lowest rounded-xl shadow-sm p-space-lg flex flex-col xl:flex-row xl:items-center justify-between gap-space-md">
+<div class="space-y-space-xs">
+<div class="flex items-center gap-space-xs">
+<span class="px-2 py-0.5 rounded-full bg-primary/10 text-primary font-label-caps text-label-caps uppercase tracking-wider">RENEW V8 • FLEET INTEL</span>
+<span class="text-outline-variant">•</span>
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-secondary-container/20 text-on-secondary-container font-body-sm text-body-sm">
+<span class="w-1.5 h-1.5 rounded-full bg-primary-container animate-ping"></span>
+            Canlı Telemetri &amp; Finansman Motoru
+          </span>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface tracking-tight">Araç 360° — Genel Detaylar, SKS &amp; Finansman Yönetimi</h1>
+<div class="flex flex-wrap items-center gap-space-sm pt-1">
+<!-- Dönem Ayracı ve Veri Kilidi Rozeti -->
+<div class="inline-flex items-center gap-1.5 px-3 py-1 rounded bg-surface-container text-on-surface-variant font-label-ui text-label-ui">
+<span class="material-symbols-outlined text-[16px] text-primary">lock_clock</span>
+<span>Seçili Dönem: <strong class="text-on-surface">Ekim 2024</strong> (Canlı Senkronize • Başka dönem verisi karışmaz)</span>
+</div>
+<div class="inline-flex items-center gap-1 px-2.5 py-1 rounded bg-surface-container-high text-primary font-label-caps text-label-caps">
+<span class="material-symbols-outlined text-[14px]">shield</span>
+<span>VERİ KİLİDİ AKTİF</span>
+</div>
+</div>
+</div>
+<!-- Üst Sağ Hızlı Aksiyonlar -->
+<div class="flex flex-wrap items-center gap-space-xs xl:justify-end">
+<button class="inline-flex items-center gap-1.5 px-3 py-2 rounded bg-surface-container hover:bg-surface-container-high text-on-surface font-label-ui text-label-ui transition-colors" id="btn-refresh">
+<span class="material-symbols-outlined text-[18px] text-secondary">sync</span>
+<span>Yenile</span>
+</button>
+<a class="inline-flex items-center gap-1.5 px-3 py-2 rounded bg-surface-container hover:bg-surface-container-high text-on-surface font-label-ui text-label-ui transition-colors" href="#">
+<span class="material-symbols-outlined text-[18px] text-secondary">open_in_new</span>
+<span>İlanı Aç</span>
+</a>
+<a class="inline-flex items-center gap-1.5 px-3 py-2 rounded bg-surface-container hover:bg-surface-container-high text-on-surface font-label-ui text-label-ui transition-colors" href="#">
+<span class="material-symbols-outlined text-[18px] text-secondary">photo_camera</span>
+<span>Fotoğraf Stüdyosu</span>
+<span class="px-1.5 py-0.2 rounded bg-primary text-on-primary font-table-numeric text-body-sm">18/25</span>
+</a>
+<button class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded bg-primary text-on-primary font-label-ui text-label-ui hover:bg-primary-container shadow-sm transition-colors" onclick="window.print()">
+<span class="material-symbols-outlined text-[18px]">print</span>
+<span>Yazdır / PDF Döküm</span>
+</button>
+</div>
+</div>
+<!-- MAIN VIEW CONTAINER (States toggle inside here) -->
+<div class="space-y-space-lg" id="state-container-active">
+<!-- 2. ARAÇ KİMLİK & HERO ŞERİDİ -->
+<div class="bg-surface-container-lowest rounded-xl shadow-sm p-space-lg space-y-space-md">
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-space-md">
+<!-- Sol: Plaka ve Model Bilgisi -->
+<div class="flex flex-wrap items-center gap-space-md">
+<!-- TR Plaka Damgası -->
+<div class="flex items-stretch rounded-lg shadow-sm overflow-hidden bg-surface-container-lowest select-none">
+<div class="bg-primary text-on-primary px-2.5 py-1.5 flex flex-col items-center justify-between">
+<span class="text-[10px] font-bold tracking-tighter">TR</span>
+<span class="material-symbols-outlined text-[14px]">star</span>
+</div>
+<div class="px-4 py-1.5 flex items-center bg-surface-container-lowest">
+<span class="font-headline-md text-headline-md tracking-wider text-on-surface font-bold" id="vehicle-plate">33 ARB 585</span>
+</div>
+</div>
+<div class="space-y-space-2xs">
+<div class="flex items-center gap-space-xs">
+<h2 class="font-headline-md text-headline-md text-on-surface font-bold">Renault Megane Sedan</h2>
+<span class="text-on-surface-variant font-body-md text-body-md">1.3 TCe Touch EDC 140 bg</span>
+</div>
+<div class="flex flex-wrap items-center gap-space-sm font-label-ui text-label-ui text-on-surface-variant">
+<span class="inline-flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-secondary">calendar_today</span>
+                  2022 Model
+                </span>
+<span>•</span>
+<span class="inline-flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-secondary">speed</span>
+<span class="font-table-numeric text-table-numeric font-semibold text-on-surface">68.400 KM</span>
+</span>
+<span>•</span>
+<span class="inline-flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-secondary">palette</span>
+                  Saf Beyaz (Boya Kodu: QPA)
+                </span>
+<span>•</span>
+<span class="inline-flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-secondary">fingerprint</span>
+                  VIN: <span class="font-table-numeric text-table-numeric text-on-surface">VF1RFB00868294101</span>
+</span>
+</div>
+</div>
+</div>
+<!-- Sağ: Yaşam Döngüsü ve Durum Rozetleri -->
+<div class="flex flex-col sm:flex-row items-start sm:items-center gap-space-sm">
+<div class="flex flex-wrap gap-1.5 p-1 bg-surface-container rounded-lg">
+<span class="px-2.5 py-1 rounded bg-surface-container-lowest text-primary font-label-caps text-label-caps shadow-sm flex items-center gap-1">
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+                STOKTA (VİTRİN)
+              </span>
+<span class="px-2.5 py-1 rounded text-outline font-label-caps text-label-caps opacity-60">REZERVE</span>
+<span class="px-2.5 py-1 rounded text-outline font-label-caps text-label-caps opacity-60">SATILDI</span>
+<span class="px-2.5 py-1 rounded text-outline font-label-caps text-label-caps opacity-60">ATÖLYE</span>
+</div>
+<div class="px-3 py-1.5 rounded-lg bg-surface-container-high text-on-surface font-label-ui text-label-ui flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[18px] text-secondary">store</span>
+<span>Çayan Tarsus Plaza Vitrin</span>
+</div>
+</div>
+</div>
+<!-- Canlı Durum ve Yönlendirme Uyarısı (94 gün SKS Kritik Eşik) -->
+<div class="p-space-md rounded-lg bg-error-container/40 flex items-start sm:items-center justify-between gap-space-md">
+<div class="flex items-center gap-space-sm">
+<div class="w-8 h-8 rounded bg-error text-on-error flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[20px]">warning</span>
+</div>
+<div>
+<span class="font-headline-sm text-headline-sm text-on-error-container block">Kritik Stok Yaşı Uyarısı — 94 Gün Bekleme</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Bu araç <strong class="text-error font-semibold">94 gündür</strong> stokta beklemektedir. SKS finansman faiz yükü kârlılığı tüketmiş olup acil vitrin kampanya ve fiyat revizyon aksiyonu önerilir.</p>
+</div>
+</div>
+<button class="shrink-0 px-3 py-1.5 rounded bg-error text-on-error font-label-ui text-label-ui hover:bg-error/90 shadow-sm transition-colors">
+            Kampanya Başlat
+          </button>
+</div>
+</div>
+<!-- 3 & 4. BÖLÜM: 12 KOLONLU HİBRİT YERLEŞİM (FOTOĞRAF GALERİSİ & FİNANSMAN MOTORU) -->
+<div class="grid grid-cols-1 xl:grid-cols-12 gap-space-lg">
+<!-- SOL BÖLÜM: FOTOĞRAF GALERİSİ & VİTRİN (5 Kolon) -->
+<div class="xl:col-span-5 space-y-space-md">
+<div class="bg-surface-container-lowest rounded-xl shadow-sm p-space-md space-y-space-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[20px]">photo_library</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Vitrin Görselleri</h3>
+</div>
+<span class="font-label-caps text-label-caps px-2 py-0.5 rounded bg-surface-container text-primary" id="photo-indicator">SLOT #1 AKTİF</span>
+</div>
+<!-- Yüksek Çözünürlüklü Kapak Fotoğrafı -->
+<div class="relative w-full h-80 rounded-lg overflow-hidden bg-surface-container group">
+<img alt="33 ARB 585 Ana Kapak" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" data-alt="Modern studio shot of a pristine pure white Renault Megane Sedan 2022 model, front three-quarter view under professional showroom lighting with smooth metallic reflections on white polished floor, dark blue executive backdrop" id="main-vehicle-photo" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBbGt8El0-Yhz20Gy51hZKdT6lRszx7Asf1iNHiNDXjyZr_VRivLV7trEonm-POO6rDfunhSxCXdXqolb6XfcxtrR6-xFrWohc5Orx7COCqYmIj6SCOuZ9bSRsdn4KGY-P_p7oVmtNZPL4qTwd9XlPmoNszlt88VRM4huwZUBdqRec26C3sd92aGc1CJbONzr9CA-_60nEz96ASvmQPsrsX0bTrBAqp3u8ymus1Nsb2H4cQuqRX_jAF"/>
+<!-- Üst Badge'ler -->
+<div class="absolute top-3 left-3 flex items-center gap-2">
+<span class="px-2.5 py-1 rounded bg-on-surface/80 backdrop-blur text-on-primary font-label-ui text-label-ui shadow-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-secondary-container">verified</span>
+                  Fotoğraf Slotu #1 (Vitrin Kapak)
+                </span>
+<span class="px-2 py-1 rounded bg-primary/90 text-on-primary font-label-caps text-label-caps shadow-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">360</span>
+                  360° AKTİF
+                </span>
+</div>
+<!-- Alt Bilgi Şeridi -->
+<div class="absolute bottom-0 inset-x-0 bg-gradient-to-t from-on-surface/90 via-on-surface/40 to-transparent p-space-md text-on-primary flex items-center justify-between">
+<div>
+<span class="font-label-ui text-label-ui block text-surface-container-high">Stüdyo Çekimi: 19.11.2024</span>
+<span class="font-table-numeric text-body-sm">4032 x 3024 px • HDR Raw</span>
+</div>
+<button class="p-2 rounded-full bg-surface-container-lowest/20 hover:bg-surface-container-lowest/40 backdrop-blur transition-colors" title="Büyüt">
+<span class="material-symbols-outlined text-[18px]">zoom_in</span>
+</button>
+</div>
+</div>
+<!-- 5 Adet Tıklanabilir Mini Fotoğraf Slotu -->
+<div class="space-y-space-xs">
+<span class="font-label-caps text-label-caps text-on-surface-variant">AÇI VE DETAY SEÇİMİ</span>
+<div class="grid grid-cols-5 gap-space-xs" id="gallery-thumbs">
+<button class="thumb-slot relative aspect-video rounded overflow-hidden shadow-sm transition-all focus:outline-none ring-2 ring-primary" onclick="selectPhoto(1, 'Vitrin Kapak')">
+<img alt="#1 Kapak" class="w-full h-full object-cover" data-alt="Front three quarter view of white Renault Megane Sedan parked in automotive showroom with architectural ceiling lights" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCfVV4z42K4gYCfKiQJ7xs5K4avueQvIsSm1YwYd0teWBDYyz11BEgADQAEhLEUfQS-PwhGLAWq0a-wnnYxEtxDQHXc_nyEa97jDeG2UonIkzZqMhFa02nIKp0do06fayXyrnJGrVjBB26Ck-zYAvncIIuIdDbZ7pPsDn6c4bjk7b6UDtan5WlmQ_sRQGdRq_WiTfpH-VhxG-LmZIJ7w47Bju29fSTxjRz59KRNmKaRM5_LNtbJUfm5"/>
+<span class="absolute bottom-0.5 left-0.5 px-1 rounded bg-on-surface/80 text-[10px] text-on-primary font-bold">#1</span>
+</button>
+<button class="thumb-slot relative aspect-video rounded overflow-hidden shadow-sm transition-all focus:outline-none hover:opacity-90" onclick="selectPhoto(2, 'Ön Izgara &amp; Far')">
+<img alt="#2 Ön Izgara" class="w-full h-full object-cover" data-alt="Close up detailed shot of modern chrome front grille and LED headlight assembly of white Renault Megane Sedan" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBaTvHczVeZB0oVrGTzmfUDA6_qhgiT_qPAZr0UhVTFgGxN8_duQTbhvZQF4y7hvypzgtdTz_6NKcfjinCdQFdw8cG1-s2CUKcOk0uOOWr4UFRJehuZI6YH2nCad-ktN9lyPf4FofVDOGmIIYAELjNP24SIi8ItMri7OEz_bHEl1j9e-j8SsDq9S_JDtNfEqdnxrGaWFQQ3ST5Ga78pEa07yCgNTmH20NYDEkh9-sP-y1eVGn65LBlw"/>
+<span class="absolute bottom-0.5 left-0.5 px-1 rounded bg-on-surface/80 text-[10px] text-on-primary font-bold">#2</span>
+</button>
+<button class="thumb-slot relative aspect-video rounded overflow-hidden shadow-sm transition-all focus:outline-none hover:opacity-90" onclick="selectPhoto(3, 'Yan Profil Çizgisi')">
+<img alt="#3 Yan Profil" class="w-full h-full object-cover" data-alt="Sleek side profile view of white Renault Megane Sedan showing 17-inch alloy wheels and chrome window accents" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBajQN1dbjChwUN6na2HMym6cOkR92vKlcx3ZJKGXz5gEFiiJefohfH93kwCSjYZ3eacwE44vYAnkxQEp96uk5hDt_qZ-rcZkrNrP9nM-BDTvA2LAyERh7aIemoWqeCBdb8xDh2uUT2sckKlFUt7d_lVnzEXozuUVa7mVN4a_NG0XX0fTm2qX1BYSqQpXWAI6buFYvrEUHl_MyZRzx8ljUQpI9Azqz0wMcHioVt4ZTU-XKK7vr1UAnI"/>
+<span class="absolute bottom-0.5 left-0.5 px-1 rounded bg-on-surface/80 text-[10px] text-on-primary font-bold">#3</span>
+</button>
+<button class="thumb-slot relative aspect-video rounded overflow-hidden shadow-sm transition-all focus:outline-none hover:opacity-90" onclick="selectPhoto(4, 'Arka Stop &amp; Bagaj')">
+<img alt="#4 Far Detay" class="w-full h-full object-cover" data-alt="Rear view of modern white Renault Megane sedan displaying 3D edge light tail lamps and dual exhaust trims" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDbZx7GpsebTTPxfk-TwQwQAFxBkUnTlcNL9PvP2ERyuyBs_2vLc2YPqVAL5gtMsQwn_y8gAzC_Wbf2OEiJP1S4h8GU-Q92yDzJkOiW67sXLbRuw-I7xCZebxTawcI1pOHylin1CcBQ5mGdW47obxedm9yqWAAwEHAY43beBRPxJqg5SPccADGcO8Xlr80APORqrDC0WpgFmNWUVhw0KIpRhHNoR2gozGDmXiNS-t7ya_EVdJNUajG-"/>
+<span class="absolute bottom-0.5 left-0.5 px-1 rounded bg-on-surface/80 text-[10px] text-on-primary font-bold">#4</span>
+</button>
+<button class="thumb-slot relative aspect-video rounded overflow-hidden shadow-sm transition-all focus:outline-none hover:opacity-90" onclick="selectPhoto(5, 'Kokpit &amp; Konsol')">
+<img alt="#5 Kokpit" class="w-full h-full object-cover" data-alt="Interior driver cabin cockpit of Renault Megane showing digital instrument cluster, touchscreen infotainment display, leather steering wheel, and clean dashboard" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB3pz-3mQ4wk99yGL65XhawODyE_Ykh2komV51-oa9Za9CIn6OW8DPSbNp4Nll6q7Tiso4wFNs8qdTWgfDJAf_ztcdEea3PlMVypdjj4_QTVXKVqwtOLLoGTWB-PAe2LbDuy0TuxLDVXl5Td41_GHKEGL-Y6Vqmxp9kH7cawHBMQ0RwOhCCBnsMDzmQI_bjVib2BeEPmtYn4ipbVPX-HsQYYCZErn68C5opoy_J6URSsHtHLja8gm65"/>
+<span class="absolute bottom-0.5 left-0.5 px-1 rounded bg-on-surface/80 text-[10px] text-on-primary font-bold">#5</span>
+</button>
+</div>
+</div>
+<!-- Hızlı Butonlar -->
+<div class="grid grid-cols-3 gap-space-xs pt-1">
+<button class="px-2.5 py-2 rounded bg-surface-container hover:bg-surface-container-high text-on-surface font-label-ui text-label-ui flex items-center justify-center gap-1 transition-colors">
+<span class="material-symbols-outlined text-[16px] text-secondary">grid_view</span>
+<span>25 Fotoğraf</span>
+</button>
+<button class="px-2.5 py-2 rounded bg-surface-container hover:bg-surface-container-high text-on-surface font-label-ui text-label-ui flex items-center justify-center gap-1 transition-colors">
+<span class="material-symbols-outlined text-[16px] text-secondary">star_half</span>
+<span>Kapak Yap</span>
+</button>
+<button class="px-2.5 py-2 rounded bg-surface-container hover:bg-surface-container-high text-on-surface font-label-ui text-label-ui flex items-center justify-center gap-1 transition-colors">
+<span class="material-symbols-outlined text-[16px] text-secondary">cloud_download</span>
+<span>İndir (ZIP)</span>
+</button>
+</div>
+<!-- Ekspertiz & Tramer Hızlı Özeti -->
+<div class="p-space-md rounded-lg bg-surface-container-low space-y-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-on-surface-variant">EKSPERTİZ DURUMU</span>
+<span class="px-2 py-0.5 rounded bg-surface-container-lowest text-secondary font-table-numeric text-body-sm font-semibold">TSE ONAYLI</span>
+</div>
+<div class="grid grid-cols-3 gap-space-xs text-center">
+<div class="p-2 rounded bg-surface-container-lowest shadow-sm">
+<span class="font-label-caps text-[10px] text-outline block">BOYALI PARÇA</span>
+<span class="font-headline-sm text-headline-sm text-on-surface font-bold">1 Parça</span>
+<span class="text-[11px] text-on-surface-variant block truncate">Sağ Arka Çamurluk</span>
+</div>
+<div class="p-2 rounded bg-surface-container-lowest shadow-sm">
+<span class="font-label-caps text-[10px] text-outline block">DEĞİŞEN PARÇA</span>
+<span class="font-headline-sm text-headline-sm text-on-surface font-bold">0</span>
+<span class="text-[11px] text-primary block">Orijinal Hatasız</span>
+</div>
+<div class="p-2 rounded bg-surface-container-lowest shadow-sm">
+<span class="font-label-caps text-[10px] text-outline block">TRAMER KAYDI</span>
+<span class="font-headline-sm text-headline-sm text-on-surface font-bold">₺4.250</span>
+<span class="text-[11px] text-outline block">Mini Onarım</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- SAĞ VE ORTA BÖLÜM: DETAYLI SKS, FİNANSMAN & GİDER DAĞILIMI (7 Kolon) -->
+<div class="xl:col-span-7 space-y-space-md">
+<!-- SKS Yaş Takip Çubuğu & Durum Göstergesi -->
+<div class="bg-surface-container-lowest rounded-xl shadow-sm p-space-md space-y-space-sm">
+<div class="flex items-center justify-between">
+<div>
+<span class="font-label-caps text-label-caps text-on-surface-variant block">STOK YAŞI &amp; SKS DÖNGÜSÜ</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Stokta 94. Gün (Kritik Eşik Aşımı)</h3>
+</div>
+<span class="px-2.5 py-1 rounded bg-error/10 text-error font-table-numeric text-body-sm font-bold">
+                +4 Gün Gecikme
+              </span>
+</div>
+<!-- İlerleme Çubuğu Bölümleri -->
+<div class="space-y-1">
+<div class="h-3 w-full bg-surface-container rounded-full overflow-hidden flex relative">
+<div class="w-[31.9%] bg-primary/40 h-full" title="0-30 Gün: Normal"></div>
+<div class="w-[31.9%] bg-secondary-container h-full" title="31-60 Gün: Takip"></div>
+<div class="w-[31.9%] bg-surface-tint/60 h-full" title="61-90 Gün: Risk Eşiği"></div>
+<div class="w-[4.3%] bg-error h-full animate-pulse" title="90+ Gün: Kritik Aşım"></div>
+</div>
+<div class="flex justify-between text-[11px] font-table-numeric text-on-surface-variant px-0.5">
+<span>0 Gün (Giriş)</span>
+<span>30. Gün</span>
+<span>60. Gün</span>
+<span>90. Gün (Hedef Max)</span>
+<span class="text-error font-bold">94. Gün (BUGÜN)</span>
+</div>
+</div>
+<!-- SKS Faizi Açıklama Kutusu -->
+<div class="p-space-sm rounded bg-surface-container flex items-center justify-between gap-space-sm">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[18px]">calculate</span>
+<span class="font-body-sm text-body-sm text-on-surface">
+                  Günlük SKS Faizi: <strong class="font-table-numeric font-bold text-on-surface">₺1.120 / gün</strong>. Her geçen gün net kârlılığı ₺1.120 aşındırmaktadır.
+                </span>
+</div>
+<span class="font-label-caps text-[10px] text-outline uppercase tracking-wider">Aylık Oran: %3.00</span>
+</div>
+</div>
+<!-- Finansal Metrikler Izgarası (Büyük KPI Kartları) -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-space-sm">
+<!-- 1. Alış Bedeli -->
+<div class="p-space-md rounded-lg bg-surface-container-lowest shadow-sm space-y-space-2xs transition-all hover:bg-surface-container-low">
+<span class="font-label-caps text-label-caps text-outline block">ALIŞ BEDELİ</span>
+<div class="font-metric-kpi-md text-metric-kpi-md text-on-surface font-table-numeric tabular-nums">₺1.120.000</div>
+<div class="flex items-center gap-1 text-[11px] text-on-surface-variant font-label-ui">
+<span class="material-symbols-outlined text-[14px] text-primary">handshake</span>
+<span>Takas Alım • 18.11.2024</span>
+</div>
+</div>
+<!-- 2. Sabit Giderler Toplamı -->
+<div class="p-space-md rounded-lg bg-surface-container-lowest shadow-sm space-y-space-2xs transition-all hover:bg-surface-container-low">
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-outline">SABİT GİDERLER</span>
+<span class="text-[11px] font-bold text-secondary">4 Kalem</span>
+</div>
+<div class="font-metric-kpi-md text-metric-kpi-md text-on-surface font-table-numeric tabular-nums">₺19.600</div>
+<div class="text-[11px] text-on-surface-variant font-label-ui truncate">
+                Ekspertiz, Noter, Check-Up, Sigorta
+              </div>
+</div>
+<!-- 3. Ek Masraflar -->
+<div class="p-space-md rounded-lg bg-surface-container-lowest shadow-sm space-y-space-2xs transition-all hover:bg-surface-container-low">
+<span class="font-label-caps text-label-caps text-outline block">EK MASRAFLAR</span>
+<div class="font-metric-kpi-md text-metric-kpi-md text-on-surface font-table-numeric tabular-nums text-outline">₺0</div>
+<div class="text-[11px] text-outline font-label-ui">
+                Boya/Kuaför/Mekanik yok
+              </div>
+</div>
+<!-- 4. SKS Finansman Yükü -->
+<div class="p-space-md rounded-lg bg-error-container/30 shadow-sm space-y-space-2xs">
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-error font-bold">SKS FİNANSMAN YÜKÜ</span>
+<span class="text-[10px] px-1.5 py-0.2 rounded bg-error text-on-error font-bold">94 GÜN</span>
+</div>
+<div class="font-metric-kpi-md text-metric-kpi-md text-error font-table-numeric tabular-nums font-bold">₺105.280</div>
+<div class="text-[11px] text-on-error-container font-label-ui">
+                %3.00/Ay x 94 Gün Stok Faizi
+              </div>
+</div>
+<!-- 5. Toplam Araç Maliyeti -->
+<div class="p-space-md rounded-lg bg-surface-container shadow-sm space-y-space-2xs">
+<span class="font-label-caps text-label-caps text-on-surface-variant font-semibold block">TOPLAM MALİYET</span>
+<div class="font-metric-kpi-md text-metric-kpi-md text-on-surface font-table-numeric tabular-nums font-bold">₺1.244.880</div>
+<div class="text-[11px] text-on-surface-variant font-label-ui">
+                Alış + Sabit + SKS Yükü
+              </div>
+</div>
+<!-- 6. Liste Satış Fiyatı -->
+<div class="p-space-md rounded-lg bg-primary/10 shadow-sm space-y-space-2xs">
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-primary font-bold">GÜNCEL LİSTE SATIŞ</span>
+<span class="material-symbols-outlined text-[16px] text-primary">sell</span>
+</div>
+<div class="font-metric-kpi-md text-metric-kpi-md text-primary font-table-numeric tabular-nums font-bold">₺1.240.000</div>
+<div class="text-[11px] text-primary font-label-ui">
+                Vitrindeki Güncel Etiket
+              </div>
+</div>
+</div>
+<!-- Tahmini Net Kâr/Zarar Barometresi & Sabit Gider Detay Tablosu -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-sm">
+<!-- Tahmini Net Kâr/Zarar Kartı (5 Kolon) -->
+<div class="lg:col-span-5 p-space-md rounded-lg bg-surface-container-lowest shadow-sm space-y-space-sm flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-outline">TAHMİNİ NET KÂR / ZARAR</span>
+<span class="px-2 py-0.5 rounded bg-error-container text-error font-label-caps text-[10px] font-bold">ZARAR RİSKİ</span>
+</div>
+<div class="mt-2 font-display-lg text-display-lg text-error font-table-numeric tabular-nums font-bold leading-none">
+                  -₺4.880
+                </div>
+<div class="mt-1 flex items-center gap-1.5 font-label-ui text-label-ui text-error">
+<span class="material-symbols-outlined text-[16px]">trending_down</span>
+<span class="font-semibold">%-0.4 Net Marj Aşınması</span>
+</div>
+</div>
+<!-- Mini Kıyaslama Grafiği (Inline SVG Barometre) -->
+<div class="p-space-sm rounded bg-surface-container-low space-y-2">
+<div class="flex justify-between text-[11px] font-body-sm text-on-surface-variant">
+<span>Maliyet (₺1.244.880)</span>
+<span>Satış (₺1.240.000)</span>
+</div>
+<div class="w-full bg-surface-container-highest rounded-full h-2 overflow-hidden flex">
+<div class="bg-error h-full" style="width: 50.2%;"></div>
+<div class="bg-primary h-full" style="width: 49.8%;"></div>
+</div>
+<span class="text-[11px] text-outline block leading-tight">Maliyet satış fiyatını ₺4.880 aşmış durumda. Beklenen kâr elde edilememektedir.</span>
+</div>
+</div>
+<!-- Sabit Gider Kalemleri İnceleme (7 Kolon) -->
+<div class="lg:col-span-7 p-space-md rounded-lg bg-surface-container-lowest shadow-sm space-y-space-xs">
+<div class="flex items-center justify-between mb-1">
+<h4 class="font-headline-sm text-headline-sm text-on-surface">Sabit Gider Dağılımı</h4>
+<span class="font-table-numeric text-table-numeric font-bold text-on-surface">₺19.600</span>
+</div>
+<div class="space-y-1.5">
+<div class="p-2 rounded bg-surface-container-low flex items-center justify-between text-body-sm">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px] text-secondary">verified_user</span>
+<span class="font-label-ui text-label-ui text-on-surface">TSE Standart Ekspertiz</span>
+</div>
+<span class="font-table-numeric text-table-numeric font-semibold text-on-surface">₺8.500</span>
+</div>
+<div class="p-2 rounded bg-surface-container-low flex items-center justify-between text-body-sm">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px] text-secondary">checklist</span>
+<span class="font-label-ui text-label-ui text-on-surface">150 Nokta Mekanik Check-Up</span>
+</div>
+<span class="font-table-numeric text-table-numeric font-semibold text-on-surface">₺4.500</span>
+</div>
+<div class="p-2 rounded bg-surface-container-low flex items-center justify-between text-body-sm">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px] text-secondary">policy</span>
+<span class="font-label-ui text-label-ui text-on-surface">Zorunlu Trafik Sigortası Payı</span>
+</div>
+<span class="font-table-numeric text-table-numeric font-semibold text-on-surface">₺4.000</span>
+</div>
+<div class="p-2 rounded bg-surface-container-low flex items-center justify-between text-body-sm">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px] text-secondary">description</span>
+<span class="font-label-ui text-label-ui text-on-surface">Noter &amp; Tescil Devir Harcı</span>
+</div>
+<span class="font-table-numeric text-table-numeric font-semibold text-on-surface">₺2.600</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Finansal Simülasyon Hızlı Girişi -->
+<div class="p-space-md rounded-lg bg-surface-container-lowest shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-space-md">
+<div class="space-y-0.5">
+<span class="font-headline-sm text-headline-sm text-on-surface">Fiyat &amp; Kâr Simülasyonu</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Hedef kâr marjına ulaşmak için liste fiyatı güncelleme motoru.</p>
+</div>
+<div class="flex items-center gap-space-xs">
+<div class="relative">
+<span class="absolute left-3 top-1/2 -translate-y-1/2 text-outline font-table-numeric text-body-sm">₺</span>
+<input class="pl-7 pr-3 py-1.5 rounded bg-surface-container font-table-numeric text-body-sm text-on-surface focus:outline-none w-36 font-semibold" id="sim-price-input" placeholder="Yeni Fiyat" type="text" value="1.285.000"/>
+</div>
+<button class="px-3 py-1.5 rounded bg-primary text-on-primary font-label-ui text-label-ui hover:bg-primary-container transition-all" id="btn-apply-sim">
+                Hesapla
+              </button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- 5. ETKİLEŞİM & SİSTEM DURUMU SENARYOLARI (SİMÜLATÖR PANELİ) -->
+<div class="bg-surface-container-lowest rounded-xl shadow-sm p-space-md space-y-space-sm">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-space-sm">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-[20px]">tune</span>
+<span class="font-headline-sm text-headline-sm text-on-surface">Sistem Durum Simülatörü</span>
+<span class="font-label-caps text-[10px] px-2 py-0.5 rounded bg-surface-container text-outline">GELİŞTİRİCİ &amp; TEST PANELİ</span>
+</div>
+<!-- Durum Butonları -->
+<div class="flex flex-wrap items-center gap-1.5">
+<button class="px-3 py-1.5 rounded font-label-ui text-label-ui transition-all bg-primary text-on-primary shadow-sm" id="tab-active" onclick="switchState('active')">
+            Aktif Canlı Kart
+          </button>
+<button class="px-3 py-1.5 rounded font-label-ui text-label-ui transition-all bg-surface-container text-on-surface hover:bg-surface-container-high" id="tab-skeleton" onclick="switchState('skeleton')">
+            Yükleniyor / Skeleton
+          </button>
+<button class="px-3 py-1.5 rounded font-label-ui text-label-ui transition-all bg-surface-container text-on-surface hover:bg-surface-container-high" id="tab-empty" onclick="switchState('empty')">
+            Boş Veri Durumu
+          </button>
+<button class="px-3 py-1.5 rounded font-label-ui text-label-ui transition-all bg-surface-container text-on-surface hover:bg-surface-container-high" id="tab-error" onclick="switchState('error')">
+            Bağlantı Hatası
+          </button>
+</div>
+</div>
+</div>
+<!-- SKELETON / LOADING CONTAINER (Hidden by default) -->
+<div class="hidden space-y-space-lg" id="state-container-skeleton">
+<!-- Header Skeleton -->
+<div class="bg-surface-container-lowest rounded-xl shadow-sm p-space-lg space-y-space-md animate-pulse">
+<div class="flex justify-between items-center">
+<div class="space-y-2">
+<div class="h-4 w-48 bg-surface-container rounded"></div>
+<div class="h-8 w-96 bg-surface-container rounded"></div>
+</div>
+<div class="h-10 w-64 bg-surface-container rounded"></div>
+</div>
+<div class="h-16 w-full bg-surface-container rounded-lg"></div>
+</div>
+<!-- Main Skeleton Grid -->
+<div class="grid grid-cols-1 xl:grid-cols-12 gap-space-lg animate-pulse">
+<div class="xl:col-span-5 bg-surface-container-lowest rounded-xl shadow-sm p-space-md space-y-space-md">
+<div class="h-6 w-36 bg-surface-container rounded"></div>
+<div class="h-80 w-full bg-surface-container rounded-lg"></div>
+<div class="grid grid-cols-5 gap-space-xs">
+<div class="aspect-video bg-surface-container rounded"></div>
+<div class="aspect-video bg-surface-container rounded"></div>
+<div class="aspect-video bg-surface-container rounded"></div>
+<div class="aspect-video bg-surface-container rounded"></div>
+<div class="aspect-video bg-surface-container rounded"></div>
+</div>
+</div>
+<div class="xl:col-span-7 bg-surface-container-lowest rounded-xl shadow-sm p-space-md space-y-space-md">
+<div class="h-24 w-full bg-surface-container rounded-lg"></div>
+<div class="grid grid-cols-3 gap-space-sm">
+<div class="h-28 bg-surface-container rounded-lg"></div>
+<div class="h-28 bg-surface-container rounded-lg"></div>
+<div class="h-28 bg-surface-container rounded-lg"></div>
+<div class="h-28 bg-surface-container rounded-lg"></div>
+<div class="h-28 bg-surface-container rounded-lg"></div>
+<div class="h-28 bg-surface-container rounded-lg"></div>
+</div>
+<div class="h-40 w-full bg-surface-container rounded-lg"></div>
+</div>
+</div>
+</div>
+<!-- BOŞ VERİ DURUMU CONTAINER (Hidden by default) -->
+<div class="hidden bg-surface-container-lowest rounded-xl shadow-sm p-space-4xl text-center space-y-space-md" id="state-container-empty">
+<div class="w-16 h-16 rounded-full bg-surface-container mx-auto flex items-center justify-center text-outline">
+<span class="material-symbols-outlined text-[36px]">directions_car</span>
+</div>
+<div class="space-y-space-xs max-w-md mx-auto">
+<h3 class="font-headline-md text-headline-md text-on-surface font-bold">Araç Kaydı Bulunamadı</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">
+          Seçili <strong class="text-on-surface">Ekim 2024</strong> dönem kilidinde "33 ARB 585" plakalı araca ait aktif stok veya finans kaydı bulunmamaktadır.
+        </p>
+</div>
+<div class="flex justify-center gap-space-sm">
+<button class="px-4 py-2 rounded bg-primary text-on-primary font-label-ui text-label-ui hover:bg-primary-container transition-colors" onclick="switchState('active')">
+          Varsayılan Aracı Görüntüle
+        </button>
+<button class="px-4 py-2 rounded bg-surface-container text-on-surface font-label-ui text-label-ui hover:bg-surface-container-high transition-colors">
+          Stok Listesine Dön
+        </button>
+</div>
+</div>
+<!-- BAĞLANTI HATASI DURUMU CONTAINER (Hidden by default) -->
+<div class="hidden bg-surface-container-lowest rounded-xl shadow-sm p-space-4xl text-center space-y-space-md" id="state-container-error">
+<div class="w-16 h-16 rounded-full bg-error-container mx-auto flex items-center justify-center text-error">
+<span class="material-symbols-outlined text-[36px]">cloud_off</span>
+</div>
+<div class="space-y-space-xs max-w-md mx-auto">
+<h3 class="font-headline-md text-headline-md text-error font-bold">Veri Tabanı Senkronizasyon Hatası</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">
+          Ana Excel sunucusu ve Çayan Tarsus Plaza canlı telemetri bağlantısında zaman aşımı oluştu (HTTP 504 Gateway Timeout).
+        </p>
+</div>
+<div class="flex justify-center gap-space-sm">
+<button class="inline-flex items-center gap-1.5 px-4 py-2 rounded bg-primary text-on-primary font-label-ui text-label-ui hover:bg-primary-container shadow-sm transition-colors" id="btn-retry" onclick="retryConnection()">
+<span class="material-symbols-outlined text-[18px]">sync</span>
+<span>↻ Yeniden Dene</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<script>
+  // Galeri Mini Fotoğraf Seçimi & Active Ring
+  function selectPhoto(index, title) {
+    const thumbs = document.querySelectorAll('#gallery-thumbs .thumb-slot');
+    thumbs.forEach(t => {
+      t.classList.remove('ring-2', 'ring-primary');
+    });
+    
+    if (event && event.currentTarget) {
+      event.currentTarget.classList.add('ring-2', 'ring-primary');
+    }
+
+    const indicator = document.getElementById('photo-indicator');
+    if (indicator) {
+      indicator.textContent = 'SLOT #' + index + ' (' + title + ')';
+      // Animasyon ilkesi: Değişim nabız efekti
+      indicator.classList.add('animate-pulse');
+      setTimeout(() => indicator.classList.remove('animate-pulse'), 800);
+    }
+  }
+
+  // Sistem Durumu Değiştirici
+  function switchState(state) {
+    const states = ['active', 'skeleton', 'empty', 'error'];
+    states.forEach(s => {
+      const el = document.getElementById('state-container-' + s);
+      const btn = document.getElementById('tab-' + s);
+      if (el) el.classList.add('hidden');
+      if (btn) {
+        btn.classList.remove('bg-primary', 'text-on-primary', 'shadow-sm');
+        btn.classList.add('bg-surface-container', 'text-on-surface');
+      }
+    });
+
+    const activeEl = document.getElementById('state-container-' + state);
+    const activeBtn = document.getElementById('tab-' + state);
+    if (activeEl) activeEl.classList.remove('hidden');
+    if (activeBtn) {
+      activeBtn.classList.add('bg-primary', 'text-on-primary', 'shadow-sm');
+      activeBtn.classList.remove('bg-surface-container', 'text-on-surface');
+    }
+  }
+
+  // Yeniden Dene Butonu
+  function retryConnection() {
+    const btn = document.getElementById('btn-retry');
+    if (btn) {
+      btn.innerHTML = '<span class="material-symbols-outlined text-[18px] animate-spin">sync</span><span>Bağlanıyor...</span>';
+      setTimeout(() => {
+        btn.innerHTML = '<span class="material-symbols-outlined text-[18px]">sync</span><span>↻ Yeniden Dene</span>';
+        switchState('active');
+      }, 1000);
+    }
+  }
+
+  // Fiyat Simülasyonu Etkileşimi
+  const applyBtn = document.getElementById('btn-apply-sim');
+  if (applyBtn) {
+    applyBtn.addEventListener('click', () => {
+      applyBtn.classList.add('animate-pulse');
+      setTimeout(() => {
+        applyBtn.classList.remove('animate-pulse');
+        alert('Simülasyon Güncellendi: Belirtilen liste fiyatı ile net kâr/zarar senaryosu hesaplandı.');
+      }, 400);
+    });
+  }
+
+  // Üst panel hızlı yenileme
+  const btnRefresh = document.getElementById('btn-refresh');
+  if (btnRefresh) {
+    btnRefresh.addEventListener('click', () => {
+      btnRefresh.classList.add('animate-spin');
+      setTimeout(() => {
+        btnRefresh.classList.remove('animate-spin');
+      }, 800);
+    });
+  }
+</script></main></div></body></html>
