@@ -375,6 +375,105 @@ senkron atamalarından sonra) — fiilen çalışan handler bu olabilir. ID
 sözleşmesi aynı olduğu için yeni tasarımı etkilemiyor, davranış test edildi
 ve doğru çalışıyor. İleride ayrı bir temizlik konusu olabilir.
 
+### 12.09.2026 — Dashboard ince ayar turu (animasyon/boşluk/ikon/plaka)
+
+Kullanıcı geri bildirimi: animasyonlar karmaşık, boşluklar fazla, "SKS
+Finansman" KPI'ının üstünde fazladan bir ikon var, plaka görünümü
+beğenildi → dashboard'da her yere uygulanmalı.
+
+- 10 bloklu staggered giriş animasyonu tek `rdsFadeIn` (opacity-only) ile
+  değiştirildi; kart/KPI hover'larındaki `translateY` kaldırıldı (sadece
+  gölge/border geçişi kaldı).
+- Kart/KPI/alert/compare/mini-satır dolgu ve gap değerleri ~%20-30 azaltıldı.
+- **Kök neden bulundu:** `dashboard_pro_v3.js`'teki eski `decorateKpis()`
+  fonksiyonu, KPI'ları YENİDEN gruplandırdığımız için artık `#dashKpis`'in
+  doğrudan çocuğu olan 2 `.kpi-group` sarmalayıcıyı "tekil KPI kartı" sanıp
+  emoji ikon + renk sınıfı basıyordu. Bu dosya kapalı IIFE olduğu için
+  düzeltilemiyor — `renew_dashboard_stitch_v2.js`'e `cleanupLegacyKpiDecoration()`
+  eklendi, hem senkron hem `setTimeout(...,0)` ile (script-yükleme-sırası
+  nedeniyle `dashboard_pro_v3.js`'in `DOMContentLoaded`'a ertelenmiş sarma
+  işlemi benim render'ımdan SONRA çalışabiliyor) çağrılıyor.
+- `.pa-mini-plate` → `.pa-plate` olarak birleştirildi, mini satış listeleri +
+  Kritik SKS tablosu + Bu Ay Alınan Araçlar kartlarının hepsinde aynı rozet.
+
+### 12.09.2026 — Stok/Satış/Aylık Alım formları "Precision Automotive" + Canlı Finansal Analiz (canlıda)
+
+Kullanıcı yeni stitch referansı verdi (form modalı + canlı finansal analiz
+paneli, ayrıca mobil form). `renew_forms_stitch_v1.css/js` eklendi —
+`openStock/openSale/openSell` (zaten `renew_forms_v1.js` tarafından
+sarmalanmış) ZİNCİRE bir kez daha eklendi, `openAcquisition` (V7.10, kendi
+bağımsız kod yolu) sadece CSS ile restyle edildi. Alan id/name, submit/API
+akışı hiç değişmedi.
+
+**Canlı Finansal Analiz paneli** (Stok ve Satış formlarına eklendi):
+hesap `calc.py`'deki `stock_calc`/`sale_calc` ile **birebir aynı formülü**
+JS'de tekrar eder (Ayarlar merkezindeki `notary_expense/expertise_expense/
+control150_expense/insurance_expense/sks_monthly_rate` + `purchase_rules`
+üzerinden, ek backend isteği yok — sadece submit anında zaten var olan
+`/api/sales/preview` ayrı kalır). ŞİRKET ARACI seçilince noter+sigorta
+muafiyeti canlı düşüyor; test değeri kural.md'deki ₺5.102 farkla birebir
+eşleşti. Aylık Alım formunda gerçek sistemde zaten olmayan bir "kâr" hesabı
+İCAT EDİLMEDİ — orada hâlâ sadece "alış + ek masraf" toplamı var (doğrusu bu).
+
+**Bug 1 — `window.SETTINGS` her zaman `undefined`:** `app.js` üst seviyede
+`let SETTINGS={}` ile tanımlanıyor; ES modülü olmayan `<script>` içinde üst
+seviye `let`/`const` **`window` nesnesine eklenmez** (yalnızca `var` eklenir).
+`window.SETTINGS && SETTINGS.rules` gibi bir koruma bu yüzden sessizce boş
+döner. Aynı dosyadaki diğer script'ler (`renew_dashboard_stitch_v2.js` dahil)
+`SETTINGS`'e ÇIPLAK identifier olarak erişiyor (global lexical scope, farklı
+`<script>` etiketleri arasında paylaşılıyor) — yeni kodda da `window.X`
+değil, `typeof X!=='undefined' && X...` kalıbı kullanılmalı.
+
+**Bug 2 — `<aside>` etiketi `style.css`'teki global sidebar seçicisiyle
+çakıştı:** Finans panelini `<aside class="pa-finance-panel">` olarak
+oluşturdum; `style.css`'te bare `aside{background:linear-gradient(...);
+height:100vh;position:sticky}` (sol menü için yazılmış) tüm `<aside>`
+elemanlarını hedefliyor, class'tan bağımsız olarak devreye giriyor. Panel
+lacivert/sidebar gibi göründü. **Ders:** Yeni bir eleman oluştururken
+semantik HTML etiketi (`aside/header/nav/main` vb.) yerine `<div>` tercih
+et, ya da önce `style.css`'te o bare etiket için global bir kural olup
+olmadığını grep'le — özellikle bu proje sol menüyü `<aside>` ile kurmuş.
+
+### 12.09.2026 — karpathy-guidelines skill eklendi
+
+Kullanıcı `multica-ai/andrej-karpathy-skills` reposunu paylaştı, proje
+skill'i olarak kaydedilmesini istedi. `skills/karpathy-guidelines/SKILL.md`
+içeriği `.claude/skills/karpathy-guidelines/SKILL.md`'ye taşındı (proje
+skill dizini standardı). Davranış rehberi: düşün-önce-kodla, sadelik,
+cerrahi değişiklik, hedef-odaklı doğrulama. Canlı uygulama koduna etkisi yok.
+
+### 12.09.2026 — Araç Fotoğrafları (25 slot stüdyo) redesign (canlıda)
+
+Kullanıcı web (25 slot masaüstü) + mobil (hızlı çekim) referansı verdi.
+Keşifte kritik bulgu: sayfanın GERÇEK aktif kodu `renew_photo_studio_v1.js/
+css`'tir (25 slot + tarayıcı içi canlı kamera, `getUserMedia`/`capture()` ile
+gerçekten çalışıyor — mockup'taki "kamera stüdyosu" uydurma değilmiş).
+`index.html`'deki `#photos` section'ın statik markup'ı ("Araç Medya Merkezi",
+orijinal/işlenmiş ikili galeri, `app.js`'teki `loadVehiclePhotos` vb.) sayfa
+açılır açılmaz `boot()`'un `innerHTML` ataması ile eziliyor — **tamamen ölü
+kod**, hiç görünmüyor. `renew_premium_vehicle_v1.js/css` ve
+`renew_media_picker_v2.js` da devre dışı/ölü, 25-slot kavramıyla ilgisizler.
+
+**Yöntem:** `renew_photo_studio_v1.js` tamamen kapalı bir IIFE — render
+fonksiyonları (`boot/renderVehicles/renderGrid/slotCard`) `window`'a
+açılmıyor, bu yüzden zincirleyerek DOM değiştiremedim (sadece `renew*` event
+handler'ları global). Bu yüzden **sadece CSS** ile restyle edildi
+(`renew_photo_studio_stitch_v1.css`) — var olan class adları (`.photo-studio`,
+`.studio-vehicle`, `.photo-slot`, `.number-guide`, `.desktop-studio-tools`,
+`.studio-camera` vb.) DESIGN.md renk/tipografi token'larıyla yeniden
+renklendirildi. Slot/kamera/yükleme/silme/swap/ZIP mantığına, menüye ve
+diğer sayfalara dokunulmadı. Bare-tag çakışması olmadığı önceden grep'le
+doğrulandı (`header/video/canvas/button` için `style.css`'te global kural
+yok).
+
+**Ortak ders (bu oturumda 3. kez, farklı modüllerde tekrarlandı):** Yeni bir
+DOM/CSS katmanı eklemeden önce şu kontrol listesi atlanmamalı: (1) hedef
+render fonksiyonu global mi yoksa kapalı bir kapsam içinde mi (zincirleme
+mümkün mü, yoksa CSS-only mi gitmek lazım), (2) yeni oluşturulacak HTML
+etiketleri (`aside`, `header` vb.) için proje genelinde bare-tag seçici var
+mı, (3) yeni JS'in okuyacağı global değişkenler (`SETTINGS`, `SALES` vb.)
+`window.X` değil çıplak identifier ile mi erişiliyor.
+
 ## Token/iletişim tercihi (11.09.2026'dan itibaren)
 
 Kullanıcı minimal raporlama istiyor: uzun teknik döküm yerine kısa özet,
